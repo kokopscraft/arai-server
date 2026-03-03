@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
-<title>新井鯖 - Rules</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
+  <title>新井鯖 - Rules</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -13,11 +13,14 @@
       color: #f1f5f9;
       min-height: 100vh;
     }
+
+    /* ── Navigation (index.html と同一) ── */
     .site-nav {
       background: rgba(15, 23, 42, 0.97);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid #334155;
       position: sticky;
+      font-family: 'Noto Sans JP', sans-serif;
       top: 0;
       z-index: 100;
     }
@@ -44,9 +47,9 @@
     }
     .nav-title {
       font-size: 1.2rem;
-          font-family: 'Noto Sans JP', sans-serif;
       font-weight: 900;
       color: #38bdf8;
+      letter-spacing: 0.02em;
     }
     .nav-links {
       list-style: none;
@@ -61,32 +64,45 @@
       border-radius: 6px;
       font-size: 0.9rem;
       font-weight: 500;
-          border: 1px solid transparent;
+      border: 1px solid transparent;
       transition: all 0.2s;
     }
-    .nav-links a.active {
-          background: rgba(56,189,248,0.15);
+    .nav-links a:hover {
+      background: #1e293b;
       color: #38bdf8;
-          border: 1px solid rgba(56,189,248,0.3);
+      border-color: #334155;
     }
+    .nav-links a.active {
+      background: rgba(56,189,248,0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56,189,248,0.3);
+    }
+
+    /* ── Container ── */
     .container {
       max-width: 900px;
       margin: 3rem auto;
       padding: 0 2rem;
     }
+
+    /* ── Page Header ── */
     h1 {
       font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
       margin-bottom: 2rem;
       text-align: center;
-      color: #38bdf8;
+      color: #f1f5f9;
     }
+
+    /* ── Rule Sections ── */
     .rule-section {
       background: #1e293b;
       border-radius: 16px;
       border: 1px solid #334155;
       padding: 2rem;
       margin-bottom: 2.5rem;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
     }
     .section-title {
       font-size: 1.5rem;
@@ -96,16 +112,14 @@
       display: flex;
       align-items: center;
       gap: 0.75rem;
-      border-left: 4px solid #f87171;
+      border-left: 4px solid #38bdf8;
       padding-left: 1rem;
     }
-    .rule-list {
-      list-style: none;
-    }
+    .rule-list { list-style: none; }
     .rule-item {
       margin-bottom: 1.5rem;
       padding-bottom: 1rem;
-      border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+      border-bottom: 1px solid rgba(51,65,85,0.5);
     }
     .rule-item:last-child {
       margin-bottom: 0;
@@ -134,26 +148,32 @@
       color: #f87171;
       font-weight: 700;
     }
-    .flow-list, .point-info-list {
-      list-style: none;
-    }
+    .flow-list, .point-info-list { list-style: none; }
     .flow-item, .point-info-item {
       margin-bottom: 1rem;
       padding: 1rem;
-      background: rgba(56, 189, 248, 0.05);
+      background: rgba(56,189,248,0.05);
       border-radius: 8px;
       border-left: 3px solid #38bdf8;
       line-height: 1.6;
     }
-            .point-info-item { background: rgba(56,189,248,0.12); border-left: 4px solid #38bdf8; font-weight: 600; color: #f1f5f9; }
+    .point-info-item {
+      background: rgba(56,189,248,0.12);
+      border-left: 4px solid #38bdf8;
+      font-weight: 600;
+      color: #f1f5f9;
+    }
+
+    /* ── Footer (index.html と同一) ── */
     footer {
       text-align: center;
       padding: 2.5rem 2rem 2rem;
       color: #475569;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       border-top: 1px solid #1e293b;
+      margin-top: 4rem;
     }
-        .footer-social {
+    .footer-social {
       display: flex;
       justify-content: center;
       gap: 1.25rem;
@@ -163,7 +183,7 @@
     .footer-social a {
       display: flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.5rem;
       color: #94a3b8;
       text-decoration: none;
       font-size: 0.85rem;
@@ -171,21 +191,27 @@
       padding: 0.45rem 1rem;
       border-radius: 20px;
       border: 1px solid #334155;
-      transition: all 0.2s;
+      transition: all 0.3s ease;
     }
-    .footer-social a:hover {
-      color: #f1f5f9;
-      border-color: #38bdf8;
-      background: rgba(56,189,248,0.08);
+    .footer-social a:hover { color: #f1f5f9; border-color: #38bdf8; background: rgba(56,189,248,0.08); }
+    .footer-social img { width: 18px; height: 18px; object-fit: contain; transform: scale(1.05); }
+    footer p { margin-bottom: 0.25rem; }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .container { padding: 0 1rem; margin: 2rem auto; }
+      h1 { font-size: 2rem; }
+      .rule-section { padding: 1.5rem 1.25rem; }
+      .nav-inner { padding: 0.75rem 1rem; }
+      .nav-links a { padding: 0.4rem 0.6rem; font-size: 0.8rem; }
     }
-            .social-icon { width: 18px; height: 18px; object-fit: contain; }
   </style>
 </head>
 <body>
   <nav class="site-nav">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo-link">
-        <img src="images/server_logo.png" alt="新井鯖" class="nav-logo">
+        <img src="images/server_logo.png" alt="新井鯖ロゴ" class="nav-logo">
         <span class="nav-title">新井鯖</span>
       </a>
       <ul class="nav-links">
@@ -205,93 +231,63 @@
       <ul class="rule-list">
         <li class="rule-item">
           <div class="rule-text">1. 暴言・誹謗中傷・煽り・差別発言</div>
-          <div class="rule-detail">
-            <span class="violation-point">違反ポイント：1点</span>
-          </div>
+          <div class="rule-detail"><span class="violation-point">違反ポイント：1点</span></div>
         </li>
         <li class="rule-item">
           <div class="rule-text">2. 運営(主に新井熊)に無許可での勧誘・リンク貼り付け</div>
-          <div class="rule-detail">
-            <span class="violation-point">違反ポイント：1点</span>
-          </div>
+          <div class="rule-detail"><span class="violation-point">違反ポイント：1点</span></div>
         </li>
         <li class="rule-item">
           <div class="rule-text">3. 公序良俗や他人が不快になる画像の投稿</div>
-          <div class="rule-detail">
-            <span class="violation-point">違反ポイント：1点</span>
-          </div>
+          <div class="rule-detail"><span class="violation-point">違反ポイント：1点</span></div>
         </li>
         <li class="rule-item">
           <div class="rule-text">4. スタ連／短時間での大量投稿／迷惑・軽度スパム／荒らし行為</div>
-          <div class="rule-detail">
-            <span class="violation-point">違反ポイント：1点</span>
-          </div>
+          <div class="rule-detail"><span class="violation-point">違反ポイント：1点</span></div>
         </li>
         <li class="rule-item">
           <div class="rule-text">5. その他ルール違反（例：連携アプリの悪用、グループ内容の外部晒し）</div>
-          <div class="rule-detail">
-            <span class="violation-point">違反ポイント：2点</span>
-          </div>
+          <div class="rule-detail"><span class="violation-point">違反ポイント：2点</span></div>
         </li>
         <li class="rule-item">
           <div class="rule-text">6. 性的表現／性的な発言・画像等</div>
-          <div class="rule-detail">
-            <span class="violation-point">違反ポイント：2点</span>
-          </div>
+          <div class="rule-detail"><span class="violation-point">違反ポイント：2点</span></div>
         </li>
         <li class="rule-item">
           <div class="rule-text">7. 個人情報の公開（住所、電話番号、実名、顔写真、ID等）</div>
-          <div class="rule-detail">
-            <span class="ban-notice">即強制退会</span>
-          </div>
+          <div class="rule-detail"><span class="ban-notice">即強制退会</span></div>
         </li>
         <li class="rule-item">
           <div class="rule-text">8. 運営の指示に従わない行為</div>
-          <div class="rule-detail">
-            <span class="ban-notice">即強制退会</span>
-          </div>
+          <div class="rule-detail"><span class="ban-notice">即強制退会</span></div>
         </li>
         <li class="rule-item">
           <div class="rule-text">9. 出会い厨行為（交際など目的の発言・勧誘）</div>
-          <div class="rule-detail">
-            <span class="ban-notice">即強制退会</span>
-          </div>
+          <div class="rule-detail"><span class="ban-notice">即強制退会</span></div>
         </li>
         <li class="rule-item">
           <div class="rule-text">10. 自殺・自傷行為の予告や助長</div>
-          <div class="rule-detail">
-            <span class="ban-notice">即強制退会</span>
-          </div>
+          <div class="rule-detail"><span class="ban-notice">即強制退会</span></div>
         </li>
         <li class="rule-item">
           <div class="rule-text">11. 犯罪を助長する発言や違法行為の相談／共有／教唆</div>
-          <div class="rule-detail">
-            <span class="ban-notice">即強制退会</span>
-          </div>
+          <div class="rule-detail"><span class="ban-notice">即強制退会</span></div>
         </li>
         <li class="rule-item">
           <div class="rule-text">12. サーバー運営や他メンバーになりすます行為</div>
-          <div class="rule-detail">
-            <span class="violation-point">違反ポイント：2点</span>
-          </div>
+          <div class="rule-detail"><span class="violation-point">違反ポイント：2点</span></div>
         </li>
         <li class="rule-item">
           <div class="rule-text">13. 複数アカウント（サブ垢）を使った不正</div>
-          <div class="rule-detail">
-            <span class="violation-point">違反ポイント：2点</span>
-          </div>
+          <div class="rule-detail"><span class="violation-point">違反ポイント：2点</span></div>
         </li>
         <li class="rule-item">
           <div class="rule-text">14. サーバー運営の妨害</div>
-          <div class="rule-detail">
-            <span class="violation-point">違反ポイント：2点</span>
-          </div>
+          <div class="rule-detail"><span class="violation-point">違反ポイント：2点</span></div>
         </li>
         <li class="rule-item">
           <div class="rule-text">15. 上記内容の助長・勧誘</div>
-          <div class="rule-detail">
-            <span class="violation-point">違反ポイント：1点</span>
-          </div>
+          <div class="rule-detail"><span class="violation-point">違反ポイント：1点</span></div>
         </li>
       </ul>
     </div>
@@ -367,9 +363,7 @@
       <ul class="rule-list">
         <li class="rule-item">
           <div class="rule-text">1. 他国への無断侵入</div>
-          <div class="rule-detail">
-            <span class="violation-point">違反ポイント：1点 + 損害賠償請求</span>
-          </div>
+          <div class="rule-detail"><span class="violation-point">違反ポイント：1点 + 損害賠償請求</span></div>
         </li>
         <li class="rule-item">
           <div class="rule-text">2. 他国の建築/土地/施設への荒らし（意図的破壊・妨害）</div>
@@ -409,9 +403,7 @@
         </li>
         <li class="rule-item">
           <div class="rule-text">11. PK行為（無断プレイヤーキル）</div>
-          <div class="rule-detail">
-            <span class="violation-point">違反ポイント：1点 ※複数回累積で加点</span>
-          </div>
+          <div class="rule-detail"><span class="violation-point">違反ポイント：1点 ※複数回累積で加点</span></div>
         </li>
         <li class="rule-item">
           <div class="rule-text">12. エンドへの無断侵入</div>
@@ -459,7 +451,7 @@
       </ul>
     </div>
 
-            <div class="rule-section" style="border-color: #38bdf8; box-shadow: 0 0 20px rgba(56,189,248,0.25);">
+    <div class="rule-section" style="border-color: #38bdf8; box-shadow: 0 0 20px rgba(56,189,248,0.25);">
       <h2 class="section-title">ポイント累積ルール・時効制度</h2>
       <ul class="point-info-list">
         <li class="point-info-item">違反ポイントが累積3点に達した場合、永久追放(BAN)</li>
@@ -471,16 +463,16 @@
 
   <footer>
     <div class="footer-social">
-      <a href="https://line.me/ti/g2/uViXaSuCHoFWX0Z8WiyY2io4IRrXuT6t4OhRZA" target="_blank" rel="noopener">
+      <a href="https://line.me/ti/g2/uViXaSuCHoFWX0Z8WiyY2io4IRrXuT6t4OhRZA" target="_blank" rel="noopener noreferrer">
         <img src="https://cdn.simpleicons.org/line/94a3b8" alt="LINE" width="18" height="18"> LINE
       </a>
-      <a href="https://discord.gg/EWphkMNb5h" target="_blank" rel="noopener">
+      <a href="https://discord.gg/EWphkMNb5h" target="_blank" rel="noopener noreferrer">
         <img src="https://cdn.simpleicons.org/discord/94a3b8" alt="Discord" width="18" height="18"> Discord
       </a>
-      <a href="https://www.youtube.com/@arai_server" target="_blank" rel="noopener">
+      <a href="https://www.youtube.com/@arai_server" target="_blank" rel="noopener noreferrer">
         <img src="https://cdn.simpleicons.org/youtube/94a3b8" alt="YouTube" width="18" height="18"> YouTube
       </a>
-      <a href="https://x.com/913_arakuma" target="_blank" rel="noopener">
+      <a href="https://x.com/913_arakuma" target="_blank" rel="noopener noreferrer">
         <img src="https://cdn.simpleicons.org/x/94a3b8" alt="X" width="18" height="18"> X
       </a>
     </div>
