@@ -129,6 +129,10 @@
       margin-bottom: 2.5rem;
       min-height: 3.4rem;
     }
+    .static-text {
+    color: #cbd5e1;
+      font-weight: 600;
+    }
     .dynamic-text {
       color: #38bdf8;
       font-weight: 600;
@@ -345,7 +349,7 @@
     <img src="images/server_logo.png" alt="新井鯖 Logo" class="hero-logo">
     <h1 class="hero-title"><span class="new-color">新井</span><span>鯖</span></h1>
     <p class="hero-subtitle">
-        <span class="dynamic-text" id="dynamicText"></span><span class="cursor" id="cursor">|</span>
+        <span class="static-text">建国サーバーに</span><span class="dynamic-text" id="dynamicText"></span><span class="cursor" id="cursor">|</span>
     </p>
     <div class="nav-cards">
       <a href="members.html" class="nav-card">
@@ -424,9 +428,9 @@
   </footer>
   <script>
     const texts = [
-        "建国サーバーに新たな出会いを。",
-        "建国サーバーにさらなる利便性を。",
-        "建国サーバーに楽しい賑わいを。",
+        "新たな出会いを。",
+        "さらなる利便性を。",
+        "楽しい賑わいを。",
     ];
 
     let textIndex = 0;
