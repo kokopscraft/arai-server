@@ -607,6 +607,7 @@
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         currentFilter = btn.dataset.filter;
+        localStorage.setItem("araiserver_memberFilter", currentFilter);
         renderCountries(currentFilter, document.getElementById('searchInput').value);
       });
     });
@@ -628,6 +629,10 @@
     }
 
     updateStats();
+
+    const savedFilter = localStorage.getItem("araiserver_memberFilter");
+    if (savedFilter) currentFilter = savedFilter;
+    
     renderCountries();
 
     function toggleNav() {
