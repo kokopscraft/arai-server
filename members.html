@@ -370,6 +370,18 @@
         background: #f1f5f9;
         border-radius: 2px;
     }
+    .nav-badge {
+        display: inline-block;
+        background: #ef4444;
+        color: #fff;
+        font-size: 0.6rem;
+        font-weight: 700;
+        padding: 0.1rem 0.35rem;
+        border-radius: 999px;
+        margin-left: 0.3rem;
+        vertical-align: middle;
+        line-height: 1.4;
+    }
 
     /* ── Responsive ── */
     @media (max-width: 640px) {
@@ -632,12 +644,24 @@
 
     const savedFilter = localStorage.getItem("araiserver_memberFilter");
     if (savedFilter) currentFilter = savedFilter;
-    
+
     renderCountries();
 
     function toggleNav() {
         document.querySelector('.nav-links').classList.toggle('open');
     }
+
+    // News 未読バッジ
+    (function () {
+        const lastVisit  = Number(localStorage.getItem("araiserver_newsLastVisit") || 0);
+        const latestDate = localStorage.getItem("araiserver_newsLatest");
+        if (!latestDate) return;
+        const hasUnread  = new Date(latestDate).getTime() > lastVisit;
+        if (hasUnread) {
+            const link = document.querySelector('a[href="news.html"]');
+            if (link) link.insertAdjacentHTML("beforeend", '<span class="nav-badge">NEW</span>');
+        }
+    })();
   </script>
 
   <footer>
