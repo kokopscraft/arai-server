@@ -306,6 +306,19 @@
         z-index: 99;
       }
       .nav-links.open { display: flex; }
+
+      .cursor {
+          display: inline-block;
+          color: #38bdf8;
+          font-weight: 300;
+          animation: blink 0.75s step-end infinite;
+          margin-left: 1px;
+          opacity: 1;
+      }
+      @keyframes blink {
+          0%, 100% { opacity: 1; }
+          50%       { opacity: 0; }
+      }
     }
   </style>
 </head>
@@ -332,7 +345,7 @@
     <img src="images/server_logo.png" alt="新井鯖 Logo" class="hero-logo">
     <h1 class="hero-title"><span class="new-color">新井</span><span>鯖</span></h1>
     <p class="hero-subtitle">
-      建国サーバーに<span class="dynamic-text" id="dynamicText">新たな出会いを。</span>
+        <span class="dynamic-text" id="dynamicText"></span><span class="cursor" id="cursor">|</span>
     </p>
     <div class="nav-cards">
       <a href="members.html" class="nav-card">
@@ -410,17 +423,53 @@
     <p>無断転載・二次配布を禁じます。</p>
   </footer>
   <script>
-    const texts = ['新たな出会いを。', 'さらなる利便性を。', '楽しい賑わいを。'];
-    let index = 0;
-    const dynamicText = document.getElementById('dynamicText');
-    setInterval(() => {
-      index = (index + 1) % texts.length;
-      dynamicText.style.opacity = '0';
-      setTimeout(() => {
-        dynamicText.textContent = texts[index];
-        dynamicText.style.opacity = '1';
-      }, 300);
-    }, 3000);
+    const texts = [
+        "建国サーバーに新たな出会いを。",
+        "建国サーバーにさらなる利便性を。",
+        "建国サーバーに楽しい賑わいを。",
+    ];
+
+    let textIndex = 0;
+    let charIndex  = 0;
+    let isDeleting = false;
+
+    const dynamicText = document.getElementById("dynamicText");
+    const cursor      = document.getElementById("cursor");
+
+    function typeWriter() {
+        const current = texts[textIndex];
+    
+        if (isDeleting) {
+            dynamicText.textContent = current.substring(0, charIndex - 1);
+            charIndex--;
+        } else {
+            dynamicText.textContent = current.substring(0, charIndex + 1);
+            charIndex++;
+        }
+      
+        // 打ち中はカーソルを常時表示、待機中は通常点滅
+        cursor.style.animation = "none";
+        void cursor.offsetWidth; // reflow で animation リセット
+        cursor.style.animation  = "";
+      
+        let delay = isDeleting ? 55 : 95;
+      
+        if (!isDeleting && charIndex === current.length) {
+            // 打ち終わり → 2秒待ってから削除開始
+            delay      = 2000;
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            // 削除完了 → 次のテキストへ
+            isDeleting = false;
+            textIndex  = (textIndex + 1) % texts.length;
+            delay      = 350;
+        }
+      
+        setTimeout(typeWriter, delay);
+    }
+
+    typeWriter();
+
     function toggleNav() {
         document.querySelector('.nav-links').classList.toggle('open');
     }
