@@ -313,6 +313,35 @@
     vertical-align: middle;
     line-height: 1.4;
   }
+  /* ページトップへ戻るボタン */
+  #back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 44px;
+      height: 44px;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      border-radius: 50%;
+      color: #38bdf8;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s, background 0.2s;
+      z-index: 200;
+  }
+  #back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+  }
+  #back-to-top:hover {
+      background: rgba(56, 189, 248, 0.3);
+      transform: translateY(-3px);
+  }
 
   @media (max-width: 640px) {
     .hero-title { font-size: 2.2rem; }
@@ -451,6 +480,9 @@
   <p>&copy; 2026 arai server. All rights reserved.</p>
   <p>無断転載・二次配布を禁じます。</p>
   </footer>
+
+  <button id="back-to-top" aria-label="ページトップへ戻る">&#x2191;</button>
+
   <script>
   const texts = [
     "新たな出会いを。",
@@ -515,6 +547,15 @@
       if (link) link.insertAdjacentHTML("beforeend", '<span class="nav-badge">NEW</span>');
     }
   })();
+  // ページトップへ戻るボタン
+  const backToTop = document.getElementById('back-to-top');
+  window.addEventListener('scroll', () => {
+      backToTop.classList.toggle('visible', window.scrollY > 300);
+  });
+  backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  
   </script>
 </body>
 </html>
