@@ -6,6 +6,7 @@
   <link rel="icon" href="images/server_logo.png" type="image/png">
   <link rel="apple-touch-icon" href="images/server_logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <title>新井鯖 - Admin</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -387,6 +388,12 @@
         background: rgba(56, 189, 248, 0.3);
         transform: translateY(-3px);
     }
+    .back-to-top-icon {
+        width: 1.25rem;
+        height: 1.25rem;
+        stroke-width: 2;
+        color: #38bdf8;
+    }
 
     @media (max-width: 768px) {
         .container { padding: 2rem 1rem 0; }
@@ -608,7 +615,9 @@
   <p>無断転載・二次配布を禁じます。</p>
   </footer>
 
-  <button id="back-to-top" aria-label="ページトップへ戻る">&#x2191;</button>
+  <button id="back-to-top" aria-label="トップへ戻る">
+    <i data-lucide="arrow-up" class="back-to-top-icon"></i>
+  </button>
 
   <script>
     function toggleProfile(element) {
@@ -638,6 +647,8 @@
     backToTop.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+
+    lucide.createIcons();
   </script>
 </body>
 </html>
