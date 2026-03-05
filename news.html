@@ -394,6 +394,16 @@
         border-radius: 2px;
         padding: 0 2px;
     }
+    /* カードのフェードイン */
+    .news-card {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .news-card.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
 
     /* ── Responsive ── */
     @media (max-width: 640px) {
@@ -708,6 +718,7 @@
          <div class="news-body-full">${highlight(n.body, searchTerm)}</div>
       </div>`;
      }).join("");
+     observeCards();
     }
 
     document.getElementById("searchInput").addEventListener("input", e => {
@@ -726,6 +737,23 @@
     function toggleNav() {
       document.querySelector('.nav-links').classList.toggle('open');
       document.querySelector('.nav-hamburger').classList.toggle('open'); // ← 追加
+    }
+
+    function observeCards() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, i * 80); // カードごとに80msずつ遅延
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+      
+        document.querySelectorAll('.news-card').forEach(card => {
+            observer.observe(card);
+        });
     }
 
     localStorage.setItem("araiserver_newsLastVisit", Date.now());
