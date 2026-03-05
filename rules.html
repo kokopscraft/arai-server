@@ -6,6 +6,7 @@
   <link rel="icon" href="images/server_logo.png" type="image/png">
   <link rel="apple-touch-icon" href="images/server_logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <title>新井鯖 - Rules</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -269,6 +270,12 @@
     #back-to-top:hover {
         background: rgba(56, 189, 248, 0.3);
         transform: translateY(-3px);
+    }
+    .back-to-top-icon {
+        width: 1.25rem;
+        height: 1.25rem;
+        stroke-width: 2;
+        color: #38bdf8;
     }
 
     /* ── Responsive ── */
@@ -552,6 +559,29 @@
       </ul>
     </div>
   </div>
+
+  <footer>
+    <div class="footer-social">
+      <a href="https://line.me/ti/g2/uViXaSuCHoFWX0Z8WiyY2io4IRrXuT6t4OhRZA" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn.simpleicons.org/line/94a3b8" alt="LINE"> LINE</a>
+      <a href="https://discord.gg/EWphkMNb5h" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn.simpleicons.org/discord/94a3b8" alt="Discord"> Discord</a>
+      <a href="https://www.youtube.com/@arai_server" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn.simpleicons.org/youtube/94a3b8" alt="YouTube"> YouTube</a>
+      <a href="https://x.com/913_arakuma" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn.simpleicons.org/x/94a3b8" alt="X"> X</a>
+      <a href="https://github.com/kokopscraft/arai-server-members" target="_blank" rel="noopener">
+        <img src="https://cdn.simpleicons.org/github/94a3b8" alt="GitHub"> GitHub
+            </a>
+    </div>
+    <p>&copy; 2026 arai server. All rights reserved.</p>
+    <p>無断転載・二次配布を禁じます。</p>
+  </footer>
+
+  <button id="back-to-top" aria-label="トップへ戻る">
+    <i data-lucide="arrow-up" class="back-to-top-icon"></i>
+  </button>
+
   <script>
     function toggleNav() {
       document.querySelector('.nav-links').classList.toggle('open');
@@ -579,26 +609,5 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   </script>
-
-  <footer>
-    <div class="footer-social">
-      <a href="https://line.me/ti/g2/uViXaSuCHoFWX0Z8WiyY2io4IRrXuT6t4OhRZA" target="_blank" rel="noopener noreferrer">
-        <img src="https://cdn.simpleicons.org/line/94a3b8" alt="LINE"> LINE</a>
-      <a href="https://discord.gg/EWphkMNb5h" target="_blank" rel="noopener noreferrer">
-        <img src="https://cdn.simpleicons.org/discord/94a3b8" alt="Discord"> Discord</a>
-      <a href="https://www.youtube.com/@arai_server" target="_blank" rel="noopener noreferrer">
-        <img src="https://cdn.simpleicons.org/youtube/94a3b8" alt="YouTube"> YouTube</a>
-      <a href="https://x.com/913_arakuma" target="_blank" rel="noopener noreferrer">
-        <img src="https://cdn.simpleicons.org/x/94a3b8" alt="X"> X</a>
-      <a href="https://github.com/kokopscraft/arai-server-members" target="_blank" rel="noopener">
-        <img src="https://cdn.simpleicons.org/github/94a3b8" alt="GitHub"> GitHub
-            </a>
-    </div>
-    <p>&copy; 2026 arai server. All rights reserved.</p>
-    <p>無断転載・二次配布を禁じます。</p>
-  </footer>
-
-  <button id="back-to-top" aria-label="ページトップへ戻る">&#x2191;</button>
-
 </body>
 </html>
