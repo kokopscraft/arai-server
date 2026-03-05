@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="images/server_logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="images/server_logo.png">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
+  <title>新井鯖 - Economy</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background-color: #0f172a;
+      color: #f1f5f9;
+      min-height: 100vh;
+    }
+
+    /* ── Navigation ── */
+    .site-nav {
+      background: rgba(15, 23, 42, 0.97);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #334155;
+      position: sticky;
+      font-family: 'Noto Sans JP', sans-serif;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 2rem;
+    }
+    .nav-logo-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: #f1f5f9;
+    }
+    .nav-logo { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; }
+    .nav-title { font-size: 1.2rem; font-weight: 900; color: #38bdf8; letter-spacing: 0.02em; }
+    .nav-title-pc { display: none; }
+    @media (min-width: 641px) { .nav-title-pc { display: inline; } }
+    .nav-links { list-style: none; display: flex; gap: 0.25rem; }
+    .nav-links a {
+      display: block;
+      padding: 0.5rem 1rem;
+      color: #cbd5e1;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+    .nav-links a:hover { background: #1e293b; color: #38bdf8; border-color: #334155; }
+    .nav-links a.active {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    /* ── Container ── */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 3rem 2rem 0;
+    }
+
+    /* ── Page Header ── */
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid #334155;
+    }
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      color: #f1f5f9;
+    }
+    .subtitle { color: #94a3b8; font-size: 1rem; }
+
+    /* ── Info Banner ── */
+    .info-banner {
+      background: rgba(56, 189, 248, 0.07);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.875rem;
+      color: #94a3b8;
+      line-height: 1.6;
+    }
+    .info-banner i { color: #38bdf8; flex-shrink: 0; width: 1.1rem; height: 1.1rem; }
+
+    /* ── Search ── */
+    .search-box {
+      margin-bottom: 2rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .search-input {
+      flex: 1;
+      min-width: 220px;
+      padding: 0.75rem 1rem;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      color: #f1f5f9;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+    .search-input:focus {
+      outline: none;
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.15);
+    }
+    .filter-buttons { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+    .filter-btn {
+      padding: 0.5rem 1rem;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 6px;
+      color: #94a3b8;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.875rem;
+    }
+    .filter-btn:hover { border-color: #38bdf8; color: #38bdf8; }
+    .filter-btn.active {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+
+    /* ── Price Section ── */
+    .price-section { margin-bottom: 2.5rem; }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      padding-left: 1rem;
+      border-left: 4px solid #38bdf8;
+    }
+    .section-header i { color: #38bdf8; width: 1.1rem; height: 1.1rem; }
+    .section-title-text { font-size: 1.2rem; font-weight: 700; color: #f1f5f9; }
+
+    /* ── Price Table ── */
+    .price-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .price-table thead tr {
+      background: #0f172a;
+      border-bottom: 1px solid #334155;
+    }
+    .price-table th {
+      padding: 0.75rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #64748b;
+      text-align: left;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .price-table th:not(:first-child) { text-align: right; }
+    .price-table tbody tr {
+      border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+      transition: background 0.15s;
+    }
+    .price-table tbody tr:last-child { border-bottom: none; }
+    .price-table tbody tr:hover { background: rgba(56, 189, 248, 0.04); }
+    .price-table tbody tr.hidden { display: none; }
+    .price-table td {
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+    }
+    .price-table td:not(:first-child) { text-align: right; }
+    .item-name { font-weight: 600; color: #f1f5f9; }
+    .buy-price { color: #38bdf8; font-weight: 600; font-family: 'Courier New', monospace; }
+    .sell-price { color: #22c55e; font-weight: 600; font-family: 'Courier New', monospace; }
+    .no-order { color: #475569; font-size: 0.8rem; }
+
+    /* ── No Results ── */
+    .no-results {
+      text-align: center;
+      padding: 3rem;
+      color: #94a3b8;
+      display: none;
+    }
+    .no-results.visible { display: block; }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 2.5rem 2rem 2rem;
+      color: #475569;
+      font-size: 0.8rem;
+      border-top: 1px solid #1e293b;
+      margin-top: 4rem;
+    }
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .footer-social a {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.45rem 1rem;
+      border-radius: 20px;
+      border: 1px solid #334155;
+      transition: all 0.3s ease;
+    }
+    .footer-social a:hover { color: #f1f5f9; border-color: #38bdf8; background: rgba(56,189,248,0.08); }
+    .footer-social img { width: 18px; height: 18px; object-fit: contain; transform: scale(1.05); }
+    .footer-social a[href*="x.com"] img { transform: scale(0.88); }
+    footer p { margin-bottom: 0.25rem; }
+
+    /* ── Hamburger ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #f1f5f9;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-badge {
+      display: inline-block;
+      background: #ef4444;
+      color: #fff;
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 0.1rem 0.35rem;
+      border-radius: 999px;
+      margin-left: 0.3rem;
+      vertical-align: middle;
+      line-height: 1.4;
+    }
+
+    /* ── Back to Top ── */
+    #back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 44px;
+      height: 44px;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      border-radius: 50%;
+      color: #38bdf8;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s, background 0.2s;
+      z-index: 200;
+    }
+    #back-to-top.visible { opacity: 1; pointer-events: auto; }
+    #back-to-top:hover { background: rgba(56, 189, 248, 0.3); transform: translateY(-3px); }
+    .back-to-top-icon { width: 1.25rem; height: 1.25rem; stroke-width: 2; color: #38bdf8; }
+
+    mark {
+      background: rgba(56, 189, 248, 0.3);
+      color: #f1f5f9;
+      border-radius: 2px;
+      padding: 0 2px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .container { padding: 2rem 1rem 0; }
+      h1 { font-size: 2rem; }
+      .nav-inner { padding: 0.75rem 1rem; position: relative; }
+      .nav-hamburger { display: flex; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: rgba(15, 23, 42, 0.97);
+        border-bottom: 1px solid #334155;
+        padding: 0.5rem 1rem 1rem;
+        z-index: 99;
+      }
+      .nav-links.open { display: flex; }
+      .search-box { flex-direction: column; }
+      .search-input { width: 100%; }
+      .price-table th, .price-table td { padding: 0.6rem 0.75rem; font-size: 0.82rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo-link">
+        <img src="images/server_logo.png" alt="新井鯖ロゴ" class="nav-logo">
+        <span class="nav-title">新井鯖<span class="nav-title-pc"> - Founding Server</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="members.html">Members</a></li>
+        <li><a href="wiki.html">Wiki</a></li>
+        <li><a href="rules.html">Rules</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="economy.html" class="active">Economy</a></li>
+        <li><a href="network.html">Network</a></li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
+      <button class="nav-hamburger" onclick="toggleNav()" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="container">
+    <header>
+      <h1>Economy</h1>
+      <p class="subtitle">新井鯖取引所（ATS）の現在の価格表</p>
+    </header>
+
+    <div class="info-banner">
+      <i data-lucide="info"></i>
+      <span>価格は鯖民の売買履歴をもとに定期的に見直されます。<strong style="color:#f1f5f9;">買値</strong>はATSからアイテムを買う価格、<strong style="color:#f1f5f9;">売値</strong>はATSにアイテムを売る価格です。</span>
+    </div>
+
+    <div class="search-box">
+      <input type="text" class="search-input" id="searchInput" placeholder="アイテム名で検索...">
+      <div class="filter-buttons">
+        <button class="filter-btn active" data-filter="all">すべて</button>
+        <button class="filter-btn" data-filter="ore">鉱石</button>
+        <button class="filter-btn" data-filter="food">食料</button>
+        <button class="filter-btn" data-filter="wood">木材</button>
+        <button class="filter-btn" data-filter="other">その他</button>
+      </div>
+    </div>
+
+    <!-- 鉱石系統 -->
+    <div class="price-section" data-category="ore">
+      <div class="section-header">
+        <i data-lucide="gem"></i>
+        <span class="section-title-text">鉱石系統</span>
+      </div>
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th>アイテム</th>
+            <th>買値</th>
+            <th>売値</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-category="ore"><td class="item-name">石炭ブロック</td><td class="buy-price">281</td><td class="sell-price">90</td></tr>
+          <tr data-category="ore"><td class="item-name">鉄ブロック</td><td class="buy-price">250</td><td class="sell-price">100</td></tr>
+          <tr data-category="ore"><td class="item-name">金ブロック</td><td class="buy-price">429</td><td class="sell-price">257</td></tr>
+          <tr data-category="ore"><td class="item-name">ダイヤモンドブロック</td><td class="buy-price">1,974</td><td class="sell-price">1,104</td></tr>
+          <tr data-category="ore"><td class="item-name">エメラルドブロック</td><td class="buy-price">113</td><td class="sell-price">98</td></tr>
+          <tr data-category="ore"><td class="item-name">ネザライトインゴット</td><td class="buy-price">7,003</td><td class="sell-price">4,289</td></tr>
+          <tr data-category="ore"><td class="item-name">グロウストーンダスト</td><td class="buy-price">30</td><td class="sell-price">11</td></tr>
+          <tr data-category="ore"><td class="item-name">レッドストーンブロック</td><td class="buy-price">22</td><td class="sell-price">3</td></tr>
+          <tr data-category="ore"><td class="item-name">ネザークオーツ</td><td class="buy-price">1</td><td><span class="no-order">買い注文無し</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 食料系統 -->
+    <div class="price-section" data-category="food">
+      <div class="section-header">
+        <i data-lucide="apple"></i>
+        <span class="section-title-text">食料系統</span>
+      </div>
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th>アイテム</th>
+            <th>買値</th>
+            <th>売値</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-category="food"><td class="item-name">干草の俵</td><td class="buy-price">29</td><td class="sell-price">22</td></tr>
+          <tr data-category="food"><td class="item-name">ベイクドポテト</td><td class="buy-price">21</td><td class="sell-price">14</td></tr>
+          <tr data-category="food"><td class="item-name">リンゴ</td><td class="buy-price">81</td><td class="sell-price">78</td></tr>
+          <tr data-category="food"><td class="item-name">金のリンゴ</td><td class="buy-price">536</td><td class="sell-price">347</td></tr>
+          <tr data-category="food"><td class="item-name">ステーキ</td><td class="buy-price">25</td><td class="sell-price">18</td></tr>
+          <tr data-category="food"><td class="item-name">焼き豚</td><td class="buy-price">23</td><td class="sell-price">17</td></tr>
+          <tr data-category="food"><td class="item-name">焼き鶏肉</td><td class="buy-price">24</td><td class="sell-price">16</td></tr>
+          <tr data-category="food"><td class="item-name">焼き羊肉</td><td class="buy-price">27</td><td class="sell-price">19</td></tr>
+          <tr data-category="food"><td class="item-name">サトウキビ</td><td class="buy-price">4</td><td class="sell-price">2</td></tr>
+          <tr data-category="food"><td class="item-name">サケ</td><td class="buy-price">41</td><td class="sell-price">33</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 木材系統 -->
+    <div class="price-section" data-category="wood">
+      <div class="section-header">
+        <i data-lucide="tree-pine"></i>
+        <span class="section-title-text">木材系統</span>
+      </div>
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th>アイテム</th>
+            <th>買値</th>
+            <th>売値</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-category="wood"><td class="item-name">オークの原木</td><td class="buy-price">15</td><td class="sell-price">1</td></tr>
+          <tr data-category="wood"><td class="item-name">白樺の原木</td><td class="buy-price">15</td><td class="sell-price">1</td></tr>
+          <tr data-category="wood"><td class="item-name">トウヒの原木</td><td class="buy-price">15</td><td class="sell-price">1</td></tr>
+          <tr data-category="wood"><td class="item-name">ジャングルの原木</td><td class="buy-price">15</td><td class="sell-price">1</td></tr>
+          <tr data-category="wood"><td class="item-name">アカシアの原木</td><td class="buy-price">20</td><td class="sell-price">1</td></tr>
+          <tr data-category="wood"><td class="item-name">ダークオークの原木</td><td class="buy-price">11</td><td class="sell-price">1</td></tr>
+          <tr data-category="wood"><td class="item-name">歪んだ幹</td><td class="buy-price">15</td><td class="sell-price">1</td></tr>
+          <tr data-category="wood"><td class="item-name">深紅の幹</td><td class="buy-price">19</td><td class="sell-price">1</td></tr>
+          <tr data-category="wood"><td class="item-name">サクラの原木</td><td class="buy-price">16</td><td class="sell-price">1</td></tr>
+          <tr data-category="wood"><td class="item-name">ペールオークの原木</td><td class="buy-price">21</td><td class="sell-price">2</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- その他 -->
+    <div class="price-section" data-category="other">
+      <div class="section-header">
+        <i data-lucide="package"></i>
+        <span class="section-title-text">その他</span>
+      </div>
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th>アイテム</th>
+            <th>買値</th>
+            <th>売値</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-category="other"><td class="item-name">黒曜石</td><td class="buy-price">40</td><td class="sell-price">20</td></tr>
+          <tr data-category="other"><td class="item-name">氷</td><td class="buy-price">20</td><td class="sell-price">4</td></tr>
+          <tr data-category="other"><td class="item-name">砂</td><td class="buy-price">4</td><td class="sell-price">2</td></tr>
+          <tr data-category="other"><td class="item-name">砂利</td><td class="buy-price">1</td><td><span class="no-order">買い注文なし</span></td></tr>
+          <tr data-category="other"><td class="item-name">粘土玉</td><td class="buy-price">2</td><td class="sell-price">1</td></tr>
+          <tr data-category="other"><td class="item-name">丸石</td><td class="buy-price">1</td><td><span class="no-order">買い注文なし</span></td></tr>
+          <tr data-category="other"><td class="item-name">ネザーラック</td><td class="buy-price">1</td><td><span class="no-order">買い注文なし</span></td></tr>
+          <tr data-category="other"><td class="item-name">エンチャントの瓶</td><td class="buy-price">48</td><td class="sell-price">43</td></tr>
+          <tr data-category="other"><td class="item-name">深層岩</td><td class="buy-price">2</td><td><span class="no-order">買い注文なし</span></td></tr>
+          <tr data-category="other"><td class="item-name">皮</td><td class="buy-price">18</td><td class="sell-price">12</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="no-results" id="noResults">該当するアイテムが見つかりませんでした。</div>
+  </div>
+
+  <footer>
+    <div class="footer-social">
+      <a href="https://line.me/ti/g2/uViXaSuCHoFWX0Z8WiyY2io4IRrXuT6t4OhRZA" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn.simpleicons.org/line/94a3b8" alt="LINE"> LINE</a>
+      <a href="https://discord.gg/EWphkMNb5h" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn.simpleicons.org/discord/94a3b8" alt="Discord"> Discord</a>
+      <a href="https://www.youtube.com/@arai_server" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn.simpleicons.org/youtube/94a3b8" alt="YouTube"> YouTube</a>
+      <a href="https://x.com/913_arakuma" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn.simpleicons.org/x/94a3b8" alt="X"> X</a>
+      <a href="https://github.com/kokopscraft/arai-server-members" target="_blank" rel="noopener">
+        <img src="https://cdn.simpleicons.org/github/94a3b8" alt="GitHub"> GitHub</a>
+    </div>
+    <p>&copy; 2026 arai server. All rights reserved.</p>
+    <p>サイト内のコンテンツの無断転載を禁じます。</p>
+  </footer>
+
+  <button id="back-to-top" aria-label="トップへ戻る">
+    <i data-lucide="arrow-up" class="back-to-top-icon"></i>
+  </button>
+
+  <script>
+    let currentFilter = 'all';
+
+    function highlight(text, term) {
+      if (!term) return text;
+      const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      return text.replace(new RegExp(escaped, 'gi'), match => `<mark>${match}</mark>`);
+    }
+
+    function applyFilter() {
+      const term = document.getElementById('searchInput').value.toLowerCase();
+      const sections = document.querySelectorAll('.price-section');
+      let totalVisible = 0;
+
+      sections.forEach(section => {
+        const cat = section.dataset.category;
+        const showSection = currentFilter === 'all' || currentFilter === cat;
+        if (!showSection) {
+          section.style.display = 'none';
+          return;
+        }
+        section.style.display = '';
+
+        const rows = section.querySelectorAll('tbody tr');
+        let sectionVisible = 0;
+        rows.forEach(row => {
+          const nameEl = row.querySelector('.item-name');
+          const name = nameEl.dataset.original || nameEl.textContent;
+          nameEl.dataset.original = name;
+
+          if (!term || name.toLowerCase().includes(term)) {
+            row.classList.remove('hidden');
+            nameEl.innerHTML = highlight(name, term);
+            sectionVisible++;
+            totalVisible++;
+          } else {
+            row.classList.add('hidden');
+            nameEl.innerHTML = name;
+          }
+        });
+        section.style.display = sectionVisible === 0 ? 'none' : '';
+      });
+
+      document.getElementById('noResults').classList.toggle('visible', totalVisible === 0);
+    }
+
+    document.getElementById('searchInput').addEventListener('input', applyFilter);
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        applyFilter();
+      });
+    });
+
+    function toggleNav() {
+      document.querySelector('.nav-links').classList.toggle('open');
+      document.querySelector('.nav-hamburger').classList.toggle('open');
+    }
+
+    // News 未読バッジ
+    (function () {
+      const lastVisit  = Number(localStorage.getItem("araiserver_newsLastVisit") || 0);
+      const latestDate = localStorage.getItem("araiserver_newsLatest");
+      if (!latestDate) return;
+      const hasUnread  = new Date(latestDate).getTime() > lastVisit;
+      if (hasUnread) {
+        const link = document.querySelector('a[href="news.html"]');
+        if (link) link.insertAdjacentHTML("beforeend", '<span class="nav-badge">NEW</span>');
+      }
+    })();
+
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      backToTop.classList.toggle('visible', window.scrollY > 300);
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    lucide.createIcons();
+  </script>
+</body>
+</html>
