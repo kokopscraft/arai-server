@@ -603,11 +603,35 @@
 
     let currentFilter = 'all';
 
+    function countUp(elementId, target, delay) {
+        setTimeout(() => {
+            const el = document.getElementById(elementId);
+            const duration = 1000;
+            const steps = 40;
+            const increment = target / steps;
+            let current = 0;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    el.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    el.textContent = Math.floor(current);
+                }
+            }, duration / steps);
+        }, delay);
+    }
+    
     function updateStats() {
-      document.getElementById('totalCountries').textContent = countriesData.length;
-      document.getElementById('totalMembers').textContent = countriesData.reduce((sum, c) => sum + c.members.length, 0);
-      document.getElementById('peaceCountries').textContent = countriesData.filter(c => c.type === 'peace').length;
-      document.getElementById('warCountries').textContent = countriesData.filter(c => c.type === 'war').length;
+        const total    = countriesData.length;
+        const members  = countriesData.reduce((sum, c) => sum + c.members.length, 0);
+        const peace    = countriesData.filter(c => c.type === 'peace').length;
+        const war      = countriesData.filter(c => c.type === 'war').length;
+    
+        countUp('totalCountries', total,   0);
+        countUp('totalMembers',   members, 150);
+        countUp('peaceCountries', peace,   300);
+        countUp('warCountries',   war,     450);
     }
 
     function renderCountries(filter = 'all', searchTerm = '') {
