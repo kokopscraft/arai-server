@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="images/server_logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="images/server_logo.png">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
+  <title>新井鯖 - Wiki</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background-color: #0f172a;
+      color: #f1f5f9;
+      min-height: 100vh;
+    }
+    .site-nav {
+      background: rgba(15, 23, 42, 0.97);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid #334155;
+      position: sticky;
+      font-family: 'Noto Sans JP', sans-serif;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 2rem;
+    }
+    .nav-logo-link { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: #f1f5f9; }
+    .nav-logo { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; }
+    .nav-title { font-size: 1.2rem; font-weight: 900; color: #38bdf8; letter-spacing: 0.02em; }
+    .nav-title-pc { display: none; }
+    @media (min-width: 641px) { .nav-title-pc { display: inline; } }
+    .nav-links { list-style: none; display: flex; gap: 0.25rem; }
+    .nav-links a {
+      display: block; padding: 0.5rem 1rem; color: #cbd5e1; text-decoration: none;
+      border-radius: 6px; font-size: 0.9rem; font-weight: 500;
+      border: 1px solid transparent; transition: all 0.2s;
+    }
+    .nav-links a:hover { background: #1e293b; color: #38bdf8; border-color: #334155; }
+    .nav-links a.active { background: rgba(56,189,248,0.15); color: #38bdf8; border: 1px solid rgba(56,189,248,0.3); }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 0.5rem; }
+    .nav-hamburger span { display: block; width: 24px; height: 2px; background: #f1f5f9; border-radius: 2px; transition: all 0.3s ease; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-badge {
+      display: inline-block; background: #ef4444; color: #fff; font-size: 0.6rem; font-weight: 700;
+      padding: 0.1rem 0.35rem; border-radius: 999px; margin-left: 0.3rem; vertical-align: middle; line-height: 1.4;
+    }
+
+    /* ── Layout ── */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 2rem 0;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    /* ── Page Header ── */
+    .page-header {
+      grid-column: 1 / -1;
+      text-align: center;
+      margin-bottom: 1rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid #334155;
+    }
+    h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.5rem; color: #f1f5f9; }
+    .subtitle { color: #94a3b8; font-size: 1rem; }
+
+    /* ── Sidebar ── */
+    .wiki-sidebar {
+      position: sticky;
+      top: 5rem;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 1.25rem;
+    }
+    .sidebar-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.75rem;
+    }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: 0.25rem; }
+    .sidebar-nav a {
+      display: block;
+      padding: 0.45rem 0.75rem;
+      color: #94a3b8;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      transition: all 0.2s;
+    }
+    .sidebar-nav a:hover { background: rgba(56,189,248,0.08); color: #38bdf8; }
+    .sidebar-nav a.active { background: rgba(56,189,248,0.12); color: #38bdf8; font-weight: 600; }
+    .sidebar-divider { height: 1px; background: #334155; margin: 0.5rem 0; }
+
+    /* ── Wiki Content ── */
+    .wiki-content { min-width: 0; }
+    .wiki-section {
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .wiki-section.visible { opacity: 1; transform: translateY(0); }
+    .wiki-section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #334155;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .wiki-section-title i { color: #38bdf8; width: 1.2rem; height: 1.2rem; }
+    .wiki-card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      line-height: 1.8;
+      color: #cbd5e1;
+      font-size: 0.95rem;
+    }
+    .wiki-card p { margin-bottom: 0.75rem; }
+    .wiki-card p:last-child { margin-bottom: 0; }
+    .wiki-card h3 { font-size: 1rem; font-weight: 700; color: #f1f5f9; margin-bottom: 0.5rem; }
+    .wiki-card code {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 4px;
+      padding: 0.1rem 0.4rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.875rem;
+      color: #38bdf8;
+    }
+    .wiki-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+    .wiki-table th {
+      background: #0f172a;
+      padding: 0.75rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #64748b;
+      text-align: left;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border-bottom: 1px solid #334155;
+    }
+    .wiki-table td {
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      border-bottom: 1px solid rgba(51,65,85,0.5);
+    }
+    .wiki-table tr:last-child td { border-bottom: none; }
+    .wiki-table tr:hover td { background: rgba(56,189,248,0.04); }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center; padding: 2.5rem 2rem 2rem;
+      color: #475569; font-size: 0.8rem; border-top: 1px solid #1e293b; margin-top: 4rem;
+    }
+    .footer-social { display: flex; justify-content: center; gap: 1.25rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
+    .footer-social a {
+      display: flex; align-items: center; gap: 0.5rem; color: #94a3b8; text-decoration: none;
+      font-size: 0.85rem; font-weight: 500; padding: 0.45rem 1rem; border-radius: 20px;
+      border: 1px solid #334155; transition: all 0.3s ease;
+    }
+    .footer-social a:hover { color: #f1f5f9; border-color: #38bdf8; background: rgba(56,189,248,0.08); }
+    .footer-social img { width: 18px; height: 18px; object-fit: contain; transform: scale(1.05); }
+    .footer-social a[href*="x.com"] img { transform: scale(0.88); }
+    footer p { margin-bottom: 0.25rem; }
+
+    /* ── Back to Top ── */
+    #back-to-top {
+      position: fixed; bottom: 2rem; right: 2rem; width: 44px; height: 44px;
+      background: rgba(56,189,248,0.15); border: 1px solid rgba(56,189,248,0.4);
+      border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s, transform 0.3s, background 0.2s; z-index: 200;
+    }
+    #back-to-top.visible { opacity: 1; pointer-events: auto; }
+    #back-to-top:hover { background: rgba(56,189,248,0.3); transform: translateY(-3px); }
+    .back-to-top-icon { width: 1.25rem; height: 1.25rem; stroke-width: 2; color: #38bdf8; }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .container { grid-template-columns: 1fr; }
+      .wiki-sidebar { position: static; }
+      .page-header { grid-column: 1; }
+    }
+    @media (max-width: 640px) {
+      .container { padding: 2rem 1rem 0; }
+      h1 { font-size: 2rem; }
+      .nav-inner { padding: 0.75rem 1rem; position: relative; }
+      .nav-hamburger { display: flex; }
+      .nav-links {
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        flex-direction: column; background: rgba(15,23,42,0.97);
+        border-bottom: 1px solid #334155; padding: 0.5rem 1rem 1rem; z-index: 99;
+      }
+      .nav-links.open { display: flex; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo-link">
+        <img src="images/server_logo.png" alt="新井鯖ロゴ" class="nav-logo">
+        <span class="nav-title">新井鯖<span class="nav-title-pc"> - Founding Server</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="members.html">Members</a></li>
+        <li><a href="wiki.html" class="active">Wiki</a></li>
+        <li><a href="rules.html">Rules</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="economy.html">Economy</a></li>
+        <li><a href="network.html">Network</a></li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
+      <button class="nav-hamburger" onclick="toggleNav()" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="page-header">
+      <h1>Wiki</h1>
+      <p class="subtitle">新井鯖の機能・システム解説</p>
+    </div>
+
+    <!-- サイドバー -->
+    <aside class="wiki-sidebar">
+      <div class="sidebar-title">目次</div>
+      <ul class="sidebar-nav">
+        <!-- ここにセクションへのアンカーリンクを追加 -->
+        <!-- 例:
+        <li><a href="#currency">通貨システム</a></li>
+        <div class="sidebar-divider"></div>
+        <li><a href="#gwarp">G Warp</a></li>
+        <li><a href="#rank">ランク制度</a></li>
+        -->
+        <li><a href="#">準備中...</a></li>
+      </ul>
+    </aside>
+
+    <!-- メインコンテンツ -->
+    <main class="wiki-content">
+      <!-- ここにセクションを追加 -->
+      <!-- 例:
+      <section class="wiki-section" id="currency">
+        <h2 class="wiki-section-title">
+          <i data-lucide="coins"></i>
+          通貨システム
+        </h2>
+        <div class="wiki-card">
+          <p>内容...</p>
+        </div>
+      </section>
+      -->
+      <section class="wiki-section">
+        <h2 class="wiki-section-title">
+          <i data-lucide="construction"></i>
+          準備中
+        </h2>
+        <div class="wiki-card">
+          <p>Wiki のコンテンツは現在準備中です。順次追加予定です。</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <div class="footer-social">
+      <a href="https://line.me/ti/g2/uViXaSuCHoFWX0Z8WiyY2io4IRrXuT6t4OhRZA" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn.simpleicons.org/line/94a3b8" alt="LINE"> LINE</a>
+      <a href="https://discord.gg/EWphkMNb5h" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn.simpleicons.org/discord/94a3b8" alt="Discord"> Discord</a>
+      <a href="https://www.youtube.com/@arai_server" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn.simpleicons.org/youtube/94a3b8" alt="YouTube"> YouTube</a>
+      <a href="https://x.com/913_arakuma" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn.simpleicons.org/x/94a3b8" alt="X"> X</a>
+      <a href="https://github.com/kokopscraft/arai-server-members" target="_blank" rel="noopener">
+        <img src="https://cdn.simpleicons.org/github/94a3b8" alt="GitHub"> GitHub</a>
+    </div>
+    <p>&copy; 2026 arai server. All rights reserved.</p>
+    <p>サイト内のコンテンツの無断転載を禁じます。</p>
+  </footer>
+
+  <button id="back-to-top" aria-label="トップへ戻る">
+    <i data-lucide="arrow-up" class="back-to-top-icon"></i>
+  </button>
+
+  <script>
+    function toggleNav() {
+      document.querySelector('.nav-links').classList.toggle('open');
+      document.querySelector('.nav-hamburger').classList.toggle('open');
+    }
+
+    // News 未読バッジ
+    (function () {
+      const lastVisit  = Number(localStorage.getItem("araiserver_newsLastVisit") || 0);
+      const latestDate = localStorage.getItem("araiserver_newsLatest");
+      if (!latestDate) return;
+      if (new Date(latestDate).getTime() > lastVisit) {
+        const link = document.querySelector('a[href="news.html"]');
+        if (link) link.insertAdjacentHTML("beforeend", '<span class="nav-badge">NEW</span>');
+      }
+    })();
+
+    // フェードイン
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 100);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.wiki-section').forEach(el => observer.observe(el));
+
+    // サイドバーのアクティブ連動
+    const sections = document.querySelectorAll('.wiki-section[id]');
+    const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 120) current = s.id;
+      });
+      sidebarLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === `#${current}`);
+      });
+    });
+
+    // Back to top
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => backToTop.classList.toggle('visible', window.scrollY > 300));
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    lucide.createIcons();
+  </script>
+</body>
+</html>
