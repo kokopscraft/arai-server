@@ -8,499 +8,513 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
   <title>新井鯖 - Home</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background-color: #0f172a;
-      color: #f1f5f9;
-      min-height: 100vh;
-    }
-    .site-nav {
-      background: rgba(15, 23, 42, 0.97);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid #334155;
-      position: sticky;
-      font-family: 'Noto Sans JP', sans-serif;
-      top: 0;
-      z-index: 100;
-    }
-    .nav-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.75rem 2rem;
-    }
-    .nav-logo-link {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      text-decoration: none;
-      color: #f1f5f9;
-    }
-    .nav-logo {
-      width: 40px;
-      height: 40px;
-      border-radius: 8px;
-      object-fit: cover;
-    }
-    .nav-title {
-      font-size: 1.2rem;
-      font-weight: 900;
-      color: #38bdf8;
-      letter-spacing: 0.02em;
-    }
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 0.25rem;
-    }
-    .nav-links a {
-      display: block;
-      padding: 0.5rem 1rem;
-      color: #cbd5e1;
-      text-decoration: none;
-      border-radius: 6px;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: all 0.2s;
-      border: 1px solid transparent;
-    }
-    .nav-links a:hover {
-      background: #1e293b;
-      color: #38bdf8;
-      border-color: #334155;
-    }
-    .nav-links a.active {
-      background: rgba(56,189,248,0.15);
-      color: #38bdf8;
-      border: 1px solid rgba(56,189,248,0.3);
-    }
-    .hero {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 6rem 2rem 4rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(56,189,248,0.18) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 40% at 80% 80%, rgba(99,102,241,0.12) 0%, transparent 60%);
-      pointer-events: none;
-    }
-    .hero-logo {
-      width: 120px;
-      height: 120px;
-      border-radius: 24px;
-      object-fit: cover;
-      box-shadow: 0 0 40px rgba(56,189,248,0.35), 0 8px 32px rgba(0,0,0,0.5);
-      margin-bottom: 2rem;
-      position: relative;
-      z-index: 1;
-      border: 2px solid rgba(56,189,248,0.3);
-    }
-    .hero-title {
-      font-size: 3.5rem;
-      font-weight: 800;
-      color: #f1f5f9;
-      letter-spacing: -0.02em;
-      position: relative;
-      z-index: 1;
-      margin-bottom: 0.75rem;
-    }
-    .hero-title .new-color { color: #b89c8f; }
-    .hero-title span { color: #38bdf8; }
-    .hero-subtitle {
-      font-size: 1.15rem;
-      color: #94a3b8;
-      max-width: 500px;
-      line-height: 1.7;
-      transition: all 0.3s ease;
-      position: relative;
-      z-index: 1;
-      margin-bottom: 2.5rem;
-      min-height: 3.4rem;
-    }
-    .static-text {
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: #0f172a;
+    color: #f1f5f9;
+    min-height: 100vh;
+  }
+  .site-nav {
+    background: rgba(15, 23, 42, 0.97);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #334155;
+    position: sticky;
+    font-family: 'Noto Sans JP', sans-serif;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 2rem;
+  }
+  .nav-logo-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: #f1f5f9;
+  }
+  .nav-logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+  .nav-title {
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: #38bdf8;
+    letter-spacing: 0.02em;
+  }
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 0.25rem;
+  }
+  .nav-links a {
+    display: block;
+    padding: 0.5rem 1rem;
     color: #cbd5e1;
-      font-weight: 600;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+  }
+  .nav-links a:hover {
+    background: #1e293b;
+    color: #38bdf8;
+    border-color: #334155;
+  }
+  .nav-links a.active {
+    background: rgba(56,189,248,0.15);
+    color: #38bdf8;
+    border: 1px solid rgba(56,189,248,0.3);
+  }
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 6rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(56,189,248,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 80% 80%, rgba(99,102,241,0.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-logo {
+    width: 120px;
+    height: 120px;
+    border-radius: 24px;
+    object-fit: cover;
+    box-shadow: 0 0 40px rgba(56,189,248,0.35), 0 8px 32px rgba(0,0,0,0.5);
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 1;
+    border: 2px solid rgba(56,189,248,0.3);
+  }
+  .hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #f1f5f9;
+    letter-spacing: -0.02em;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 0.75rem;
+  }
+  .hero-title .new-color { color: #b89c8f; }
+  .hero-title span { color: #38bdf8; }
+  .hero-subtitle {
+    font-size: 1.15rem;
+    color: #94a3b8;
+    max-width: 500px;
+    line-height: 1.7;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 2.5rem;
+    min-height: 3.4rem;
+  }
+  .static-text {
+  color: #cbd5e1;
+    font-weight: 600;
+  }
+  .dynamic-text {
+    color: #38bdf8;
+    font-weight: 600;
+  }
+  .nav-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    max-width: 860px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+  .nav-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 2rem 1.5rem;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 16px;
+    text-decoration: none;
+    color: #f1f5f9;
+    transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    position: relative;
+    overflow: hidden;
+  }
+  .nav-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(56,189,248,0.08) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .nav-card:hover {
+    transform: translateY(-4px);
+    border-color: #38bdf8;
+    box-shadow: 0 8px 32px rgba(56,189,248,0.18), 0 2px 8px rgba(0,0,0,0.4);
+  }
+  .nav-card:hover::before { opacity: 1; }
+  .card-icon { font-size: 2.5rem; line-height: 1; }
+  .card-title { font-size: 1.15rem; font-weight: 700; color: #f1f5f9; }
+  .card-desc { font-size: 0.82rem; color: #64748b; text-align: center; line-height: 1.5; }
+  .card-arrow { font-size: 1rem; color: #38bdf8; opacity: 0; transform: translateX(-4px); transition: all 0.2s; }
+  .nav-card:hover .card-arrow { opacity: 1; transform: translateX(0); }
+  footer {
+    text-align: center;
+    padding: 2.5rem 2rem 2rem;
+    color: #475569;
+    font-size: 0.8rem;
+    border-top: 1px solid #1e293b;
+    margin-top: 4rem;
+  }
+  .footer-social {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+  .footer-social a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.45rem 1rem;
+    border-radius: 20px;
+    border: 1px solid #334155;
+    transition: all 0.3s ease;
+  }
+  .footer-social a:hover { color: #f1f5f9; border-color: #38bdf8; background: rgba(56,189,248,0.08); }
+  .footer-social img { width: 18px; height: 18px; object-fit: contain; transform: scale(1.05); }
+  /* Xのアイコンだけ視覚的にバランスを整える */
+  .footer-social a[href*="x.com"] img { transform: scale(0.88); }
+  footer p { margin-bottom: 0.25rem; }
+  .about-section { max-width: 860px; margin: 0 auto 4rem; padding: 0 2rem; }
+  .about-section h2 { font-size: 1.5rem; font-weight: 700; color: #38bdf8; margin-bottom: 1.5rem; padding-left: 1rem; border-left: 4px solid #38bdf8; }
+  .about-card { background: #1e293b; border: 1px solid #334155; border-radius: 16px; padding: 1.75rem 2rem; margin-bottom: 1.5rem; }
+  .about-card p { color: #cbd5e1; font-size: 0.97rem; line-height: 1.8; margin-bottom: 0.75rem; }
+  .about-card p:last-child { margin-bottom: 0; }
+  .about-card a { color: #38bdf8; text-decoration: none; font-size: 0.8rem; }
+  .about-card a:hover { text-decoration: underline; }
+
+  /* Addon Cards */
+  .addon-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; margin-top: 0.5rem; }
+  .addon-card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 10px;
+  }
+  .addon-item {
+    background: rgba(56,189,248,0.05);
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    cursor: pointer;
+    position: relative;
+  }
+  .addon-card-link:hover .addon-item,
+  .addon-item.no-link:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(56,189,248,0.15);
+    border-color: #38bdf8;
+  }
+  .addon-item.no-link:active {
+    transform: scale(0.97);
+    box-shadow: none;
+  }
+  .addon-item .addon-name { font-weight: 700; color: #f1f5f9; font-size: 0.97rem; margin-bottom: 0.3rem; }
+  .addon-item .addon-desc { color: #94a3b8; font-size: 0.88rem; line-height: 1.6; }
+  .addon-badge {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    font-size: 0.75rem;
+    color: #38bdf8;
+    opacity: 0.6;
+    transition: opacity 0.15s;
+  }
+  .addon-card-link:hover .addon-badge { opacity: 1; }
+  .addon-badge-locked {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    font-size: 0.72rem;
+    color: #475569;
+    background: rgba(71,85,105,0.2);
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #334155;
+  }
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #f1f5f9;
+    border-radius: 2px;
+  }
+  .nav-hamburger span {
+    transition: all 0.3s ease;
+  }
+  .nav-hamburger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .nav-hamburger.open span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  .nav-hamburger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+  .nav-badge {
+    display: inline-block;
+    background: #ef4444;
+    color: #fff;
+    font-size: 0.6rem;
+    font-weight: 700;
+    padding: 0.1rem 0.35rem;
+    border-radius: 999px;
+    margin-left: 0.3rem;
+    vertical-align: middle;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 640px) {
+    .hero-title { font-size: 2.2rem; }
+    .nav-cards { grid-template-columns: 1fr; max-width: 360px; }
+    .nav-inner { padding: 0.75rem 1rem; position: relative; }
+    .nav-links a { padding: 0.4rem 0.6rem; font-size: 0.8rem; }
+    .about-section { padding: 0 1rem; }
+    .about-card { padding: 1.25rem 1rem; }
+    .nav-hamburger { display: flex; }
+    .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: rgba(15, 23, 42, 0.97);
+    border-bottom: 1px solid #334155;
+    padding: 0.5rem 1rem 1rem;
+    z-index: 99;
     }
-    .dynamic-text {
+    .nav-links.open { display: flex; }
+
+    .cursor {
+      display: inline-block;
       color: #38bdf8;
-      font-weight: 600;
+      font-weight: 300;
+      animation: blink 0.75s step-end infinite;
+      margin-left: 1px;
+      opacity: 1;
     }
-    .nav-cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.25rem;
-      max-width: 860px;
-      width: 100%;
-      position: relative;
-      z-index: 1;
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%     { opacity: 0; }
     }
-    .nav-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.75rem;
-      padding: 2rem 1.5rem;
-      background: #1e293b;
-      border: 1px solid #334155;
-      border-radius: 16px;
-      text-decoration: none;
-      color: #f1f5f9;
-      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
-      position: relative;
-      overflow: hidden;
-    }
-    .nav-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 50% 0%, rgba(56,189,248,0.08) 0%, transparent 60%);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .nav-card:hover {
-      transform: translateY(-4px);
-      border-color: #38bdf8;
-      box-shadow: 0 8px 32px rgba(56,189,248,0.18), 0 2px 8px rgba(0,0,0,0.4);
-    }
-    .nav-card:hover::before { opacity: 1; }
-    .card-icon { font-size: 2.5rem; line-height: 1; }
-    .card-title { font-size: 1.15rem; font-weight: 700; color: #f1f5f9; }
-    .card-desc { font-size: 0.82rem; color: #64748b; text-align: center; line-height: 1.5; }
-    .card-arrow { font-size: 1rem; color: #38bdf8; opacity: 0; transform: translateX(-4px); transition: all 0.2s; }
-    .nav-card:hover .card-arrow { opacity: 1; transform: translateX(0); }
-    footer {
-      text-align: center;
-      padding: 2.5rem 2rem 2rem;
-      color: #475569;
-      font-size: 0.8rem;
-      border-top: 1px solid #1e293b;
-      margin-top: 4rem;
-    }
-    .footer-social {
-      display: flex;
-      justify-content: center;
-      gap: 1.25rem;
-      margin-bottom: 1.25rem;
-      flex-wrap: wrap;
-    }
-    .footer-social a {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: #94a3b8;
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 500;
-      padding: 0.45rem 1rem;
-      border-radius: 20px;
-      border: 1px solid #334155;
-      transition: all 0.3s ease;
-    }
-    .footer-social a:hover { color: #f1f5f9; border-color: #38bdf8; background: rgba(56,189,248,0.08); }
-    .footer-social img { width: 18px; height: 18px; object-fit: contain; transform: scale(1.05); }
-    /* Xのアイコンだけ視覚的にバランスを整える */
-    .footer-social a[href*="x.com"] img { transform: scale(0.88); }
-    footer p { margin-bottom: 0.25rem; }
-    .about-section { max-width: 860px; margin: 0 auto 4rem; padding: 0 2rem; }
-    .about-section h2 { font-size: 1.5rem; font-weight: 700; color: #38bdf8; margin-bottom: 1.5rem; padding-left: 1rem; border-left: 4px solid #38bdf8; }
-    .about-card { background: #1e293b; border: 1px solid #334155; border-radius: 16px; padding: 1.75rem 2rem; margin-bottom: 1.5rem; }
-    .about-card p { color: #cbd5e1; font-size: 0.97rem; line-height: 1.8; margin-bottom: 0.75rem; }
-    .about-card p:last-child { margin-bottom: 0; }
-    .about-card a { color: #38bdf8; text-decoration: none; font-size: 0.8rem; }
-    .about-card a:hover { text-decoration: underline; }
-
-    /* Addon Cards */
-    .addon-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; margin-top: 0.5rem; }
-    .addon-card-link {
-      display: block;
-      text-decoration: none;
-      color: inherit;
-      border-radius: 10px;
-    }
-    .addon-item {
-      background: rgba(56,189,248,0.05);
-      border: 1px solid #334155;
-      border-radius: 10px;
-      padding: 1rem 1.25rem;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
-      cursor: pointer;
-      position: relative;
-    }
-    .addon-card-link:hover .addon-item,
-    .addon-item.no-link:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(56,189,248,0.15);
-      border-color: #38bdf8;
-    }
-    .addon-item.no-link:active {
-      transform: scale(0.97);
-      box-shadow: none;
-    }
-    .addon-item .addon-name { font-weight: 700; color: #f1f5f9; font-size: 0.97rem; margin-bottom: 0.3rem; }
-    .addon-item .addon-desc { color: #94a3b8; font-size: 0.88rem; line-height: 1.6; }
-    .addon-badge {
-      position: absolute;
-      top: 0.75rem;
-      right: 0.75rem;
-      font-size: 0.75rem;
-      color: #38bdf8;
-      opacity: 0.6;
-      transition: opacity 0.15s;
-    }
-    .addon-card-link:hover .addon-badge { opacity: 1; }
-    .addon-badge-locked {
-      position: absolute;
-      top: 0.75rem;
-      right: 0.75rem;
-      font-size: 0.72rem;
-      color: #475569;
-      background: rgba(71,85,105,0.2);
-      padding: 0.15rem 0.5rem;
-      border-radius: 4px;
-      border: 1px solid #334155;
-    }
-    .nav-hamburger {
-        display: none;
-        flex-direction: column;
-        gap: 5px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 0.5rem;
-    }
-    .nav-hamburger span {
-        display: block;
-        width: 24px;
-        height: 2px;
-        background: #f1f5f9;
-        border-radius: 2px;
-    }
-    .nav-badge {
-        display: inline-block;
-        background: #ef4444;
-        color: #fff;
-        font-size: 0.6rem;
-        font-weight: 700;
-        padding: 0.1rem 0.35rem;
-        border-radius: 999px;
-        margin-left: 0.3rem;
-        vertical-align: middle;
-        line-height: 1.4;
-    }
-
-    @media (max-width: 640px) {
-      .hero-title { font-size: 2.2rem; }
-      .nav-cards { grid-template-columns: 1fr; max-width: 360px; }
-      .nav-inner { padding: 0.75rem 1rem; position: relative; }
-      .nav-links a { padding: 0.4rem 0.6rem; font-size: 0.8rem; }
-      .about-section { padding: 0 1rem; }
-      .about-card { padding: 1.25rem 1rem; }
-      .nav-hamburger { display: flex; }
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        flex-direction: column;
-        background: rgba(15, 23, 42, 0.97);
-        border-bottom: 1px solid #334155;
-        padding: 0.5rem 1rem 1rem;
-        z-index: 99;
-      }
-      .nav-links.open { display: flex; }
-
-      .cursor {
-          display: inline-block;
-          color: #38bdf8;
-          font-weight: 300;
-          animation: blink 0.75s step-end infinite;
-          margin-left: 1px;
-          opacity: 1;
-      }
-      @keyframes blink {
-          0%, 100% { opacity: 1; }
-          50%       { opacity: 0; }
-      }
-    }
+  }
   </style>
 </head>
 <body>
   <nav class="site-nav">
-    <div class="nav-inner">
-      <a href="index.html" class="nav-logo-link">
-        <img src="images/server_logo.png" alt="新井鯖ロゴ" class="nav-logo">
-        <span class="nav-title">新井鯖</span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="news.html">News</a></li>
-        <li><a href="members.html">Members</a></li>
-        <li><a href="rules.html">Rules</a></li>
-        <li><a href="admin.html">Admin</a></li>
-      </ul>
-      <button class="nav-hamburger" onclick="toggleNav()" aria-label="メニューを開く">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo-link">
+    <img src="images/server_logo.png" alt="新井鯖ロゴ" class="nav-logo">
+    <span class="nav-title">新井鯖</span>
+    </a>
+    <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="news.html">News</a></li>
+    <li><a href="members.html">Members</a></li>
+    <li><a href="rules.html">Rules</a></li>
+    <li><a href="admin.html">Admin</a></li>
+    </ul>
+    <button class="nav-hamburger" onclick="toggleNav()" aria-label="メニューを開く">
+    <span></span><span></span><span></span>
+    </button>
+  </div>
   </nav>
   <section class="hero">
-    <img src="images/server_logo.png" alt="新井鯖 Logo" class="hero-logo">
-    <h1 class="hero-title"><span class="new-color">新井</span><span>鯖</span></h1>
-    <p class="hero-subtitle">
-        <span class="static-text">建国サーバーに</span><span class="dynamic-text" id="dynamicText"></span><span class="cursor" id="cursor">|</span>
-    </p>
-    <div class="nav-cards">
-      <a href="members.html" class="nav-card">
-        <span class="card-icon">👥</span>
-        <span class="card-title">Members</span>
-        <span class="card-desc">国民・ネームタグ一覧</span>
-        <span class="card-arrow">→</span>
-      </a>
-      <a href="rules.html" class="nav-card">
-        <span class="card-icon">📜</span>
-        <span class="card-title">Rules</span>
-        <span class="card-desc">サーバールール</span>
-        <span class="card-arrow">→</span>
-      </a>
-      <a href="admin.html" class="nav-card">
-        <span class="card-icon">🛡️</span>
-        <span class="card-title">Admin</span>
-        <span class="card-desc">管理者情報</span>
-        <span class="card-arrow">→</span>
-      </a>
-    </div>
+  <img src="images/server_logo.png" alt="新井鯖 Logo" class="hero-logo">
+  <h1 class="hero-title"><span class="new-color">新井</span><span>鯖</span></h1>
+  <p class="hero-subtitle">
+    <span class="static-text">建国サーバーに</span><span class="dynamic-text" id="dynamicText"></span><span class="cursor" id="cursor">|</span>
+  </p>
+  <div class="nav-cards">
+    <a href="members.html" class="nav-card">
+    <span class="card-icon">👥</span>
+    <span class="card-title">Members</span>
+    <span class="card-desc">国民・ネームタグ一覧</span>
+    <span class="card-arrow">→</span>
+    </a>
+    <a href="rules.html" class="nav-card">
+    <span class="card-icon">📜</span>
+    <span class="card-title">Rules</span>
+    <span class="card-desc">サーバールール</span>
+    <span class="card-arrow">→</span>
+    </a>
+    <a href="admin.html" class="nav-card">
+    <span class="card-icon">🛡️</span>
+    <span class="card-title">Admin</span>
+    <span class="card-desc">管理者情報</span>
+    <span class="card-arrow">→</span>
+    </a>
+  </div>
   </section>
   <section class="about-section">
-    <h2>新井鯖について</h2>
-    <div class="about-card">
-      <p>新井建国鯖は20人ほど入れるレンタルサーバーの<a href="https://xserver.ne.jp/xservergames/" target="_blank" rel="noopener noreferrer">XServer Games</a>を使って公開されているMinecraft統合版の建国サーバーです。</p>
-      <p>定期的な賭博イベント・PVPイベントや追加新要素があり、オリジナル要素を含んでいてとても楽しめます。</p>
-    </div>
+  <h2>新井鯖について</h2>
+  <div class="about-card">
+    <p>新井建国鯖は20人ほど入れるレンタルサーバーの<a href="https://xserver.ne.jp/xservergames/" target="_blank" rel="noopener noreferrer">XServer Games</a>を使って公開されているMinecraft統合版の建国サーバーです。</p>
+    <p>定期的な賭博イベント・PVPイベントや追加新要素があり、オリジナル要素を含んでいてとても楽しめます。</p>
+  </div>
 
-    <h2>新井鯖のアドオン</h2>
-    <div class="about-card">
-      <p>新井鯖はさまざまなアドオンを組み合わせて独自の体験を提供しています。</p>
-      <ul class="addon-list">
-        <li>
-          <a href="https://capi.un-known.xyz/" target="_blank" rel="noopener noreferrer" class="addon-card-link">
-            <div class="addon-item">
-              <div class="addon-name">Commander API</div>
-              <div class="addon-desc">コマンドの限界を突破する。コマンド勢に新たな力を。<br>開発者: 𝒩𝒶𝓃ℴ・あるたか・wako</div>
-              <div class="addon-badge">↗</div>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a href="https://minecraft-mcworld.com/185998/" target="_blank" rel="noopener noreferrer" class="addon-card-link">
-            <div class="addon-item">
-              <div class="addon-name">塩雪トランプアドオン</div>
-              <div class="addon-desc">52枚＋ジョーカー、ペルシャ絨毯青小・大、ペルシャ絨毯ピンク、透明額縁を追加。床にカーペットのように置くことができます。<br>開発者: 雪塩 マイクラ</div>
-              <div class="addon-badge">↗</div>
-            </div>
-          </a>
-        </li>
-        <li class="addon-item no-link">
-          <div class="addon-name">Arai Server Add-on（オリジナル）</div>
-          <div class="addon-desc">新井鯖技術班のココが制作したオリジナル機能満載のアドオン。Java版の経済サーバー<a href="https://minecraft.jp/servers/dan5.red" target="_blank" rel="noopener noreferrer">まんじゅうサーバー</a>から着想を受けています。非公開・配布予定なし。</div>
-          <div class="addon-badge-locked">Private</div>
-        </li>
-      </ul>
-    </div>
+  <h2>新井鯖のアドオン</h2>
+  <div class="about-card">
+    <p>新井鯖はさまざまなアドオンを組み合わせて独自の体験を提供しています。</p>
+    <ul class="addon-list">
+    <li>
+      <a href="https://capi.un-known.xyz/" target="_blank" rel="noopener noreferrer" class="addon-card-link">
+      <div class="addon-item">
+        <div class="addon-name">Commander API</div>
+        <div class="addon-desc">コマンドの限界を突破する。コマンド勢に新たな力を。<br>開発者: 𝒩𝒶𝓃ℴ・あるたか・wako</div>
+        <div class="addon-badge">↗</div>
+      </div>
+      </a>
+    </li>
+    <li>
+      <a href="https://minecraft-mcworld.com/185998/" target="_blank" rel="noopener noreferrer" class="addon-card-link">
+      <div class="addon-item">
+        <div class="addon-name">塩雪トランプアドオン</div>
+        <div class="addon-desc">52枚＋ジョーカー、ペルシャ絨毯青小・大、ペルシャ絨毯ピンク、透明額縁を追加。床にカーペットのように置くことができます。<br>開発者: 雪塩 マイクラ</div>
+        <div class="addon-badge">↗</div>
+      </div>
+      </a>
+    </li>
+    <li class="addon-item no-link">
+      <div class="addon-name">Arai Server Add-on（オリジナル）</div>
+      <div class="addon-desc">新井鯖技術班のココが制作したオリジナル機能満載のアドオン。Java版の経済サーバー<a href="https://minecraft.jp/servers/dan5.red" target="_blank" rel="noopener noreferrer">まんじゅうサーバー</a>から着想を受けています。非公開・配布予定なし。</div>
+      <div class="addon-badge-locked">Private</div>
+    </li>
+    </ul>
+  </div>
   </section>
   <footer>
-    <div class="footer-social">
-      <a href="https://line.me/ti/g2/uViXaSuCHoFWX0Z8WiyY2io4IRrXuT6t4OhRZA" target="_blank" rel="noopener noreferrer">
-        <img src="https://cdn.simpleicons.org/line/94a3b8" alt="LINE"> LINE</a>
-      <a href="https://discord.gg/EWphkMNb5h" target="_blank" rel="noopener noreferrer">
-        <img src="https://cdn.simpleicons.org/discord/94a3b8" alt="Discord"> Discord</a>
-      <a href="https://www.youtube.com/@arai_server" target="_blank" rel="noopener noreferrer">
-        <img src="https://cdn.simpleicons.org/youtube/94a3b8" alt="YouTube"> YouTube</a>
-      <a href="https://x.com/913_arakuma" target="_blank" rel="noopener noreferrer">
-        <img src="https://cdn.simpleicons.org/x/94a3b8" alt="X"> X</a>
-      <a href="https://github.com/kokopscraft/arai-server-members" target="_blank" rel="noopener">
-        <img src="https://cdn.simpleicons.org/github/94a3b8" alt="GitHub"> GitHub
-            </a>
-    </div>
-    <p>&copy; 2026 arai server. All rights reserved.</p>
-    <p>無断転載・二次配布を禁じます。</p>
+  <div class="footer-social">
+    <a href="https://line.me/ti/g2/uViXaSuCHoFWX0Z8WiyY2io4IRrXuT6t4OhRZA" target="_blank" rel="noopener noreferrer">
+    <img src="https://cdn.simpleicons.org/line/94a3b8" alt="LINE"> LINE</a>
+    <a href="https://discord.gg/EWphkMNb5h" target="_blank" rel="noopener noreferrer">
+    <img src="https://cdn.simpleicons.org/discord/94a3b8" alt="Discord"> Discord</a>
+    <a href="https://www.youtube.com/@arai_server" target="_blank" rel="noopener noreferrer">
+    <img src="https://cdn.simpleicons.org/youtube/94a3b8" alt="YouTube"> YouTube</a>
+    <a href="https://x.com/913_arakuma" target="_blank" rel="noopener noreferrer">
+    <img src="https://cdn.simpleicons.org/x/94a3b8" alt="X"> X</a>
+    <a href="https://github.com/kokopscraft/arai-server-members" target="_blank" rel="noopener">
+    <img src="https://cdn.simpleicons.org/github/94a3b8" alt="GitHub"> GitHub
+      </a>
+  </div>
+  <p>&copy; 2026 arai server. All rights reserved.</p>
+  <p>無断転載・二次配布を禁じます。</p>
   </footer>
   <script>
-    const texts = [
-        "新たな出会いを。",
-        "さらなる利便性を。",
-        "楽しい賑わいを。",
-    ];
+  const texts = [
+    "新たな出会いを。",
+    "さらなる利便性を。",
+    "楽しい賑わいを。",
+  ];
 
-    let textIndex = 0;
-    let charIndex  = 0;
-    let isDeleting = false;
+  let textIndex = 0;
+  let charIndex  = 0;
+  let isDeleting = false;
 
-    const dynamicText = document.getElementById("dynamicText");
-    const cursor      = document.getElementById("cursor");
+  const dynamicText = document.getElementById("dynamicText");
+  const cursor    = document.getElementById("cursor");
 
-    function typeWriter() {
-        const current = texts[textIndex];
+  function typeWriter() {
+    const current = texts[textIndex];
+  
+    if (isDeleting) {
+      dynamicText.textContent = current.substring(0, charIndex - 1);
+      charIndex--;
+    } else {
+      dynamicText.textContent = current.substring(0, charIndex + 1);
+      charIndex++;
+    }
     
-        if (isDeleting) {
-            dynamicText.textContent = current.substring(0, charIndex - 1);
-            charIndex--;
-        } else {
-            dynamicText.textContent = current.substring(0, charIndex + 1);
-            charIndex++;
-        }
-      
-        // 打ち中はカーソルを常時表示、待機中は通常点滅
-        cursor.style.animation = "none";
-        void cursor.offsetWidth; // reflow で animation リセット
-        cursor.style.animation  = "";
-      
-        let delay = isDeleting ? 55 : 95;
-      
-        if (!isDeleting && charIndex === current.length) {
-            // 打ち終わり → 2秒待ってから削除開始
-            delay      = 2000;
-            isDeleting = true;
-        } else if (isDeleting && charIndex === 0) {
-            // 削除完了 → 次のテキストへ
-            isDeleting = false;
-            textIndex  = (textIndex + 1) % texts.length;
-            delay      = 350;
-        }
-      
-        setTimeout(typeWriter, delay);
+    // 打ち中はカーソルを常時表示、待機中は通常点滅
+    cursor.style.animation = "none";
+    void cursor.offsetWidth; // reflow で animation リセット
+    cursor.style.animation  = "";
+    
+    let delay = isDeleting ? 55 : 95;
+    
+    if (!isDeleting && charIndex === current.length) {
+      // 打ち終わり → 2秒待ってから削除開始
+      delay    = 2000;
+      isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+      // 削除完了 → 次のテキストへ
+      isDeleting = false;
+      textIndex  = (textIndex + 1) % texts.length;
+      delay    = 350;
     }
+    
+    setTimeout(typeWriter, delay);
+  }
 
-    typeWriter();
+  typeWriter();
 
-    function toggleNav() {
-        document.querySelector('.nav-links').classList.toggle('open');
+  function toggleNav() {
+    document.querySelector('.nav-links').classList.toggle('open');
+    document.querySelector('.nav-hamburger').classList.toggle('open'); // ← 追加
+  }
+
+  // News 未読バッジ
+  (function () {
+    const lastVisit  = Number(localStorage.getItem("araiserver_newsLastVisit") || 0);
+    const latestDate = localStorage.getItem("araiserver_newsLatest");
+    if (!latestDate) return;
+    const hasUnread  = new Date(latestDate).getTime() > lastVisit;
+    if (hasUnread) {
+      const link = document.querySelector('a[href="news.html"]');
+      if (link) link.insertAdjacentHTML("beforeend", '<span class="nav-badge">NEW</span>');
     }
-
-    // News 未読バッジ
-    (function () {
-        const lastVisit  = Number(localStorage.getItem("araiserver_newsLastVisit") || 0);
-        const latestDate = localStorage.getItem("araiserver_newsLatest");
-        if (!latestDate) return;
-        const hasUnread  = new Date(latestDate).getTime() > lastVisit;
-        if (hasUnread) {
-            const link = document.querySelector('a[href="news.html"]');
-            if (link) link.insertAdjacentHTML("beforeend", '<span class="nav-badge">NEW</span>');
-        }
-    })();
+  })();
   </script>
 </body>
 </html>
