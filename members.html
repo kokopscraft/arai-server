@@ -207,6 +207,8 @@
       border-radius: 16px;
       padding: 1.5rem;
       transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+      opacity: 0;
+      transform: translateY(24px);
     }
     .country-card:hover {
       border-color: var(--color-accent);
@@ -423,10 +425,6 @@
     #back-to-top:hover {
         background: rgba(56, 189, 248, 0.3);
         transform: translateY(-3px);
-    }
-    .country-card {
-        opacity: 0;
-        transform: translateY(24px);
     }
     .country-card.visible {
         animation: cardFadeIn 0.45s ease forwards;
@@ -660,19 +658,24 @@
     }
 
     function renderCountries(filter = 'all', searchTerm = '') {
-      const term = searchTerm;
-      const grid = document.getElementById('countriesGrid');
-      grid.innerHTML = '';
+        const term = searchTerm;              // highlight() 用（元のケース）
+        const termLower = searchTerm.toLowerCase(); // フィルタ比較用（小文字）
+        const grid = document.getElementById('countriesGrid');
+        grid.innerHTML = '';
+        
+        let filtered = filter !== 'all' ? countriesData.filter(c => c.type === filter) : [...countriesData];
+        
+        if (searchTerm) {
+            filtered = filtered.filter(c =>
+                c.name.toLowerCase().includes(termLower) ||
+                c.tag.toLowerCase().includes(termLower) ||
+                c.members.some(m =>
+                    m.name.toLowerCase().includes(termLower) ||
+                    m.username.toLowerCase().includes(termLower)
+                )
+            );
+        }
 
-      let filtered = filter !== 'all' ? countriesData.filter(c => c.type === filter) : [...countriesData];
-
-      if (searchTerm) {
-        filtered = filtered.filter(c =>
-          c.name.toLowerCase().includes(term) ||
-          c.tag.toLowerCase().includes(term) ||
-          c.members.some(m => m.name.toLowerCase().includes(term) || m.username.toLowerCase().includes(term))
-        );
-      }
 
       if (filtered.length === 0) {
         grid.innerHTML = '<div class="no-results">検索結果が見つかりませんでした</div>';
@@ -701,6 +704,7 @@
           </div>`;
         grid.appendChild(card);
         card.style.animationDelay = `${index * 60}ms`;
+        requestAnimationFrame(() => card.classList.add('visible'));
       });
     }
 
@@ -739,9 +743,6 @@
 
     setTimeout(() => {
         renderCountries(currentFilter);
-        document.querySelectorAll('.country-card').forEach(card => {
-            card.classList.add('visible');
-        });
     }, 600);
 
     function toggleNav() {
