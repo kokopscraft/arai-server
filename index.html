@@ -6,6 +6,7 @@
   <link rel="icon" href="images/server_logo.png" type="image/png">
   <link rel="apple-touch-icon" href="images/server_logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <title>新井鯖 - Home</title>
   <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -189,7 +190,12 @@
     box-shadow: 0 8px 32px rgba(56,189,248,0.18), 0 2px 8px rgba(0,0,0,0.4);
   }
   .nav-card:hover::before { opacity: 1; }
-  .card-icon { font-size: 2.5rem; line-height: 1; }
+  .card-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    color: var(--color-accent); /* #38bdf8 */
+    stroke-width: 1.5;
+  }
   .card-title { font-size: 1.15rem; font-weight: 700; color: #f1f5f9; }
   .card-desc { font-size: 0.82rem; color: #64748b; text-align: center; line-height: 1.5; }
   .card-arrow { font-size: 1rem; color: #38bdf8; opacity: 0; transform: translateX(-4px); transition: all 0.2s; }
@@ -420,19 +426,19 @@
   </p>
   <div class="nav-cards">
     <a href="members.html" class="nav-card">
-    <span class="card-icon">👥</span>
+    <i data-lucide="users" class="card-icon"></i>
     <span class="card-title">Members</span>
     <span class="card-desc">国民・ネームタグ一覧</span>
     <span class="card-arrow">→</span>
     </a>
     <a href="rules.html" class="nav-card">
-    <span class="card-icon">📜</span>
+    <i data-lucide="book-open" class="card-icon"></i>
     <span class="card-title">Rules</span>
     <span class="card-desc">サーバールール</span>
     <span class="card-arrow">→</span>
     </a>
     <a href="admin.html" class="nav-card">
-    <span class="card-icon">🛡️</span>
+    <i data-lucide="settings-2" class="card-icon"></i>
     <span class="card-title">Admin</span>
     <span class="card-desc">管理者情報</span>
     <span class="card-arrow">→</span>
@@ -569,6 +575,7 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
+    lucide.createIcons();
   </script>
 </body>
 </html>
