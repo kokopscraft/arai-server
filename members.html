@@ -660,13 +660,13 @@
     }
 
     function renderCountries(filter = 'all', searchTerm = '') {
+      const term = searchTerm;
       const grid = document.getElementById('countriesGrid');
       grid.innerHTML = '';
 
       let filtered = filter !== 'all' ? countriesData.filter(c => c.type === filter) : [...countriesData];
 
       if (searchTerm) {
-        const term = searchTerm;
         filtered = filtered.filter(c =>
           c.name.toLowerCase().includes(term) ||
           c.tag.toLowerCase().includes(term) ||
@@ -738,7 +738,7 @@
     if (savedFilter) currentFilter = savedFilter;
 
     setTimeout(() => {
-        renderCountries();
+        renderCountries(currentFilter);
         document.querySelectorAll('.country-card').forEach(card => {
             card.classList.add('visible');
         });
