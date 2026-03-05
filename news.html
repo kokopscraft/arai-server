@@ -381,6 +381,12 @@
         background: rgba(56, 189, 248, 0.3);
         transform: translateY(-3px);
     }
+    mark {
+        background: rgba(56, 189, 248, 0.3);
+        color: #f1f5f9;
+        border-radius: 2px;
+        padding: 0 2px;
+    }
 
     /* ── Responsive ── */
     @media (max-width: 640px) {
@@ -469,6 +475,12 @@
 
 
    <script>
+    function highlight(text, term) {
+        if (!term) return text;
+        const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        return text.replace(new RegExp(escaped, 'gi'), match => `<mark>${match}</mark>`);
+    }
+
   // ============================================================
   // お知らせデータ
   // 新しい記事を追加する場合は、newsData 配列の先頭に追記してください。
@@ -683,9 +695,9 @@
           <span class="news-date">${n.date}</span>
           <span class="news-tag ${tag.cls}">${tag.label}</span>
          </div>
-         <div class="news-title">${n.title}</div>
-         <div class="news-body-preview">${n.body.replace(/\n/g, ' ')}</div>
-         <div class="news-body-full">${n.body}</div>
+         <div class="news-title">${highlight(n.title, searchTerm)}</div>
+         <div class="news-body-preview">${highlight(n.body.replace(/\n/g, ' '), searchTerm)}</div>
+         <div class="news-body-full">${highlight(n.body, searchTerm)}</div>
       </div>`;
      }).join("");
     }

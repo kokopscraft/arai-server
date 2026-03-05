@@ -437,6 +437,12 @@
             transform: translateY(0);
         }
     }
+    mark {
+        background: rgba(56, 189, 248, 0.3);
+        color: #f1f5f9;
+        border-radius: 2px;
+        padding: 0 2px;
+    }
 
     /* ── Responsive ── */
     @media (max-width: 640px) {
@@ -525,6 +531,12 @@
   </div>
 
   <script>
+    function highlight(text, term) {
+        if (!term) return text;
+        const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        return text.replace(new RegExp(escaped, 'gi'), match => `<mark>${match}</mark>`);
+    }
+
     const countriesData = [
       { name: "ゲルン=アラクイア中枢帝国", tag: "ct:GERUA", type: "star", members: [
         { role: "建国者", name: "あらくま", username: "AR Bear6790" },
@@ -654,7 +666,7 @@
       let filtered = filter !== 'all' ? countriesData.filter(c => c.type === filter) : [...countriesData];
 
       if (searchTerm) {
-        const term = searchTerm.toLowerCase();
+        const term = searchTerm;
         filtered = filtered.filter(c =>
           c.name.toLowerCase().includes(term) ||
           c.tag.toLowerCase().includes(term) ||
@@ -674,7 +686,7 @@
         card.innerHTML = `
           <div class="country-header">
             <div>
-              <div class="country-name">${country.name}</div>
+              <div class="country-name">${highlight(country.name, term)}</div>
               <span class="country-type ${country.type}">${typeLabel}</span>
             </div>
             <div class="country-tag">${country.tag}</div>
@@ -682,9 +694,9 @@
           <div class="members-list">
             ${country.members.map(m => `
               <div class="member-item" onclick="copyToClipboard('${m.username}')">
-                <div class="member-role">${m.role}</div>
-                <div class="member-name">${m.name}</div>
-                <div class="member-username">${m.username}</div>
+                <div class="member-role">${highlight(m.role, term)}</div>
+                <div class="member-name">${highlight(m.name, term)}</div>
+                <div class="member-username">${highlight(m.username, term)}</div>
               </div>`).join('')}
           </div>`;
         grid.appendChild(card);
