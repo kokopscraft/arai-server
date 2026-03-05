@@ -424,6 +424,19 @@
         background: rgba(56, 189, 248, 0.3);
         transform: translateY(-3px);
     }
+    .country-card {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    .country-card.visible {
+        animation: cardFadeIn 0.45s ease forwards;
+    }
+    @keyframes cardFadeIn {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
 
     /* ── Responsive ── */
     @media (max-width: 640px) {
@@ -621,7 +634,7 @@
             }, duration / steps);
         }, delay);
     }
-    
+
     function updateStats() {
         const total    = countriesData.length;
         const members  = countriesData.reduce((sum, c) => sum + c.members.length, 0);
@@ -654,7 +667,7 @@
         return;
       }
 
-      filtered.forEach(country => {
+      filtered.forEach((country, index) => {
         const card = document.createElement('div');
         card.className = 'country-card';
         const typeLabel = country.type === 'peace' ? '平和国' : country.type === 'war' ? '戦争国' : 'Star';
@@ -675,6 +688,7 @@
               </div>`).join('')}
           </div>`;
         grid.appendChild(card);
+        card.style.animationDelay = `${index * 60}ms`;
       });
     }
 
@@ -711,7 +725,12 @@
     const savedFilter = localStorage.getItem("araiserver_memberFilter");
     if (savedFilter) currentFilter = savedFilter;
 
-    renderCountries();
+    setTimeout(() => {
+        renderCountries();
+        document.querySelectorAll('.country-card').forEach(card => {
+            card.classList.add('visible');
+        });
+    }, 600);
 
     function toggleNav() {
       document.querySelector('.nav-links').classList.toggle('open');
