@@ -300,6 +300,14 @@
       }
       .nav-links.open { display: flex; }
     }
+    .nav-title-pc {
+        display: none; /* モバイルでは非表示 */
+    }
+    @media (min-width: 641px) {
+        .nav-title-pc {
+            display: inline; /* PC幅では表示 */
+        }
+    }
   </style>
 </head>
 <body>
@@ -307,7 +315,7 @@
     <div class="nav-inner">
       <a href="index.html" class="nav-logo-link">
         <img src="images/server_logo.png" alt="新井鯖ロゴ" class="nav-logo">
-        <span class="nav-title">新井鯖</span>
+        <span class="nav-title">新井鯖<span class="nav-title-pc"> - Founding Server</span></span>
       </a>
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
