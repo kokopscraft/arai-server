@@ -159,6 +159,30 @@
     #back-to-top.visible { opacity: 1; pointer-events: auto; }
     #back-to-top:hover { background: rgba(56,189,248,0.3); transform: translateY(-3px); }
     .back-to-top-icon { width: 1.25rem; height: 1.25rem; stroke-width: 2; color: #38bdf8; }
+    .event-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.6rem;
+    }
+    .event-link-cal {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      color: #a78bfa;
+      text-decoration: none;
+      border: 1px solid rgba(167,139,250,0.3);
+      background: rgba(167,139,250,0.08);
+      padding: 0.3rem 0.75rem;
+      border-radius: 6px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .event-link-cal:hover {
+      background: rgba(167,139,250,0.18);
+      border-color: #a78bfa;
+    }
+    .event-link-cal i { width: 0.9rem; height: 0.9rem; }
 
     /* ── Responsive ── */
     @media (max-width: 640px) {
@@ -217,6 +241,27 @@
     </div>
 
     <div class="events-list" id="eventsList">
+      <div class="event-card" data-status="upcoming">
+        <div class="event-date-block">
+          <div class="event-date-month">MAR</div>
+          <div class="event-date-day">20</div>
+          <div class="event-date-year">2026</div>
+        </div>
+        <div class="event-body">
+          <div class="event-meta">
+            <span class="event-tag tag-upcoming">開催予定</span>
+          </div>
+          <div class="event-title">第三期新井鯖 開幕</div>
+          <div class="event-desc">第三期新井鯖がいよいよ開幕。詳細は確定次第更新予定。</div>
+          <div class="event-actions">
+            <!-- カレンダー登録ボタン -->
+            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%E7%AC%AC%E4%B8%89%E6%9C%9F%E6%96%B0%E4%BA%95%E9%AF%96+%E9%96%8B%E5%B9%95&dates=20260320T000000Z/20260320T235959Z&details=%E7%AC%AC%E4%B8%89%E6%9C%9F%E6%96%B0%E4%BA%95%E9%AF%96%E9%96%8B%E5%B9%95"
+               target="_blank" rel="noopener noreferrer" class="event-link-cal">
+              <i data-lucide="calendar-plus"></i> カレンダーに登録
+            </a>
+          </div>
+        </div>
+      </div>
 
       <!-- ── あらくま放送局 第6回 ── -->
       <div class="event-card" data-status="ended">
