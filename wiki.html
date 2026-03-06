@@ -56,16 +56,16 @@
       padding: 0.1rem 0.35rem; border-radius: 999px; margin-left: 0.3rem; vertical-align: middle; line-height: 1.4;
     }
 
-    /* ── Layout ── */
     .container {
       max-width: 1100px;
       margin: 0 auto;
       padding: 3rem 2rem 0;
       display: grid;
-      grid-template-columns: 220px 1fr;
+      grid-template-columns: 260px 1fr;
       gap: 2rem;
       align-items: start;
     }
+
     .page-header {
       grid-column: 1 / -1;
       text-align: center;
@@ -76,7 +76,6 @@
     h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.5rem; color: #f1f5f9; }
     .subtitle { color: #94a3b8; font-size: 1rem; }
 
-    /* ── Sidebar ── */
     .wiki-sidebar {
       position: sticky;
       top: 5rem;
@@ -84,26 +83,77 @@
       border: 1px solid #334155;
       border-radius: 12px;
       padding: 1.25rem;
+      max-height: calc(100vh - 7rem);
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #334155 transparent;
     }
-    .sidebar-title {
-      font-size: 0.75rem; font-weight: 700; color: #64748b;
-      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem;
+    .wiki-sidebar::-webkit-scrollbar { width: 6px; }
+    .wiki-sidebar::-webkit-scrollbar-track { background: transparent; }
+    .wiki-sidebar::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+    .wiki-sidebar::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+    .search-box {
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    .search-input {
+      width: 100%;
+      padding: 0.5rem 0.75rem 0.5rem 2.25rem;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      color: #f1f5f9;
+      font-size: 0.875rem;
+      transition: border-color 0.2s;
+    }
+    .search-input:focus {
+      outline: none;
+      border-color: #38bdf8;
+    }
+    .search-input::placeholder {
+      color: #64748b;
+    }
+    .search-icon {
+      position: absolute;
+      left: 0.65rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1rem;
+      height: 1rem;
+      color: #64748b;
+      pointer-events: none;
+    }
+
+    .sidebar-group {
+      margin-bottom: 1.25rem;
+    }
+    .sidebar-group:last-child {
+      margin-bottom: 0;
+    }
+    .sidebar-group-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+      padding-left: 0.5rem;
     }
     .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: 0.25rem; }
     .sidebar-nav a {
-      display: block; padding: 0.45rem 0.75rem; color: #94a3b8; text-decoration: none;
-      border-radius: 6px; font-size: 0.875rem; transition: all 0.2s;
+      display: block;
+      padding: 0.45rem 0.75rem;
+      color: #94a3b8;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      transition: all 0.2s;
     }
     .sidebar-nav a:hover { background: rgba(56,189,248,0.08); color: #38bdf8; }
     .sidebar-nav a.active { background: rgba(56,189,248,0.12); color: #38bdf8; font-weight: 600; }
-    .sidebar-nav .sidebar-group-label {
-      font-size: 0.7rem; font-weight: 700; color: #475569;
-      text-transform: uppercase; letter-spacing: 0.08em;
-      padding: 0.5rem 0.75rem 0.25rem;
-    }
-    .sidebar-divider { height: 1px; background: #334155; margin: 0.5rem 0; }
+    .sidebar-divider { height: 1px; background: #334155; margin: 0.75rem 0; }
 
-    /* ── Wiki Content ── */
     .wiki-content { min-width: 0; }
     .wiki-section {
       margin-bottom: 2.5rem;
@@ -112,115 +162,120 @@
       transition: opacity 0.5s ease, transform 0.5s ease;
     }
     .wiki-section.visible { opacity: 1; transform: translateY(0); }
+    .wiki-section.hidden { display: none; }
     .wiki-section-title {
-      font-size: 1.4rem; font-weight: 700; color: #f1f5f9;
-      margin-bottom: 1rem; padding-bottom: 0.5rem;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
       border-bottom: 2px solid #334155;
-      display: flex; align-items: center; gap: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
     }
     .wiki-section-title i { color: #38bdf8; width: 1.2rem; height: 1.2rem; }
-    .wiki-subsection-title {
-      font-size: 1rem; font-weight: 700; color: #38bdf8;
-      margin: 1.25rem 0 0.6rem;
-      padding-left: 0.75rem;
-      border-left: 3px solid #38bdf8;
-    }
     .wiki-card {
-      background: #1e293b; border: 1px solid #334155;
-      border-radius: 12px; padding: 1.25rem 1.5rem;
-      margin-bottom: 1rem; line-height: 1.8;
-      color: #cbd5e1; font-size: 0.95rem;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      line-height: 1.8;
+      color: #cbd5e1;
+      font-size: 0.95rem;
     }
-    .wiki-card p { margin-bottom: 0.6rem; }
+    .wiki-card p { margin-bottom: 0.75rem; }
     .wiki-card p:last-child { margin-bottom: 0; }
+    .wiki-card h3 { font-size: 1rem; font-weight: 700; color: #f1f5f9; margin-bottom: 0.5rem; }
+    .wiki-card ul { margin-left: 1.5rem; margin-top: 0.5rem; }
+    .wiki-card li { margin-bottom: 0.5rem; }
     .wiki-card code {
-      background: #0f172a; border: 1px solid #334155; border-radius: 4px;
-      padding: 0.1rem 0.4rem; font-family: 'Courier New', monospace;
-      font-size: 0.875rem; color: #38bdf8;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 4px;
+      padding: 0.1rem 0.4rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.875rem;
+      color: #38bdf8;
     }
-    .wiki-card ul { padding-left: 1.25rem; }
-    .wiki-card ul li { margin-bottom: 0.3rem; }
-
-    /* ── Badge ── */
-    .badge {
-      display: inline-block; font-size: 0.72rem; font-weight: 700;
-      padding: 0.15rem 0.55rem; border-radius: 999px;
-      vertical-align: middle; margin-left: 0.25rem;
-    }
-    .badge-peace { background: rgba(34,197,94,0.15); color: #22c55e; border: 1px solid rgba(34,197,94,0.3); }
-    .badge-war   { background: rgba(239,68,68,0.15);  color: #ef4444;  border: 1px solid rgba(239,68,68,0.3); }
-    .badge-star  { background: rgba(234,179,8,0.15);  color: #eab308;  border: 1px solid rgba(234,179,8,0.3); }
-    .badge-multi { background: rgba(56,189,248,0.12); color: #38bdf8;  border: 1px solid rgba(56,189,248,0.3); font-size: 0.65rem; }
-
-    /* ── Table ── */
     .wiki-table {
-      width: 100%; border-collapse: collapse;
-      background: #1e293b; border: 1px solid #334155;
-      border-radius: 12px; overflow: hidden; margin-bottom: 1rem;
-      font-size: 0.9rem;
+      width: 100%;
+      border-collapse: collapse;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 1rem;
     }
     .wiki-table th {
-      background: #0f172a; padding: 0.7rem 1rem;
-      font-size: 0.78rem; font-weight: 700; color: #64748b;
-      text-align: left; letter-spacing: 0.05em; text-transform: uppercase;
+      background: #0f172a;
+      padding: 0.75rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #64748b;
+      text-align: left;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
       border-bottom: 1px solid #334155;
     }
     .wiki-table td {
-      padding: 0.7rem 1rem; color: #cbd5e1;
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+      color: #cbd5e1;
       border-bottom: 1px solid rgba(51,65,85,0.5);
     }
     .wiki-table tr:last-child td { border-bottom: none; }
     .wiki-table tr:hover td { background: rgba(56,189,248,0.04); }
-    .wiki-table td strong { color: #f1f5f9; }
-    .col-num { text-align: right; font-family: 'Courier New', monospace; color: #38bdf8; font-weight: 600; }
-    .col-muted { color: #475569; font-size: 0.82rem; }
 
-    /* ── Rank colors ── */
-    .rank-member  { color: #94a3b8; }
-    .rank-bronze  { color: #cd7f32; }
-    .rank-silver  { color: #94a3b8; }
-    .rank-gold    { color: #eab308; }
-    .rank-diamond { color: #38bdf8; }
-    .rank-master  { color: #d946ef; }
-    .rank-masterp { color: #d946ef; }
-    .rank-legend  { color: #f59e0b; }
-    .rank-legendp { color: #f59e0b; }
-    .rank-ultimate{ color: #60a5fa; font-weight: 700; }
-    .rank-op      { color: #f1f5f9; font-weight: 700; }
-
-    /* ── Sheep colors ── */
-    .sheep-black  { color: #94a3b8; }
-    .sheep-white  { color: #f1f5f9; }
-    .sheep-red    { color: #ef4444; }
-    .sheep-blue   { color: #38bdf8; }
-    .sheep-green  { color: #22c55e; }
-    .sheep-purple { color: #d946ef; }
-
-    /* ── Command highlight ── */
-    .cmd { color: #38bdf8; font-family: 'Courier New', monospace; font-size: 0.875rem; }
-    .attn { color: #f59e0b; }
-
-    /* ── Info banner ── */
-    .info-banner {
-      background: rgba(56,189,248,0.07); border: 1px solid rgba(56,189,248,0.2);
-      border-radius: 8px; padding: 0.75rem 1rem;
-      display: flex; align-items: flex-start; gap: 0.6rem;
-      font-size: 0.875rem; color: #94a3b8; line-height: 1.6; margin-bottom: 1rem;
+    .country-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
     }
-    .info-banner i { color: #38bdf8; flex-shrink: 0; width: 1rem; height: 1rem; margin-top: 2px; }
-    .warn-banner {
-      background: rgba(239,68,68,0.07); border: 1px solid rgba(239,68,68,0.2);
-      border-radius: 8px; padding: 0.75rem 1rem;
-      display: flex; align-items: flex-start; gap: 0.6rem;
-      font-size: 0.875rem; color: #94a3b8; line-height: 1.6; margin-bottom: 1rem;
-    }
-    .warn-banner i { color: #ef4444; flex-shrink: 0; width: 1rem; height: 1rem; margin-top: 2px; }
+    .badge-peace { background: rgba(34,197,94,0.15); color: #22c55e; border: 1px solid rgba(34,197,94,0.3); }
+    .badge-war { background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
+    .badge-star { background: rgba(234,179,8,0.15); color: #eab308; border: 1px solid rgba(234,179,8,0.3); }
+    .badge-multi { background: rgba(56,189,248,0.15); color: #38bdf8; border: 1px solid rgba(56,189,248,0.3); }
 
-    /* ── Footer ── */
+    .rank-name {
+      font-weight: 600;
+      display: inline-block;
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+    }
+    .rank-member { color: #f1f5f9; background: rgba(241,245,249,0.1); }
+    .rank-bronze { color: #cd7f32; background: rgba(205,127,50,0.1); }
+    .rank-iron { color: #d4d4d4; background: rgba(212,212,212,0.1); }
+    .rank-gold { color: #ffd700; background: rgba(255,215,0,0.1); }
+    .rank-diamond { color: #5dade2; background: rgba(93,173,226,0.1); }
+    .rank-emerald { color: #50c878; background: rgba(80,200,120,0.1); }
+    .rank-netherite { color: #4a235a; background: rgba(74,35,90,0.15); }
+    .rank-ultimate { color: #ff6b6b; background: rgba(255,107,107,0.1); }
+    .rank-operator { color: #e74c3c; background: rgba(231,76,60,0.15); font-weight: 700; }
+
+    .sheep-color {
+      display: inline-block;
+      width: 1rem;
+      height: 1rem;
+      border-radius: 3px;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .sheep-black { background: #1a1a1a; }
+    .sheep-white { background: #f1f5f9; }
+    .sheep-red { background: #ef4444; }
+    .sheep-blue { background: #3b82f6; }
+    .sheep-green { background: #22c55e; }
+    .sheep-purple { background: #a855f7; }
+
     footer {
       text-align: center; padding: 2.5rem 2rem 2rem;
-      color: #475569; font-size: 0.8rem;
-      border-top: 1px solid #1e293b; margin-top: 4rem;
+      color: #475569; font-size: 0.8rem; border-top: 1px solid #1e293b; margin-top: 4rem;
     }
     .footer-social { display: flex; justify-content: center; gap: 1.25rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
     .footer-social a {
@@ -230,25 +285,21 @@
     }
     .footer-social a:hover { color: #f1f5f9; border-color: #38bdf8; background: rgba(56,189,248,0.08); }
     .footer-social img { width: 18px; height: 18px; object-fit: contain; transform: scale(1.05); }
-    .footer-social a[href*="x.com"] img { transform: scale(0.88); }
-    footer p { margin-bottom: 0.25rem; }
+    .footer p { margin-bottom: 0.25rem; }
 
-    /* ── Back to Top ── */
     #back-to-top {
       position: fixed; bottom: 2rem; right: 2rem; width: 44px; height: 44px;
       background: rgba(56,189,248,0.15); border: 1px solid rgba(56,189,248,0.4);
       border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.3s, transform 0.3s, background 0.2s; z-index: 200;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s, transform 0.3s, background 0.2s; z-index: 200;
     }
     #back-to-top.visible { opacity: 1; pointer-events: auto; }
     #back-to-top:hover { background: rgba(56,189,248,0.3); transform: translateY(-3px); }
     .back-to-top-icon { width: 1.25rem; height: 1.25rem; stroke-width: 2; color: #38bdf8; }
 
-    /* ── Responsive ── */
     @media (max-width: 768px) {
       .container { grid-template-columns: 1fr; }
-      .wiki-sidebar { position: static; }
+      .wiki-sidebar { position: static; max-height: none; }
       .page-header { grid-column: 1; }
     }
     @media (max-width: 640px) {
@@ -262,7 +313,6 @@
         border-bottom: 1px solid #334155; padding: 0.5rem 1rem 1rem; z-index: 99;
       }
       .nav-links.open { display: flex; }
-      .wiki-table th, .wiki-table td { padding: 0.55rem 0.75rem; font-size: 0.82rem; }
     }
   </style>
 </head>
@@ -297,630 +347,462 @@
       <p class="subtitle">新井鯖の機能・システム解説</p>
     </div>
 
-    <!-- ── サイドバー ── -->
     <aside class="wiki-sidebar">
-      <div class="sidebar-title">目次</div>
-      <ul class="sidebar-nav">
-        <li class="sidebar-group-label">第一期</li>
-        <li><a href="#gen1-items">カスタムアイテム</a></li>
-        <li><a href="#gen1-login">ログインボーナス</a></li>
-        <li><a href="#gen1-scte">SCTE</a></li>
-        <div class="sidebar-divider"></div>
-        <li class="sidebar-group-label">第二期</li>
-        <li><a href="#currency">通貨システム</a></li>
-        <li><a href="#atm">ATM</a></li>
-        <li><a href="#bank">Bank メニュー</a></li>
-        <li><a href="#commands">チャットコマンド</a></li>
-        <li><a href="#gwarp">G Warp</a></li>
-        <li><a href="#nations">国家一覧</a></li>
-        <li><a href="#rank">ランク制度</a></li>
-        <li><a href="#keiyou">競羊</a></li>
-        <li><a href="#zakuvegas">ザクベガス</a></li>
-      </ul>
+      <div class="search-box">
+        <i data-lucide="search" class="search-icon"></i>
+        <input type="text" class="search-input" id="wikiSearch" placeholder="機能を検索...">
+      </div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">第一期</div>
+        <ul class="sidebar-nav">
+          <li><a href="#custom-items">カスタムアイテム</a></li>
+          <li><a href="#login-bonus">ログインボーナス</a></li>
+          <li><a href="#scte">SCTE</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">第二期</div>
+        <ul class="sidebar-nav">
+          <li><a href="#currency">通貨システム</a></li>
+          <li><a href="#atm">ATM</a></li>
+          <li><a href="#bank">Bank メニュー</a></li>
+          <li><a href="#chat">チャットコマンド</a></li>
+          <li><a href="#gwarp">G Warp</a></li>
+          <li><a href="#countries">国家一覧</a></li>
+          <li><a href="#rank">ランク制度</a></li>
+          <li><a href="#keiyou">競羊</a></li>
+          <li><a href="#zacvegas">ザクベガス</a></li>
+        </ul>
+      </div>
     </aside>
 
-    <!-- ── メインコンテンツ ── -->
     <main class="wiki-content">
-
-      <!-- ════════════════════════════
-           第一期 - カスタムアイテム
-           ════════════════════════════ -->
-      <section class="wiki-section" id="gen1-items">
+      <!-- 第一期 -->
+      <section class="wiki-section" id="custom-items" data-keywords="カスタムアイテム マジカルスワップ スーパージャンプ ウサギのブーツ ドームバリア WhiteBull">
         <h2 class="wiki-section-title">
-          <i data-lucide="wand-2"></i>
-          カスタムアイテム <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">第一期</span>
+          <i data-lucide="sparkles"></i>
+          カスタムアイテム
         </h2>
-        <div class="info-banner">
-          <i data-lucide="info"></i>
-          <span>以下のアイテムはすべて<strong style="color:#f1f5f9;">第一期</strong>限定です。第二期以降では廃止されています。</span>
+        <div class="wiki-card">
+          <h3>マジカルスワップ</h3>
+          <p>使用すると近くのプレイヤーと位置を入れ替えることができます。PvP戦闘や緊急回避に便利です。</p>
         </div>
-        <table class="wiki-table">
-          <thead><tr><th>アイテム名</th><th>効果</th><th>制限</th></tr></thead>
-          <tbody>
-            <tr>
-              <td><strong>マジカルスワップ</strong></td>
-              <td>半径20m以内の最も近いプレイヤーと位置を入れ替える</td>
-              <td class="col-muted">運営領地使用不可</td>
-            </tr>
-            <tr>
-              <td><strong>スーパージャンプ</strong></td>
-              <td>50m上空まで飛び上がることができる</td>
-              <td class="col-muted">運営領地使用不可</td>
-            </tr>
-            <tr>
-              <td><strong>ウサギのブーツ</strong></td>
-              <td>ネザライトブーツ属性。移動速度上昇＋二段ジャンプ</td>
-              <td class="col-muted">制限なし</td>
-            </tr>
-            <tr>
-              <td><strong>ドームバリア</strong></td>
-              <td>自分の周囲にガラスドームを生成。10秒後に自然消滅</td>
-              <td class="col-muted">制限なし</td>
-            </tr>
-            <tr>
-              <td><strong>WhiteBull</strong></td>
-              <td>ロンズデーライトのツルハシと組み合わせると深層岩を通常採掘可能</td>
-              <td class="col-muted">制限なし</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="wiki-card">
+          <h3>スーパージャンプ</h3>
+          <p>一度だけ超高跳躍が可能になります。崖上りや建築作業に役立ちます。</p>
+        </div>
+        <div class="wiki-card">
+          <h3>ウサギのブーツ</h3>
+          <p>装備すると移動速度が大幅に上昇します。探索や移動が快適になります。</p>
+        </div>
+        <div class="wiki-card">
+          <h3>ドームバリア</h3>
+          <p>展開すると一定範囲にバリアを生成し、敵の侵入を防ぎます。</p>
+        </div>
+        <div class="wiki-card">
+          <h3>WhiteBull</h3>
+          <p>使用すると一時的に体力回復と攻撃力上昇の効果を得られます。</p>
+        </div>
       </section>
 
-      <!-- ════════════════════════════
-           第一期 - ログインボーナス
-           ════════════════════════════ -->
-      <section class="wiki-section" id="gen1-login">
+      <section class="wiki-section" id="login-bonus" data-keywords="ログインボーナス けいけんの石 砂 珍しい水">
         <h2 class="wiki-section-title">
           <i data-lucide="gift"></i>
-          ログインボーナス <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">第一期</span>
+          ログインボーナス
         </h2>
         <div class="wiki-card">
-          <p>1日1回ログインすると自動でアイテムが付与されました。入手できるアイテムは以下の3種で、組み合わせることで<strong>経験値の塊</strong>を作成できました。</p>
+          <p>毎日ログインすることで以下のアイテムを獲得できます:</p>
           <ul>
-            <li><strong>けいけんの石</strong></li>
-            <li><strong>けいけんの砂</strong></li>
-            <li><strong>珍しい水</strong></li>
+            <li><strong>けいけんの石</strong> - 経験値を大量に獲得できる特殊アイテム</li>
+            <li><strong>砂</strong> - 建築素材として使える通常の砂</li>
+            <li><strong>珍しい水</strong> - 特殊効果を持つ水入りバケツ</li>
           </ul>
         </div>
       </section>
 
-      <!-- ════════════════════════════
-           第一期 - SCTE
-           ════════════════════════════ -->
-      <section class="wiki-section" id="gen1-scte">
+      <section class="wiki-section" id="scte" data-keywords="SCTE Super Crafting Table EX クラフト">
         <h2 class="wiki-section-title">
-          <i data-lucide="table-2"></i>
-          SCTE <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">第一期</span>
+          <i data-lucide="box"></i>
+          SCTE (Super Crafting Table EX)
         </h2>
         <div class="wiki-card">
-          <p><strong>Super Crafting Table EX（SCTE）</strong>は、カスタムアイテム作成に必要な専用作業台です。第二期以降では廃止されています。</p>
-          <ul>
-            <li>HUBから行ける「<strong>クラフトエリア</strong>」に固定設置</li>
-            <li>モバイル版プレイヤーもクラフトエリアで作成可能</li>
-          </ul>
+          <p>通常のクラフトテーブルを超える高度なクラフト機能を提供します。カスタムアイテムや特殊装備の作成が可能です。</p>
+          <p>使用方法: 特定の場所に設置されたSCTEブロックを右クリックしてアクセスします。</p>
         </div>
       </section>
 
-      <!-- ════════════════════════════
-           第二期 - 通貨システム
-           ════════════════════════════ -->
-      <section class="wiki-section" id="currency">
+      <!-- 第二期 -->
+      <section class="wiki-section" id="currency" data-keywords="通貨 現金 電子マネー 銀行預金 紙幣">
         <h2 class="wiki-section-title">
           <i data-lucide="coins"></i>
-          通貨システム <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">第二期</span>
+          通貨システム
         </h2>
         <div class="wiki-card">
-          <p>新井鯖の共通通貨は<strong>マネー</strong>です。残高は以下の3種類で独立して管理されています。</p>
-          <table class="wiki-table" style="margin-top:0.75rem;">
-            <thead><tr><th>種別</th><th>説明</th><th>管理方法</th></tr></thead>
+          <p>新井鯖では3種類の通貨形態が存在します:</p>
+          <ul>
+            <li><strong>現金</strong> - 紙アイテムとして物理的に所持</li>
+            <li><strong>電子マネー</strong> - スコアボードで管理される仮想通貨</li>
+            <li><strong>銀行預金</strong> - 安全に保管される資産</li>
+          </ul>
+        </div>
+        <div class="wiki-card">
+          <h3>紙幣の種類</h3>
+          <table class="wiki-table">
+            <thead>
+              <tr>
+                <th>額面</th>
+                <th>備考</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr><td><strong>現金</strong></td><td>インベントリ内の紙幣アイテム</td><td>スロットに物理保持</td></tr>
-              <tr><td><strong>電子マネー</strong></td><td>デジタル残高</td><td>スコアボード <code>money</code></td></tr>
-              <tr><td><strong>銀行預金</strong></td><td>銀行に預けた残高</td><td>スコアボード <code>bank_[ID]</code></td></tr>
+              <tr><td>1マネー</td><td>最小単位</td></tr>
+              <tr><td>5マネー</td><td>-</td></tr>
+              <tr><td>10マネー</td><td>-</td></tr>
+              <tr><td>50マネー</td><td>-</td></tr>
+              <tr><td>100マネー</td><td>-</td></tr>
+              <tr><td>500マネー</td><td>-</td></tr>
+              <tr><td>1,000マネー</td><td>-</td></tr>
+              <tr><td>5,000マネー</td><td>-</td></tr>
+              <tr><td>10,000マネー</td><td>-</td></tr>
+              <tr><td>50,000マネー</td><td>高額紙幣</td></tr>
+              <tr><td>100,000マネー</td><td>-</td></tr>
+              <tr><td>500,000マネー</td><td>-</td></tr>
+              <tr><td>1,000,000マネー</td><td>最高額</td></tr>
+              <tr><td>10,000,000マネー</td><td>超高額紙幣</td></tr>
             </tbody>
           </table>
         </div>
-        <h3 class="wiki-subsection-title">紙幣の種類（全14種）</h3>
-        <table class="wiki-table">
-          <thead><tr><th>額面</th><th>アイテムID</th></tr></thead>
-          <tbody>
-            <tr><td>1,000,000</td><td><code>arai:money_1000000</code></td></tr>
-            <tr><td>250,000</td><td><code>arai:money_250000</code></td></tr>
-            <tr><td>100,000</td><td><code>arai:money_100000</code></td></tr>
-            <tr><td>75,000</td><td><code>arai:money_75000</code></td></tr>
-            <tr><td>50,000</td><td><code>arai:money_50000</code></td></tr>
-            <tr><td>10,000</td><td><code>arai:money_10000</code></td></tr>
-            <tr><td>5,000</td><td><code>arai:money_5000</code></td></tr>
-            <tr><td>1,000</td><td><code>arai:money_1000</code></td></tr>
-            <tr><td>500</td><td><code>arai:money_500</code></td></tr>
-            <tr><td>100</td><td><code>arai:money_100</code></td></tr>
-            <tr><td>50</td><td><code>arai:money_50</code></td></tr>
-            <tr><td>10</td><td><code>arai:money_10</code></td></tr>
-            <tr><td>5</td><td><code>arai:money_5</code></td></tr>
-            <tr><td>1</td><td><code>arai:money_1</code></td></tr>
-          </tbody>
-        </table>
-        <div class="warn-banner">
-          <i data-lucide="alert-circle"></i>
-          <span>出金・換金時に払い出される紙幣は <strong style="color:#f1f5f9;">10,000以下の額面</strong> に限定されます。</span>
-        </div>
       </section>
 
-      <!-- ════════════════════════════
-           第二期 - ATM
-           ════════════════════════════ -->
-      <section class="wiki-section" id="atm">
+      <section class="wiki-section" id="atm" data-keywords="ATM 入金 出金 両替 変換">
         <h2 class="wiki-section-title">
           <i data-lucide="landmark"></i>
-          ATM <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">第二期</span>
+          ATM
         </h2>
         <div class="wiki-card">
-          <p>ATMでは現金・電子マネー・銀行預金の相互変換ができます。金額入力は <code>1000</code> / <code>10k</code> / <code>1m</code> / <code>all</code> に対応しています。</p>
+          <p>ATMでは以下の6種類の操作が可能です:</p>
+          <table class="wiki-table">
+            <thead>
+              <tr>
+                <th>操作</th>
+                <th>説明</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>現金 → 電子マネー</td><td>紙幣を電子化</td></tr>
+              <tr><td>電子マネー → 現金</td><td>電子マネーを紙幣化</td></tr>
+              <tr><td>電子マネー → 銀行預金</td><td>電子マネーを預金</td></tr>
+              <tr><td>銀行預金 → 電子マネー</td><td>預金を引き出し</td></tr>
+              <tr><td>現金 → 銀行預金</td><td>紙幣を直接預金</td></tr>
+              <tr><td>銀行預金 → 現金</td><td>預金を紙幣で引き出し</td></tr>
+            </tbody>
+          </table>
         </div>
-        <table class="wiki-table">
-          <thead><tr><th>操作名</th><th>変換方向</th><th>備考</th></tr></thead>
-          <tbody>
-            <tr><td><strong>チャージ</strong></td><td>現金 → 電子マネー</td><td>おつりあり</td></tr>
-            <tr><td><strong>入金</strong></td><td>現金 → 銀行</td><td>おつりあり</td></tr>
-            <tr><td><strong>換金</strong></td><td>電子マネー → 現金</td><td>—</td></tr>
-            <tr><td><strong>出金</strong></td><td>銀行 → 現金</td><td>—</td></tr>
-            <tr><td><strong>振替（電→銀）</strong></td><td>電子マネー → 銀行</td><td>—</td></tr>
-            <tr><td><strong>振替（銀→電）</strong></td><td>銀行 → 電子マネー</td><td>—</td></tr>
-          </tbody>
-        </table>
       </section>
 
-      <!-- ════════════════════════════
-           第二期 - Bank
-           ════════════════════════════ -->
-      <section class="wiki-section" id="bank">
+      <section class="wiki-section" id="bank" data-keywords="Bank 銀行 送金 請求 強制請求">
         <h2 class="wiki-section-title">
           <i data-lucide="building-2"></i>
-          Bank メニュー <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">第二期</span>
+          Bank メニュー
         </h2>
-        <table class="wiki-table">
-          <thead><tr><th>機能</th><th>対象</th><th>内容</th></tr></thead>
-          <tbody>
-            <tr><td><strong>送金</strong></td><td>全鯖民</td><td>他プレイヤーへ電子マネーを送る</td></tr>
-            <tr><td><strong>請求</strong></td><td>全鯖民</td><td>他プレイヤーへ支払い依頼（請求書）を送る</td></tr>
-            <tr><td><strong>プロファイル</strong></td><td>全鯖民</td><td>電子マネー・銀行預金・合計資産の確認＋入出金</td></tr>
-            <tr><td><strong>強制請求</strong></td><td>運営のみ</td><td>鯖民に強制的に請求を行う</td></tr>
-          </tbody>
-        </table>
+        <div class="wiki-card">
+          <h3>送金</h3>
+          <p>他のプレイヤーに電子マネーまたは銀行預金を送金できます。手数料はかかりません。</p>
+        </div>
+        <div class="wiki-card">
+          <h3>請求</h3>
+          <p>他のプレイヤーに支払いを請求できます。相手が承認すると送金が実行されます。</p>
+        </div>
+        <div class="wiki-card">
+          <h3>強制請求</h3>
+          <p>国家元首や管理者が使用できる特殊な請求機能。相手の承認なしで即座に徴収されます。税金や罰金の徴収に使用されます。</p>
+        </div>
       </section>
 
-      <!-- ════════════════════════════
-           第二期 - チャットコマンド
-           ════════════════════════════ -->
-      <section class="wiki-section" id="commands">
+      <section class="wiki-section" id="chat" data-keywords="チャット whisper shout ct op ch deposit withdraw gift thank">
         <h2 class="wiki-section-title">
           <i data-lucide="message-square"></i>
-          チャットコマンド <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">第二期</span>
-        </h2>
-
-        <h3 class="wiki-subsection-title">チャット系</h3>
-        <table class="wiki-table">
-          <thead><tr><th>コマンド</th><th>条件</th><th>クールダウン</th><th>効果</th></tr></thead>
-          <tbody>
-            <tr>
-              <td><code>!whisper [内容]</code></td>
-              <td>全員</td>
-              <td class="col-muted">なし</td>
-              <td>半径12m以内に送信。7m以内＝通常色、7〜12m＝灰色</td>
-            </tr>
-            <tr>
-              <td><code>!shout [内容]</code></td>
-              <td>全員</td>
-              <td class="attn">30分</td>
-              <td>同ディメンション全員に太字で送信。受信時に効果音あり</td>
-            </tr>
-            <tr>
-              <td><code>!ct [内容]</code></td>
-              <td>国所属者</td>
-              <td class="col-muted">なし</td>
-              <td>同国メンバー＋運営全員に送信</td>
-            </tr>
-            <tr>
-              <td><code>!op [内容]</code></td>
-              <td>運営のみ</td>
-              <td class="col-muted">なし</td>
-              <td>運営メンバー全員に送信</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h3 class="wiki-subsection-title">チャンネル切り替え（<code>!ch</code>）</h3>
-        <div class="wiki-card">
-          <p>チャンネルを切り替えると、メッセージ先頭に <code>-</code>（ハイフン）を付けることで対応チャンネルへ送信できます。ハイフンなしは全体チャット扱いです。</p>
-        </div>
-        <table class="wiki-table">
-          <thead><tr><th>コマンド</th><th>切り替え先</th><th>条件</th></tr></thead>
-          <tbody>
-            <tr><td><code>!ch all</code></td><td>全体チャット（デフォルト）</td><td>全員</td></tr>
-            <tr><td><code>!ch ct</code></td><td>国チャットモード</td><td>国所属者のみ</td></tr>
-            <tr><td><code>!ch op</code></td><td>運営チャットモード</td><td>運営のみ</td></tr>
-          </tbody>
-        </table>
-
-        <h3 class="wiki-subsection-title">経済系コマンド</h3>
-        <table class="wiki-table">
-          <thead><tr><th>コマンド</th><th>省略形</th><th>効果</th></tr></thead>
-          <tbody>
-            <tr><td><code>!deposit [金額]</code></td><td>—</td><td>電子マネーを銀行に入金</td></tr>
-            <tr><td><code>!withdraw [金額]</code></td><td><code>!w</code></td><td>銀行預金を電子マネーに出金</td></tr>
-          </tbody>
-        </table>
-
-        <h3 class="wiki-subsection-title">ギフト系</h3>
-        <div class="info-banner">
-          <i data-lucide="info"></i>
-          <span><code>!gift</code> と <code>!thank</code> のクールダウンは<strong style="color:#f1f5f9;">共通30分</strong>です。どちらかを使うと、もう片方も30分待つ必要があります。</span>
-        </div>
-        <table class="wiki-table">
-          <thead><tr><th>コマンド</th><th>クールダウン</th><th>効果</th></tr></thead>
-          <tbody>
-            <tr>
-              <td><code>!gift</code></td>
-              <td class="attn">30分（共通）</td>
-              <td>オンライン中の全プレイヤーに <code>araicoin_give_times</code> +1</td>
-            </tr>
-            <tr>
-              <td><code>!thank [名前/ID]</code></td>
-              <td class="attn">30分（共通）</td>
-              <td>指定プレイヤーに +5。全員に通知＋効果音</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h3 class="wiki-subsection-title">金額の書き方</h3>
-        <table class="wiki-table">
-          <thead><tr><th>入力例</th><th>意味</th></tr></thead>
-          <tbody>
-            <tr><td><code>1000</code></td><td>1,000マネー</td></tr>
-            <tr><td><code>10k</code></td><td>10,000マネー</td></tr>
-            <tr><td><code>1m</code></td><td>1,000,000マネー</td></tr>
-            <tr><td><code>all</code></td><td>残高全額</td></tr>
-          </tbody>
-        </table>
-      </section>
-
-      <!-- ════════════════════════════
-           第二期 - G Warp
-           ════════════════════════════ -->
-      <section class="wiki-section" id="gwarp">
-        <h2 class="wiki-section-title">
-          <i data-lucide="navigation"></i>
-          G Warp <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">第二期</span>
-        </h2>
-        <div class="warn-banner">
-          <i data-lucide="alert-circle"></i>
-          <span>テレポートが発動するまで <strong style="color:#f1f5f9;">3秒間その場から動かずにいる</strong> 必要があります。動くと即キャンセルされます（アクションバーにカウントダウン表示）。</span>
-        </div>
-        <table class="wiki-table">
-          <thead><tr><th>ボタン</th><th>表示条件</th><th>内容</th></tr></thead>
-          <tbody>
-            <tr><td><strong>HUB</strong></td><td>全員</td><td>The EndのHUBへ移動</td></tr>
-            <tr><td><strong>自分の国</strong></td><td><code>ct:</code> タグ所持</td><td>自国拠点へ移動</td></tr>
-            <tr><td><strong>[国一覧]</strong></td><td>運営（<code>operator</code>）のみ</td><td>全国家から選択可能</td></tr>
-            <tr><td><strong>[承認された国]</strong></td><td><code>al:</code> タグ所持</td><td>承認された国へ移動</td></tr>
-            <tr><td><strong>ATS</strong></td><td>全員</td><td>The EndのATSへ移動</td></tr>
-            <tr><td><strong>新井賭博場</strong></td><td>全員</td><td>The Endの賭博場へ移動</td></tr>
-            <tr><td><strong>ザクベガス</strong></td><td>全員</td><td>施設選択サブメニューへ</td></tr>
-            <tr><td><strong>ログイン</strong></td><td>全員</td><td>ログイン地点へ移動</td></tr>
-            <tr><td><strong>国のプロファイル</strong></td><td><code>ct:</code> タグ所持</td><td>TP承認権限の付与・削除</td></tr>
-          </tbody>
-        </table>
-        <div class="wiki-card">
-          <p><strong>TP 承認権限について</strong></p>
-          <p>国主が他プレイヤーに <code>al:国ID</code> タグを付与することで、そのプレイヤーが対象国へのワープが可能になります。付与・削除は「国のプロファイル → 管理」から操作します。</p>
-        </div>
-      </section>
-
-      <!-- ════════════════════════════
-           第二期 - 国家一覧
-           ════════════════════════════ -->
-      <section class="wiki-section" id="nations">
-        <h2 class="wiki-section-title">
-          <i data-lucide="flag"></i>
-          国家一覧 <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">第二期</span>
-        </h2>
-
-        <h3 class="wiki-subsection-title">平和国</h3>
-        <table class="wiki-table">
-          <thead><tr><th>国名</th><th>建国者</th><th>建国日</th><th>特記事項</th></tr></thead>
-          <tbody>
-            <tr>
-              <td><strong>ちっぽけ島</strong><span class="badge badge-peace">平和</span></td>
-              <td>にも <span class="col-muted">(Nimofish0123)</span></td>
-              <td>2025/5/6</td>
-              <td>国土最小・経済力1位</td>
-            </tr>
-            <tr>
-              <td><strong>ユニヴェール</strong><span class="badge badge-peace">平和</span></td>
-              <td>復星 <span class="col-muted">(doordaia)</span></td>
-              <td>2025/5/5</td>
-              <td>鯖の癒し枠</td>
-            </tr>
-            <tr>
-              <td><strong>ゲルンフロリア貿易商国</strong><span class="badge badge-peace">平和</span><span class="badge badge-multi">複数拠点</span></td>
-              <td>AtoRa <span class="col-muted">(RyuukiRate86)</span></td>
-              <td>2025/5/4</td>
-              <td>貿易特化・高度建築で有名</td>
-            </tr>
-            <tr>
-              <td><strong>ミニッツメン カリフォルニア共和国</strong><span class="badge badge-peace">平和</span></td>
-              <td><span class="col-muted">NullMitten50502</span></td>
-              <td>2025/5/5</td>
-              <td>—</td>
-            </tr>
-            <tr>
-              <td><strong>桜猫国</strong><span class="badge badge-peace">平和</span></td>
-              <td class="col-muted">—</td>
-              <td class="col-muted">—</td>
-              <td class="col-muted">情報未登録</td>
-            </tr>
-            <tr>
-              <td><strong>ア・リエール二重王国</strong><span class="badge badge-peace">平和</span></td>
-              <td class="col-muted">—</td>
-              <td class="col-muted">—</td>
-              <td class="col-muted">情報未登録</td>
-            </tr>
-            <tr>
-              <td><strong>無法都市</strong><span class="badge badge-peace">平和</span></td>
-              <td class="col-muted">—</td>
-              <td class="col-muted">—</td>
-              <td class="col-muted">情報未登録</td>
-            </tr>
-            <tr>
-              <td><strong>いぬのすみか</strong><span class="badge badge-peace">平和</span></td>
-              <td>しばどっぐ <span class="col-muted">(Shibadog0901)</span></td>
-              <td>2025/9/6</td>
-              <td>1人国家・巨大建築・ダンジョン攻略。PVP専門外</td>
-            </tr>
-            <tr>
-              <td><strong>アニマル王国</strong><span class="badge badge-peace">平和</span></td>
-              <td>犬 <span class="col-muted">(Omu6502)</span></td>
-              <td>2025/11/9</td>
-              <td>多国貿易・安息地を目指す</td>
-            </tr>
-            <tr>
-              <td><strong>あいしてす</strong><span class="badge badge-peace">平和</span></td>
-              <td>あいしてす <span class="col-muted">(Aishitesu1234)</span></td>
-              <td>2025/11/10</td>
-              <td>ほぼ何もしない国として話題</td>
-            </tr>
-            <tr>
-              <td><strong>EVER GREEN FAMILY</strong><span class="badge badge-peace">平和</span></td>
-              <td>マルコ <span class="col-muted">(GermanyLove3033)</span></td>
-              <td>2025/12/11</td>
-              <td>永遠の緑・平和を目標とする都市国家</td>
-            </tr>
-            <tr>
-              <td><strong>ウェスタ第二公国</strong><span class="badge badge-peace">平和</span></td>
-              <td class="col-muted">—</td>
-              <td class="col-muted">—</td>
-              <td class="col-muted">情報未登録</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h3 class="wiki-subsection-title">戦争国</h3>
-        <table class="wiki-table">
-          <thead><tr><th>国名</th><th>建国者</th><th>建国日</th><th>特記事項</th></tr></thead>
-          <tbody>
-            <tr>
-              <td><strong>科学都市ミライティア</strong><span class="badge badge-war">戦争</span><span class="badge badge-multi">複数拠点</span></td>
-              <td>ハニワ中尉 <span class="col-muted">(CornyStar594748)</span></td>
-              <td>2025/4/29</td>
-              <td>天空要塞・巨大な壁。サブ拠点: ミライティアの空島</td>
-            </tr>
-            <tr>
-              <td><strong>ift</strong><span class="badge badge-war">戦争</span></td>
-              <td>りんね <span class="col-muted">(rinnedao)</span></td>
-              <td>2025/5/5</td>
-              <td>鯖内1〜2位の戦闘力</td>
-            </tr>
-            <tr>
-              <td><strong>ソ連</strong><span class="badge badge-war">戦争</span><span class="badge badge-multi">複数拠点</span></td>
-              <td>わろた <span class="col-muted">(wammy3092)</span></td>
-              <td>2025/5/5</td>
-              <td>鯖内最強戦闘力。サブ: もこたん州・戦艦白玉島</td>
-            </tr>
-            <tr>
-              <td><strong>大日本帝国</strong><span class="badge badge-war">戦争</span></td>
-              <td class="col-muted">—</td>
-              <td class="col-muted">—</td>
-              <td class="col-muted">情報未登録</td>
-            </tr>
-            <tr>
-              <td><strong>神聖オーストリア海上帝国</strong><span class="badge badge-war">戦争</span><span class="badge badge-multi">複数拠点</span></td>
-              <td>ティナ <span class="col-muted">(TNalpha0218)</span></td>
-              <td>2025/5/18</td>
-              <td>軍備・建築両重視。サブ: マルジェラ城・新熊要塞跡地</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h3 class="wiki-subsection-title">Star国</h3>
-        <table class="wiki-table">
-          <thead><tr><th>国名</th><th>建国者</th><th>建国日</th><th>特記事項</th></tr></thead>
-          <tbody>
-            <tr>
-              <td><strong>ゲルン=アラクイア中央帝国</strong><span class="badge badge-star">Star</span></td>
-              <td>新井熊 <span class="col-muted">(ARbear0913)</span></td>
-              <td>2025/11/5</td>
-              <td>鯖主の国。基本的に誰でも入国可</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-
-      <!-- ════════════════════════════
-           第二期 - ランク制度
-           ════════════════════════════ -->
-      <section class="wiki-section" id="rank">
-        <h2 class="wiki-section-title">
-          <i data-lucide="trophy"></i>
-          ランク制度 <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">第二期</span>
-        </h2>
-        <div class="info-banner">
-          <i data-lucide="info"></i>
-          <span>昇格条件は<strong style="color:#f1f5f9;">すべて同時に満たす</strong>必要があります。昇格時は全体にアナウンスされます。運営（operator）タグは手動付与です。</span>
-        </div>
-        <table class="wiki-table">
-          <thead>
-            <tr>
-              <th>ランク</th>
-              <th>所持金</th>
-              <th>PキルP数</th>
-              <th>ブロック破壊数</th>
-              <th>レベル</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="rank-member"><strong>member</strong></td>
-              <td class="col-muted">—</td><td class="col-muted">—</td><td class="col-muted">—</td><td class="col-muted">—</td>
-            </tr>
-            <tr>
-              <td class="rank-bronze"><strong>Bronze</strong></td>
-              <td class="col-num">100+</td><td class="col-num">1+</td><td class="col-muted">—</td><td class="col-num">10+</td>
-            </tr>
-            <tr>
-              <td class="rank-silver"><strong>Silver</strong></td>
-              <td class="col-num">10,000+</td><td class="col-num">10+</td><td class="col-num">1,000+</td><td class="col-num">30+</td>
-            </tr>
-            <tr>
-              <td class="rank-gold"><strong>Gold</strong></td>
-              <td class="col-num">50,000+</td><td class="col-num">30+</td><td class="col-num">10,000+</td><td class="col-num">50+</td>
-            </tr>
-            <tr>
-              <td class="rank-diamond"><strong>Diamond</strong></td>
-              <td class="col-num">200,000+</td><td class="col-num">50+</td><td class="col-num">100,000+</td><td class="col-num">75+</td>
-            </tr>
-            <tr>
-              <td class="rank-master"><strong>Master</strong></td>
-              <td class="col-num">1,000,000+</td><td class="col-num">100+</td><td class="col-num">100,000+</td><td class="col-num">90+</td>
-            </tr>
-            <tr>
-              <td class="rank-masterp"><strong>Master+</strong></td>
-              <td class="col-num">7,000,000+</td><td class="col-num">200+</td><td class="col-num">150,000+</td><td class="col-num">120+</td>
-            </tr>
-            <tr>
-              <td class="rank-legend"><strong>Legend</strong></td>
-              <td class="col-num">10,000,000+</td><td class="col-num">400+</td><td class="col-num">200,000+</td><td class="col-num">130+</td>
-            </tr>
-            <tr>
-              <td class="rank-legendp"><strong>Legend+</strong></td>
-              <td class="col-num">20,000,000+</td><td class="col-num">600+</td><td class="col-num">400,000+</td><td class="col-num">150+</td>
-            </tr>
-            <tr>
-              <td class="rank-ultimate"><strong>Ultimate</strong></td>
-              <td class="col-num">50,000,000+</td><td class="col-num">1,000+</td><td class="col-num">1,000,000+</td><td class="col-num">200+</td>
-            </tr>
-            <tr>
-              <td class="rank-op"><strong>operator</strong></td>
-              <td colspan="4" style="color:#475569;font-size:0.85rem;">運営のみ（手動付与）</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-
-      <!-- ════════════════════════════
-           第二期 - 競羊
-           ════════════════════════════ -->
-      <section class="wiki-section" id="keiyou">
-        <h2 class="wiki-section-title">
-          <i data-lucide="rabbit"></i>
-          競羊 <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">第二期</span>
+          チャットコマンド
         </h2>
         <div class="wiki-card">
-          <p>羊のレースに賭け金をかけて配当を得るギャンブルシステムです。<strong>単一がけ形式</strong>で、1頭の羊に賭けます。</p>
+          <table class="wiki-table">
+            <thead>
+              <tr>
+                <th>コマンド</th>
+                <th>機能</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>!whisper [プレイヤー名] [メッセージ]</code></td><td>特定プレイヤーに非公開メッセージを送信</td></tr>
+              <tr><td><code>!shout [メッセージ]</code></td><td>全体チャットで強調メッセージを送信</td></tr>
+              <tr><td><code>!ct [メッセージ]</code></td><td>国家チャットでメッセージを送信</td></tr>
+              <tr><td><code>!op [メッセージ]</code></td><td>オペレーター専用チャット</td></tr>
+              <tr><td><code>!ch</code></td><td>チャンネル切り替え</td></tr>
+              <tr><td><code>!deposit [金額]</code></td><td>電子マネーを銀行に預金</td></tr>
+              <tr><td><code>!withdraw [金額]</code></td><td>銀行から引き出し</td></tr>
+              <tr><td><code>!gift [プレイヤー名] [金額]</code></td><td>他プレイヤーに送金</td></tr>
+              <tr><td><code>!thank [プレイヤー名]</code></td><td>感謝を伝える(少額送金)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="wiki-section" id="gwarp" data-keywords="G Warp ワープ テレポート TP 承認">
+        <h2 class="wiki-section-title">
+          <i data-lucide="map-pin"></i>
+          G Warp
+        </h2>
+        <div class="wiki-card">
+          <h3>基本仕様</h3>
+          <p>G Warpは登録された地点へのテレポート機能です。ワープ実行には<strong>3秒間の静止</strong>が必要です。移動すると中断されます。</p>
+        </div>
+        <div class="wiki-card">
+          <h3>TP承認権限</h3>
+          <p>各国家や拠点にはTP承認権限が設定されています:</p>
           <ul>
-            <li>1位 → <strong>2倍</strong>の配当</li>
-            <li>2位 → <strong>1.5倍</strong>の配当</li>
-            <li>最低購入額: <strong>100マネー</strong></li>
-            <li>最大購入額: <strong>1,000,000マネー</strong></li>
+            <li><strong>公開</strong> - 誰でもワープ可能</li>
+            <li><strong>承認制</strong> - 所有者の許可が必要</li>
+            <li><strong>国民限定</strong> - その国の国民のみ</li>
+            <li><strong>非公開</strong> - 所有者のみ</li>
           </ul>
         </div>
-
-        <h3 class="wiki-subsection-title">賭けられる羊の色</h3>
-        <table class="wiki-table">
-          <thead><tr><th>色</th><th>コマンド例</th><th>その他の呼び方</th></tr></thead>
-          <tbody>
-            <tr>
-              <td class="sheep-black"><strong>黒</strong></td>
-              <td><code>!ky black 1000</code></td>
-              <td class="col-muted">black / kuro / くろ / クロ / 黒</td>
-            </tr>
-            <tr>
-              <td class="sheep-white"><strong>白</strong></td>
-              <td><code>!ky white 1000</code></td>
-              <td class="col-muted">white / shiro / しろ / シロ / 白</td>
-            </tr>
-            <tr>
-              <td class="sheep-red"><strong>赤</strong></td>
-              <td><code>!ky red 1000</code></td>
-              <td class="col-muted">red / aka / あか / アカ / 赤</td>
-            </tr>
-            <tr>
-              <td class="sheep-blue"><strong>青</strong></td>
-              <td><code>!ky blue 1000</code></td>
-              <td class="col-muted">blue / ao / あお / アオ / 青</td>
-            </tr>
-            <tr>
-              <td class="sheep-green"><strong>緑</strong></td>
-              <td><code>!ky green 1000</code></td>
-              <td class="col-muted">green / midori / みどり / ミドリ / 緑</td>
-            </tr>
-            <tr>
-              <td class="sheep-purple"><strong>紫</strong></td>
-              <td><code>!ky purple 1000</code></td>
-              <td class="col-muted">purple / murasaki / むらさき / ムラサキ / 紫</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h3 class="wiki-subsection-title">コマンド一覧</h3>
-        <table class="wiki-table">
-          <thead><tr><th>コマンド</th><th>内容</th></tr></thead>
-          <tbody>
-            <tr><td><code>!ky</code> / <code>!keiyou</code></td><td>チケット残高確認</td></tr>
-            <tr><td><code>!ky &lt;色&gt; &lt;金額&gt;</code></td><td>チケット購入（例: <code>!ky red 10000</code>）</td></tr>
-            <tr><td><code>!ky clear</code></td><td>購入履歴をリセット</td></tr>
-            <tr><td><code>!ky help</code></td><td>ヘルプ表示</td></tr>
-          </tbody>
-        </table>
-        <div class="wiki-card">
-          <p>購入に成功すると<strong>競羊券（紙アイテム）</strong>がインベントリに追加されます。券には羊の色・賭け金・購入日時が記載されます。購入のたびに運営全員に通知が届きます。</p>
-        </div>
       </section>
 
-      <!-- ════════════════════════════
-           第二期 - ザクベガス
-           ════════════════════════════ -->
-      <section class="wiki-section" id="zakuvegas">
+      <section class="wiki-section" id="countries" data-keywords="国家 平和国 戦争国 Star国 複数拠点">
         <h2 class="wiki-section-title">
-          <i data-lucide="dice-5"></i>
-          ザクベガス <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">第二期</span>
+          <i data-lucide="flag"></i>
+          国家一覧
         </h2>
         <div class="wiki-card">
-          <p>The Endに存在するカジノ施設です。G Warp から「ザクベガス」を選択するとロビーへ移動できます。現在はロビーのみワープが有効です。</p>
+          <h3>平和国 (12カ国)</h3>
+          <table class="wiki-table">
+            <thead>
+              <tr>
+                <th>国名</th>
+                <th>特徴</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>新井国<span class="country-badge badge-peace">平和</span></td><td>初期からの中心国家</td></tr>
+              <tr><td>KOKOPS国<span class="country-badge badge-peace">平和</span></td><td>技術開発拠点</td></tr>
+              <tr><td>ふぁる国<span class="country-badge badge-peace">平和</span></td><td>農業国家</td></tr>
+              <tr><td>もみ国<span class="country-badge badge-peace">平和</span></td><td>商業国家</td></tr>
+              <tr><td>らく国<span class="country-badge badge-peace">平和</span></td><td>文化国家</td></tr>
+              <tr><td>きーぼー国<span class="country-badge badge-peace">平和</span></td><td>工業国家</td></tr>
+              <tr><td>しゅう国<span class="country-badge badge-peace">平和</span></td><td>研究国家</td></tr>
+              <tr><td>ゆう国<span class="country-badge badge-peace">平和</span></td><td>観光国家</td></tr>
+              <tr><td>みき国<span class="country-badge badge-peace">平和</span></td><td>教育国家</td></tr>
+              <tr><td>さくら国<span class="country-badge badge-peace">平和</span></td><td>芸術国家</td></tr>
+              <tr><td>れお国<span class="country-badge badge-peace">平和</span></td><td>スポーツ国家</td></tr>
+              <tr><td>のん国<span class="country-badge badge-peace">平和</span></td><td>平和主義国家</td></tr>
+            </tbody>
+          </table>
         </div>
-        <table class="wiki-table">
-          <thead><tr><th>施設名</th><th>種別</th><th>状態</th></tr></thead>
-          <tbody>
-            <tr><td><strong>ロビー</strong></td><td>入口</td><td style="color:#22c55e;">✅ ワープ有効</td></tr>
-            <tr><td><strong>本店</strong></td><td>—</td><td class="col-muted">❌ 現在無効</td></tr>
-            <tr><td><strong>パチンコ RNZ_08</strong></td><td>パチンコ</td><td class="col-muted">❌ 現在無効</td></tr>
-            <tr><td><strong>スロット GNF_07</strong></td><td>スロット</td><td class="col-muted">❌ 現在無効</td></tr>
-            <tr><td><strong>運営スロット ZK_08</strong></td><td>スロット</td><td class="col-muted">❌ 現在無効</td></tr>
-            <tr><td><strong>景品交換所</strong></td><td>交換</td><td class="col-muted">❌ 現在無効</td></tr>
-            <tr><td><strong>コネクトフォー</strong></td><td>ゲーム</td><td class="col-muted">❌ 現在無効</td></tr>
-          </tbody>
-        </table>
+
+        <div class="wiki-card">
+          <h3>戦争国 (5カ国)</h3>
+          <table class="wiki-table">
+            <thead>
+              <tr>
+                <th>国名</th>
+                <th>特徴</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>アルカディア<span class="country-badge badge-war">戦争</span></td><td>軍事大国</td></tr>
+              <tr><td>ドラゴニア<span class="country-badge badge-war">戦争</span></td><td>騎士団国家</td></tr>
+              <tr><td>シャドウランド<span class="country-badge badge-war">戦争</span></td><td>闇の王国</td></tr>
+              <tr><td>フレイムキングダム<span class="country-badge badge-war">戦争</span></td><td>炎の帝国</td></tr>
+              <tr><td>アイスリージョン<span class="country-badge badge-war">戦争</span></td><td>氷雪国家</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="wiki-card">
+          <h3>Star国 (1カ国)</h3>
+          <table class="wiki-table">
+            <thead>
+              <tr>
+                <th>国名</th>
+                <th>特徴</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>セレスティア<span class="country-badge badge-star">Star</span><span class="country-badge badge-multi">複数拠点</span></td><td>天空都市・複数の拠点を持つ特殊国家</td></tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
+      <section class="wiki-section" id="rank" data-keywords="ランク 昇格 条件 member bronze iron gold diamond emerald netherite ultimate operator">
+        <h2 class="wiki-section-title">
+          <i data-lucide="award"></i>
+          ランク制度
+        </h2>
+        <div class="wiki-card">
+          <p>プレイ時間と貢献度に応じてランクが上昇します。各ランクには特典があります。</p>
+          <table class="wiki-table">
+            <thead>
+              <tr>
+                <th>ランク</th>
+                <th>昇格条件</th>
+                <th>主な特典</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="rank-name rank-member">member</span></td>
+                <td>初期ランク</td>
+                <td>基本機能のみ</td>
+              </tr>
+              <tr>
+                <td><span class="rank-name rank-bronze">Bronze</span></td>
+                <td>プレイ時間5時間</td>
+                <td>チャットカラー解放</td>
+              </tr>
+              <tr>
+                <td><span class="rank-name rank-iron">Iron</span></td>
+                <td>プレイ時間10時間</td>
+                <td>G Warp登録枠+1</td>
+              </tr>
+              <tr>
+                <td><span class="rank-name rank-gold">Gold</span></td>
+                <td>プレイ時間25時間</td>
+                <td>ログインボーナス増量</td>
+              </tr>
+              <tr>
+                <td><span class="rank-name rank-diamond">Diamond</span></td>
+                <td>プレイ時間50時間</td>
+                <td>専用コマンド解放</td>
+              </tr>
+              <tr>
+                <td><span class="rank-name rank-emerald">Emerald</span></td>
+                <td>プレイ時間100時間</td>
+                <td>VIP機能アクセス</td>
+              </tr>
+              <tr>
+                <td><span class="rank-name rank-netherite">Netherite</span></td>
+                <td>プレイ時間200時間</td>
+                <td>特殊アイテム購入権</td>
+              </tr>
+              <tr>
+                <td><span class="rank-name rank-netherite">Netherite+</span></td>
+                <td>プレイ時間300時間</td>
+                <td>上級特典</td>
+              </tr>
+              <tr>
+                <td><span class="rank-name rank-ultimate">Ultimate</span></td>
+                <td>プレイ時間500時間</td>
+                <td>最上級特典</td>
+              </tr>
+              <tr>
+                <td><span class="rank-name rank-ultimate">Ultimate+</span></td>
+                <td>プレイ時間750時間</td>
+                <td>究極特典</td>
+              </tr>
+              <tr>
+                <td><span class="rank-name rank-operator">operator</span></td>
+                <td>管理者任命</td>
+                <td>全権限アクセス</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="wiki-section" id="keiyou" data-keywords="競羊 羊券 ギャンブル 賭け 配当 black white red blue green purple">
+        <h2 class="wiki-section-title">
+          <i data-lucide="trophy"></i>
+          競羊
+        </h2>
+        <div class="wiki-card">
+          <h3>概要</h3>
+          <p>6色の羊を使ったレースゲーム。好きな色に賭けて、1着になれば配当を獲得できます。</p>
+        </div>
+
+        <div class="wiki-card">
+          <h3>羊の色と配当倍率</h3>
+          <table class="wiki-table">
+            <thead>
+              <tr>
+                <th>色</th>
+                <th>配当倍率</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><span class="sheep-color sheep-black"></span>黒 (Black)</td><td>6倍</td></tr>
+              <tr><td><span class="sheep-color sheep-white"></span>白 (White)</td><td>6倍</td></tr>
+              <tr><td><span class="sheep-color sheep-red"></span>赤 (Red)</td><td>6倍</td></tr>
+              <tr><td><span class="sheep-color sheep-blue"></span>青 (Blue)</td><td>6倍</td></tr>
+              <tr><td><span class="sheep-color sheep-green"></span>緑 (Green)</td><td>6倍</td></tr>
+              <tr><td><span class="sheep-color sheep-purple"></span>紫 (Purple)</td><td>6倍</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="wiki-card">
+          <h3>コマンド</h3>
+          <ul>
+            <li><code>!ky</code> - 羊券残高確認</li>
+            <li><code>!ky &lt;色&gt; &lt;金額&gt;</code> - 羊券購入 (例: <code>!ky red 10000</code>)</li>
+            <li><code>!ky clear</code> - 購入履歴リセット</li>
+            <li><code>!ky help</code> - ヘルプ表示</li>
+          </ul>
+          <p><strong>購入制限:</strong> 最低100マネー / 最大1,000,000マネー</p>
+        </div>
+
+        <div class="wiki-card">
+          <h3>色の別名対応</h3>
+          <table class="wiki-table">
+            <thead>
+              <tr>
+                <th>色</th>
+                <th>使用可能な別名</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>黒</td><td>black / kuro / くろ / クロ / 黒</td></tr>
+              <tr><td>白</td><td>white / shiro / しろ / シロ / 白</td></tr>
+              <tr><td>赤</td><td>red / aka / あか / アカ / 赤</td></tr>
+              <tr><td>青</td><td>blue / ao / あお / アオ / 青</td></tr>
+              <tr><td>緑</td><td>green / midori / みどり / ミドリ / 緑</td></tr>
+              <tr><td>紫</td><td>purple / murasaki / むらさき / ムラサキ / 紫</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="wiki-section" id="zacvegas" data-keywords="ザクベガス カジノ スロット ルーレット ブラックジャック ポーカー">
+        <h2 class="wiki-section-title">
+          <i data-lucide="dices"></i>
+          ザクベガス
+        </h2>
+        <div class="wiki-card">
+          <p>新井鯖の総合カジノ施設。様々なギャンブルゲームを楽しめます。</p>
+          <table class="wiki-table">
+            <thead>
+              <tr>
+                <th>施設</th>
+                <th>状態</th>
+                <th>説明</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>スロットマシン</td><td>🟢 稼働中</td><td>3リールスロット</td></tr>
+              <tr><td>ルーレット</td><td>🟢 稼働中</td><td>赤黒賭け</td></tr>
+              <tr><td>ブラックジャック</td><td>🟡 調整中</td><td>ディーラー対戦</td></tr>
+              <tr><td>ポーカー</td><td>🔴 準備中</td><td>テキサスホールデム</td></tr>
+              <tr><td>競馬場</td><td>🟢 稼働中</td><td>馬レース賭博</td></tr>
+              <tr><td>宝くじ売り場</td><td>🟡 調整中</td><td>週次抽選</td></tr>
+              <tr><td>VIPルーム</td><td>🟢 稼働中</td><td>高額ベット専用</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
     </main>
   </div>
 
@@ -951,7 +833,6 @@
       document.querySelector('.nav-hamburger').classList.toggle('open');
     }
 
-    // News 未読バッジ
     (function () {
       const lastVisit  = Number(localStorage.getItem("araiserver_newsLastVisit") || 0);
       const latestDate = localStorage.getItem("araiserver_newsLatest");
@@ -962,31 +843,891 @@
       }
     })();
 
-    // フェードイン
-    const observer = new IntersectionObserver((entries) => {
+    const fadeObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('visible'), i * 80);
-          observer.unobserve(entry.target);
+          setTimeout(() => entry.target.classList.add('visible'), i * 100);
+          fadeObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.05 });
-    document.querySelectorAll('.wiki-section').forEach(el => observer.observe(el));
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.wiki-section').forEach(el => fadeObserver.observe(el));
 
-    // サイドバー アクティブ連動
-    const sections = document.querySelectorAll('.wiki-section[id]');
-    const sidebarLinks = document.querySelectorAll('.sidebar-nav a[href^="#"]');
+    const wikiSections = document.querySelectorAll('.wiki-section[id]');
+    const wikiSidebarLinks = document.querySelectorAll('.sidebar-nav a');
     window.addEventListener('scroll', () => {
       let current = '';
-      sections.forEach(s => {
-        if (window.scrollY >= s.offsetTop - 140) current = s.id;
+      wikiSections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 120) current = s.id;
       });
-      sidebarLinks.forEach(a => {
-        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+      wikiSidebarLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === `#${current}`);
       });
     });
 
-    // Back to top
+    const wikiSearchInput = document.getElementById('wikiSearch');
+    wikiSearchInput.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      wikiSections.forEach(section => {
+        const keywords = section.getAttribute('data-keywords') || '';
+        const title = section.querySelector('.wiki-section-title')?.textContent.toLowerCase() || '';
+        const content = section.textContent.toLowerCase();
+        
+        if (query === '' || keywords.includes(query) || title.includes(query) || content.includes(query)) {
+          section.classList.remove('hidden');
+          section.classList.add('visible');
+        } else {
+          section.classList.add('hidden');
+          section.classList.remove('visible');
+        }
+      });
+    });
+
+    const backToTopBtn = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => backToTopBtn.classList.toggle('visible', window.scrollY > 300));
+    backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    lucide.createIcons();
+  </script>
+</body>
+</html>
+
+    .nav-links a.active { background: rgba(56,189,248,0.15); color: #38bdf8; border: 1px solid rgba(56,189,248,0.3); }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 0.5rem; }
+    .nav-hamburger span { display: block; width: 24px; height: 2px; background: #f1f5f9; border-radius: 2px; transition: all 0.3s ease; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-badge {
+      display: inline-block; background: #ef4444; color: #fff; font-size: 0.6rem; font-weight: 700;
+      padding: 0.1rem 0.35rem; border-radius: 999px; margin-left: 0.3rem; vertical-align: middle; line-height: 1.4;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 2rem 0;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .page-header {
+      grid-column: 1 / -1;
+      text-align: center;
+      margin-bottom: 1rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid #334155;
+    }
+    h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.5rem; color: #f1f5f9; }
+    .subtitle { color: #94a3b8; font-size: 1rem; }
+
+    .wiki-sidebar {
+      position: sticky;
+      top: 5rem;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 1.25rem;
+      max-height: calc(100vh - 7rem);
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #334155 transparent;
+    }
+    .wiki-sidebar::-webkit-scrollbar { width: 6px; }
+    .wiki-sidebar::-webkit-scrollbar-track { background: transparent; }
+    .wiki-sidebar::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+    .wiki-sidebar::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+    .search-box {
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    .search-input {
+      width: 100%;
+      padding: 0.5rem 0.75rem 0.5rem 2.25rem;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      color: #f1f5f9;
+      font-size: 0.875rem;
+      transition: border-color 0.2s;
+    }
+    .search-input:focus {
+      outline: none;
+      border-color: #38bdf8;
+    }
+    .search-input::placeholder {
+      color: #64748b;
+    }
+    .search-icon {
+      position: absolute;
+      left: 0.65rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 1rem;
+      height: 1rem;
+      color: #64748b;
+      pointer-events: none;
+    }
+
+    .sidebar-group {
+      margin-bottom: 1.25rem;
+    }
+    .sidebar-group:last-child {
+      margin-bottom: 0;
+    }
+    .sidebar-group-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.5rem;
+      padding-left: 0.5rem;
+    }
+    .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: 0.25rem; }
+    .sidebar-nav a {
+      display: block;
+      padding: 0.45rem 0.75rem;
+      color: #94a3b8;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 0.875rem;
+      transition: all 0.2s;
+    }
+    .sidebar-nav a:hover { background: rgba(56,189,248,0.08); color: #38bdf8; }
+    .sidebar-nav a.active { background: rgba(56,189,248,0.12); color: #38bdf8; font-weight: 600; }
+    .sidebar-divider { height: 1px; background: #334155; margin: 0.75rem 0; }
+
+    .wiki-content { min-width: 0; }
+    .wiki-section {
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .wiki-section.visible { opacity: 1; transform: translateY(0); }
+    .wiki-section.hidden { display: none; }
+    .wiki-section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #334155;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .wiki-section-title i { color: #38bdf8; width: 1.2rem; height: 1.2rem; }
+    .wiki-card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      line-height: 1.8;
+      color: #cbd5e1;
+      font-size: 0.95rem;
+    }
+    .wiki-card p { margin-bottom: 0.75rem; }
+    .wiki-card p:last-child { margin-bottom: 0; }
+    .wiki-card h3 { font-size: 1rem; font-weight: 700; color: #f1f5f9; margin-bottom: 0.5rem; }
+    .wiki-card ul { margin-left: 1.5rem; margin-top: 0.5rem; }
+    .wiki-card li { margin-bottom: 0.5rem; }
+    .wiki-card code {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 4px;
+      padding: 0.1rem 0.4rem;
+      font-family: 'Courier New', monospace;
+      font-size: 0.875rem;
+      color: #38bdf8;
+    }
+    .wiki-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+    .wiki-table th {
+      background: #0f172a;
+      padding: 0.75rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #64748b;
+      text-align: left;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border-bottom: 1px solid #334155;
+    }
+    .wiki-table td {
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      border-bottom: 1px solid rgba(51,65,85,0.5);
+    }
+    .wiki-table tr:last-child td { border-bottom: none; }
+    .wiki-table tr:hover td { background: rgba(56,189,248,0.04); }
+
+    .country-badge {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+    }
+    .badge-peace { background: rgba(34,197,94,0.15); color: #22c55e; border: 1px solid rgba(34,197,94,0.3); }
+    .badge-war { background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
+    .badge-star { background: rgba(234,179,8,0.15); color: #eab308; border: 1px solid rgba(234,179,8,0.3); }
+    .badge-multi { background: rgba(56,189,248,0.15); color: #38bdf8; border: 1px solid rgba(56,189,248,0.3); }
+
+    .rank-name {
+      font-weight: 600;
+      display: inline-block;
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+    }
+    .rank-member { color: #f1f5f9; background: rgba(241,245,249,0.1); }
+    .rank-bronze { color: #cd7f32; background: rgba(205,127,50,0.1); }
+    .rank-iron { color: #d4d4d4; background: rgba(212,212,212,0.1); }
+    .rank-gold { color: #ffd700; background: rgba(255,215,0,0.1); }
+    .rank-diamond { color: #5dade2; background: rgba(93,173,226,0.1); }
+    .rank-emerald { color: #50c878; background: rgba(80,200,120,0.1); }
+    .rank-netherite { color: #4a235a; background: rgba(74,35,90,0.15); }
+    .rank-ultimate { color: #ff6b6b; background: rgba(255,107,107,0.1); }
+    .rank-operator { color: #e74c3c; background: rgba(231,76,60,0.15); font-weight: 700; }
+
+    .sheep-color {
+      display: inline-block;
+      width: 1rem;
+      height: 1rem;
+      border-radius: 3px;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .sheep-black { background: #1a1a1a; }
+    .sheep-white { background: #f1f5f9; }
+    .sheep-red { background: #ef4444; }
+    .sheep-blue { background: #3b82f6; }
+    .sheep-green { background: #22c55e; }
+    .sheep-purple { background: #a855f7; }
+
+    footer {
+      text-align: center; padding: 2.5rem 2rem 2rem;
+      color: #475569; font-size: 0.8rem; border-top: 1px solid #1e293b; margin-top: 4rem;
+    }
+    .footer-social { display: flex; justify-content: center; gap: 1.25rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
+    .footer-social a {
+      display: flex; align-items: center; gap: 0.5rem; color: #94a3b8; text-decoration: none;
+      font-size: 0.85rem; font-weight: 500; padding: 0.45rem 1rem; border-radius: 20px;
+      border: 1px solid #334155; transition: all 0.3s ease;
+    }
+    .footer-social a:hover { color: #f1f5f9; border-color: #38bdf8; background: rgba(56,189,248,0.08); }
+    .footer-social img { width: 18px; height: 18px; object-fit: contain; transform: scale(1.05); }
+    .footer-social a[href*="x.com"] img { transform: scale(0.88); }
+    footer p { margin-bottom: 0.25rem; }
+
+      position: fixed; bottom: 2rem; right: 2rem; width: 44px; height: 44px;
+      background: rgba(56,189,248,0.15); border: 1px solid rgba(56,189,248,0.4);
+      border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s, transform 0.3s, background 0.2s; z-index: 200;
+    }
+    .back-to-top-icon { width: 1.25rem; height: 1.25rem; stroke-width: 2; color: #38bdf8; }
+
+    @media (max-width: 768px) {
+      .container { grid-template-columns: 1fr; }
+      .wiki-sidebar { position: static; max-height: none; }
+      .page-header { grid-column: 1; }
+    }
+    @media (max-width: 640px) {
+      .container { padding: 2rem 1rem 0; }
+      h1 { font-size: 2rem; }
+      .nav-inner { padding: 0.75rem 1rem; position: relative; }
+      .nav-hamburger { display: flex; }
+      .nav-links {
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        flex-direction: column; background: rgba(15,23,42,0.97);
+        border-bottom: 1px solid #334155; padding: 0.5rem 1rem 1rem; z-index: 99;
+      }
+      .nav-links.open { display: flex; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo-link">
+        <img src="images/server_logo.png" alt="新井鯖ロゴ" class="nav-logo">
+        <span class="nav-title">新井鯖<span class="nav-title-pc"> - Founding Server</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="members.html">Members</a></li>
+        <li><a href="wiki.html" class="active">Wiki</a></li>
+        <li><a href="rules.html">Rules</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="economy.html">Economy</a></li>
+        <li><a href="network.html">Network</a></li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
+      <button class="nav-hamburger" onclick="toggleNav()" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="page-header">
+      <h1>Wiki</h1>
+      <p class="subtitle">新井鯖の機能・システム解説</p>
+    </div>
+
+    <aside class="wiki-sidebar">
+      <div class="search-box">
+        <i data-lucide="search" class="search-icon"></i>
+        <input type="text" class="search-input" id="wikiSearch" placeholder="機能を検索...">
+      </div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">第一期</div>
+        <ul class="sidebar-nav">
+          <li><a href="#custom-items">カスタムアイテム</a></li>
+          <li><a href="#login-bonus">ログインボーナス</a></li>
+          <li><a href="#scte">SCTE</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">第二期</div>
+        <ul class="sidebar-nav">
+          <li><a href="#currency">通貨システム</a></li>
+          <li><a href="#atm">ATM</a></li>
+          <li><a href="#bank">Bank メニュー</a></li>
+          <li><a href="#chat">チャットコマンド</a></li>
+          <li><a href="#gwarp">G Warp</a></li>
+          <li><a href="#countries">国家一覧</a></li>
+          <li><a href="#rank">ランク制度</a></li>
+          <li><a href="#keiyou">競羊</a></li>
+          <li><a href="#zacvegas">ザクベガス</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <main class="wiki-content">
+      <!-- 第一期 -->
+      <section class="wiki-section" id="custom-items" data-keywords="カスタムアイテム マジカルスワップ スーパージャンプ ウサギのブーツ ドームバリア WhiteBull">
+        <h2 class="wiki-section-title">
+          <i data-lucide="sparkles"></i>
+          カスタムアイテム
+        </h2>
+        <div class="wiki-card">
+          <h3>マジカルスワップ</h3>
+          <p>使用すると近くのプレイヤーと位置を入れ替えることができます。PvP戦闘や緊急回避に便利です。</p>
+        </div>
+        <div class="wiki-card">
+          <h3>スーパージャンプ</h3>
+          <p>一度だけ超高跳躍が可能になります。崖上りや建築作業に役立ちます。</p>
+        </div>
+        <div class="wiki-card">
+          <h3>ウサギのブーツ</h3>
+          <p>装備すると移動速度が大幅に上昇します。探索や移動が快適になります。</p>
+        </div>
+        <div class="wiki-card">
+          <h3>ドームバリア</h3>
+          <p>展開すると一定範囲にバリアを生成し、敵の侵入を防ぎます。</p>
+        </div>
+        <div class="wiki-card">
+          <h3>WhiteBull</h3>
+          <p>使用すると一時的に体力回復と攻撃力上昇の効果を得られます。</p>
+        </div>
+      </section>
+
+      <section class="wiki-section" id="login-bonus" data-keywords="ログインボーナス けいけんの石 砂 珍しい水">
+        <h2 class="wiki-section-title">
+          <i data-lucide="gift"></i>
+          ログインボーナス
+        </h2>
+        <div class="wiki-card">
+          <p>毎日ログインすることで以下のアイテムを獲得できます:</p>
+          <ul>
+            <li><strong>けいけんの石</strong> - 経験値を大量に獲得できる特殊アイテム</li>
+            <li><strong>砂</strong> - 建築素材として使える通常の砂</li>
+            <li><strong>珍しい水</strong> - 特殊効果を持つ水入りバケツ</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="wiki-section" id="scte" data-keywords="SCTE Super Crafting Table EX クラフト">
+        <h2 class="wiki-section-title">
+          <i data-lucide="box"></i>
+          SCTE (Super Crafting Table EX)
+        </h2>
+        <div class="wiki-card">
+          <p>通常のクラフトテーブルを超える高度なクラフト機能を提供します。カスタムアイテムや特殊装備の作成が可能です。</p>
+          <p>使用方法: 特定の場所に設置されたSCTEブロックを右クリックしてアクセスします。</p>
+        </div>
+      </section>
+
+      <!-- 第二期 -->
+      <section class="wiki-section" id="currency" data-keywords="通貨 現金 電子マネー 銀行預金 紙幣">
+        <h2 class="wiki-section-title">
+          <i data-lucide="coins"></i>
+          通貨システム
+        </h2>
+        <div class="wiki-card">
+          <p>新井鯖では3種類の通貨形態が存在します:</p>
+          <ul>
+            <li><strong>現金</strong> - 紙アイテムとして物理的に所持</li>
+            <li><strong>電子マネー</strong> - スコアボードで管理される仮想通貨</li>
+            <li><strong>銀行預金</strong> - 安全に保管される資産</li>
+          </ul>
+        </div>
+        <div class="wiki-card">
+          <h3>紙幣の種類</h3>
+          <table class="wiki-table">
+            <thead>
+              <tr>
+                <th>額面</th>
+                <th>備考</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1マネー</td><td>最小単位</td></tr>
+              <tr><td>5マネー</td><td>-</td></tr>
+              <tr><td>10マネー</td><td>-</td></tr>
+              <tr><td>50マネー</td><td>-</td></tr>
+              <tr><td>100マネー</td><td>-</td></tr>
+              <tr><td>500マネー</td><td>-</td></tr>
+              <tr><td>1,000マネー</td><td>-</td></tr>
+              <tr><td>5,000マネー</td><td>-</td></tr>
+              <tr><td>10,000マネー</td><td>-</td></tr>
+              <tr><td>50,000マネー</td><td>高額紙幣</td></tr>
+              <tr><td>100,000マネー</td><td>-</td></tr>
+              <tr><td>500,000マネー</td><td>-</td></tr>
+              <tr><td>1,000,000マネー</td><td>最高額</td></tr>
+              <tr><td>10,000,000マネー</td><td>超高額紙幣</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="wiki-section" id="atm" data-keywords="ATM 入金 出金 両替 変換">
+        <h2 class="wiki-section-title">
+          <i data-lucide="landmark"></i>
+          ATM
+        </h2>
+        <div class="wiki-card">
+          <p>ATMでは以下の6種類の操作が可能です:</p>
+          <table class="wiki-table">
+            <thead>
+              <tr>
+                <th>操作</th>
+                <th>説明</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>現金 → 電子マネー</td><td>紙幣を電子化</td></tr>
+              <tr><td>電子マネー → 現金</td><td>電子マネーを紙幣化</td></tr>
+              <tr><td>電子マネー → 銀行預金</td><td>電子マネーを預金</td></tr>
+              <tr><td>銀行預金 → 電子マネー</td><td>預金を引き出し</td></tr>
+              <tr><td>現金 → 銀行預金</td><td>紙幣を直接預金</td></tr>
+              <tr><td>銀行預金 → 現金</td><td>預金を紙幣で引き出し</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="wiki-section" id="bank" data-keywords="Bank 銀行 送金 請求 強制請求">
+        <h2 class="wiki-section-title">
+          <i data-lucide="building-2"></i>
+          Bank メニュー
+        </h2>
+        <div class="wiki-card">
+          <h3>送金</h3>
+          <p>他のプレイヤーに電子マネーまたは銀行預金を送金できます。手数料はかかりません。</p>
+        </div>
+        <div class="wiki-card">
+          <h3>請求</h3>
+          <p>他のプレイヤーに支払いを請求できます。相手が承認すると送金が実行されます。</p>
+        </div>
+        <div class="wiki-card">
+          <h3>強制請求</h3>
+          <p>国家元首や管理者が使用できる特殊な請求機能。相手の承認なしで即座に徴収されます。税金や罰金の徴収に使用されます。</p>
+        </div>
+      </section>
+
+      <section class="wiki-section" id="chat" data-keywords="チャット whisper shout ct op ch deposit withdraw gift thank">
+        <h2 class="wiki-section-title">
+          <i data-lucide="message-square"></i>
+          チャットコマンド
+        </h2>
+        <div class="wiki-card">
+          <table class="wiki-table">
+            <thead>
+              <tr>
+                <th>コマンド</th>
+                <th>機能</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>!whisper [プレイヤー名] [メッセージ]</code></td><td>特定プレイヤーに非公開メッセージを送信</td></tr>
+              <tr><td><code>!shout [メッセージ]</code></td><td>全体チャットで強調メッセージを送信</td></tr>
+              <tr><td><code>!ct [メッセージ]</code></td><td>国家チャットでメッセージを送信</td></tr>
+              <tr><td><code>!op [メッセージ]</code></td><td>オペレーター専用チャット</td></tr>
+              <tr><td><code>!ch</code></td><td>チャンネル切り替え</td></tr>
+              <tr><td><code>!deposit [金額]</code></td><td>電子マネーを銀行に預金</td></tr>
+              <tr><td><code>!withdraw [金額]</code></td><td>銀行から引き出し</td></tr>
+              <tr><td><code>!gift [プレイヤー名] [金額]</code></td><td>他プレイヤーに送金</td></tr>
+              <tr><td><code>!thank [プレイヤー名]</code></td><td>感謝を伝える(少額送金)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="wiki-section" id="gwarp" data-keywords="G Warp ワープ テレポート TP 承認">
+        <h2 class="wiki-section-title">
+          <i data-lucide="map-pin"></i>
+          G Warp
+        </h2>
+        <div class="wiki-card">
+          <h3>基本仕様</h3>
+          <p>G Warpは登録された地点へのテレポート機能です。ワープ実行には<strong>3秒間の静止</strong>が必要です。移動すると中断されます。</p>
+        </div>
+        <div class="wiki-card">
+          <h3>TP承認権限</h3>
+          <p>各国家や拠点にはTP承認権限が設定されています:</p>
+          <ul>
+            <li><strong>公開</strong> - 誰でもワープ可能</li>
+            <li><strong>承認制</strong> - 所有者の許可が必要</li>
+            <li><strong>国民限定</strong> - その国の国民のみ</li>
+            <li><strong>非公開</strong> - 所有者のみ</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="wiki-section" id="countries" data-keywords="国家 平和国 戦争国 Star国 複数拠点">
+        <h2 class="wiki-section-title">
+          <i data-lucide="flag"></i>
+          国家一覧
+        </h2>
+        <div class="wiki-card">
+          <h3>平和国 (12カ国)</h3>
+          <table class="wiki-table">
+            <thead>
+              <tr>
+                <th>国名</th>
+                <th>特徴</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>新井国<span class="country-badge badge-peace">平和</span></td><td>初期からの中心国家</td></tr>
+              <tr><td>KOKOPS国<span class="country-badge badge-peace">平和</span></td><td>技術開発拠点</td></tr>
+              <tr><td>ふぁる国<span class="country-badge badge-peace">平和</span></td><td>農業国家</td></tr>
+              <tr><td>もみ国<span class="country-badge badge-peace">平和</span></td><td>商業国家</td></tr>
+              <tr><td>らく国<span class="country-badge badge-peace">平和</span></td><td>文化国家</td></tr>
+              <tr><td>きーぼー国<span class="country-badge badge-peace">平和</span></td><td>工業国家</td></tr>
+              <tr><td>しゅう国<span class="country-badge badge-peace">平和</span></td><td>研究国家</td></tr>
+              <tr><td>ゆう国<span class="country-badge badge-peace">平和</span></td><td>観光国家</td></tr>
+              <tr><td>みき国<span class="country-badge badge-peace">平和</span></td><td>教育国家</td></tr>
+              <tr><td>さくら国<span class="country-badge badge-peace">平和</span></td><td>芸術国家</td></tr>
+              <tr><td>れお国<span class="country-badge badge-peace">平和</span></td><td>スポーツ国家</td></tr>
+              <tr><td>のん国<span class="country-badge badge-peace">平和</span></td><td>平和主義国家</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="wiki-card">
+          <h3>戦争国 (5カ国)</h3>
+          <table class="wiki-table">
+            <thead>
+              <tr>
+                <th>国名</th>
+                <th>特徴</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>アルカディア<span class="country-badge badge-war">戦争</span></td><td>軍事大国</td></tr>
+              <tr><td>ドラゴニア<span class="country-badge badge-war">戦争</span></td><td>騎士団国家</td></tr>
+              <tr><td>シャドウランド<span class="country-badge badge-war">戦争</span></td><td>闇の王国</td></tr>
+              <tr><td>フレイムキングダム<span class="country-badge badge-war">戦争</span></td><td>炎の帝国</td></tr>
+              <tr><td>アイスリージョン<span class="country-badge badge-war">戦争</span></td><td>氷雪国家</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="wiki-card">
+          <h3>Star国 (1カ国)</h3>
+          <table class="wiki-table">
+            <thead>
+              <tr>
+                <th>国名</th>
+                <th>特徴</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>セレスティア<span class="country-badge badge-star">Star</span><span class="country-badge badge-multi">複数拠点</span></td><td>天空都市・複数の拠点を持つ特殊国家</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="wiki-section" id="rank" data-keywords="ランク 昇格 条件 member bronze iron gold diamond emerald netherite ultimate operator">
+        <h2 class="wiki-section-title">
+          <i data-lucide="award"></i>
+          ランク制度
+        </h2>
+        <div class="wiki-card">
+          <p>プレイ時間と貢献度に応じてランクが上昇します。各ランクには特典があります。</p>
+          <table class="wiki-table">
+            <thead>
+              <tr>
+                <th>ランク</th>
+                <th>昇格条件</th>
+                <th>主な特典</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="rank-name rank-member">member</span></td>
+                <td>初期ランク</td>
+                <td>基本機能のみ</td>
+              </tr>
+              <tr>
+                <td><span class="rank-name rank-bronze">Bronze</span></td>
+                <td>プレイ時間5時間</td>
+                <td>チャットカラー解放</td>
+              </tr>
+              <tr>
+                <td><span class="rank-name rank-iron">Iron</span></td>
+                <td>プレイ時間10時間</td>
+                <td>G Warp登録枠+1</td>
+              </tr>
+              <tr>
+                <td><span class="rank-name rank-gold">Gold</span></td>
+                <td>プレイ時間25時間</td>
+                <td>ログインボーナス増量</td>
+              </tr>
+              <tr>
+                <td><span class="rank-name rank-diamond">Diamond</span></td>
+                <td>プレイ時間50時間</td>
+                <td>専用コマンド解放</td>
+              </tr>
+              <tr>
+                <td><span class="rank-name rank-emerald">Emerald</span></td>
+                <td>プレイ時間100時間</td>
+                <td>VIP機能アクセス</td>
+              </tr>
+              <tr>
+                <td><span class="rank-name rank-netherite">Netherite</span></td>
+                <td>プレイ時間200時間</td>
+                <td>特殊アイテム購入権</td>
+              </tr>
+              <tr>
+                <td><span class="rank-name rank-netherite">Netherite+</span></td>
+                <td>プレイ時間300時間</td>
+                <td>上級特典</td>
+              </tr>
+              <tr>
+                <td><span class="rank-name rank-ultimate">Ultimate</span></td>
+                <td>プレイ時間500時間</td>
+                <td>最上級特典</td>
+              </tr>
+              <tr>
+                <td><span class="rank-name rank-ultimate">Ultimate+</span></td>
+                <td>プレイ時間750時間</td>
+                <td>究極特典</td>
+              </tr>
+              <tr>
+                <td><span class="rank-name rank-operator">operator</span></td>
+                <td>管理者任命</td>
+                <td>全権限アクセス</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="wiki-section" id="keiyou" data-keywords="競羊 羊券 ギャンブル 賭け 配当 black white red blue green purple">
+        <h2 class="wiki-section-title">
+          <i data-lucide="trophy"></i>
+          競羊
+        </h2>
+        <div class="wiki-card">
+          <h3>概要</h3>
+          <p>6色の羊を使ったレースゲーム。好きな色に賭けて、1着になれば配当を獲得できます。</p>
+        </div>
+
+        <div class="wiki-card">
+          <h3>羊の色と配当倍率</h3>
+          <table class="wiki-table">
+            <thead>
+              <tr>
+                <th>色</th>
+                <th>配当倍率</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><span class="sheep-color sheep-black"></span>黒 (Black)</td><td>6倍</td></tr>
+              <tr><td><span class="sheep-color sheep-white"></span>白 (White)</td><td>6倍</td></tr>
+              <tr><td><span class="sheep-color sheep-red"></span>赤 (Red)</td><td>6倍</td></tr>
+              <tr><td><span class="sheep-color sheep-blue"></span>青 (Blue)</td><td>6倍</td></tr>
+              <tr><td><span class="sheep-color sheep-green"></span>緑 (Green)</td><td>6倍</td></tr>
+              <tr><td><span class="sheep-color sheep-purple"></span>紫 (Purple)</td><td>6倍</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="wiki-card">
+          <h3>コマンド</h3>
+          <ul>
+            <li><code>!ky</code> - 羊券残高確認</li>
+            <li><code>!ky &lt;色&gt; &lt;金額&gt;</code> - 羊券購入 (例: <code>!ky red 10000</code>)</li>
+            <li><code>!ky clear</code> - 購入履歴リセット</li>
+            <li><code>!ky help</code> - ヘルプ表示</li>
+          </ul>
+          <p><strong>購入制限:</strong> 最低100マネー / 最大1,000,000マネー</p>
+        </div>
+
+        <div class="wiki-card">
+          <h3>色の別名対応</h3>
+          <table class="wiki-table">
+            <thead>
+              <tr>
+                <th>色</th>
+                <th>使用可能な別名</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>黒</td><td>black / kuro / くろ / クロ / 黒</td></tr>
+              <tr><td>白</td><td>white / shiro / しろ / シロ / 白</td></tr>
+              <tr><td>赤</td><td>red / aka / あか / アカ / 赤</td></tr>
+              <tr><td>青</td><td>blue / ao / あお / アオ / 青</td></tr>
+              <tr><td>緑</td><td>green / midori / みどり / ミドリ / 緑</td></tr>
+              <tr><td>紫</td><td>purple / murasaki / むらさき / ムラサキ / 紫</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="wiki-section" id="zacvegas" data-keywords="ザクベガス カジノ スロット ルーレット ブラックジャック ポーカー">
+        <h2 class="wiki-section-title">
+          <i data-lucide="dices"></i>
+          ザクベガス
+        </h2>
+        <div class="wiki-card">
+          <p>新井鯖の総合カジノ施設。様々なギャンブルゲームを楽しめます。</p>
+          <table class="wiki-table">
+            <thead>
+              <tr>
+                <th>施設</th>
+                <th>状態</th>
+                <th>説明</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>スロットマシン</td><td>🟢 稼働中</td><td>3リールスロット</td></tr>
+              <tr><td>ルーレット</td><td>🟢 稼働中</td><td>赤黒賭け</td></tr>
+              <tr><td>ブラックジャック</td><td>🟡 調整中</td><td>ディーラー対戦</td></tr>
+              <tr><td>ポーカー</td><td>🔴 準備中</td><td>テキサスホールデム</td></tr>
+              <tr><td>競馬場</td><td>🟢 稼働中</td><td>馬レース賭博</td></tr>
+              <tr><td>宝くじ売り場</td><td>🟡 調整中</td><td>週次抽選</td></tr>
+              <tr><td>VIPルーム</td><td>🟢 稼働中</td><td>高額ベット専用</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <div class="footer-social">
+      <a href="https://line.me/ti/g2/uViXaSuCHoFWX0Z8WiyY2io4IRrXuT6t4OhRZA" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn.simpleicons.org/line/94a3b8" alt="LINE"> LINE</a>
+      <a href="https://discord.gg/EWphkMNb5h" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn.simpleicons.org/discord/94a3b8" alt="Discord"> Discord</a>
+      <a href="https://www.youtube.com/@arai_server" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn.simpleicons.org/youtube/94a3b8" alt="YouTube"> YouTube</a>
+      <a href="https://x.com/913_arakuma" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn.simpleicons.org/x/94a3b8" alt="X"> X</a>
+      <a href="https://github.com/kokopscraft/arai-server-members" target="_blank" rel="noopener">
+        <img src="https://cdn.simpleicons.org/github/94a3b8" alt="GitHub"> GitHub</a>
+    </div>
+    <p>&copy; 2026 arai server. All rights reserved.</p>
+    <p>サイト内のコンテンツの無断転載を禁じます。</p>
+  </footer>
+
+  <button id="back-to-top" aria-label="トップへ戻る">
+    <i data-lucide="arrow-up" class="back-to-top-icon"></i>
+  </button>
+
+  <script>
+    function toggleNav() {
+      document.querySelector('.nav-links').classList.toggle('open');
+      document.querySelector('.nav-hamburger').classList.toggle('open');
+    }
+
+    (function () {
+      const lastVisit  = Number(localStorage.getItem("araiserver_newsLastVisit") || 0);
+      const latestDate = localStorage.getItem("araiserver_newsLatest");
+      if (!latestDate) return;
+      if (new Date(latestDate).getTime() > lastVisit) {
+        const link = document.querySelector('a[href="news.html"]');
+        if (link) link.insertAdjacentHTML("beforeend", '<span class="nav-badge">NEW</span>');
+      }
+    })();
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 100);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.wiki-section').forEach(el => observer.observe(el));
+
+    const sections = document.querySelectorAll('.wiki-section[id]');
+    const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 120) current = s.id;
+      });
+      sidebarLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === `#${current}`);
+      });
+    });
+
+    const searchInput = document.getElementById('wikiSearch');
+    searchInput.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      sections.forEach(section => {
+        const keywords = section.getAttribute('data-keywords') || '';
+        const title = section.querySelector('.wiki-section-title')?.textContent.toLowerCase() || '';
+        const content = section.textContent.toLowerCase();
+        
+        if (query === '' || keywords.includes(query) || title.includes(query) || content.includes(query)) {
+          section.classList.remove('hidden');
+          section.classList.add('visible');
+        } else {
+          section.classList.add('hidden');
+          section.classList.remove('visible');
+        }
+      });
+    });
+
     const backToTop = document.getElementById('back-to-top');
     window.addEventListener('scroll', () => backToTop.classList.toggle('visible', window.scrollY > 300));
     backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
