@@ -106,6 +106,13 @@
       padding: 2rem;
       margin-bottom: 2.5rem;
       box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .rule-section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     .section-title {
       font-size: 1.5rem;
@@ -617,6 +624,18 @@
     window.addEventListener('scroll', () => {
         backToTop.classList.toggle('visible', window.scrollY > 300);
     });
+
+    // ── Rule セクション フェードイン ──
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 120);
+          sectionObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.rule-section').forEach(el => sectionObserver.observe(el));
+
     backToTop.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
