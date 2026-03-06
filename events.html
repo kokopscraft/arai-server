@@ -65,12 +65,7 @@
     .subtitle { color: #94a3b8; font-size: 1rem; }
 
     /* ── Filter ── */
-    .filter-bar {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      margin-bottom: 2rem;
-    }
+    .filter-bar { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
     .filter-btn {
       padding: 0.5rem 1rem; background: #1e293b; border: 1px solid #334155;
       border-radius: 6px; color: #94a3b8; cursor: pointer; transition: all 0.2s; font-size: 0.875rem;
@@ -88,9 +83,9 @@
       display: flex;
       gap: 1.5rem;
       align-items: flex-start;
-      transition: border-color 0.2s, box-shadow 0.2s, opacity 0.5s ease, transform 0.5s ease;
       opacity: 0;
       transform: translateY(20px);
+      transition: border-color 0.2s, box-shadow 0.2s, opacity 0.5s ease, transform 0.5s ease;
     }
     .event-card.visible { opacity: 1; transform: translateY(0); }
     .event-card:hover { border-color: #38bdf8; box-shadow: 0 8px 32px rgba(56,189,248,0.1); }
@@ -116,15 +111,26 @@
     .tag-ongoing  { background: rgba(34,197,94,0.15);  color: #22c55e; border: 1px solid rgba(34,197,94,0.3); }
     .tag-ended    { background: rgba(100,116,139,0.15); color: #64748b; border: 1px solid rgba(100,116,139,0.3); }
     .event-title  { font-size: 1.1rem; font-weight: 700; color: #f1f5f9; margin-bottom: 0.4rem; }
-    .event-desc   { font-size: 0.9rem; color: #94a3b8; line-height: 1.7; }
+    .event-desc   { font-size: 0.9rem; color: #94a3b8; line-height: 1.7; margin-bottom: 0.6rem; }
+    .event-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      color: #38bdf8;
+      text-decoration: none;
+      border: 1px solid rgba(56,189,248,0.3);
+      background: rgba(56,189,248,0.08);
+      padding: 0.3rem 0.75rem;
+      border-radius: 6px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .event-link:hover { background: rgba(56,189,248,0.18); border-color: #38bdf8; }
+    .event-link i { width: 0.9rem; height: 0.9rem; }
 
     /* ── Empty State ── */
-    .empty-state {
-      text-align: center;
-      padding: 4rem 2rem;
-      color: #475569;
-    }
-    .empty-state i { width: 3rem; height: 3rem; margin-bottom: 1rem; color: #334155; }
+    .empty-state { text-align: center; padding: 4rem 2rem; color: #475569; }
+    .empty-state i { width: 3rem; height: 3rem; margin-bottom: 1rem; color: #334155; display: block; margin: 0 auto 1rem; }
     .empty-state p { font-size: 1rem; }
 
     /* ── Footer ── */
@@ -211,27 +217,121 @@
     </div>
 
     <div class="events-list" id="eventsList">
-      <!-- ここにイベントデータを追加 -->
-      <!-- 例:
-      <div class="event-card" data-status="upcoming">
+
+      <!-- ── あらくま放送局 第6回 ── -->
+      <div class="event-card" data-status="ended">
         <div class="event-date-block">
-          <div class="event-date-month">MAR</div>
-          <div class="event-date-day">15</div>
-          <div class="event-date-year">2026</div>
+          <div class="event-date-month">OCT</div>
+          <div class="event-date-day">01</div>
+          <div class="event-date-year">2025</div>
         </div>
         <div class="event-body">
           <div class="event-meta">
-            <span class="event-tag tag-upcoming">開催予定</span>
+            <span class="event-tag tag-ended">終了</span>
           </div>
-          <div class="event-title">イベント名</div>
-          <div class="event-desc">イベントの説明</div>
+          <div class="event-title">あらくま放送局 第6回</div>
+          <div class="event-desc">新井鯖公式YouTube配信。新井熊によるサーバー近況・企画などを生配信。</div>
+          <a href="https://www.youtube.com/watch?v=33Cr6YWVpXo" target="_blank" rel="noopener noreferrer" class="event-link">
+            <i data-lucide="youtube"></i> アーカイブを見る
+          </a>
         </div>
       </div>
-      -->
-      <div class="empty-state">
-        <i data-lucide="calendar-x"></i>
-        <p>現在予定されているイベントはありません。</p>
+
+      <!-- ── あらくま放送局 第5回 ── -->
+      <div class="event-card" data-status="ended">
+        <div class="event-date-block">
+          <div class="event-date-month">JUL</div>
+          <div class="event-date-day">23</div>
+          <div class="event-date-year">2025</div>
+        </div>
+        <div class="event-body">
+          <div class="event-meta">
+            <span class="event-tag tag-ended">終了</span>
+          </div>
+          <div class="event-title">あらくま放送局 第5回</div>
+          <div class="event-desc">新井鯖公式YouTube配信。新井熊によるサーバー近況・企画などを生配信。</div>
+          <a href="https://www.youtube.com/watch?v=UV1jpLipjuY" target="_blank" rel="noopener noreferrer" class="event-link">
+            <i data-lucide="youtube"></i> アーカイブを見る
+          </a>
+        </div>
       </div>
+
+      <!-- ── あらくま放送局 第4回 ── -->
+      <div class="event-card" data-status="ended">
+        <div class="event-date-block">
+          <div class="event-date-month">JUN</div>
+          <div class="event-date-day">10</div>
+          <div class="event-date-year">2025</div>
+        </div>
+        <div class="event-body">
+          <div class="event-meta">
+            <span class="event-tag tag-ended">終了</span>
+          </div>
+          <div class="event-title">あらくま放送局 第4回</div>
+          <div class="event-desc">新井鯖公式YouTube配信。新井熊によるサーバー近況・企画などを生配信。</div>
+          <a href="https://www.youtube.com/watch?v=riAT6SRdl2Y" target="_blank" rel="noopener noreferrer" class="event-link">
+            <i data-lucide="youtube"></i> アーカイブを見る
+          </a>
+        </div>
+      </div>
+
+      <!-- ── あらくま放送局 第3回 ── -->
+      <div class="event-card" data-status="ended">
+        <div class="event-date-block">
+          <div class="event-date-month">APR</div>
+          <div class="event-date-day">17</div>
+          <div class="event-date-year">2025</div>
+        </div>
+        <div class="event-body">
+          <div class="event-meta">
+            <span class="event-tag tag-ended">終了</span>
+          </div>
+          <div class="event-title">あらくま放送局 第3回</div>
+          <div class="event-desc">新井鯖公式YouTube配信。新井熊によるサーバー近況・企画などを生配信。</div>
+          <a href="https://www.youtube.com/watch?v=Hm7TVawWECU" target="_blank" rel="noopener noreferrer" class="event-link">
+            <i data-lucide="youtube"></i> アーカイブを見る
+          </a>
+        </div>
+      </div>
+
+      <!-- ── あらくま放送局 第2回 ── -->
+      <div class="event-card" data-status="ended">
+        <div class="event-date-block">
+          <div class="event-date-month">MAR</div>
+          <div class="event-date-day">31</div>
+          <div class="event-date-year">2025</div>
+        </div>
+        <div class="event-body">
+          <div class="event-meta">
+            <span class="event-tag tag-ended">終了</span>
+          </div>
+          <div class="event-title">あらくま放送局 第2回</div>
+          <div class="event-desc">新井鯖公式YouTube配信。新井熊によるサーバー近況・企画などを生配信。</div>
+          <a href="https://www.youtube.com/watch?v=dF0w3xOWbug" target="_blank" rel="noopener noreferrer" class="event-link">
+            <i data-lucide="youtube"></i> アーカイブを見る
+          </a>
+        </div>
+      </div>
+
+      <!-- ── あらくま放送局 第1回 ── -->
+      <div class="event-card" data-status="ended">
+        <div class="event-date-block">
+          <div class="event-date-month">MAR</div>
+          <div class="event-date-day">24</div>
+          <div class="event-date-year">2025</div>
+        </div>
+        <div class="event-body">
+          <div class="event-meta">
+            <span class="event-tag tag-ended">終了</span>
+          </div>
+          <div class="event-title">あらくま放送局 第1回</div>
+          <div class="event-desc">新井鯖公式YouTube配信。新井熊によるサーバー近況・企画などを生配信。</div>
+          <a href="https://www.youtube.com/watch?v=r3s5wh5SYFo" target="_blank" rel="noopener noreferrer" class="event-link">
+            <i data-lucide="youtube"></i> アーカイブを見る
+          </a>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -274,15 +374,13 @@
     })();
 
     // フィルター
-    let currentFilter = 'all';
     document.querySelectorAll('.filter-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        currentFilter = btn.dataset.filter;
+        const filter = btn.dataset.filter;
         document.querySelectorAll('.event-card').forEach(card => {
-          const match = currentFilter === 'all' || card.dataset.status === currentFilter;
-          card.style.display = match ? '' : 'none';
+          card.style.display = (filter === 'all' || card.dataset.status === filter) ? '' : 'none';
         });
       });
     });
