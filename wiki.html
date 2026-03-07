@@ -62,7 +62,7 @@
       margin: 0 auto;
       padding: 3rem 2rem 0;
       display: grid;
-      grid-template-columns: 220px 1fr;
+      grid-template-columns: 260px 1fr;
       gap: 2rem;
       align-items: start;
     }
@@ -84,10 +84,41 @@
       border: 1px solid #334155;
       border-radius: 12px;
       padding: 1.25rem;
+      max-height: calc(100vh - 7rem);
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #334155 transparent;
     }
-    .sidebar-title {
-      font-size: 0.75rem; font-weight: 700; color: #64748b;
-      text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.75rem;
+    .wiki-sidebar::-webkit-scrollbar { width: 6px; }
+    .wiki-sidebar::-webkit-scrollbar-track { background: transparent; }
+    .wiki-sidebar::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+    .wiki-sidebar::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+    /* ── Search ── */
+    .search-box { margin-bottom: 1rem; position: relative; }
+    .search-input {
+      width: 100%;
+      padding: 0.5rem 0.75rem 0.5rem 2.25rem;
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      color: #f1f5f9;
+      font-size: 0.875rem;
+      transition: border-color 0.2s;
+    }
+    .search-input:focus { outline: none; border-color: #38bdf8; }
+    .search-input::placeholder { color: #64748b; }
+    .search-icon {
+      position: absolute; left: 0.65rem; top: 50%; transform: translateY(-50%);
+      width: 1rem; height: 1rem; color: #64748b; pointer-events: none;
+    }
+
+    .sidebar-group { margin-bottom: 1.25rem; }
+    .sidebar-group:last-child { margin-bottom: 0; }
+    .sidebar-group-label {
+      font-size: 0.7rem; font-weight: 700; color: #64748b;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      margin-bottom: 0.5rem; padding-left: 0.5rem;
     }
     .sidebar-nav { list-style: none; display: flex; flex-direction: column; gap: 0.25rem; }
     .sidebar-nav a {
@@ -96,12 +127,7 @@
     }
     .sidebar-nav a:hover { background: rgba(56,189,248,0.08); color: #38bdf8; }
     .sidebar-nav a.active { background: rgba(56,189,248,0.12); color: #38bdf8; font-weight: 600; }
-    .sidebar-nav .sidebar-group-label {
-      font-size: 0.7rem; font-weight: 700; color: #475569;
-      text-transform: uppercase; letter-spacing: 0.08em;
-      padding: 0.5rem 0.75rem 0.25rem;
-    }
-    .sidebar-divider { height: 1px; background: #334155; margin: 0.5rem 0; }
+    .sidebar-divider { height: 1px; background: #334155; margin: 0.75rem 0; }
 
     /* ── Wiki Content ── */
     .wiki-content { min-width: 0; }
@@ -112,6 +138,7 @@
       transition: opacity 0.5s ease, transform 0.5s ease;
     }
     .wiki-section.visible { opacity: 1; transform: translateY(0); }
+    .wiki-section.hidden { display: none; }
     .wiki-section-title {
       font-size: 1.4rem; font-weight: 700; color: #f1f5f9;
       margin-bottom: 1rem; padding-bottom: 0.5rem;
@@ -127,26 +154,28 @@
     }
     .wiki-card {
       background: #1e293b; border: 1px solid #334155;
-      border-radius: 12px; padding: 1.25rem 1.5rem;
+      border-radius: 12px; padding: 1.5rem;
       margin-bottom: 1rem; line-height: 1.8;
       color: #cbd5e1; font-size: 0.95rem;
     }
-    .wiki-card p { margin-bottom: 0.6rem; }
+    .wiki-card p { margin-bottom: 0.75rem; }
     .wiki-card p:last-child { margin-bottom: 0; }
+    .wiki-card h3 { font-size: 1rem; font-weight: 700; color: #f1f5f9; margin-bottom: 0.5rem; }
+    .wiki-card ul { padding-left: 1.5rem; margin-top: 0.5rem; }
+    .wiki-card li { margin-bottom: 0.5rem; }
     .wiki-card code {
       background: #0f172a; border: 1px solid #334155; border-radius: 4px;
       padding: 0.1rem 0.4rem; font-family: 'Courier New', monospace;
       font-size: 0.875rem; color: #38bdf8;
     }
-    .wiki-card ul { padding-left: 1.25rem; }
-    .wiki-card ul li { margin-bottom: 0.3rem; }
 
     /* ── Badge ── */
-    .badge {
+    .badge, .country-badge {
       display: inline-block; font-size: 0.72rem; font-weight: 700;
       padding: 0.15rem 0.55rem; border-radius: 999px;
       vertical-align: middle; margin-left: 0.25rem;
     }
+    .country-badge { border-radius: 4px; font-size: 0.75rem; font-weight: 600; margin-left: 0.5rem; }
     .badge-peace { background: rgba(34,197,94,0.15); color: #22c55e; border: 1px solid rgba(34,197,94,0.3); }
     .badge-war   { background: rgba(239,68,68,0.15);  color: #ef4444;  border: 1px solid rgba(239,68,68,0.3); }
     .badge-star  { background: rgba(234,179,8,0.15);  color: #eab308;  border: 1px solid rgba(234,179,8,0.3); }
@@ -160,13 +189,13 @@
       font-size: 0.9rem;
     }
     .wiki-table th {
-      background: #0f172a; padding: 0.7rem 1rem;
-      font-size: 0.78rem; font-weight: 700; color: #64748b;
+      background: #0f172a; padding: 0.75rem 1rem;
+      font-size: 0.8rem; font-weight: 700; color: #64748b;
       text-align: left; letter-spacing: 0.05em; text-transform: uppercase;
       border-bottom: 1px solid #334155;
     }
     .wiki-table td {
-      padding: 0.7rem 1rem; color: #cbd5e1;
+      padding: 0.75rem 1rem; color: #cbd5e1;
       border-bottom: 1px solid rgba(51,65,85,0.5);
     }
     .wiki-table tr:last-child td { border-bottom: none; }
@@ -175,32 +204,41 @@
     .col-num { text-align: right; font-family: 'Courier New', monospace; color: #38bdf8; font-weight: 600; }
     .col-muted { color: #475569; font-size: 0.82rem; }
 
-    /* ── Rank colors ── */
-    .rank-member  { color: #94a3b8; }
-    .rank-bronze  { color: #cd7f32; }
-    .rank-silver  { color: #94a3b8; }
-    .rank-gold    { color: #eab308; }
-    .rank-diamond { color: #38bdf8; }
-    .rank-master  { color: #d946ef; }
-    .rank-masterp { color: #d946ef; }
-    .rank-legend  { color: #f59e0b; }
-    .rank-legendp { color: #f59e0b; }
-    .rank-ultimate{ color: #60a5fa; font-weight: 700; }
-    .rank-op      { color: #f1f5f9; font-weight: 700; }
+    /* ── Rank badges ── */
+    .rank-name {
+      font-weight: 600; display: inline-block;
+      padding: 0.15rem 0.4rem; border-radius: 3px;
+    }
+    .rank-member  { color: #94a3b8;  background: rgba(148,163,184,0.1); }
+    .rank-bronze  { color: #cd7f32;  background: rgba(205,127,50,0.1); }
+    .rank-silver  { color: #c0c0c0;  background: rgba(192,192,192,0.1); }
+    .rank-gold    { color: #eab308;  background: rgba(234,179,8,0.1); }
+    .rank-diamond { color: #38bdf8;  background: rgba(56,189,248,0.1); }
+    .rank-master  { color: #d946ef;  background: rgba(217,70,239,0.1); }
+    .rank-masterp { color: #d946ef;  background: rgba(217,70,239,0.12); }
+    .rank-legend  { color: #f59e0b;  background: rgba(245,158,11,0.1); }
+    .rank-legendp { color: #f59e0b;  background: rgba(245,158,11,0.12); }
+    .rank-ultimate{ color: #60a5fa;  background: rgba(96,165,250,0.1); font-weight: 700; }
+    .rank-op      { color: #f1f5f9;  background: rgba(241,245,249,0.1); font-weight: 700; }
 
-    /* ── Sheep colors ── */
-    .sheep-black  { color: #94a3b8; }
-    .sheep-white  { color: #f1f5f9; }
-    .sheep-red    { color: #ef4444; }
-    .sheep-blue   { color: #38bdf8; }
-    .sheep-green  { color: #22c55e; }
-    .sheep-purple { color: #d946ef; }
+    /* ── Sheep color swatches ── */
+    .sheep-swatch {
+      display: inline-block; width: 1rem; height: 1rem; border-radius: 3px;
+      margin-right: 0.5rem; vertical-align: middle;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .swatch-black  { background: #1a1a1a; }
+    .swatch-white  { background: #f1f5f9; }
+    .swatch-red    { background: #ef4444; }
+    .swatch-blue   { background: #3b82f6; }
+    .swatch-green  { background: #22c55e; }
+    .swatch-purple { background: #a855f7; }
 
-    /* ── Command highlight ── */
-    .cmd { color: #38bdf8; font-family: 'Courier New', monospace; font-size: 0.875rem; }
+    /* ── Command / attention highlights ── */
+    .cmd  { color: #38bdf8; font-family: 'Courier New', monospace; font-size: 0.875rem; }
     .attn { color: #f59e0b; }
 
-    /* ── Info banner ── */
+    /* ── Info / Warn banners ── */
     .info-banner {
       background: rgba(56,189,248,0.07); border: 1px solid rgba(56,189,248,0.2);
       border-radius: 8px; padding: 0.75rem 1rem;
@@ -248,7 +286,7 @@
     /* ── Responsive ── */
     @media (max-width: 768px) {
       .container { grid-template-columns: 1fr; }
-      .wiki-sidebar { position: static; }
+      .wiki-sidebar { position: static; max-height: none; }
       .page-header { grid-column: 1; }
     }
     @media (max-width: 640px) {
@@ -299,24 +337,36 @@
 
     <!-- ── サイドバー ── -->
     <aside class="wiki-sidebar">
-      <div class="sidebar-title">目次</div>
-      <ul class="sidebar-nav">
-        <li class="sidebar-group-label">第一期</li>
-        <li><a href="#gen1-items">カスタムアイテム</a></li>
-        <li><a href="#gen1-login">ログインボーナス</a></li>
-        <li><a href="#gen1-scte">SCTE</a></li>
-        <div class="sidebar-divider"></div>
-        <li class="sidebar-group-label">第二期</li>
-        <li><a href="#currency">通貨システム</a></li>
-        <li><a href="#atm">ATM</a></li>
-        <li><a href="#bank">Bank メニュー</a></li>
-        <li><a href="#commands">チャットコマンド</a></li>
-        <li><a href="#gwarp">G Warp</a></li>
-        <li><a href="#nations">国家一覧</a></li>
-        <li><a href="#rank">ランク制度</a></li>
-        <li><a href="#keiyou">競羊</a></li>
-        <li><a href="#zakuvegas">ザクベガス</a></li>
-      </ul>
+      <div class="search-box">
+        <i data-lucide="search" class="search-icon"></i>
+        <input type="text" class="search-input" id="wikiSearch" placeholder="機能を検索...">
+      </div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">第一期</div>
+        <ul class="sidebar-nav">
+          <li><a href="#gen1-items">カスタムアイテム</a></li>
+          <li><a href="#gen1-login">ログインボーナス</a></li>
+          <li><a href="#gen1-scte">SCTE</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-divider"></div>
+
+      <div class="sidebar-group">
+        <div class="sidebar-group-label">第二期</div>
+        <ul class="sidebar-nav">
+          <li><a href="#currency">通貨システム</a></li>
+          <li><a href="#atm">ATM</a></li>
+          <li><a href="#bank">Bank メニュー</a></li>
+          <li><a href="#commands">チャットコマンド</a></li>
+          <li><a href="#gwarp">G Warp</a></li>
+          <li><a href="#nations">国家一覧</a></li>
+          <li><a href="#rank">ランク制度</a></li>
+          <li><a href="#keiyou">競羊</a></li>
+          <li><a href="#zakuvegas">ザクベガス</a></li>
+        </ul>
+      </div>
     </aside>
 
     <!-- ── メインコンテンツ ── -->
@@ -325,7 +375,7 @@
       <!-- ════════════════════════════
            第一期 - カスタムアイテム
            ════════════════════════════ -->
-      <section class="wiki-section" id="gen1-items">
+      <section class="wiki-section" id="gen1-items" data-keywords="カスタムアイテム マジカルスワップ スーパージャンプ ウサギのブーツ ドームバリア WhiteBull 第一期">
         <h2 class="wiki-section-title">
           <i data-lucide="wand-2"></i>
           カスタムアイテム <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">第一期</span>
@@ -369,7 +419,7 @@
       <!-- ════════════════════════════
            第一期 - ログインボーナス
            ════════════════════════════ -->
-      <section class="wiki-section" id="gen1-login">
+      <section class="wiki-section" id="gen1-login" data-keywords="ログインボーナス けいけんの石 けいけんの砂 珍しい水 経験値 第一期">
         <h2 class="wiki-section-title">
           <i data-lucide="gift"></i>
           ログインボーナス <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">第一期</span>
@@ -387,7 +437,7 @@
       <!-- ════════════════════════════
            第一期 - SCTE
            ════════════════════════════ -->
-      <section class="wiki-section" id="gen1-scte">
+      <section class="wiki-section" id="gen1-scte" data-keywords="SCTE Super Crafting Table EX クラフトエリア モバイル 第一期">
         <h2 class="wiki-section-title">
           <i data-lucide="table-2"></i>
           SCTE <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">第一期</span>
@@ -404,7 +454,7 @@
       <!-- ════════════════════════════
            第二期 - 通貨システム
            ════════════════════════════ -->
-      <section class="wiki-section" id="currency">
+      <section class="wiki-section" id="currency" data-keywords="通貨 現金 電子マネー 銀行預金 紙幣 マネー 第二期">
         <h2 class="wiki-section-title">
           <i data-lucide="coins"></i>
           通貨システム <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">第二期</span>
@@ -449,7 +499,7 @@
       <!-- ════════════════════════════
            第二期 - ATM
            ════════════════════════════ -->
-      <section class="wiki-section" id="atm">
+      <section class="wiki-section" id="atm" data-keywords="ATM 入金 出金 両替 変換 チャージ 換金 振替 第二期">
         <h2 class="wiki-section-title">
           <i data-lucide="landmark"></i>
           ATM <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">第二期</span>
@@ -473,7 +523,7 @@
       <!-- ════════════════════════════
            第二期 - Bank
            ════════════════════════════ -->
-      <section class="wiki-section" id="bank">
+      <section class="wiki-section" id="bank" data-keywords="Bank 銀行 送金 請求 強制請求 プロファイル 第二期">
         <h2 class="wiki-section-title">
           <i data-lucide="building-2"></i>
           Bank メニュー <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">第二期</span>
@@ -492,7 +542,7 @@
       <!-- ════════════════════════════
            第二期 - チャットコマンド
            ════════════════════════════ -->
-      <section class="wiki-section" id="commands">
+      <section class="wiki-section" id="commands" data-keywords="チャット whisper shout ct op ch deposit withdraw gift thank クールダウン 第二期">
         <h2 class="wiki-section-title">
           <i data-lucide="message-square"></i>
           チャットコマンド <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">第二期</span>
@@ -587,7 +637,7 @@
       <!-- ════════════════════════════
            第二期 - G Warp
            ════════════════════════════ -->
-      <section class="wiki-section" id="gwarp">
+      <section class="wiki-section" id="gwarp" data-keywords="G Warp ワープ テレポート TP 承認 HUB ATS 第二期">
         <h2 class="wiki-section-title">
           <i data-lucide="navigation"></i>
           G Warp <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">第二期</span>
@@ -619,7 +669,7 @@
       <!-- ════════════════════════════
            第二期 - 国家一覧
            ════════════════════════════ -->
-      <section class="wiki-section" id="nations">
+      <section class="wiki-section" id="nations" data-keywords="国家 平和国 戦争国 Star国 複数拠点 建国 第二期">
         <h2 class="wiki-section-title">
           <i data-lucide="flag"></i>
           国家一覧 <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">第二期</span>
@@ -630,73 +680,73 @@
           <thead><tr><th>国名</th><th>建国者</th><th>建国日</th><th>特記事項</th></tr></thead>
           <tbody>
             <tr>
-              <td><strong>ちっぽけ島</strong><span class="badge badge-peace">平和</span></td>
+              <td><strong>ちっぽけ島</strong><span class="country-badge badge-peace">平和</span></td>
               <td>にも <span class="col-muted">(Nimofish0123)</span></td>
               <td>2025/5/6</td>
               <td>国土最小・経済力1位</td>
             </tr>
             <tr>
-              <td><strong>ユニヴェール</strong><span class="badge badge-peace">平和</span></td>
+              <td><strong>ユニヴェール</strong><span class="country-badge badge-peace">平和</span></td>
               <td>復星 <span class="col-muted">(doordaia)</span></td>
               <td>2025/5/5</td>
               <td>鯖の癒し枠</td>
             </tr>
             <tr>
-              <td><strong>ゲルンフロリア貿易商国</strong><span class="badge badge-peace">平和</span><span class="badge badge-multi">複数拠点</span></td>
+              <td><strong>ゲルンフロリア貿易商国</strong><span class="country-badge badge-peace">平和</span><span class="country-badge badge-multi">複数拠点</span></td>
               <td>AtoRa <span class="col-muted">(RyuukiRate86)</span></td>
               <td>2025/5/4</td>
               <td>貿易特化・高度建築で有名</td>
             </tr>
             <tr>
-              <td><strong>ミニッツメン カリフォルニア共和国</strong><span class="badge badge-peace">平和</span></td>
+              <td><strong>ミニッツメン カリフォルニア共和国</strong><span class="country-badge badge-peace">平和</span></td>
               <td><span class="col-muted">NullMitten50502</span></td>
               <td>2025/5/5</td>
               <td>—</td>
             </tr>
             <tr>
-              <td><strong>桜猫国</strong><span class="badge badge-peace">平和</span></td>
+              <td><strong>桜猫国</strong><span class="country-badge badge-peace">平和</span></td>
               <td class="col-muted">—</td>
               <td class="col-muted">—</td>
               <td class="col-muted">情報未登録</td>
             </tr>
             <tr>
-              <td><strong>ア・リエール二重王国</strong><span class="badge badge-peace">平和</span></td>
+              <td><strong>ア・リエール二重王国</strong><span class="country-badge badge-peace">平和</span></td>
               <td class="col-muted">—</td>
               <td class="col-muted">—</td>
               <td class="col-muted">情報未登録</td>
             </tr>
             <tr>
-              <td><strong>無法都市</strong><span class="badge badge-peace">平和</span></td>
+              <td><strong>無法都市</strong><span class="country-badge badge-peace">平和</span></td>
               <td class="col-muted">—</td>
               <td class="col-muted">—</td>
               <td class="col-muted">情報未登録</td>
             </tr>
             <tr>
-              <td><strong>いぬのすみか</strong><span class="badge badge-peace">平和</span></td>
+              <td><strong>いぬのすみか</strong><span class="country-badge badge-peace">平和</span></td>
               <td>しばどっぐ <span class="col-muted">(Shibadog0901)</span></td>
               <td>2025/9/6</td>
               <td>1人国家・巨大建築・ダンジョン攻略。PVP専門外</td>
             </tr>
             <tr>
-              <td><strong>アニマル王国</strong><span class="badge badge-peace">平和</span></td>
+              <td><strong>アニマル王国</strong><span class="country-badge badge-peace">平和</span></td>
               <td>犬 <span class="col-muted">(Omu6502)</span></td>
               <td>2025/11/9</td>
               <td>多国貿易・安息地を目指す</td>
             </tr>
             <tr>
-              <td><strong>あいしてす</strong><span class="badge badge-peace">平和</span></td>
+              <td><strong>あいしてす</strong><span class="country-badge badge-peace">平和</span></td>
               <td>あいしてす <span class="col-muted">(Aishitesu1234)</span></td>
               <td>2025/11/10</td>
               <td>ほぼ何もしない国として話題</td>
             </tr>
             <tr>
-              <td><strong>EVER GREEN FAMILY</strong><span class="badge badge-peace">平和</span></td>
+              <td><strong>EVER GREEN FAMILY</strong><span class="country-badge badge-peace">平和</span></td>
               <td>マルコ <span class="col-muted">(GermanyLove3033)</span></td>
               <td>2025/12/11</td>
               <td>永遠の緑・平和を目標とする都市国家</td>
             </tr>
             <tr>
-              <td><strong>ウェスタ第二公国</strong><span class="badge badge-peace">平和</span></td>
+              <td><strong>ウェスタ第二公国</strong><span class="country-badge badge-peace">平和</span></td>
               <td class="col-muted">—</td>
               <td class="col-muted">—</td>
               <td class="col-muted">情報未登録</td>
@@ -709,31 +759,31 @@
           <thead><tr><th>国名</th><th>建国者</th><th>建国日</th><th>特記事項</th></tr></thead>
           <tbody>
             <tr>
-              <td><strong>科学都市ミライティア</strong><span class="badge badge-war">戦争</span><span class="badge badge-multi">複数拠点</span></td>
+              <td><strong>科学都市ミライティア</strong><span class="country-badge badge-war">戦争</span><span class="country-badge badge-multi">複数拠点</span></td>
               <td>ハニワ中尉 <span class="col-muted">(CornyStar594748)</span></td>
               <td>2025/4/29</td>
               <td>天空要塞・巨大な壁。サブ拠点: ミライティアの空島</td>
             </tr>
             <tr>
-              <td><strong>ift</strong><span class="badge badge-war">戦争</span></td>
+              <td><strong>ift</strong><span class="country-badge badge-war">戦争</span></td>
               <td>りんね <span class="col-muted">(rinnedao)</span></td>
               <td>2025/5/5</td>
               <td>鯖内1〜2位の戦闘力</td>
             </tr>
             <tr>
-              <td><strong>ソ連</strong><span class="badge badge-war">戦争</span><span class="badge badge-multi">複数拠点</span></td>
+              <td><strong>ソ連</strong><span class="country-badge badge-war">戦争</span><span class="country-badge badge-multi">複数拠点</span></td>
               <td>わろた <span class="col-muted">(wammy3092)</span></td>
               <td>2025/5/5</td>
               <td>鯖内最強戦闘力。サブ: もこたん州・戦艦白玉島</td>
             </tr>
             <tr>
-              <td><strong>大日本帝国</strong><span class="badge badge-war">戦争</span></td>
+              <td><strong>大日本帝国</strong><span class="country-badge badge-war">戦争</span></td>
               <td class="col-muted">—</td>
               <td class="col-muted">—</td>
               <td class="col-muted">情報未登録</td>
             </tr>
             <tr>
-              <td><strong>神聖オーストリア海上帝国</strong><span class="badge badge-war">戦争</span><span class="badge badge-multi">複数拠点</span></td>
+              <td><strong>神聖オーストリア海上帝国</strong><span class="country-badge badge-war">戦争</span><span class="country-badge badge-multi">複数拠点</span></td>
               <td>ティナ <span class="col-muted">(TNalpha0218)</span></td>
               <td>2025/5/18</td>
               <td>軍備・建築両重視。サブ: マルジェラ城・新熊要塞跡地</td>
@@ -746,7 +796,7 @@
           <thead><tr><th>国名</th><th>建国者</th><th>建国日</th><th>特記事項</th></tr></thead>
           <tbody>
             <tr>
-              <td><strong>ゲルン=アラクイア中央帝国</strong><span class="badge badge-star">Star</span></td>
+              <td><strong>ゲルン=アラクイア中央帝国</strong><span class="country-badge badge-star">Star</span></td>
               <td>新井熊 <span class="col-muted">(ARbear0913)</span></td>
               <td>2025/11/5</td>
               <td>鯖主の国。基本的に誰でも入国可</td>
@@ -758,7 +808,7 @@
       <!-- ════════════════════════════
            第二期 - ランク制度
            ════════════════════════════ -->
-      <section class="wiki-section" id="rank">
+      <section class="wiki-section" id="rank" data-keywords="ランク 昇格 条件 member Bronze Silver Gold Diamond Master Legend Ultimate operator 所持金 第二期">
         <h2 class="wiki-section-title">
           <i data-lucide="trophy"></i>
           ランク制度 <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">第二期</span>
@@ -779,47 +829,47 @@
           </thead>
           <tbody>
             <tr>
-              <td class="rank-member"><strong>member</strong></td>
+              <td><span class="rank-name rank-member">member</span></td>
               <td class="col-muted">—</td><td class="col-muted">—</td><td class="col-muted">—</td><td class="col-muted">—</td>
             </tr>
             <tr>
-              <td class="rank-bronze"><strong>Bronze</strong></td>
+              <td><span class="rank-name rank-bronze">Bronze</span></td>
               <td class="col-num">100+</td><td class="col-num">1+</td><td class="col-muted">—</td><td class="col-num">10+</td>
             </tr>
             <tr>
-              <td class="rank-silver"><strong>Silver</strong></td>
+              <td><span class="rank-name rank-silver">Silver</span></td>
               <td class="col-num">10,000+</td><td class="col-num">10+</td><td class="col-num">1,000+</td><td class="col-num">30+</td>
             </tr>
             <tr>
-              <td class="rank-gold"><strong>Gold</strong></td>
+              <td><span class="rank-name rank-gold">Gold</span></td>
               <td class="col-num">50,000+</td><td class="col-num">30+</td><td class="col-num">10,000+</td><td class="col-num">50+</td>
             </tr>
             <tr>
-              <td class="rank-diamond"><strong>Diamond</strong></td>
+              <td><span class="rank-name rank-diamond">Diamond</span></td>
               <td class="col-num">200,000+</td><td class="col-num">50+</td><td class="col-num">100,000+</td><td class="col-num">75+</td>
             </tr>
             <tr>
-              <td class="rank-master"><strong>Master</strong></td>
+              <td><span class="rank-name rank-master">Master</span></td>
               <td class="col-num">1,000,000+</td><td class="col-num">100+</td><td class="col-num">100,000+</td><td class="col-num">90+</td>
             </tr>
             <tr>
-              <td class="rank-masterp"><strong>Master+</strong></td>
+              <td><span class="rank-name rank-masterp">Master+</span></td>
               <td class="col-num">7,000,000+</td><td class="col-num">200+</td><td class="col-num">150,000+</td><td class="col-num">120+</td>
             </tr>
             <tr>
-              <td class="rank-legend"><strong>Legend</strong></td>
+              <td><span class="rank-name rank-legend">Legend</span></td>
               <td class="col-num">10,000,000+</td><td class="col-num">400+</td><td class="col-num">200,000+</td><td class="col-num">130+</td>
             </tr>
             <tr>
-              <td class="rank-legendp"><strong>Legend+</strong></td>
+              <td><span class="rank-name rank-legendp">Legend+</span></td>
               <td class="col-num">20,000,000+</td><td class="col-num">600+</td><td class="col-num">400,000+</td><td class="col-num">150+</td>
             </tr>
             <tr>
-              <td class="rank-ultimate"><strong>Ultimate</strong></td>
+              <td><span class="rank-name rank-ultimate">Ultimate</span></td>
               <td class="col-num">50,000,000+</td><td class="col-num">1,000+</td><td class="col-num">1,000,000+</td><td class="col-num">200+</td>
             </tr>
             <tr>
-              <td class="rank-op"><strong>operator</strong></td>
+              <td><span class="rank-name rank-op">operator</span></td>
               <td colspan="4" style="color:#475569;font-size:0.85rem;">運営のみ（手動付与）</td>
             </tr>
           </tbody>
@@ -829,7 +879,7 @@
       <!-- ════════════════════════════
            第二期 - 競羊
            ════════════════════════════ -->
-      <section class="wiki-section" id="keiyou">
+      <section class="wiki-section" id="keiyou" data-keywords="競羊 羊 レース ギャンブル 賭け 配当 black white red blue green purple ky 第二期">
         <h2 class="wiki-section-title">
           <i data-lucide="rabbit"></i>
           競羊 <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">第二期</span>
@@ -849,32 +899,32 @@
           <thead><tr><th>色</th><th>コマンド例</th><th>その他の呼び方</th></tr></thead>
           <tbody>
             <tr>
-              <td class="sheep-black"><strong>黒</strong></td>
+              <td><span class="sheep-swatch swatch-black"></span><strong>黒</strong></td>
               <td><code>!ky black 1000</code></td>
               <td class="col-muted">black / kuro / くろ / クロ / 黒</td>
             </tr>
             <tr>
-              <td class="sheep-white"><strong>白</strong></td>
+              <td><span class="sheep-swatch swatch-white"></span><strong>白</strong></td>
               <td><code>!ky white 1000</code></td>
               <td class="col-muted">white / shiro / しろ / シロ / 白</td>
             </tr>
             <tr>
-              <td class="sheep-red"><strong>赤</strong></td>
+              <td><span class="sheep-swatch swatch-red"></span><strong>赤</strong></td>
               <td><code>!ky red 1000</code></td>
               <td class="col-muted">red / aka / あか / アカ / 赤</td>
             </tr>
             <tr>
-              <td class="sheep-blue"><strong>青</strong></td>
+              <td><span class="sheep-swatch swatch-blue"></span><strong>青</strong></td>
               <td><code>!ky blue 1000</code></td>
               <td class="col-muted">blue / ao / あお / アオ / 青</td>
             </tr>
             <tr>
-              <td class="sheep-green"><strong>緑</strong></td>
+              <td><span class="sheep-swatch swatch-green"></span><strong>緑</strong></td>
               <td><code>!ky green 1000</code></td>
               <td class="col-muted">green / midori / みどり / ミドリ / 緑</td>
             </tr>
             <tr>
-              <td class="sheep-purple"><strong>紫</strong></td>
+              <td><span class="sheep-swatch swatch-purple"></span><strong>紫</strong></td>
               <td><code>!ky purple 1000</code></td>
               <td class="col-muted">purple / murasaki / むらさき / ムラサキ / 紫</td>
             </tr>
@@ -899,7 +949,7 @@
       <!-- ════════════════════════════
            第二期 - ザクベガス
            ════════════════════════════ -->
-      <section class="wiki-section" id="zakuvegas">
+      <section class="wiki-section" id="zakuvegas" data-keywords="ザクベガス カジノ スロット パチンコ 景品 コネクトフォー 第二期">
         <h2 class="wiki-section-title">
           <i data-lucide="dice-5"></i>
           ザクベガス <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">第二期</span>
@@ -963,15 +1013,15 @@
     })();
 
     // フェードイン
-    const observer = new IntersectionObserver((entries) => {
+    const fadeObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
           setTimeout(() => entry.target.classList.add('visible'), i * 80);
-          observer.unobserve(entry.target);
+          fadeObserver.unobserve(entry.target);
         }
       });
     }, { threshold: 0.05 });
-    document.querySelectorAll('.wiki-section').forEach(el => observer.observe(el));
+    document.querySelectorAll('.wiki-section').forEach(el => fadeObserver.observe(el));
 
     // サイドバー アクティブ連動
     const sections = document.querySelectorAll('.wiki-section[id]');
@@ -979,10 +1029,28 @@
     window.addEventListener('scroll', () => {
       let current = '';
       sections.forEach(s => {
-        if (window.scrollY >= s.offsetTop - 140) current = s.id;
+        if (!s.classList.contains('hidden') && window.scrollY >= s.offsetTop - 140) current = s.id;
       });
       sidebarLinks.forEach(a => {
         a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+      });
+    });
+
+    // 検索機能
+    const searchInput = document.getElementById('wikiSearch');
+    searchInput.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      sections.forEach(section => {
+        const keywords = section.getAttribute('data-keywords') || '';
+        const title    = section.querySelector('.wiki-section-title')?.textContent.toLowerCase() || '';
+        const content  = section.textContent.toLowerCase();
+        if (query === '' || keywords.includes(query) || title.includes(query) || content.includes(query)) {
+          section.classList.remove('hidden');
+          if (!section.classList.contains('visible')) section.classList.add('visible');
+        } else {
+          section.classList.add('hidden');
+          section.classList.remove('visible');
+        }
       });
     });
 
