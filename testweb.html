@@ -778,35 +778,35 @@
         </h2>
         <div class="info-banner">
           <i data-lucide="info"></i>
-          <span><strong style="color:#f1f5f9;">第一期の仕様です。</strong>マインクラフト内でプレイ中に入手できるアイテムの一覧。</span>
+          <span><strong style="color:#f1f5f9;">第一期の仕様です。</strong>マインクラフト内でプレイ中に入手できるカスタムアイテムの一覧。</span>
         </div>
         <table class="wiki-table">
-          <thead><tr><th>アイテム名</th><th>入手難度</th><th>入手方法</th></tr></thead>
+          <thead><tr><th>アイテム名</th><th>効果</th><th>制限</th></tr></thead>
           <tbody>
             <tr>
-              <td><strong>ロンズデーライト鉱石</strong></td>
-              <td>★★★★★ (20m)</td>
-              <td class="col-muted">岩盤層・採掘</td>
+              <td><strong>マジカルスワップ</strong></td>
+              <td>半径20m以内の最も近いプレイヤーと位置を入れ替える</td>
+              <td class="col-muted">運営領地使用不可</td>
             </tr>
             <tr>
-              <td><strong>ロンズデーライト</strong></td>
-              <td>★★★★★ (50m)</td>
-              <td class="col-muted">焼く・製錬</td>
+              <td><strong>スーパージャンプ</strong></td>
+              <td>50m上空まで飛び上がることができる</td>
+              <td class="col-muted">運営領地使用不可</td>
             </tr>
             <tr>
-              <td><strong>ロンズデーライトツルハシ</strong></td>
-              <td>★★★★★</td>
-              <td class="col-muted">クラフト</td>
+              <td><strong>ウサギのブーツ</strong></td>
+              <td>ネザライトブーツ属性。移動速度上昇＋二段ジャンプ</td>
+              <td class="col-muted">制限なし</td>
             </tr>
             <tr>
-              <td><strong>あらくまねー</strong></td>
-              <td>★ (10分)</td>
-              <td class="col-muted">自動付与</td>
+              <td><strong>ドームバリア</strong></td>
+              <td>自分の周囲にガラスドームを生成。10秒後に自然消滅</td>
+              <td class="col-muted">制限なし</td>
             </tr>
             <tr>
               <td><strong>WhiteBull</strong></td>
-              <td>★★★</td>
-              <td class="col-muted">ガチャ</td>
+              <td>ロンズデーライトのツルハシと組み合わせると深層岩を通常採掘可能</td>
+              <td class="col-muted">制限なし</td>
             </tr>
           </tbody>
         </table>
@@ -820,11 +820,11 @@
           <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">(第一期限定)</span>
         </h2>
         <div class="wiki-card">
-          <p>1日1回、3種のアイテムがランダムでもらえます。</p>
+          <p>1日1回ログインすると自動でアイテムが付与されました。入手できるアイテムは以下の3種で、組み合わせることで<strong>経験値の塊</strong>を作成できました。</p>
           <ul>
-            <li><strong>あらくまねー</strong>（5～10個）</li>
-            <li><strong>けいけんちのかたまり</strong>（1～2個）</li>
-            <li><strong>レッドストーン</strong>（5～10個）</li>
+            <li><strong>けいけんの石</strong></li>
+            <li><strong>けいけんの砂</strong></li>
+            <li><strong>珍しい水</strong></li>
           </ul>
         </div>
       </section>
@@ -837,11 +837,10 @@
           <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">(第一期限定)</span>
         </h2>
         <div class="wiki-card">
-          <p><strong>Super Crafting Table EX（SCTE）</strong>とは、自動圧縮ブロック作成システムです。</p>
+          <p><strong>Super Crafting Table EX（SCTE）</strong>は、カスタムアイテム作成に必要な専用作業台です。第二期以降では廃止されています。</p>
           <ul>
-            <li>HUBから<strong>ワープストーン</strong>を使用してアクセス</li>
-            <li>特定アイテムを入れると圧縮ブロックやコンポスト化が自動で行える</li>
-            <li>高度な自動加工に対応</li>
+            <li>HUBから行ける「<strong>クラフトエリア</strong>」に固定設置</li>
+            <li>モバイル版プレイヤーもクラフトエリアで作成可能</li>
           </ul>
         </div>
       </section>
@@ -854,35 +853,35 @@
           <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">(第二期)</span>
         </h2>
         <div class="wiki-card">
-          <p><strong>新井鯖には3種類の通貨</strong>があります。</p>
+          <p>新井鯖の共通通貨は<strong>マネー</strong>です。残高は以下の3種類で独立して管理されています。</p>
           <table class="wiki-table" style="margin-top:0.75rem;">
-            <thead><tr><th>種類</th><th>形式</th><th>用途</th><th>識別子</th></tr></thead>
+            <thead><tr><th>種別</th><th>説明</th><th>管理方法</th></tr></thead>
             <tbody>
-              <tr><td><strong>現金紙幣</strong></td><td>アイテム</td><td>手渡し・取引</td><td>—</td></tr>
-              <tr><td><strong>電子マネー</strong></td><td>仮想</td><td>送金・請求</td><td><code>money</code></td></tr>
-              <tr><td><strong>銀行預金</strong></td><td>仮想</td><td>保管・送金</td><td><code>bankID</code></td></tr>
+              <tr><td><strong>現金</strong></td><td>インベントリ内の紙幣アイテム</td><td>スロットに物理保持</td></tr>
+              <tr><td><strong>電子マネー</strong></td><td>デジタル残高</td><td>スコアボード<code>money</code></td></tr>
+              <tr><td><strong>銀行預金</strong></td><td>銀行に預けた残高</td><td>スコアボード<code>bank_[ID]</code></td></tr>
             </tbody>
           </table>
         </div>
 
-        <h3 class="wiki-subsection-title">紙幣アイテム（全14種）</h3>
+        <h3 class="wiki-subsection-title">紙幣の種類（全14種）</h3>
         <table class="wiki-table currency-table-bills">
-          <thead><tr><th>額面</th><th>説明</th><th>アイテムID</th></tr></thead>
+          <thead><tr><th>額面</th><th>アイテムID</th></tr></thead>
           <tbody>
-            <tr><td>1,000,000円</td><td>最高額紙幣</td><td><code>araimoney:1000000</code></td></tr>
-            <tr><td>250,000円</td><td>—</td><td><code>araimoney:250000</code></td></tr>
-            <tr><td>100,000円</td><td>—</td><td><code>araimoney:100000</code></td></tr>
-            <tr><td>75,000円</td><td>—</td><td><code>araimoney:75000</code></td></tr>
-            <tr><td>50,000円</td><td>—</td><td><code>araimoney:50000</code></td></tr>
-            <tr><td>10,000円</td><td>—</td><td><code>araimoney:10000</code></td></tr>
-            <tr><td>5,000円</td><td>—</td><td><code>araimoney:5000</code></td></tr>
-            <tr><td>1,000円</td><td>—</td><td><code>araimoney:1000</code></td></tr>
-            <tr><td>500円</td><td>—</td><td><code>araimoney:500</code></td></tr>
-            <tr><td>100円</td><td>—</td><td><code>araimoney:100</code></td></tr>
-            <tr><td>50円</td><td>—</td><td><code>araimoney:50</code></td></tr>
-            <tr><td>10円</td><td>—</td><td><code>araimoney:10</code></td></tr>
-            <tr><td>5円</td><td>—</td><td><code>araimoney:5</code></td></tr>
-            <tr><td>1円</td><td>最小額</td><td><code>araimoney:1</code></td></tr>
+            <tr><td>1,000,000</td><td><code>arai:money_1000000</code></td></tr>
+            <tr><td>250,000</td><td><code>arai:money_250000</code></td></tr>
+            <tr><td>100,000</td><td><code>arai:money_100000</code></td></tr>
+            <tr><td>75,000</td><td><code>arai:money_75000</code></td></tr>
+            <tr><td>50,000</td><td><code>arai:money_50000</code></td></tr>
+            <tr><td>10,000</td><td><code>arai:money_10000</code></td></tr>
+            <tr><td>5,000</td><td><code>arai:money_5000</code></td></tr>
+            <tr><td>1,000</td><td><code>arai:money_1000</code></td></tr>
+            <tr><td>500</td><td><code>arai:money_500</code></td></tr>
+            <tr><td>100</td><td><code>arai:money_100</code></td></tr>
+            <tr><td>50</td><td><code>arai:money_50</code></td></tr>
+            <tr><td>10</td><td><code>arai:money_10</code></td></tr>
+            <tr><td>5</td><td><code>arai:money_5</code></td></tr>
+            <tr><td>1</td><td><code>arai:money_1</code></td></tr>
           </tbody>
         </table>
 
@@ -900,17 +899,17 @@
           <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">(第二期)</span>
         </h2>
         <div class="wiki-card">
-          <p>ATMで現金紙幣と電子マネーを相互変換できます。<code>1000</code>、<code>10k</code>、<code>1m</code>、<code>all</code>といった金額指定に対応しています。</p>
+          <p>ATMでは現金・電子マネー・銀行預金の相互変換ができます。金額入力は<code>1000</code>、<code>10k</code>、<code>1m</code>、<code>all</code>に対応しています。</p>
         </div>
         <table class="wiki-table">
-          <thead><tr><th>操作</th><th>処理内容</th><th>備考</th></tr></thead>
+          <thead><tr><th>操作名</th><th>変換方向</th><th>備考</th></tr></thead>
           <tbody>
-            <tr><td><strong>入金</strong></td><td>現金 → 電子マネー</td><td>チェストに入れる</td></tr>
-            <tr><td><strong>出金</strong></td><td>電子マネー → 現金</td><td>チェストから取る</td></tr>
-            <tr><td><strong>残高照会</strong></td><td>電子マネー確認</td><td>右クリックで表示</td></tr>
-            <tr><td><strong>ATS取引</strong></td><td>アイテム売買</td><td>自動取引システム</td></tr>
-            <tr><td><strong>ガチャ</strong></td><td>くじ引き</td><td>レアアイテム</td></tr>
-            <tr><td><strong>ランクアップ</strong></td><td>ランク昇格</td><td>電子マネー支払い</td></tr>
+            <tr><td><strong>チャージ</strong></td><td>現金 → 電子マネー</td><td>おつりあり</td></tr>
+            <tr><td><strong>入金</strong></td><td>現金 → 銀行</td><td>おつりあり</td></tr>
+            <tr><td><strong>換金</strong></td><td>電子マネー → 現金</td><td>—</td></tr>
+            <tr><td><strong>出金</strong></td><td>銀行 → 現金</td><td>—</td></tr>
+            <tr><td><strong>振替（電→銀）</strong></td><td>電子マネー → 銀行</td><td>—</td></tr>
+            <tr><td><strong>振替（銀→電）</strong></td><td>銀行 → 電子マネー</td><td>—</td></tr>
           </tbody>
         </table>
       </section>
@@ -919,16 +918,16 @@
       <section class="wiki-section gen2-content" id="bank" data-keywords="Bank 送金 請求 銀行">
         <h2 class="wiki-section-title">
           <i data-lucide="building-2"></i>
-          Bank（送金・請求）
+          Bank メニュー
           <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">(第二期)</span>
         </h2>
         <table class="wiki-table">
-          <thead><tr><th>機能</th><th>説明</th><th>備考</th></tr></thead>
+          <thead><tr><th>機能</th><th>対象</th><th>内容</th></tr></thead>
           <tbody>
-            <tr><td><strong>送金</strong></td><td>他プレイヤーに電子マネーを送る</td><td>オンライン時即座に反映</td></tr>
-            <tr><td><strong>請求</strong></td><td>他プレイヤーに支払いリクエスト</td><td>相手承認で成立</td></tr>
-            <tr><td><strong>入出金</strong></td><td>電子マネー ⇔ 銀行預金</td><td>コマンド対応</td></tr>
-            <tr><td><strong>オフライン送金</strong></td><td>相手ログイン時に通知</td><td>銀行預金から送金</td></tr>
+            <tr><td><strong>送金</strong></td><td>全鯖民</td><td>他プレイヤーへ電子マネーを送る</td></tr>
+            <tr><td><strong>請求</strong></td><td>全鯖民</td><td>他プレイヤーへ支払い依頼（請求書）を送る</td></tr>
+            <tr><td><strong>プロファイル</strong></td><td>全鯖民</td><td>電子マネー・銀行預金・合計資産の確認＋入出金</td></tr>
+            <tr><td><strong>強制請求</strong></td><td>運営のみ</td><td>鯖民に強制的に請求を行う</td></tr>
           </tbody>
         </table>
       </section>
@@ -956,8 +955,8 @@
               <td><code>!shout &lt;内容&gt;</code></td>
               <td>叫び</td>
               <td>同ディメンション</td>
-              <td class="attn">1分</td>
-              <td>太字で全体送信</td>
+              <td class="attn">30分</td>
+              <td>太字で全体送信。受信時に効果音あり</td>
             </tr>
             <tr>
               <td><code>!ct &lt;内容&gt;</code></td>
@@ -1009,12 +1008,12 @@
             <tr>
               <td><code>!gift</code></td>
               <td class="attn">30分</td>
-              <td>全員に「あらくまねー」アイテムを付与</td>
+              <td>オンライン中の全プレイヤーに<code>araicoin_give_times</code> +1</td>
             </tr>
             <tr>
               <td><code>!thank &lt;プレイヤー名&gt;</code></td>
               <td class="attn">30分</td>
-              <td>指定プレイヤーに +5 個の「あらくまねー」アイテムを付与</td>
+              <td>指定プレイヤーに +5。全員に通知＋効果音</td>
             </tr>
           </tbody>
         </table>
@@ -1047,19 +1046,19 @@
           <tbody>
             <tr><td><strong>HUB</strong></td><td>常時</td><td>The End中央HUB</td></tr>
             <tr><td><strong>自国</strong></td><td><code>ct</code>タグ所持</td><td>所属国へテレポート</td></tr>
-            <tr><td><strong>運営国</strong></td><td><code>operator</code>タグ</td><td>運営専用</td></tr>
+            <tr><td><strong>[国一覧]</strong></td><td><code>operator</code>タグ</td><td>運営のみ・全国家から選択可能</td></tr>
             <tr><td><strong>[承認された国]</strong></td><td>他国の国民に承認された場合</td><td>国主から承認されTPが可能</td></tr>
             <tr><td><strong>ATS</strong></td><td>常時</td><td>The End内のATSへ</td></tr>
-            <tr><td><strong>競羊場</strong></td><td>常時</td><td>The End内の競羊場</td></tr>
-            <tr><td><strong>ザクベガス</strong></td><td>—</td><td>閉鎖済み</td></tr>
-            <tr><td><strong>ピースランド</strong></td><td>—</td><td>PVP禁止エリア</td></tr>
-            <tr><td><strong>拠点1～3</strong></td><td><code>ct</code>タグ所持</td><td>自国の各拠点へTP</td></tr>
+            <tr><td><strong>新井賭博場</strong></td><td>常時</td><td>The End内の賭博場へ</td></tr>
+            <tr><td><strong>ザクベガス</strong></td><td>常時</td><td>施設選択サブメニューへ</td></tr>
+            <tr><td><strong>ログイン</strong></td><td>常時</td><td>ログイン地点へ</td></tr>
+            <tr><td><strong>国のプロファイル</strong></td><td><code>ct</code>タグ所持</td><td>TP承認権限の付与・削除</td></tr>
           </tbody>
         </table>
 
         <div class="wiki-card">
           <p><strong>TP承認権限について</strong></p>
-          <p>国主が他プレイヤーに承認を与えることで、そのプレイヤーが対象国へのワープが可能になります。付与・削除は「国のプロファイル → 管理」から操作します。</p>
+          <p>国主が他プレイヤーに<code>al:国ID</code>タグを付与することで、そのプレイヤーが対象国へのワープが可能になります。付与・削除は「国のプロファイル → 管理」から操作します。</p>
         </div>
       </section>
 
@@ -1076,76 +1075,76 @@
           <thead><tr><th>国名</th><th>建国者</th><th>建国日</th><th>特記事項</th></tr></thead>
           <tbody>
             <tr>
-              <td><strong>ウソウソの実帝国</strong><span class="country-badge badge-peace">平和</span></td>
-              <td><span class="col-muted">Nimofish0123</span></td>
+              <td><strong>ちっぽけ島</strong><span class="country-badge badge-peace">平和</span></td>
+              <td>にも <span class="col-muted">(Nimofish0123)</span></td>
               <td>2025年5月6日</td>
-              <td>砂漠/火薬商</td>
+              <td>国土最小・経済力1位</td>
             </tr>
             <tr>
-              <td><strong>明星国</strong><span class="country-badge badge-peace">平和</span></td>
-              <td><span class="col-muted">doordaia</span></td>
+              <td><strong>ユニヴェール</strong><span class="country-badge badge-peace">平和</span></td>
+              <td>復星 <span class="col-muted">(doordaia)</span></td>
               <td>2025年5月5日</td>
-              <td>—</td>
+              <td>鯖の癒し枠</td>
             </tr>
             <tr>
-              <td><strong>連合神聖ニ帝国</strong><span class="country-badge badge-peace">平和</span></td>
+              <td><strong>ゲルンフロリア貿易商国</strong><span class="country-badge badge-peace">平和</span></td>
               <td>AtoRa <span class="col-muted">(RyuukiRate86)</span></td>
               <td>2025年5月4日</td>
-              <td>—</td>
+              <td>貿易特化・高度建築で有名</td>
             </tr>
             <tr>
               <td><strong>ミニッツメン カリフォルニア共和国</strong><span class="country-badge badge-peace">平和</span></td>
-              <td>新カリフォルニア共和国 <span class="col-muted">(NullMitten50502)</span></td>
+              <td><span class="col-muted">NullMitten50502</span></td>
               <td>2025年5月5日</td>
-              <td>ジャングル</td>
+              <td>—</td>
             </tr>
             <tr>
-              <td><strong>大伴雪国</strong><span class="country-badge badge-peace">平和</span></td>
-              <td class="col-muted">大伴雪村</td>
-              <td class="col-muted">不明</td>
+              <td><strong>桜猫国</strong><span class="country-badge badge-peace">平和</span></td>
               <td class="col-muted">—</td>
-            </tr>
-            <tr>
-              <td><strong>聖グリサリオス教皇国</strong><span class="country-badge badge-peace">平和</span></td>
-              <td class="col-muted">不明</td>
-              <td class="col-muted">不明</td>
               <td class="col-muted">—</td>
+              <td class="col-muted">情報未登録</td>
             </tr>
             <tr>
-              <td><strong>マガイエル社会主義連邦共和国</strong><span class="country-badge badge-peace">平和</span></td>
-              <td class="col-muted">不明</td>
-              <td class="col-muted">不明</td>
+              <td><strong>ア・リエール二重王国</strong><span class="country-badge badge-peace">平和</span></td>
               <td class="col-muted">—</td>
+              <td class="col-muted">—</td>
+              <td class="col-muted">情報未登録</td>
             </tr>
             <tr>
-              <td><strong>永田塔</strong><span class="country-badge badge-peace">平和</span></td>
-              <td><span class="col-muted">Shibadog0901</span></td>
+              <td><strong>無法都市</strong><span class="country-badge badge-peace">平和</span></td>
+              <td class="col-muted">—</td>
+              <td class="col-muted">—</td>
+              <td class="col-muted">情報未登録</td>
+            </tr>
+            <tr>
+              <td><strong>いぬのすみか</strong><span class="country-badge badge-peace">平和</span></td>
+              <td>しばどっぐ <span class="col-muted">(Shibadog0901)</span></td>
               <td>2025年9月6日</td>
-              <td>ロ・PVP対応</td>
+              <td>1人国家・巨大建築・ダンジョン攻略。PVP専門外</td>
             </tr>
             <tr>
-              <td><strong>大日本帝国領朝鮮</strong><span class="country-badge badge-peace">平和</span></td>
-              <td><span class="col-muted">Omu6502</span></td>
+              <td><strong>アニマル王国</strong><span class="country-badge badge-peace">平和</span></td>
+              <td>犬 <span class="col-muted">(Omu6502)</span></td>
               <td>2025年11月9日</td>
-              <td>—</td>
+              <td>多国貿易・安息地を目指す</td>
             </tr>
             <tr>
-              <td><strong>明智ヶ丘</strong><span class="country-badge badge-peace">平和</span></td>
-              <td><span class="col-muted">Aishitesu1234</span></td>
+              <td><strong>あいしてす</strong><span class="country-badge badge-peace">平和</span></td>
+              <td>あいしてす <span class="col-muted">(Aishitesu1234)</span></td>
               <td>2025年11月10日</td>
-              <td>—</td>
+              <td>ほぼ何もしない国として話題</td>
             </tr>
             <tr>
               <td><strong>EVER GREEN FAMILY</strong><span class="country-badge badge-peace">平和</span></td>
-              <td><span class="col-muted">GermanyLove3033</span></td>
+              <td>マルコ <span class="col-muted">(GermanyLove3033)</span></td>
               <td>2025年12月11日</td>
-              <td>—</td>
+              <td>永遠の緑・平和を目標とする都市国家</td>
             </tr>
             <tr>
-              <td><strong>オスマン帝国</strong><span class="country-badge badge-peace">平和</span></td>
-              <td class="col-muted">運営領</td>
+              <td><strong>ウェスタ第二公国</strong><span class="country-badge badge-peace">平和</span></td>
               <td class="col-muted">—</td>
-              <td class="col-muted">運営専用</td>
+              <td class="col-muted">—</td>
+              <td class="col-muted">情報未登録</td>
             </tr>
           </tbody>
         </table>
@@ -1155,34 +1154,34 @@
           <thead><tr><th>国名</th><th>建国者</th><th>建国日</th><th>特記事項</th></tr></thead>
           <tbody>
             <tr>
-              <td><strong>王国シュヴァルツカイザー</strong><span class="country-badge badge-war">戦争</span></td>
-              <td><span class="col-muted">CornyStar594748</span></td>
+              <td><strong>科学都市ミライティア</strong><span class="country-badge badge-war">戦争</span></td>
+              <td>ハニワ中尉 <span class="col-muted">(CornyStar594748)</span></td>
               <td>2025年4月29日</td>
-              <td>雪原/要塞</td>
+              <td>天空要塞・巨大な壁</td>
             </tr>
             <tr>
-              <td><strong>ift王国</strong><span class="country-badge badge-war">戦争</span></td>
-              <td><span class="col-muted">rinnedao</span></td>
+              <td><strong>ift</strong><span class="country-badge badge-war">戦争</span></td>
+              <td>りんね <span class="col-muted">(rinnedao)</span></td>
               <td>2025年5月5日</td>
-              <td>一周・草原/12人規模</td>
+              <td>鯖内1〜2位の戦闘力</td>
             </tr>
             <tr>
-              <td><strong>大北海帝国</strong><span class="country-badge badge-war">戦争</span></td>
-              <td><span class="col-muted">wammy3092</span></td>
+              <td><strong>ソ連</strong><span class="country-badge badge-war">戦争</span></td>
+              <td>わろた <span class="col-muted">(wammy3092)</span></td>
               <td>2025年5月5日</td>
-              <td>雪原</td>
+              <td>鯖内最強戦闘力</td>
             </tr>
             <tr>
-              <td><strong>ガンダーラ</strong><span class="country-badge badge-war">戦争</span></td>
-              <td class="col-muted">不明</td>
-              <td class="col-muted">不明</td>
+              <td><strong>大日本帝国</strong><span class="country-badge badge-war">戦争</span></td>
               <td class="col-muted">—</td>
+              <td class="col-muted">—</td>
+              <td class="col-muted">情報未登録</td>
             </tr>
             <tr>
-              <td><strong>東九州帝国</strong><span class="country-badge badge-war">戦争</span></td>
-              <td><span class="col-muted">TNalpha0218</span></td>
+              <td><strong>神聖オーストリア海上帝国</strong><span class="country-badge badge-war">戦争</span></td>
+              <td>ティナ <span class="col-muted">(TNalpha0218)</span></td>
               <td>2025年5月18日</td>
-              <td>氷海</td>
+              <td>軍備・建築両重視</td>
             </tr>
           </tbody>
         </table>
@@ -1192,10 +1191,10 @@
           <thead><tr><th>国名</th><th>建国者</th><th>建国日</th><th>特記事項</th></tr></thead>
           <tbody>
             <tr>
-              <td><strong>あら鯖商業発展委員会</strong><span class="country-badge badge-star">Star</span></td>
-              <td><span class="col-muted">ARbear0913</span></td>
-              <td>2025年1月15日</td>
-              <td>—</td>
+              <td><strong>ゲルン=アラクイア中央帝国</strong><span class="country-badge badge-star">Star</span></td>
+              <td>新井熊 <span class="col-muted">(ARbear0913)</span></td>
+              <td>2025年11月5日</td>
+              <td>鯖主の国。基本的に誰でも入国可</td>
             </tr>
           </tbody>
         </table>
@@ -1205,21 +1204,17 @@
       <section class="wiki-section gen2-content" id="rank" data-keywords="ランク member Bronze Silver Gold Diamond Master Legend Ultimate operator">
         <h2 class="wiki-section-title">
           <i data-lucide="trophy"></i>
-          ランクシステム
+          ランク制度
           <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">(第二期)</span>
         </h2>
-        <div class="info-banner">
-          <i data-lucide="info"></i>
-          <span><strong style="color:#f1f5f9;">電子マネー消費</strong>でランクアップ。<strong>operator</strong>ランクのみ運営専用です。</span>
-        </div>
         <table class="wiki-table">
           <thead>
             <tr>
               <th>ランク</th>
-              <th>消費金額</th>
-              <th>ログイン時PP</th>
-              <th>ログイン時マネー</th>
-              <th>ガチャ回数上限</th>
+              <th>所持金</th>
+              <th>PキルP数</th>
+              <th>ブロック破壊数</th>
+              <th>レベル</th>
             </tr>
           </thead>
           <tbody>
@@ -1229,43 +1224,43 @@
             </tr>
             <tr>
               <td><span class="rank-name rank-bronze">Bronze</span></td>
-              <td class="col-num">100</td><td class="col-num">1</td><td class="col-muted">なし</td><td class="col-num">10</td>
+              <td class="col-num">100+</td><td class="col-num">1+</td><td class="col-muted">—</td><td class="col-num">10+</td>
             </tr>
             <tr>
               <td><span class="rank-name rank-silver">Silver</span></td>
-              <td class="col-num">10,000</td><td class="col-num">10</td><td class="col-num">1,000</td><td class="col-num">30</td>
+              <td class="col-num">10,000+</td><td class="col-num">10+</td><td class="col-num">1,000+</td><td class="col-num">30+</td>
             </tr>
             <tr>
               <td><span class="rank-name rank-gold">Gold</span></td>
-              <td class="col-num">50,000</td><td class="col-num">30</td><td class="col-num">10,000</td><td class="col-num">50</td>
+              <td class="col-num">50,000+</td><td class="col-num">30+</td><td class="col-num">10,000+</td><td class="col-num">50+</td>
             </tr>
             <tr>
               <td><span class="rank-name rank-diamond">Diamond</span></td>
-              <td class="col-num">200,000</td><td class="col-num">50</td><td class="col-num">100,000</td><td class="col-num">75</td>
+              <td class="col-num">200,000+</td><td class="col-num">50+</td><td class="col-num">100,000+</td><td class="col-num">75+</td>
             </tr>
             <tr>
               <td><span class="rank-name rank-master">Master</span></td>
-              <td class="col-num">1,000,000</td><td class="col-num">100</td><td class="col-num">100,000</td><td class="col-num">90</td>
+              <td class="col-num">1,000,000+</td><td class="col-num">100+</td><td class="col-num">100,000+</td><td class="col-num">90+</td>
             </tr>
             <tr>
               <td><span class="rank-name rank-masterp">Master+</span></td>
-              <td class="col-num">7,000,000</td><td class="col-num">200</td><td class="col-num">150,000</td><td class="col-num">120</td>
+              <td class="col-num">7,000,000+</td><td class="col-num">200+</td><td class="col-num">150,000+</td><td class="col-num">120+</td>
             </tr>
             <tr>
               <td><span class="rank-name rank-legend">Legend</span></td>
-              <td class="col-num">10,000,000</td><td class="col-num">400</td><td class="col-num">200,000</td><td class="col-num">130</td>
+              <td class="col-num">10,000,000+</td><td class="col-num">400+</td><td class="col-num">200,000+</td><td class="col-num">130+</td>
             </tr>
             <tr>
               <td><span class="rank-name rank-legendp">Legend+</span></td>
-              <td class="col-num">20,000,000</td><td class="col-num">600</td><td class="col-num">400,000</td><td class="col-num">150</td>
+              <td class="col-num">20,000,000+</td><td class="col-num">600+</td><td class="col-num">400,000+</td><td class="col-num">150+</td>
             </tr>
             <tr>
               <td><span class="rank-name rank-ultimate">Ultimate</span></td>
-              <td class="col-num">50,000,000</td><td class="col-num">1,000</td><td class="col-num">1,000,000</td><td class="col-num">200</td>
+              <td class="col-num">50,000,000+</td><td class="col-num">1,000+</td><td class="col-num">1,000,000+</td><td class="col-num">200+</td>
             </tr>
             <tr>
               <td><span class="rank-name rank-op">operator</span></td>
-              <td colspan="4" style="color:#475569;font-size:0.85rem;">運営専用（ランクアップ不可）</td>
+              <td colspan="4" style="color:#475569;font-size:0.85rem;">運営のみ（手動付与）</td>
             </tr>
           </tbody>
         </table>
@@ -1279,66 +1274,65 @@
           <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">(第二期)</span>
         </h2>
         <div class="wiki-card">
-          <p><strong>ヒツジのレース</strong>です。指定した色のヒツジに賭けられます。</p>
+          <p>羊のレースに賭け金をかけて配当を得るギャンブルシステムです。<strong>単一がけ形式</strong>で、1頭の羊に賭けます。</p>
           <ul>
-            <li>1位：<strong>2倍</strong>の配当</li>
-            <li>2位：<strong>1.5倍</strong>の配当</li>
-            <li>3位：<strong>0.5倍</strong>（50%払い戻し）</li>
-            <li>最低賭け金：<strong>100円</strong></li>
-            <li>最高賭け金：<strong>1,000,000円</strong></li>
+            <li>1位 → <strong>2倍</strong>の配当</li>
+            <li>2位 → <strong>1.5倍</strong>の配当</li>
+            <li>最低購入額：<strong>100マネー</strong></li>
+            <li>最大購入額：<strong>1,000,000マネー</strong></li>
           </ul>
         </div>
 
-        <h3 class="wiki-subsection-title">色一覧</h3>
+        <h3 class="wiki-subsection-title">賭けられる羊の色</h3>
         <table class="wiki-table">
-          <thead><tr><th>色</th><th>コマンド例</th><th>備考</th></tr></thead>
+          <thead><tr><th>色</th><th>コマンド例</th><th>その他の呼び方</th></tr></thead>
           <tbody>
             <tr>
               <td><span class="sheep-swatch swatch-black"></span><strong>黒</strong></td>
               <td><code>!ky black 1000</code></td>
-              <td class="col-muted">black / kuro</td>
+              <td class="col-muted">black / kuro / くろ / クロ / 黒</td>
             </tr>
             <tr>
               <td><span class="sheep-swatch swatch-white"></span><strong>白</strong></td>
               <td><code>!ky white 1000</code></td>
-              <td class="col-muted">white / shiro</td>
+              <td class="col-muted">white / shiro / しろ / シロ / 白</td>
             </tr>
             <tr>
               <td><span class="sheep-swatch swatch-red"></span><strong>赤</strong></td>
               <td><code>!ky red 1000</code></td>
-              <td class="col-muted">red / aka</td>
+              <td class="col-muted">red / aka / あか / アカ / 赤</td>
             </tr>
             <tr>
               <td><span class="sheep-swatch swatch-blue"></span><strong>青</strong></td>
               <td><code>!ky blue 1000</code></td>
-              <td class="col-muted">blue / ao</td>
+              <td class="col-muted">blue / ao / あお / アオ / 青</td>
             </tr>
             <tr>
               <td><span class="sheep-swatch swatch-green"></span><strong>緑</strong></td>
               <td><code>!ky green 1000</code></td>
-              <td class="col-muted">green / midori</td>
+              <td class="col-muted">green / midori / みどり / ミドリ / 緑</td>
             </tr>
             <tr>
               <td><span class="sheep-swatch swatch-purple"></span><strong>紫</strong></td>
               <td><code>!ky purple 1000</code></td>
-              <td class="col-muted">purple / murasaki</td>
+              <td class="col-muted">purple / murasaki / むらさき / ムラサキ / 紫</td>
             </tr>
           </tbody>
         </table>
 
         <h3 class="wiki-subsection-title">コマンド一覧</h3>
         <table class="wiki-table">
-          <thead><tr><th>コマンド</th><th>説明</th><th>例</th></tr></thead>
+          <thead><tr><th>コマンド</th><th>内容</th></tr></thead>
           <tbody>
-            <tr><td><code>!ky</code> / <code>!keiyou</code></td><td>競羊メニュー表示</td><td>—</td></tr>
-            <tr><td><code>!ky &lt;色&gt; &lt;金額&gt;</code></td><td>指定色に賭ける</td><td><code>!ky red 10000</code></td></tr>
-            <tr><td><code>!ky clear</code></td><td>ベット取り消し</td><td>—</td></tr>
-            <tr><td><code>!ky help</code></td><td>ヘルプ表示</td><td>—</td></tr>
+            <tr><td><code>!ky</code> / <code>!keiyou</code></td><td>チケット残高確認</td></tr>
+            <tr><td><code>!ky &lt;色&gt; &lt;金額&gt;</code></td><td>チケット購入（例:<code>!ky red 10000</code>）</td></tr>
+            <tr><td><code>!ky clear</code></td><td>購入履歴をリセット</td></tr>
+            <tr><td><code>!ky help</code></td><td>ヘルプ表示</td></tr>
           </tbody>
         </table>
 
         <div class="wiki-card">
-          <p><strong>オッズ変動あり</strong>。人気の色ほど配当が下がる可能性があります。</p>
+          <p>購入に成功すると<strong>競羊券（紙アイテム）</strong>がインベントリに追加されます。券には羊の色・賭け金・購入日時が記載されます。購入のたびに運営全員に通知が届きます。</p>
         </div>
       </section>
 
@@ -1350,18 +1344,18 @@
           <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">(第二期 / 閉鎖済み)</span>
         </h2>
         <div class="wiki-card">
-          <p>The End内にかつて存在した商業施設です。運営者の脱退により<strong>現在は閉鎖</strong>されています。G Warpからのアクセスも停止しました。</p>
+          <p>The Endに存在するカジノ施設です。G Warpから「ザクベガス」を選択するとロビーへ移動できます。現在はロビーのみワープが有効です。</p>
         </div>
         <table class="wiki-table">
-          <thead><tr><th>施設名</th><th>種別</th><th>状態</th><th>備考</th></tr></thead>
+          <thead><tr><th>施設名</th><th>種別</th><th>状態</th></tr></thead>
           <tbody>
-            <tr><td><strong>ブラックジャック</strong></td><td>カジノ</td><td style="color:#22c55e;">稼働</td><td>—</td></tr>
-            <tr><td><strong>競羊場</strong></td><td>レース</td><td class="col-muted">競羊場に移転</td><td>—</td></tr>
-            <tr><td><strong>ロンズストア RNZ-08</strong></td><td>ショップ</td><td class="col-muted">閉鎖</td><td>—</td></tr>
-            <tr><td><strong>グナッフン GNF-07</strong></td><td>ショップ</td><td class="col-muted">閉鎖</td><td>—</td></tr>
-            <tr><td><strong>ザクショップ ZK-08</strong></td><td>ショップ</td><td class="col-muted">閉鎖</td><td>—</td></tr>
-            <tr><td><strong>PVP Arena（建設中）</strong></td><td>アリーナ</td><td class="col-muted">未完成</td><td>—</td></tr>
-            <tr><td><strong>ザクタウン</strong></td><td>街</td><td class="col-muted">閉鎖</td><td>—</td></tr>
+            <tr><td><strong>ロビー</strong></td><td>入口</td><td>✅ ワープ有効</td></tr>
+            <tr><td><strong>本店</strong></td><td>—</td><td>❌ 現在無効</td></tr>
+            <tr><td><strong>パチンコ RNZ_08</strong></td><td>パチンコ</td><td>❌ 現在無効</td></tr>
+            <tr><td><strong>スロット GNF_07</strong></td><td>スロット</td><td>❌ 現在無効</td></tr>
+            <tr><td><strong>運営スロット ZK_08</strong></td><td>スロット</td><td>❌ 現在無効</td></tr>
+            <tr><td><strong>景品交換所</strong></td><td>交換</td><td>❌ 現在無効</td></tr>
+            <tr><td><strong>コネクトフォー</strong></td><td>ゲーム</td><td>❌ 現在無効</td></tr>
           </tbody>
         </table>
       </section>
