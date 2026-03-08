@@ -393,6 +393,30 @@
         border-radius: 2px;
         padding: 0 2px;
     }
+    /* ── News Image ── */
+    .news-image-wrap {
+      margin: 0.75rem 0 0;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #334155;
+      background: #0f172a;
+      line-height: 0;
+    }
+    .news-img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      display: block;
+      transition: height 0.35s ease, object-fit 0.1s;
+    }
+    .news-card.open .news-image-wrap {
+      margin-bottom: 0.75rem;
+    }
+    .news-card.open .news-img {
+      height: auto;
+      max-height: 520px;
+      object-fit: contain;
+    }
     /* カードのフェードイン */
     .news-card {
         opacity: 0;
@@ -524,6 +548,13 @@
   // ※ news.js (Minecraft アドオン内) から同期。日付は推定値。
   // ============================================================
   const newsData = [
+    {
+      date: "2026-03-08",
+      tag: "info",
+      title: "第三期新井鯖 国割マップ公開・国王募集のお知らせ",
+      image: "images/news_image/arai-server_map_20260308.png",
+      body: "第三期新井鯖の国割マップを公開しました。\n現在の地図はまだ完璧ではないため、今後変更が加わる可能性があります。\n\n【国王募集について】\nマップ内の各国の中から国王をやりたい国を選び、ノートに記入してください。\n\n締め切り：2026年3月11日（予定）\n\n【補足】\nオスマン帝国は運営領です。プレイヤーは入ることができますが、国王にはなれません。"
+    },
     {
       date: "2026-03-06",
       tag: "info",
@@ -723,8 +754,13 @@
       return;
      }
 
-     list.innerHTML = filtered.map(n => {
+    list.innerHTML = filtered.map(n => {
       const tag = tagConfig[n.tag] || tagConfig.info;
+      const imgHtml = n.image
+        ? `<div class="news-image-wrap">
+             <img src="${n.image}" alt="${highlight(n.title, searchTerm)}" class="news-img" loading="lazy">
+           </div>`
+        : '';
       return `
       <div class="news-card" onclick="this.classList.toggle('open')">
          <div class="news-meta">
@@ -732,11 +768,13 @@
           <span class="news-tag ${tag.cls}">${tag.label}</span>
          </div>
          <div class="news-title">${highlight(n.title, searchTerm)}</div>
+         ${imgHtml}
          <div class="news-body-preview">${highlight(n.body.replace(/\n/g, ' '), searchTerm)}</div>
          <div class="news-body-full">${highlight(n.body, searchTerm)}</div>
       </div>`;
-     }).join("");
-     observeCards();
+    }).join("");
+
+    observeCards();
     }
 
     document.getElementById("searchInput").addEventListener("input", e => {
