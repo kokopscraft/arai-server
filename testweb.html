@@ -739,8 +739,8 @@
         <input type="text" class="search-input" id="wikiSearch" placeholder="検索...">
       </div>
 
-      <div class="sidebar-group">
-        <div class="sidebar-group-label">第一期限定</div>
+      <div class="sidebar-group gen1-sidebar">
+        <div class="sidebar-group-label">第一期</div>
         <ul class="sidebar-nav">
           <li><a href="#gen1-items">入手アイテム</a></li>
           <li><a href="#gen1-login">ログインボーナス</a></li>
@@ -748,10 +748,10 @@
         </ul>
       </div>
 
-      <div class="sidebar-divider"></div>
+      <div class="sidebar-divider gen1-sidebar"></div>
 
-      <div class="sidebar-group">
-        <div class="sidebar-group-label">コア機能</div>
+      <div class="sidebar-group gen2-sidebar">
+        <div class="sidebar-group-label">第二期</div>
         <ul class="sidebar-nav">
           <li><a href="#currency">通貨システム</a></li>
           <li><a href="#atm">ATM</a></li>
@@ -1269,7 +1269,7 @@
       <!-- ── 第二期: 競羊 ── -->
       <section class="wiki-section gen2-content" id="keiyou" data-keywords="競羊 羊 レース black white red blue green purple ky">
         <h2 class="wiki-section-title">
-          <i data-lucide="trophy"></i>
+          <i data-lucide="flag"></i>
           競羊
           <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">(第二期)</span>
         </h2>
@@ -1423,15 +1423,14 @@
       gen2Content.forEach(el => el.style.display = version === 'gen2' ? 'block' : 'none');
       gen3Content.forEach(el => el.style.display = version === 'gen3' ? 'block' : 'none');
 
-      // Update sidebar links
-      const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
-      sidebarLinks.forEach(a => {
-        const targetId = a.getAttribute('href').substring(1);
-        const targetSection = document.getElementById(targetId);
-        if (targetSection) {
-          a.style.display = targetSection.style.display === 'none' ? 'none' : 'block';
-        }
-      });
+      // Update sidebar groups
+      const gen1Sidebars = document.querySelectorAll('.gen1-sidebar');
+      const gen2Sidebars = document.querySelectorAll('.gen2-sidebar');
+      const gen3Sidebars = document.querySelectorAll('.gen3-sidebar');
+
+      gen1Sidebars.forEach(el => el.style.display = version === 'gen1' ? 'block' : 'none');
+      gen2Sidebars.forEach(el => el.style.display = version === 'gen2' ? 'block' : 'none');
+      gen3Sidebars.forEach(el => el.style.display = version === 'gen3' ? 'block' : 'none');
     }
 
     versionButtons.forEach(btn => {
