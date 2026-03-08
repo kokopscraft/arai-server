@@ -854,7 +854,7 @@
         </h2>
         <div class="wiki-card">
           <p>新井鯖の共通通貨は<strong>マネー</strong>です。残高は以下の3種類で独立して管理されています。</p>
-          <table class="wiki-table" style="margin-top:0.75rem;border:1px solid #334155;">
+          <table class="wiki-table" style="margin-top:0.75rem;border:1px solid #334155;box-shadow:0 0 0 1px #334155;">
             <thead><tr><th style="border-right:1px solid #334155;">種別</th><th style="border-right:1px solid #334155;">説明</th><th>備考</th></tr></thead>
             <tbody>
               <tr><td style="border-right:1px solid rgba(51,65,85,0.5);"><strong>現金</strong></td><td style="border-right:1px solid rgba(51,65,85,0.5);">インベントリ内の紙幣アイテム</td><td>インベントリに物理保持</td></tr>
@@ -866,28 +866,28 @@
 
         <h3 class="wiki-subsection-title">紙幣の種類（全14種）</h3>
         <table class="wiki-table currency-table-bills">
-          <thead><tr><th>額面</th><th>アイテムID</th></tr></thead>
+          <thead><tr><th>額面</th><th>アイテムID</th><th>入手方法</th></tr></thead>
           <tbody>
-            <tr><td>1,000,000</td><td><code>arai:money_1000000</code></td></tr>
-            <tr><td>250,000</td><td><code>arai:money_250000</code></td></tr>
-            <tr><td>100,000</td><td><code>arai:money_100000</code></td></tr>
-            <tr><td>75,000</td><td><code>arai:money_75000</code></td></tr>
-            <tr><td>50,000</td><td><code>arai:money_50000</code></td></tr>
-            <tr><td>10,000</td><td><code>arai:money_10000</code></td></tr>
-            <tr><td>5,000</td><td><code>arai:money_5000</code></td></tr>
-            <tr><td>1,000</td><td><code>arai:money_1000</code></td></tr>
-            <tr><td>500</td><td><code>arai:money_500</code></td></tr>
-            <tr><td>100</td><td><code>arai:money_100</code></td></tr>
-            <tr><td>50</td><td><code>arai:money_50</code></td></tr>
-            <tr><td>10</td><td><code>arai:money_10</code></td></tr>
-            <tr><td>5</td><td><code>arai:money_5</code></td></tr>
-            <tr><td>1</td><td><code>arai:money_1</code></td></tr>
+            <tr><td>1,000,000</td><td><code>arai:money_1000000</code></td><td class="col-muted">特殊紙幣（運営 / Dealer）</td></tr>
+            <tr><td>250,000</td><td><code>arai:money_250000</code></td><td class="col-muted">特殊紙幣（運営 / Dealer）</td></tr>
+            <tr><td>100,000</td><td><code>arai:money_100000</code></td><td class="col-muted">特殊紙幣（運営 / Dealer）</td></tr>
+            <tr><td>75,000</td><td><code>arai:money_75000</code></td><td class="col-muted">特殊紙幣（Master+）</td></tr>
+            <tr><td>50,000</td><td><code>arai:money_50000</code></td><td class="col-muted">特殊紙幣（Diamond+）</td></tr>
+            <tr><td>10,000</td><td><code>arai:money_10000</code></td><td class="col-muted">ATM出金（member+）</td></tr>
+            <tr><td>5,000</td><td><code>arai:money_5000</code></td><td class="col-muted">ATM出金（member+）</td></tr>
+            <tr><td>1,000</td><td><code>arai:money_1000</code></td><td class="col-muted">ATM出金（member+）</td></tr>
+            <tr><td>500</td><td><code>arai:money_500</code></td><td class="col-muted">ATM出金（member+）</td></tr>
+            <tr><td>100</td><td><code>arai:money_100</code></td><td class="col-muted">ATM出金（member+）</td></tr>
+            <tr><td>50</td><td><code>arai:money_50</code></td><td class="col-muted">ATM出金（member+）</td></tr>
+            <tr><td>10</td><td><code>arai:money_10</code></td><td class="col-muted">ATM出金（member+）</td></tr>
+            <tr><td>5</td><td><code>arai:money_5</code></td><td class="col-muted">ATM出金（member+）</td></tr>
+            <tr><td>1</td><td><code>arai:money_1</code></td><td class="col-muted">ATM出金（member+）</td></tr>
           </tbody>
         </table>
 
         <div class="warn-banner">
           <i data-lucide="alert-circle"></i>
-          <span><strong style="color:#f1f5f9;">10,000円以上</strong>の高額紙幣は、ATMで引き出す以外に入手できません。</span>
+          <span><strong style="color:#f1f5f9;">50,000マネー以上</strong>の特殊紙幣は、運営を呼ぶかHUB内のNPC「Dealer」から電子マネーとの取引で入手できます。</span>
         </div>
       </section>
 
@@ -1022,9 +1022,9 @@
         <table class="wiki-table">
           <thead><tr><th>表記</th><th>意味</th></tr></thead>
           <tbody>
-            <tr><td><code>1000</code></td><td>1,000円</td></tr>
-            <tr><td><code>10k</code></td><td>10,000円</td></tr>
-            <tr><td><code>1m</code></td><td>1,000,000円</td></tr>
+            <tr><td><code>1000</code></td><td>1,000マネー</td></tr>
+            <tr><td><code>10k</code></td><td>10,000マネー</td></tr>
+            <tr><td><code>1m</code></td><td>1,000,000マネー</td></tr>
             <tr><td><code>all</code></td><td>全額</td></tr>
           </tbody>
         </table>
@@ -1039,19 +1039,19 @@
         </h2>
         <div class="warn-banner">
           <i data-lucide="alert-circle"></i>
-          <span><strong style="color:#f1f5f9;">最大3拠点</strong>まで登録可能。ワープ先に正しい座標を設定してください。</span>
+          <span>G Warpのワープポイントは<strong style="color:#f1f5f9;">本拠点は自動的に登録</strong>されますが、他ポイントを登録したい場合は別途申請が必要です。</span>
         </div>
         <table class="wiki-table">
           <thead><tr><th>ワープ先</th><th>表示条件</th><th>説明</th></tr></thead>
           <tbody>
-            <tr><td><strong>HUB</strong></td><td>常時</td><td>The End中央HUB</td></tr>
-            <tr><td><strong>自国</strong></td><td><code>ct</code>タグ所持</td><td>所属国へテレポート</td></tr>
+            <tr><td><strong>HUB</strong></td><td>常時</td><td>—</td></tr>
+            <tr><td><strong>自国</strong></td><td><code>ct</code>タグ所持</td><td>—</td></tr>
             <tr><td><strong>[国一覧]</strong></td><td><code>operator</code>タグ</td><td>運営のみ・全国家から選択可能</td></tr>
             <tr><td><strong>[承認された国]</strong></td><td>他国の国民に承認された場合</td><td>国主から承認されTPが可能</td></tr>
-            <tr><td><strong>ATS</strong></td><td>常時</td><td>The End内のATSへ</td></tr>
-            <tr><td><strong>新井賭博場</strong></td><td>常時</td><td>The End内の賭博場へ</td></tr>
-            <tr><td><strong>ザクベガス</strong></td><td>常時</td><td>施設選択サブメニューへ</td></tr>
-            <tr><td><strong>ログイン</strong></td><td>常時</td><td>ログイン地点へ</td></tr>
+            <tr><td><strong>ATS</strong></td><td>常時</td><td>—</td></tr>
+            <tr><td><strong>新井賭博場</strong></td><td>常時</td><td>—</td></tr>
+            <tr><td><strong>ザクベガス</strong></td><td>常時</td><td>—</td></tr>
+            <tr><td><strong>ログイン</strong></td><td>常時</td><td>—</td></tr>
             <tr><td><strong>国のプロファイル</strong></td><td><code>ct</code>タグ所持</td><td>TP承認権限の付与・削除</td></tr>
           </tbody>
         </table>
