@@ -410,6 +410,34 @@
         opacity: 1;
         transform: translateY(0);
     }
+    /* ── Member Actions ── */
+    .member-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.25rem;
+    }
+    .member-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      color: #38bdf8;
+      text-decoration: none;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      background: rgba(56, 189, 248, 0.08);
+      padding: 0.3rem 0.75rem;
+      border-radius: 6px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .member-link:hover {
+      background: rgba(56, 189, 248, 0.18);
+      border-color: #38bdf8;
+    }
+    .member-link i {
+      width: 0.9rem;
+      height: 0.9rem;
+    }
 
     @media (max-width: 768px) {
         .container { padding: 2rem 1rem 0; }
@@ -472,19 +500,33 @@
       <p class="subtitle">サーバー運営メンバー</p>
     </header>
 
-    <!-- 鯖主 -->
-    <div class="server-owner" onclick="toggleProfile(this)">
-      <div class="owner-main">
-        <img src="images/arakuma_icon.png" alt="新井熊" class="character-img">
-        <div class="owner-info">
-          <p class="role">鯖主</p>
-          <p class="name">新井熊（あらくま）</p>
-        </div>
-      </div>
-      <div class="owner-profile">
-        <p class="profile-text">新井鯖のサーバー主で新井賭博場のオーナー。技術力こそ低いが、リーダーシップ力が輝く。</p>
-      </div>
+<!-- 鯖主 -->
+<div class="server-owner" onclick="toggleProfile(this)">
+  <div class="owner-main">
+    <img src="images/arakuma_icon.png" alt="新井熊" class="character-img">
+    <div class="owner-info">
+      <p class="role">鯖主</p>
+      <p class="name">新井熊（あらくま）</p>
     </div>
+  </div>
+
+  <div class="member-actions">
+    <a href="https://www.youtube.com/@araiguma0913"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="member-link"
+       onclick="event.stopPropagation()">
+      <i data-lucide="youtube"></i> YouTube
+    </a>
+  </div>
+
+  <div class="owner-profile">
+    <p class="profile-text">
+      新井鯖のサーバー主で新井賭博場のオーナー。技術力こそ低いが、リーダーシップ力が輝く。
+    </p>
+  </div>
+</div>
+
 
     <!-- 法務部門 -->
     <section class="department">
@@ -500,6 +542,11 @@
               <p class="role">裁判官</p>
               <p class="name">新井熊（あらくま）</p>
             </div>
+          </div>
+          <div class="member-actions">
+            <a href="https://www.youtube.com/@araiguma0913" target="_blank" rel="noopener noreferrer" class="member-link" onclick="event.stopPropagation()">
+              <i data-lucide="youtube"></i> YouTube
+            </a>
           </div>
           <div class="member-profile">
             <p class="profile-text">新井鯖のサーバー主で新井賭博場のオーナー。技術力こそ低いが、リーダーシップ力が輝く。</p>
@@ -523,6 +570,11 @@
               <p class="name">ココ</p>
             </div>
           </div>
+          <div class="member-actions">
+            <a href="https://www.youtube.com/@%E6%96%B0%E4%BA%95%E9%AF%96%E3%81%AE%E3%82%B3%E3%82%B3" target="_blank" rel="noopener noreferrer" class="member-link" onclick="event.stopPropagation()">
+              <i data-lucide="youtube"></i> YouTube
+            </a>
+          </div>
           <div class="member-profile">
             <p class="profile-text">新井鯖唯一のディベロッパーで、このWebサイトの開設者。得意なJavaScriptとMcFunctionを用いてArai Server Add-onの作成を行っている。</p>
           </div>
@@ -534,6 +586,11 @@
               <p class="role">部員</p>
               <p class="name">もぐらコロッケ（もぐころ）</p>
             </div>
+          </div>
+          <div class="member-actions">
+            <a href="https://www.youtube.com/@%E3%82%82%E3%81%90%E3%82%B3%E3%83%AD-p4d" target="_blank" rel="noopener noreferrer" class="member-link" onclick="event.stopPropagation()">
+              <i data-lucide="youtube"></i> YouTube
+            </a>
           </div>
           <div class="member-profile">
             <p class="profile-text">新井鯖のコマンド担当。開発中のプロジェクトはいつになっても終わらない。副業で完璧で究極のアイドルをやっているのは絶対に言ってはいけない秘密。</p>
@@ -568,6 +625,11 @@
               <p class="role">部員</p>
               <p class="name">しいなかげひと（しいな）</p>
             </div>
+          </div>
+          <div class="member-actions">
+            <a href="https://www.youtube.com/@%E3%81%97%E3%81%84%E3%81%AA%E3%81%8B%E3%81%92%E3%81%B2%E3%81%A8" target="_blank" rel="noopener noreferrer" class="member-link" onclick="event.stopPropagation()">
+              <i data-lucide="youtube"></i> YouTube
+            </a>
           </div>
           <div class="member-profile">
             <p class="profile-text">新井鯖唯一のイラストレイターで情報整理と経理処理を行っている。積み上げられてきた経験の数々でその場を切り抜ける新井鯖の頭脳。</p>
@@ -614,6 +676,11 @@
               <p class="role">部員</p>
               <p class="name">しいなかげひと（しいな）</p>
             </div>
+          </div>
+          <div class="member-actions">
+            <a href="https://www.youtube.com/@%E3%81%97%E3%81%84%E3%81%AA%E3%81%8B%E3%81%92%E3%81%B2%E3%81%A8" target="_blank" rel="noopener noreferrer" class="member-link" onclick="event.stopPropagation()">
+              <i data-lucide="youtube"></i> YouTube
+            </a>
           </div>
           <div class="member-profile">
             <p class="profile-text">新井鯖唯一のイラストレイターで情報整理と経理処理を行っている。積み上げられてきた経験の数々でその場を切り抜ける新井鯖の頭脳。</p>
