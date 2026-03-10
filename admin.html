@@ -129,6 +129,10 @@
       cursor: pointer;
       position: relative;
       overflow: hidden;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.2s, background 0.2s;
+      /* 既存のスタイル（background, paddingなど）を保持 */
     }
     .member-card:hover {
       border-color: #38bdf8;
@@ -192,6 +196,10 @@
       transition: border-color 0.2s, box-shadow 0.2s;
       position: relative;
       overflow: hidden;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      /* 既存のスタイルを保持 */
     }
     .server-owner::before {
       content: '';
@@ -393,6 +401,14 @@
         height: 1.25rem;
         stroke-width: 2;
         color: #38bdf8;
+    }
+    .member-card.fade-in {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .server-owner.fade-in {
+        opacity: 1;
+        transform: translateY(0);
     }
 
     @media (max-width: 768px) {
@@ -657,6 +673,25 @@
     backToTop.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+
+    function initFadeInAnimation() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('fade-in');
+                    }, index * 120); // 各カードに120msの遅延で順次アニメーション
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+      
+        // adminページの対象要素を選択
+        document.querySelectorAll('.member-card, .server-owner').forEach(el => {
+            observer.observe(el);
+        });
+    }
+    document.addEventListener('DOMContentLoaded', initFadeInAnimation);
 
     lucide.createIcons();
   </script>
