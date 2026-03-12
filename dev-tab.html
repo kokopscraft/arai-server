@@ -413,11 +413,18 @@
         transform: translateX(0);
       }
 
-      /* モバイル時のタブを大きく */
+      /* モバイル時のタブを大きく（アイコン対応でflexに） */
       .nav-links a {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
         padding: 0.9rem 1.25rem;
         font-size: 1rem;
         border-radius: 8px;
+      }
+
+      .nav-icon {
+        display: block;
       }
     }
     .cursor {
@@ -459,6 +466,13 @@
       position: relative;
       z-index: 400;
     }
+    /* モバイルナビアイコン（デスクトップでは非表示） */
+    .nav-icon {
+      display: none;
+      width: 1.1rem;
+      height: 1.1rem;
+      flex-shrink: 0;
+    }
   </style>
 </head>
 <body>
@@ -469,15 +483,15 @@
       <span class="nav-title">新井鯖<span class="nav-title-pc"> - Founding Server</span></span>
     </a>
     <ul class="nav-links">
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="news.html">News</a></li>
-      <li><a href="members.html">Members</a></li>
-      <li><a href="wiki.html">Wiki</a></li>
-      <li><a href="rules.html">Rules</a></li>
-      <li><a href="events.html">Events</a></li>
-      <li><a href="economy.html">Economy</a></li>
-      <li><a href="network.html">Network</a></li>
-      <li><a href="admin.html">Admin</a></li>
+      <li><a href="index.html" class="active"><i data-lucide="home" class="nav-icon"></i>Home</a></li>
+      <li><a href="news.html"><i data-lucide="newspaper" class="nav-icon"></i>News</a></li>
+      <li><a href="members.html"><i data-lucide="users" class="nav-icon"></i>Members</a></li>
+      <li><a href="wiki.html"><i data-lucide="library" class="nav-icon"></i>Wiki</a></li>
+      <li><a href="rules.html"><i data-lucide="book-open" class="nav-icon"></i>Rules</a></li>
+      <li><a href="events.html"><i data-lucide="calendar-days" class="nav-icon"></i>Events</a></li>
+      <li><a href="economy.html"><i data-lucide="circle-dollar-sign" class="nav-icon"></i>Economy</a></li>
+      <li><a href="network.html"><i data-lucide="globe" class="nav-icon"></i>Network</a></li>
+      <li><a href="admin.html"><i data-lucide="settings-2" class="nav-icon"></i>Admin</a></li>
     </ul>
     <button class="nav-hamburger" onclick="toggleNav()" aria-label="メニューを開く">
     <span></span><span></span><span></span>
