@@ -17,13 +17,20 @@
       min-height: 100vh;
     }
     .site-nav {
-      background: rgba(15, 23, 42, 0.97);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid #334155;
       position: sticky;
       font-family: 'Noto Sans JP', sans-serif;
       top: 0;
-      z-index: 100;
+      z-index: 500;
+    }
+    .site-nav::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.97);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid #334155;
+      z-index: -1;
     }
     .nav-inner {
       max-width: 1200px;
@@ -361,7 +368,7 @@
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.3s, transform 0.3s, background 0.2s;
-        z-index: 200;
+        z-index: 150;
     }
     #back-to-top.visible {
         opacity: 1;
@@ -379,26 +386,39 @@
     }
 
     @media (max-width: 640px) {
-      .hero-title { font-size: 2.2rem; }
-      .nav-cards { grid-template-columns: 1fr; max-width: 360px; }
-      .nav-inner { padding: 0.75rem 1rem; position: relative; }
-      .nav-links a { padding: 0.4rem 0.6rem; font-size: 0.8rem; }
-      .about-section { padding: 0 1rem; }
-      .about-card { padding: 1.25rem 1rem; }
+      /* 変更後（追加） */
       .nav-hamburger { display: flex; }
+
       .nav-links {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      flex-direction: column;
-      background: rgba(15, 23, 42, 0.97);
-      border-bottom: 1px solid #334155;
-      padding: 0.5rem 1rem 1rem;
-      z-index: 99;
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100dvh;
+        width: 260px;
+        max-width: 82vw;
+        background: rgba(15, 23, 42, 0.98);
+        border-left: 1px solid #334155;
+        padding: 5rem 1.25rem 2rem;
+        z-index: 300;
+        transform: translateX(110%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        gap: 0.4rem;
+        box-shadow: -8px 0 32px rgba(0, 0, 0, 0.5);
+        overflow-y: auto;
       }
-      .nav-links.open { display: flex; }
+
+      .nav-links.open {
+        transform: translateX(0);
+      }
+
+      /* モバイル時のタブを大きく */
+      .nav-links a {
+        padding: 0.9rem 1.25rem;
+        font-size: 1rem;
+        border-radius: 8px;
+      }
     }
     .cursor {
       display: inline-block;
@@ -420,33 +440,51 @@
             display: inline; /* PC幅では表示 */
         }
     }
+    /* Nav Overlay */
+    .nav-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 200;
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+    }
+    .nav-overlay.open {
+      display: block;
+    }
+
+    /* ハンバーガーボタンを常にオーバーレイより前面に */
+    .nav-hamburger {
+      position: relative;
+      z-index: 400;
+    }
   </style>
 </head>
 <body>
   <nav class="site-nav">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo-link">
-    <img src="images/server_logo.png" alt="新井鯖ロゴ" class="nav-logo">
-    <span class="nav-title">新井鯖<span class="nav-title-pc"> - Founding Server</span></span>
+      <img src="images/server_logo.png" alt="新井鯖ロゴ" class="nav-logo">
+      <span class="nav-title">新井鯖<span class="nav-title-pc"> - Founding Server</span></span>
     </a>
-  <ul class="nav-links">
-    <li><a href="index.html" class="active">Home</a></li>
-    <li><a href="news.html">News</a></li>
-    <li><a href="members.html">Members</a></li>
-    <li><a href="wiki.html">Wiki</a></li>
-    <li><a href="rules.html">Rules</a></li>
-    <li><a href="events.html">Events</a></li>
-    <li><a href="economy.html">Economy</a></li>
-    <li><a href="network.html">Network</a></li>
-    <li><a href="admin.html">Admin</a></li>
-    <li><a href="credit.html">Credit</a></li>
-  </ul>
-
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="news.html">News</a></li>
+      <li><a href="members.html">Members</a></li>
+      <li><a href="wiki.html">Wiki</a></li>
+      <li><a href="rules.html">Rules</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="economy.html">Economy</a></li>
+      <li><a href="network.html">Network</a></li>
+      <li><a href="admin.html">Admin</a></li>
+    </ul>
     <button class="nav-hamburger" onclick="toggleNav()" aria-label="メニューを開く">
     <span></span><span></span><span></span>
     </button>
   </div>
   </nav>
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
   <section class="hero">
   <div class="hero-bg" id="heroBg"></div>
   <img src="images/server_logo.png" alt="新井鯖 Logo" class="hero-logo">
@@ -583,9 +621,21 @@
   typeWriter();
 
   function toggleNav() {
-    document.querySelector('.nav-links').classList.toggle('open');
-    document.querySelector('.nav-hamburger').classList.toggle('open'); // ← 追加
+    const nav = document.querySelector('.nav-links');
+    const hamburger = document.querySelector('.nav-hamburger');
+    const overlay = document.getElementById('navOverlay');
+    nav.classList.toggle('open');
+    hamburger.classList.toggle('open');
+    overlay.classList.toggle('open');
+    document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
   }
+
+  // ESCキーで閉じる
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.querySelector('.nav-links').classList.contains('open')) {
+      toggleNav();
+    }
+  });
 
   // News 未読バッジ
   (function () {
