@@ -556,7 +556,7 @@
       </div>
       </a>
     </li>
-    <li class="addon-item no-link">
+    <li class="addon-item no-link addon-secret-trigger">
       <div class="addon-name">Arai Server Add-on（オリジナル）</div>
       <div class="addon-desc">新井鯖技術班のココが制作したオリジナル機能満載のアドオン。Java版の経済サーバー<a href="https://minecraft.jp/servers/dan5.red" target="_blank" rel="noopener noreferrer">まんじゅうサーバー</a>から着想を受けています。非公開・配布予定なし。</div>
       <div class="addon-badge-locked">Private</div>
@@ -678,6 +678,30 @@
     bgImg.onload = () => {
         setTimeout(() => heroBg.classList.add('loaded'), 150);
     };
+
+    // --- Arai Server Add-on イースターエッグ ---
+    (function () {
+      const trigger = document.querySelector('.addon-secret-trigger');
+      if (!trigger) return;
+
+      let clickCount = 0;
+      let windowStart = 0;
+
+      trigger.addEventListener('click', () => {
+        const now = Date.now();
+
+        if (!windowStart || now - windowStart > 2000) {
+          windowStart = now;
+          clickCount = 0;
+        }
+
+        clickCount++;
+
+        if (clickCount >= 7 && now - windowStart <= 2000) {
+          window.location.href = 'credits.html';
+        }
+      });
+    })();
 
     lucide.createIcons();
   </script>

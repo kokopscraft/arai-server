@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="images/server_logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="images/server_logo.png">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <title>新井鯖 - Credits</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background-color: #0f172a;
+      color: #f1f5f9;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── Navigation (他ページと同一ベース) ── */
+    .site-nav {
+      position: sticky;
+      font-family: 'Noto Sans JP', sans-serif;
+      top: 0;
+      z-index: 500;
+    }
+    .site-nav::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.97);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid #334155;
+      z-index: -1;
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 2rem;
+    }
+    .nav-logo-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: #f1f5f9;
+    }
+    .nav-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+    .nav-title {
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: #38bdf8;
+      letter-spacing: 0.02em;
+    }
+    .nav-title-pc { display: none; }
+    @media (min-width: 641px) {
+      .nav-title-pc { display: inline; }
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 0.25rem;
+    }
+    .nav-links a {
+      display: block;
+      padding: 0.5rem 1rem;
+      color: #cbd5e1;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+    .nav-links a:hover {
+      background: #1e293b;
+      color: #38bdf8;
+      border-color: #334155;
+    }
+    .nav-links a.active {
+      background: rgba(56,189,248,0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56,189,248,0.3);
+    }
+    .nav-icon {
+      display: none;
+      width: 1.1rem;
+      height: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    /* ── Container / Header ── */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 3rem 2rem 0;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid #334155;
+    }
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      color: #f1f5f9;
+    }
+    .subtitle {
+      color: #94a3b8;
+      font-size: 0.95rem;
+    }
+    .subtitle-secret {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: #64748b;
+    }
+
+    /* ── Sections ── */
+    .section {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 16px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 2rem;
+    }
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-left: 4px solid #38bdf8;
+      padding-left: 1rem;
+    }
+    .section-title i {
+      width: 1.1rem;
+      height: 1.1rem;
+      color: #38bdf8;
+      flex-shrink: 0;
+    }
+    .section-body {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+    }
+
+    /* ── Add-on list ── */
+    .addon-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+    .addon-item {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+    }
+    .addon-item-legacy {
+      border-style: dashed;
+      border-color: #4b5563;
+      opacity: 0.8;
+    }
+    .addon-name {
+      font-size: 0.98rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+    .addon-name span.tag {
+      display: inline-block;
+      margin-left: 0.4rem;
+      font-size: 0.7rem;
+      padding: 0.05rem 0.4rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.5);
+      color: #94a3b8;
+      vertical-align: middle;
+    }
+    .addon-meta {
+      font-size: 0.82rem;
+      color: #94a3b8;
+      margin-bottom: 0.2rem;
+    }
+    .addon-meta strong {
+      color: #e5e7eb;
+      font-weight: 600;
+    }
+    .addon-link {
+      color: #38bdf8;
+      font-size: 0.82rem;
+      text-decoration: none;
+    }
+    .addon-link:hover {
+      text-decoration: underline;
+    }
+    .addon-note {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-top: 0.4rem;
+    }
+    .addon-note-ja {
+      margin-top: 0.2rem;
+    }
+
+    /* ── BGM ── */
+    .bgm-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+    }
+    .bgm-meta {
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
+    .bgm-meta a {
+      color: #38bdf8;
+      text-decoration: none;
+    }
+    .bgm-meta a:hover {
+      text-decoration: underline;
+    }
+    .bgm-note {
+      font-size: 0.78rem;
+      color: #9ca3af;
+      margin-top: 0.6rem;
+    }
+
+    /* ── Illustration ── */
+    .credit-note {
+      font-size: 0.88rem;
+      color: #cbd5e1;
+    }
+
+    /* ── Footer (共通) ── */
+    footer {
+      text-align: center;
+      padding: 2.5rem 2rem 2rem;
+      color: #475569;
+      font-size: 0.8rem;
+      border-top: 1px solid #1e293b;
+      margin-top: 4rem;
+    }
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .footer-social a {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.45rem 1rem;
+      border-radius: 20px;
+      border: 1px solid #334155;
+      transition: all 0.3s ease;
+    }
+    .footer-social a:hover {
+      color: #f1f5f9;
+      border-color: #38bdf8;
+      background: rgba(56,189,248,0.08);
+    }
+    .footer-social img {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+      transform: scale(1.05);
+    }
+    .footer-social a[href*="x.com"] img {
+      transform: scale(0.88);
+    }
+    footer p { margin-bottom: 0.25rem; }
+
+    /* ハンバーガー */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #f1f5f9;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    .nav-hamburger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .nav-hamburger.open span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    .nav-hamburger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+    .nav-badge {
+      display: inline-block;
+      background: #ef4444;
+      color: #fff;
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 0.1rem 0.35rem;
+      border-radius: 999px;
+      margin-left: 0.3rem;
+      vertical-align: middle;
+      line-height: 1.4;
+    }
+
+    /* ページトップへ戻るボタン */
+    #back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 44px;
+      height: 44px;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      border-radius: 50%;
+      color: #38bdf8;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s, background 0.2s;
+      z-index: 150;
+    }
+    #back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    #back-to-top:hover {
+      background: rgba(56, 189, 248, 0.3);
+      transform: translateY(-3px);
+    }
+    .back-to-top-icon {
+      width: 1.25rem;
+      height: 1.25rem;
+      stroke-width: 2;
+      color: #38bdf8;
+    }
+
+    /* Nav Overlay */
+    .nav-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 200;
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+    }
+    .nav-overlay.open {
+      display: block;
+    }
+
+    @media (max-width: 640px) {
+      .container { padding: 2rem 1rem 0; }
+      h1 { font-size: 2rem; }
+      .nav-inner { padding: 0.75rem 1rem; position: relative; }
+      .nav-hamburger { display: flex; }
+
+      .nav-links {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100dvh;
+        width: 260px;
+        max-width: 82vw;
+        background: rgba(15, 23, 42, 0.98);
+        border-left: 1px solid #334155;
+        padding: 5rem 1.25rem 2rem;
+        z-index: 300;
+        transform: translateX(110%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        gap: 0.4rem;
+        box-shadow: -8px 0 32px rgba(0, 0, 0, 0.5);
+        overflow-y: auto;
+      }
+      .nav-links.open {
+        transform: translateX(0);
+      }
+      .nav-links a {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.9rem 1.25rem;
+        font-size: 1rem;
+        border-radius: 8px;
+      }
+      .nav-icon {
+        display: block;
+      }
+      .section {
+        padding: 1.5rem 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo-link">
+        <img src="images/server_logo.png" alt="新井鯖ロゴ" class="nav-logo">
+        <span class="nav-title">新井鯖<span class="nav-title-pc"> - Founding Server</span></span>
+      </a>
+      <!-- 元の9タブ。JSでここから8つ選び、Creditsを混ぜてシャッフル -->
+      <ul class="nav-links" id="navLinks">
+        <li data-tab="home"><a href="index.html"><i data-lucide="home" class="nav-icon"></i>Home</a></li>
+        <li data-tab="news"><a href="news.html"><i data-lucide="newspaper" class="nav-icon"></i>News</a></li>
+        <li data-tab="members"><a href="members.html"><i data-lucide="users" class="nav-icon"></i>Members</a></li>
+        <li data-tab="wiki"><a href="wiki.html"><i data-lucide="library" class="nav-icon"></i>Wiki</a></li>
+        <li data-tab="rules"><a href="rules.html"><i data-lucide="book-open" class="nav-icon"></i>Rules</a></li>
+        <li data-tab="events"><a href="events.html"><i data-lucide="calendar-days" class="nav-icon"></i>Events</a></li>
+        <li data-tab="economy"><a href="economy.html"><i data-lucide="circle-dollar-sign" class="nav-icon"></i>Economy</a></li>
+        <li data-tab="network"><a href="network.html"><i data-lucide="globe" class="nav-icon"></i>Network</a></li>
+        <li data-tab="admin"><a href="admin.html"><i data-lucide="settings-2" class="nav-icon"></i>Admin</a></li>
+      </ul>
+      <button class="nav-hamburger" onclick="toggleNav()" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
+
+  <div class="container">
+    <header>
+      <h1>Credits</h1>
+      <p class="subtitle">新井鯖で利用しているアドオン・BGM・創作物のクレジット</p>
+      <p class="subtitle-secret">※このページは通常の導線からはアクセスできない隠しタブです。</p>
+    </header>
+
+    <!-- Add-ons 現在使用中 -->
+    <section class="section">
+      <h2 class="section-title">
+        <i data-lucide="puzzle"></i>
+        使用中のアドオン
+      </h2>
+      <div class="section-body">
+        <ul class="addon-list">
+          <li class="addon-item">
+            <div class="addon-name">Commander API 2 [BP]<span class="tag">必須基盤</span></div>
+            <div class="addon-meta"><strong>開発者</strong>: 𝒩𝒶𝓃ℴ ｜ &lt;@836575170306768967&gt; , あるたか ｜ &lt;@922459610332418089&gt;</div>
+            <div class="addon-meta"><strong>リンク</strong>: <a href="https://github.com/Unknown-Creators-Team/Commander-API" target="_blank" rel="noopener noreferrer" class="addon-link">https://github.com/Unknown-Creators-Team/Commander-API</a></div>
+          </li>
+
+          <li class="addon-item">
+            <div class="addon-name">Commander API Extension [BP]</div>
+            <div class="addon-meta"><strong>開発者</strong>: 𝒩𝒶𝓃ℴ ｜ &lt;@836575170306768967&gt; , wako ｜ &lt;@914419023121367080&gt;</div>
+            <div class="addon-meta"><strong>リンク</strong>: <a href="https://github.com/Unknown-Creators-Team/Commander-API-Extension" target="_blank" rel="noopener noreferrer" class="addon-link">https://github.com/Unknown-Creators-Team/Commander-API-Extension</a></div>
+          </li>
+
+          <li class="addon-item">
+            <div class="addon-name">Commander API Screen [BP]</div>
+            <div class="addon-meta"><strong>開発者</strong>: 𝒩𝒶𝓃ℴ ｜ &lt;@836575170306768967&gt;</div>
+            <div class="addon-meta"><strong>リンク</strong>: <a href="https://github.com/Unknown-Creators-Team/Commander-API-Screen" target="_blank" rel="noopener noreferrer" class="addon-link">https://github.com/Unknown-Creators-Team/Commander-API-Screen</a></div>
+          </li>
+
+          <li class="addon-item">
+            <div class="addon-name">Arai Server Add-on [RP][BP]<span class="tag">オリジナル</span></div>
+            <div class="addon-meta"><strong>開発者</strong>: ココ ｜ &lt;@1065531282068607147&gt;</div>
+            <div class="addon-meta"><strong>前提アドオン</strong>:
+              Commander API（Commander API 2 / Commander API Extension）, Enchantments Level ZX
+            </div>
+            <div class="addon-meta"><strong>リンク</strong>: 未配布・今後配布予定無し</div>
+            <div class="addon-note">
+              新井鯖技術班のココが制作を行っている、Java版経済サーバー
+              <a href="https://minecraft.jp/servers/dan5.red" target="_blank" rel="noopener noreferrer" class="addon-link">まんじゅうサーバー</a>
+              から着想を得たオリジナル機能満載のアドオンです。
+            </div>
+          </li>
+
+          <li class="addon-item">
+            <div class="addon-name">Enchantments Level ZX (Template - Only Creative) [BP]</div>
+            <div class="addon-meta"><strong>開発者</strong>: masterkingTL ｜ @no-discord-user</div>
+            <div class="addon-meta"><strong>リンク</strong>: <a href="https://mcpedl.com/enchantments-level-zx-template-only-creative/" target="_blank" rel="noopener noreferrer" class="addon-link">https://mcpedl.com/enchantments-level-zx-template-only-creative/</a></div>
+            <div class="addon-note">
+              template that adds a lot of new levels of enchantments for all levelable enchantments up to Level 10, .Mcstructure preconfigured with a very low cost and accessible to all, costing only 1 Level of experience
+            </div>
+            <div class="addon-note addon-note-ja">
+              この Add-on は長期間更新されていませんが、&lt;@1065531282068607147&gt; が現バージョンでも利用できるように改造しています。
+            </div>
+          </li>
+
+          <li class="addon-item">
+            <div class="addon-name">Safe Storage [BP]</div>
+            <div class="addon-meta"><strong>開発者</strong>: Vechrozilator ｜ &lt;@434744754857705472&gt;</div>
+            <div class="addon-meta"><strong>リンク</strong>: <a href="https://mcpedl.com/safe-storage-addon/" target="_blank" rel="noopener noreferrer" class="addon-link">https://mcpedl.com/safe-storage-addon/</a></div>
+          </li>
+
+          <li class="addon-item">
+            <div class="addon-name">塩雪トランプアドオン [BP]</div>
+            <div class="addon-meta"><strong>開発者</strong>: 雪塩 マイクラ ｜ @no-discord-user</div>
+            <div class="addon-meta"><strong>リンク</strong>: <a href="https://minecraft-mcworld.com/185998/" target="_blank" rel="noopener noreferrer" class="addon-link">https://minecraft-mcworld.com/185998/</a></div>
+          </li>
+
+          <li class="addon-item">
+            <div class="addon-name">Debug Stick [RP][BP]</div>
+            <div class="addon-meta"><strong>開発者</strong>: vytdev ｜ @no-discord-user</div>
+            <div class="addon-meta"><strong>リンク</strong>: <a href="https://minecraft-mcworld.com/185998/" target="_blank" rel="noopener noreferrer" class="addon-link">https://minecraft-mcworld.com/185998/</a></div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Add-ons 過去導入分 -->
+    <section class="section">
+      <h2 class="section-title">
+        <i data-lucide="history"></i>
+        過去に導入していたアドオン
+      </h2>
+      <div class="section-body">
+        <p style="font-size:0.82rem;color:#9ca3af;margin-bottom:0.75rem;">
+          取り消し線が付いているアドオンは、以前新井鯖で使用していましたが、現在は導入されていないものです。
+        </p>
+        <ul class="addon-list">
+          <li class="addon-item addon-item-legacy">
+            <div class="addon-name"><del>Aplok Guns [RP][BP]</del></div>
+            <div class="addon-meta"><strong>開発者</strong>: Gabriel Aplok ｜ &lt;@835581035622301698&gt;</div>
+            <div class="addon-meta"><strong>リンク</strong>: <a href="https://mcpedl.com/aplok-guns/" target="_blank" rel="noopener noreferrer" class="addon-link">https://mcpedl.com/aplok-guns/</a></div>
+          </li>
+
+          <li class="addon-item addon-item-legacy">
+            <div class="addon-name"><del>Wooden Planes 0.2 [RP][BP]</del></div>
+            <div class="addon-meta"><strong>開発者</strong>: AL3XANDRE ｜ @no-discord-user</div>
+            <div class="addon-meta"><strong>リンク</strong>: <a href="https://mcpedl.com/wooden-plane-add-on/" target="_blank" rel="noopener noreferrer" class="addon-link">https://mcpedl.com/wooden-plane-add-on/</a></div>
+          </li>
+
+          <li class="addon-item addon-item-legacy">
+            <div class="addon-name"><del>WorldEdit: Bedrock Edition [RP][BP]</del></div>
+            <div class="addon-meta"><strong>開発者</strong>: SIsilicon ｜ &lt;@560245199972990977&gt;</div>
+            <div class="addon-meta"><strong>リンク</strong>: <a href="https://mcpedl.com/worldedit-be-addon/" target="_blank" rel="noopener noreferrer" class="addon-link">https://mcpedl.com/worldedit-be-addon/</a></div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- BGM -->
+    <section class="section">
+      <h2 class="section-title">
+        <i data-lucide="music-3"></i>
+        HUBで使用しているBGM
+      </h2>
+      <div class="section-body">
+        <p class="bgm-name">ロビーBGM: Mage Town</p>
+        <p class="bgm-meta">
+          Listen:
+          <a href="https://www.youtube.com/watch?v=c6icLvUsCao&pp=ygUWTWFnZSB0b3duIFNreWJsb2NrIE9TVA%3D%3D" target="_blank" rel="noopener noreferrer">
+            https://www.youtube.com/watch?v=c6icLvUsCao
+          </a><br>
+          Composer: <strong>ShinkoNet</strong><br>
+          License: <a href="https://hypixel.net/" target="_blank" rel="noopener noreferrer">Hypixel Inc.</a>
+        </p>
+        <p class="bgm-note">
+          The track "Mage Town" is the intellectual property of Hypixel Inc. and is used here under Hypixel's license. All rights are reserved by Hypixel Inc.
+        </p>
+        <p class="bgm-note">
+          This is an original ambient track called "Magetown", made for Hypixel's Skyblock game on the Hypixel Minecraft Server. It is the song that plays in Scarleton inside the Crimson Isle (Nether Island).
+        </p>
+      </div>
+    </section>
+
+    <!-- イラスト・立ち絵 -->
+    <section class="section">
+      <h2 class="section-title">
+        <i data-lucide="palette"></i>
+        立ち絵・創作物について
+      </h2>
+      <div class="section-body">
+        <p class="credit-note">
+          新井鯖運営メンバーの立ち絵はすべて「しいなかげひと（しいな）」さんに著作権が帰属しますが、本人の許可を得て、このサイトは成り立っています。
+        </p>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="footer-social">
+      <a href="https://line.me/ti/g2/uViXaSuCHoFWX0Z8WiyY2io4IRrXuT6t4OhRZA" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn.simpleicons.org/line/94a3b8" alt="LINE"> LINE</a>
+      <a href="https://discord.gg/EWphkMNb5h" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn.simpleicons.org/discord/94a3b8" alt="Discord"> Discord</a>
+      <a href="https://www.youtube.com/@arai_server" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn.simpleicons.org/youtube/94a3b8" alt="YouTube"> YouTube</a>
+      <a href="https://x.com/913_arakuma" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn.simpleicons.org/x/94a3b8" alt="X"> X</a>
+      <a href="https://github.com/kokopscraft/arai-server-members" target="_blank" rel="noopener">
+        <img src="https://cdn.simpleicons.org/github/94a3b8" alt="GitHub"> GitHub
+      </a>
+    </div>
+    <p>&copy; 2026 arai server. All rights reserved.</p>
+    <p>サイト内のコンテンツの無断転載を禁じます。</p>
+  </footer>
+
+  <button id="back-to-top" aria-label="トップへ戻る">
+    <i data-lucide="arrow-up" class="back-to-top-icon"></i>
+  </button>
+
+  <script>
+    function toggleNav() {
+      const nav = document.querySelector('.nav-links');
+      const hamburger = document.querySelector('.nav-hamburger');
+      const overlay = document.getElementById('navOverlay');
+      nav.classList.toggle('open');
+      hamburger.classList.toggle('open');
+      overlay.classList.toggle('open');
+      document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+    }
+
+    // ESCキーで閉じる
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && document.querySelector('.nav-links').classList.contains('open')) {
+        toggleNav();
+      }
+    });
+
+    // News 未読バッジ
+    (function () {
+      const lastVisit  = Number(localStorage.getItem("araiserver_newsLastVisit") || 0);
+      const latestDate = localStorage.getItem("araiserver_newsLatest");
+      if (!latestDate) return;
+      const hasUnread  = new Date(latestDate).getTime() > lastVisit;
+      if (hasUnread) {
+        const link = document.querySelector('a[href="news.html"]');
+        if (link) link.insertAdjacentHTML("beforeend", '<span class="nav-badge">NEW</span>');
+      }
+    })();
+
+    // ページトップへ戻るボタン
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      backToTop.classList.toggle('visible', window.scrollY > 300);
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ナビゲーションのランダム化:
+    // 既存9タブから8をランダム選出し、Creditsを足して計9タブでシャッフル
+    (function () {
+      const nav = document.getElementById('navLinks');
+      if (!nav) return;
+
+      const originalItems = Array.from(nav.children); // 9個
+      if (originalItems.length !== 9) return;
+
+      // ランダムに1つ除外するインデックス
+      const removeIndex = Math.floor(Math.random() * originalItems.length);
+      const keptItems = originalItems.filter((_, idx) => idx !== removeIndex);
+
+      // Credits タブを生成
+      const creditsLi = document.createElement('li');
+      creditsLi.setAttribute('data-tab', 'credits');
+      creditsLi.innerHTML = '<a href="credits.html" class="active"><i data-lucide="sparkles" class="nav-icon"></i>Credits</a>';
+
+      const combined = [...keptItems, creditsLi];
+
+      // Fisher-Yates でシャッフル
+      for (let i = combined.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [combined[i], combined[j]] = [combined[j], combined[i]];
+      }
+
+      // nav を差し替え
+      nav.innerHTML = '';
+      combined.forEach(li => nav.appendChild(li));
+    })();
+
+    lucide.createIcons();
+  </script>
+</body>
+</html>
