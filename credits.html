@@ -218,6 +218,62 @@
       margin-top: 0.2rem;
     }
 
+    /* ── リンク埋め込みカード ── */
+    .credit-card-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border-radius: 10px;
+    }
+    .credit-card {
+      background: rgba(15,23,42,1);
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+      cursor: pointer;
+      position: relative;
+    }
+    .credit-card-link .credit-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(56,189,248,0.15);
+      border-color: #38bdf8;
+    }
+    .credit-card-title {
+      font-weight: 700;
+      color: #f1f5f9;
+      font-size: 0.97rem;
+      margin-bottom: 0.2rem;
+      padding-right: 4rem;
+    }
+    .credit-card-meta {
+      font-size: 0.82rem;
+      color: #94a3b8;
+      margin-bottom: 0.15rem;
+    }
+    .credit-card-meta strong {
+      color: #e5e7eb;
+      font-weight: 600;
+    }
+    .credit-card-note {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-top: 0.35rem;
+    }
+    .credit-card-badge {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      font-size: 0.72rem;
+      color: #38bdf8;
+      opacity: 0.7;
+    }
+    .credit-card-legacy {
+      border-style: dashed;
+      border-color: #4b5563;
+      opacity: 0.85;
+    }
+
     /* ── BGM ── */
     .bgm-name {
       font-weight: 700;
@@ -469,66 +525,128 @@
       </h2>
       <div class="section-body">
         <ul class="addon-list">
-          <li class="addon-item">
-            <div class="addon-name">Commander API 2 [BP]<span class="tag">必須基盤</span></div>
-            <div class="addon-meta"><strong>開発者</strong>: 𝒩𝒶𝓃ℴ ｜ &lt;@836575170306768967&gt; , あるたか ｜ &lt;@922459610332418089&gt;</div>
-            <div class="addon-meta"><strong>リンク</strong>: <a href="https://github.com/Unknown-Creators-Team/Commander-API" target="_blank" rel="noopener noreferrer" class="addon-link">https://github.com/Unknown-Creators-Team/Commander-API</a></div>
+          <li>
+            <a href="https://github.com/Unknown-Creators-Team/Commander-API"
+               target="_blank" rel="noopener noreferrer" class="credit-card-link">
+              <div class="credit-card">
+                <div class="credit-card-title">Commander API 2 [BP]
+                  <span class="credit-card-badge">GitHub</span>
+                </div>
+                <div class="credit-card-meta">
+                  <strong>開発者</strong>: 𝒩𝒶𝓃ℴ ｜ &lt;@836575170306768967&gt; , あるたか ｜ &lt;@922459610332418089&gt;
+                </div>
+                <div class="credit-card-note">コマンドの限界を突破する Commander API 本体。新井鯖では中核の基盤として採用しています。</div>
+              </div>
+            </a>
           </li>
 
-          <li class="addon-item">
-            <div class="addon-name">Commander API Extension [BP]</div>
-            <div class="addon-meta"><strong>開発者</strong>: 𝒩𝒶𝓃ℴ ｜ &lt;@836575170306768967&gt; , wako ｜ &lt;@914419023121367080&gt;</div>
-            <div class="addon-meta"><strong>リンク</strong>: <a href="https://github.com/Unknown-Creators-Team/Commander-API-Extension" target="_blank" rel="noopener noreferrer" class="addon-link">https://github.com/Unknown-Creators-Team/Commander-API-Extension</a></div>
+          <li>
+            <a href="https://github.com/Unknown-Creators-Team/Commander-API-Extension"
+               target="_blank" rel="noopener noreferrer" class="credit-card-link">
+              <div class="credit-card">
+                <div class="credit-card-title">Commander API Extension [BP]
+                  <span class="credit-card-badge">GitHub</span>
+                </div>
+                <div class="credit-card-meta">
+                  <strong>開発者</strong>: 𝒩𝒶𝓃ℴ ｜ &lt;@836575170306768967&gt; , wako ｜ &lt;@914419023121367080&gt;
+                </div>
+                <div class="credit-card-note">Commander API を拡張する追加モジュール。新井鯖では Commander API 2 と組み合わせて導入しています。</div>
+              </div>
+            </a>
           </li>
 
-          <li class="addon-item">
-            <div class="addon-name">Commander API Screen [BP]</div>
-            <div class="addon-meta"><strong>開発者</strong>: 𝒩𝒶𝓃ℴ ｜ &lt;@836575170306768967&gt;</div>
-            <div class="addon-meta"><strong>リンク</strong>: <a href="https://github.com/Unknown-Creators-Team/Commander-API-Screen" target="_blank" rel="noopener noreferrer" class="addon-link">https://github.com/Unknown-Creators-Team/Commander-API-Screen</a></div>
+          <li>
+            <a href="https://github.com/Unknown-Creators-Team/Commander-API-Screen"
+               target="_blank" rel="noopener noreferrer" class="credit-card-link">
+              <div class="credit-card">
+                <div class="credit-card-title">Commander API Screen [BP]
+                  <span class="credit-card-badge">GitHub</span>
+                </div>
+                <div class="credit-card-meta">
+                  <strong>開発者</strong>: 𝒩𝒶𝓃ℴ ｜ &lt;@836575170306768967&gt;
+                </div>
+                <div class="credit-card-note">Commander API を使ったスクリーン表示機能を提供するアドオン。</div>
+              </div>
+            </a>
           </li>
 
-          <li class="addon-item">
-            <div class="addon-name">Arai Server Add-on [RP][BP]<span class="tag">オリジナル</span></div>
-            <div class="addon-meta"><strong>開発者</strong>: ココ ｜ &lt;@1065531282068607147&gt;</div>
-            <div class="addon-meta"><strong>前提アドオン</strong>:
-              Commander API（Commander API 2 / Commander API Extension）, Enchantments Level ZX
+          <li>
+            <div class="credit-card">
+              <div class="credit-card-title">Arai Server Add-on [RP][BP]
+                <span class="credit-card-badge">Private</span>
+              </div>
+              <div class="credit-card-meta">
+                <strong>開発者</strong>: ココ ｜ &lt;@1065531282068607147&gt;
+              </div>
+              <div class="credit-card-meta">
+                <strong>前提アドオン</strong>: Commander API 2 / Commander API Extension / Enchantments Level ZX
+              </div>
+              <div class="credit-card-note">
+                Java版「まんじゅうサーバー」から着想を得た、新井鯖オリジナルの機能満載アドオン。未配布・配布予定なし。
+              </div>
             </div>
-            <div class="addon-meta"><strong>リンク</strong>: 未配布・今後配布予定無し</div>
-            <div class="addon-note">
-              新井鯖技術班のココが制作を行っている、Java版経済サーバー
-              <a href="https://minecraft.jp/servers/dan5.red" target="_blank" rel="noopener noreferrer" class="addon-link">まんじゅうサーバー</a>
-              から着想を得たオリジナル機能満載のアドオンです。
-            </div>
           </li>
 
-          <li class="addon-item">
-            <div class="addon-name">Enchantments Level ZX (Template - Only Creative) [BP]</div>
-            <div class="addon-meta"><strong>開発者</strong>: masterkingTL ｜ @no-discord-user</div>
-            <div class="addon-meta"><strong>リンク</strong>: <a href="https://mcpedl.com/enchantments-level-zx-template-only-creative/" target="_blank" rel="noopener noreferrer" class="addon-link">https://mcpedl.com/enchantments-level-zx-template-only-creative/</a></div>
-            <div class="addon-note">
-              template that adds a lot of new levels of enchantments for all levelable enchantments up to Level 10, .Mcstructure preconfigured with a very low cost and accessible to all, costing only 1 Level of experience
-            </div>
-            <div class="addon-note addon-note-ja">
-              この Add-on は長期間更新されていませんが、&lt;@1065531282068607147&gt; が現バージョンでも利用できるように改造しています。
-            </div>
+          <li>
+            <a href="https://mcpedl.com/enchantments-level-zx-template-only-creative/"
+               target="_blank" rel="noopener noreferrer" class="credit-card-link">
+              <div class="credit-card">
+                <div class="credit-card-title">Enchantments Level ZX (Template - Only Creative) [BP]
+                  <span class="credit-card-badge">MCPEDL</span>
+                </div>
+                <div class="credit-card-meta">
+                  <strong>開発者</strong>: masterkingTL ｜ @no-discord-user
+                </div>
+                <div class="credit-card-note">
+                  エンチャントレベルを大幅に拡張するテンプレートアドオン。長期間未更新ですが、&lt;@1065531282068607147&gt; が現バージョン対応に改造して採用しています。
+                </div>
+              </div>
+            </a>
           </li>
 
-          <li class="addon-item">
-            <div class="addon-name">Safe Storage [BP]</div>
-            <div class="addon-meta"><strong>開発者</strong>: Vechrozilator ｜ &lt;@434744754857705472&gt;</div>
-            <div class="addon-meta"><strong>リンク</strong>: <a href="https://mcpedl.com/safe-storage-addon/" target="_blank" rel="noopener noreferrer" class="addon-link">https://mcpedl.com/safe-storage-addon/</a></div>
+          <li>
+            <a href="https://mcpedl.com/safe-storage-addon/"
+               target="_blank" rel="noopener noreferrer" class="credit-card-link">
+              <div class="credit-card">
+                <div class="credit-card-title">Safe Storage [BP]
+                  <span class="credit-card-badge">MCPEDL</span>
+                </div>
+                <div class="credit-card-meta">
+                  <strong>開発者</strong>: Vechrozilator ｜ &lt;@434744754857705472&gt;
+                </div>
+                <div class="credit-card-note">チェストに鍵をかけられる収納セキュリティアドオン。</div>
+              </div>
+            </a>
           </li>
 
-          <li class="addon-item">
-            <div class="addon-name">塩雪トランプアドオン [BP]</div>
-            <div class="addon-meta"><strong>開発者</strong>: 雪塩 マイクラ ｜ @no-discord-user</div>
-            <div class="addon-meta"><strong>リンク</strong>: <a href="https://minecraft-mcworld.com/185998/" target="_blank" rel="noopener noreferrer" class="addon-link">https://minecraft-mcworld.com/185998/</a></div>
+          <li>
+            <a href="https://minecraft-mcworld.com/185998/"
+               target="_blank" rel="noopener noreferrer" class="credit-card-link">
+              <div class="credit-card">
+                <div class="credit-card-title">塩雪トランプアドオン [BP]
+                  <span class="credit-card-badge">mcworld</span>
+                </div>
+                <div class="credit-card-meta">
+                  <strong>開発者</strong>: 雪塩 マイクラ ｜ @no-discord-user
+                </div>
+                <div class="credit-card-note">ゲームとして遊べるトランプアドオン。</div>
+              </div>
+            </a>
           </li>
 
-          <li class="addon-item">
-            <div class="addon-name">Debug Stick [RP][BP]</div>
-            <div class="addon-meta"><strong>開発者</strong>: vytdev ｜ @no-discord-user</div>
-            <div class="addon-meta"><strong>リンク</strong>: <a href="https://minecraft-mcworld.com/185998/" target="_blank" rel="noopener noreferrer" class="addon-link">https://minecraft-mcworld.com/185998/</a></div>
+          <li>
+            <a href="https://minecraft-mcworld.com/185998/"
+               target="_blank" rel="noopener noreferrer" class="credit-card-link">
+              <div class="credit-card">
+                <div class="credit-card-title">Debug Stick [RP][BP]
+                  <span class="credit-card-badge">mcworld</span>
+                </div>
+                <div class="credit-card-meta">
+                  <strong>開発者</strong>: vytdev ｜ @no-discord-user
+                </div>
+                <div class="credit-card-note">デバッグスティックを追加するアドオン。</div>
+              </div>
+            </a>
           </li>
         </ul>
       </div>
@@ -545,22 +663,49 @@
           取り消し線が付いているアドオンは、以前新井鯖で使用していましたが、現在は導入されていないものです。
         </p>
         <ul class="addon-list">
-          <li class="addon-item addon-item-legacy">
-            <div class="addon-name"><del>Aplok Guns [RP][BP]</del></div>
-            <div class="addon-meta"><strong>開発者</strong>: Gabriel Aplok ｜ &lt;@835581035622301698&gt;</div>
-            <div class="addon-meta"><strong>リンク</strong>: <a href="https://mcpedl.com/aplok-guns/" target="_blank" rel="noopener noreferrer" class="addon-link">https://mcpedl.com/aplok-guns/</a></div>
+          <li>
+            <a href="https://mcpedl.com/aplok-guns/"
+               target="_blank" rel="noopener noreferrer" class="credit-card-link">
+              <div class="credit-card credit-card-legacy">
+                <div class="credit-card-title"><del>Aplok Guns [RP][BP]</del>
+                  <span class="credit-card-badge">MCPEDL</span>
+                </div>
+                <div class="credit-card-meta">
+                  <strong>開発者</strong>: Gabriel Aplok ｜ &lt;@835581035622301698&gt;
+                </div>
+                <div class="credit-card-note">かつて銃撃戦系コンテンツとして導入されていたアドオン。現在は新井鯖では使用していません。</div>
+              </div>
+            </a>
           </li>
 
-          <li class="addon-item addon-item-legacy">
-            <div class="addon-name"><del>Wooden Planes 0.2 [RP][BP]</del></div>
-            <div class="addon-meta"><strong>開発者</strong>: AL3XANDRE ｜ @no-discord-user</div>
-            <div class="addon-meta"><strong>リンク</strong>: <a href="https://mcpedl.com/wooden-plane-add-on/" target="_blank" rel="noopener noreferrer" class="addon-link">https://mcpedl.com/wooden-plane-add-on/</a></div>
+          <li>
+            <a href="https://mcpedl.com/wooden-plane-add-on/"
+               target="_blank" rel="noopener noreferrer" class="credit-card-link">
+              <div class="credit-card credit-card-legacy">
+                <div class="credit-card-title"><del>Wooden Planes 0.2 [RP][BP]</del>
+                  <span class="credit-card-badge">MCPEDL</span>
+                </div>
+                <div class="credit-card-meta">
+                  <strong>開発者</strong>: AL3XANDRE ｜ @no-discord-user
+                </div>
+                <div class="credit-card-note">木製の飛行機を追加するアドオン。現在は新井鯖では使用していません。</div>
+              </div>
+            </a>
           </li>
 
-          <li class="addon-item addon-item-legacy">
-            <div class="addon-name"><del>WorldEdit: Bedrock Edition [RP][BP]</del></div>
-            <div class="addon-meta"><strong>開発者</strong>: SIsilicon ｜ &lt;@560245199972990977&gt;</div>
-            <div class="addon-meta"><strong>リンク</strong>: <a href="https://mcpedl.com/worldedit-be-addon/" target="_blank" rel="noopener noreferrer" class="addon-link">https://mcpedl.com/worldedit-be-addon/</a></div>
+          <li>
+            <a href="https://mcpedl.com/worldedit-be-addon/"
+               target="_blank" rel="noopener noreferrer" class="credit-card-link">
+              <div class="credit-card credit-card-legacy">
+                <div class="credit-card-title"><del>WorldEdit: Bedrock Edition [RP][BP]</del>
+                  <span class="credit-card-badge">MCPEDL</span>
+                </div>
+                <div class="credit-card-meta">
+                  <strong>開発者</strong>: SIsilicon ｜ &lt;@560245199972990977&gt;
+                </div>
+                <div class="credit-card-note">Bedrock 版 WorldEdit。現在は新井鯖では使用していません。</div>
+              </div>
+            </a>
           </li>
         </ul>
       </div>
@@ -573,21 +718,20 @@
         HUBで使用しているBGM
       </h2>
       <div class="section-body">
-        <p class="bgm-name">ロビーBGM: Mage Town</p>
-        <p class="bgm-meta">
-          Listen:
-          <a href="https://www.youtube.com/watch?v=c6icLvUsCao&pp=ygUWTWFnZSB0b3duIFNreWJsb2NrIE9TVA%3D%3D" target="_blank" rel="noopener noreferrer">
-            https://www.youtube.com/watch?v=c6icLvUsCao
-          </a><br>
-          Composer: <strong>ShinkoNet</strong><br>
-          License: <a href="https://hypixel.net/" target="_blank" rel="noopener noreferrer">Hypixel Inc.</a>
-        </p>
-        <p class="bgm-note">
-          The track "Mage Town" is the intellectual property of Hypixel Inc. and is used here under Hypixel's license. All rights are reserved by Hypixel Inc.
-        </p>
-        <p class="bgm-note">
-          This is an original ambient track called "Magetown", made for Hypixel's Skyblock game on the Hypixel Minecraft Server. It is the song that plays in Scarleton inside the Crimson Isle (Nether Island).
-        </p>
+        <a href="https://www.youtube.com/watch?v=c6icLvUsCao&pp=ygUWTWFnZSB0b3duIFNreWJsb2NrIE9TVA%3D%3D"
+           target="_blank" rel="noopener noreferrer" class="credit-card-link">
+          <div class="credit-card">
+            <div class="credit-card-title">Mage Town
+              <span class="credit-card-badge">YouTube</span>
+            </div>
+            <div class="credit-card-meta">
+              Composer: <strong>ShinkoNet</strong>&nbsp;&nbsp;｜&nbsp;&nbsp;License: Hypixel Inc.
+            </div>
+            <div class="credit-card-note">
+              新井鯖 HUB でループ再生しているロビーBGM。Hypixel SkyBlock の Crimson Isle / Scarleton で使用される楽曲で、著作権は Hypixel Inc. に帰属します。
+            </div>
+          </div>
+        </a>
       </div>
     </section>
 
@@ -598,9 +742,12 @@
         立ち絵・創作物について
       </h2>
       <div class="section-body">
-        <p class="credit-note">
-          新井鯖運営メンバーの立ち絵はすべて「しいなかげひと（しいな）」さんに著作権が帰属しますが、本人の許可を得て、このサイトは成り立っています。
-        </p>
+        <div class="credit-card">
+          <div class="credit-card-title">運営メンバーの立ち絵</div>
+          <div class="credit-card-note">
+            新井鯖運営メンバーの立ち絵はすべて「しいなかげひと（しいな）」さんに著作権が帰属します。本人の許可を得て、このサイトは成り立っています。
+          </div>
+        </div>
       </div>
     </section>
   </div>
