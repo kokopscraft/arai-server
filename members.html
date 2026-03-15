@@ -541,6 +541,29 @@
       position: relative;
       z-index: 400;
     }
+    .notice-banner {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: rgba(234, 179, 8, 0.08);
+      border: 1px solid rgba(234, 179, 8, 0.35);
+      border-radius: 10px;
+      padding: 0.75rem 1.25rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.875rem;
+      color: #fde68a;
+      line-height: 1.5;
+    }
+    .notice-banner strong {
+      color: #fbbf24;
+      font-weight: 700;
+    }
+    .notice-icon {
+      width: 1rem;
+      height: 1rem;
+      flex-shrink: 0;
+      color: #fbbf24;
+    }
   </style>
 </head>
 <body>
@@ -575,6 +598,11 @@
       <h1>Members</h1>
       <p class="subtitle">各国の国民とMinecraftネームタグを確認</p>
     </header>
+
+    <div class="notice-banner">
+      <i data-lucide="info" class="notice-icon"></i>
+      <span>現在表示されているのは新井鯖<strong>第二期</strong>の国家勢力図です。順次、第三期のものに差し替えてまいります。</span>
+    </div>
 
     <div class="stats" id="stats">
       <div class="stat-item">
