@@ -785,8 +785,8 @@
       <p class="subtitle">新井鯖の遊び方・仕様ガイド</p>
       <div class="version-selector">
         <button class="version-btn" data-version="gen1">第一期</button>
-        <button class="version-btn active" data-version="gen2">第二期</button>
-        <button class="version-btn" data-version="gen3">第三期<span class="version-preparing">(準備中)</span></button>
+        <button class="version-btn" data-version="gen2">第二期</button>
+        <button class="version-btn active" data-version="gen3">第三期</button>
       </div>
     </div>
 
@@ -820,6 +820,21 @@
           <li><a href="#rank">ランクシステム</a></li>
           <li><a href="#keiyou">競羊</a></li>
           <li><a href="#zakuvegas">ザクベガス（閉鎖）</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-divider gen2-sidebar"></div>
+
+      <div class="sidebar-group gen3-sidebar">
+        <div class="sidebar-group-label">第三期</div>
+        <ul class="sidebar-nav">
+          <li><a href="#gen3-script-events">スクリプトイベントコマンド</a></li>
+          <li><a href="#gen3-functions">ファンクションコマンド</a></li>
+          <li><a href="#gen3-features">システムフィーチャー</a></li>
+          <li><a href="#gen3-chat-commands">チャットコマンド</a></li>
+          <li><a href="#gen3-osmium">オスミウムシステム</a></li>
+          <li><a href="#gen3-dependencies">技術情報</a></li>
+          <li><a href="#gen3-troubleshooting">トラブルシューティング</a></li>
         </ul>
       </div>
     </aside>
@@ -1419,13 +1434,342 @@
         </table>
       </section>
 
-      <!-- ── 第三期: 準備中メッセージ ── -->
-      <section class="wiki-section gen3-content" id="gen3-preparing" style="display:none;">
-        <div class="info-banner">
-          <i data-lucide="info"></i>
-          <span><strong style="color:#f1f5f9;">第三期の情報はまだ準備中です。</strong>開幕が近づきましたら順次公開いたします。</span>
+      <!-- ── 第三期: スクリプトイベントコマンド ── -->
+      <section class="wiki-section gen3-content" id="gen3-script-events" data-keywords="スクリプトイベント TPS TPS Monitor Commander API サーバー転送">
+        <h2 class="wiki-section-title">
+          <i data-lucide="terminal"></i>
+          スクリプトイベントコマンド
+        </h2>
+
+        <h3 class="wiki-subsection-title">TPS モニタ (arai:tps)</h3>
+        <div class="wiki-card">
+          <p><strong>説明：</strong>サーバーのTPS（Ticks Per Second）を5秒間のサンプリング期間で測定し表示します。</p>
+          <p><strong>エイリアス：</strong> <code>arai:tps</code>, <code>arai:tps_check</code>, <code>a:tps</code>, <code>a:tps_check</code></p>
+          <p><strong>使用方法：</strong></p>
+          <pre><code>/scriptevent arai:tps
+/scriptevent a:tps</code></pre>
+          <p><strong>出力：</strong>測定されたTPS値を実行プレイヤーに表示します。</p>
+        </div>
+
+        <h3 class="wiki-subsection-title">TPS ブロードキャスト (arai:tps_share)</h3>
+        <div class="wiki-card">
+          <p><strong>説明：</strong>最後に測定されたTPS結果をワールド内の全プレイヤーにブロードキャストします。</p>
+          <p><strong>エイリアス：</strong> <code>arai:tps_share</code>, <code>arai:send_tps</code>, <code>a:tps_share</code>, <code>a:send_tps</code></p>
+          <p><strong>使用方法：</strong></p>
+          <pre><code>/scriptevent arai:tps_share
+/scriptevent a:tps_share</code></pre>
+          <p><strong>出力：</strong>最新のTPS測定結果を接続中の全プレイヤーに送信します。</p>
+        </div>
+
+        <h3 class="wiki-subsection-title">Commander API ステータスチェック</h3>
+        <div class="wiki-card">
+          <p><strong>説明：</strong><code>capi:world</code>スコアボードの<code>current_tick</code>値を監視することで、外部Commander APIアドオンがインストール・活動しているかを確認します。</p>
+          <p><strong>エイリアス：</strong> <code>asa3:capi_check</code>, <code>a:capi_check</code></p>
+          <p><strong>使用方法：</strong></p>
+          <pre><code>/scriptevent asa3:capi_check
+/scriptevent a:capi_check</code></pre>
+          <p><strong>出力：</strong></p>
+          <ul>
+            <li><code>✓ Commander API is Available</code> — APIが稼働中</li>
+            <li><code>✗ Commander API is Not Available</code> — APIが検出されていないか稼働していない</li>
+          </ul>
+        </div>
+
+        <h3 class="wiki-subsection-title">サーバー転送コマンド</h3>
+        <div class="wiki-card">
+          <p><strong>新井サーバーへ転送</strong></p>
+          <pre><code>/scriptevent asa3:t_arai
+/scriptevent a:t_arai</code></pre>
+          <p>実行プレイヤーを新井サーバー (162.43.54.202:19132) に転送します。</p>
+        </div>
+        <div class="wiki-card">
+          <p><strong>PVP サーバーへ転送</strong></p>
+          <pre><code>/scriptevent asa3:t_pvp
+/scriptevent a:t_pvp</code></pre>
+          <p>実行プレイヤーをIdo PVP メインサーバー (play.sakana11.org:22208) に転送します。</p>
         </div>
       </section>
+
+      <!-- ── 第三期: ファンクションコマンド ── -->
+      <section class="wiki-section gen3-content" id="gen3-functions" data-keywords="ファンクション オートインデックス">
+        <h2 class="wiki-section-title">
+          <i data-lucide="function-square"></i>
+          ファンクションコマンド
+        </h2>
+
+        <h3 class="wiki-subsection-title">オートインデックス</h3>
+        <div class="wiki-card">
+          <p><strong>説明：</strong>ワールドのデータインデックスを維持するため、3分ごとに自動実行されます。</p>
+          <p><strong>実行方式：</strong>スクリプトシステムにより3分間隔で自動トリガーされ、手動実行は不要です。</p>
+          <p><strong>ステータス：</strong>ビヘイビアパックの<code>functions/</code>ディレクトリに登録されています。カスタム機能を実装する場合は、データパックのfunctionsフォルダに関数を追加してください。</p>
+        </div>
+      </section>
+
+      <!-- ── 第三期: システムフィーチャー ── -->
+      <section class="wiki-section gen3-content" id="gen3-features" data-keywords="システムフィーチャー スクリプトイベント Commander API ワールド自動化">
+        <h2 class="wiki-section-title">
+          <i data-lucide="settings"></i>
+          システムフィーチャー
+        </h2>
+
+        <h3 class="wiki-subsection-title">1. 統合スクリプトイベントハンドラー</h3>
+        <div class="wiki-card">
+          <p>すべてのスクリプトイベントは、以下の機能を持つ中央集約型ハンドラーシステムを通じて処理されます：</p>
+          <ul>
+            <li>スクリプトIDプレフィックスの正規化（<code>arai:</code>, <code>asa3:</code>, または短形式の<code>a:</code>）</li>
+            <li>適切なハンドラーへのイベントルーティング</li>
+            <li>エラーハンドリングとログ管理</li>
+          </ul>
+        </div>
+
+        <h3 class="wiki-subsection-title">2. Commander API ステータス管理</h3>
+        <div class="wiki-card">
+          <p>以下の方法でCommander APIの可用性を監視します：</p>
+          <ul>
+            <li><strong>検出方法：</strong>現在のティックスコアボード監視</li>
+            <li><strong>チェック間隔：</strong>5分ごとに自動実行</li>
+            <li><strong>永続状態：</strong>他のシステムがアクセスできるようAPI状態をダイナミックプロパティに保存</li>
+          </ul>
+        </div>
+
+        <h3 class="wiki-subsection-title">3. ワールド自動化</h3>
+        <div class="wiki-card">
+          <ul>
+            <li><strong>オートインデックス：</strong>3分ごとに<code>function index</code>を実行</li>
+            <li><strong>ワールドクリーンアップ：</strong>カスタマイズ可能なスケジュールでワールド状態を管理</li>
+            <li><strong>スペクテイターモード管理：</strong>オペレーターがゲームモードを切り替える際のテレポーション処理</li>
+          </ul>
+        </div>
+
+        <h3 class="wiki-subsection-title">4. メインメニューシステム</h3>
+        <div class="wiki-card">
+          <ul>
+            <li><strong>プレイヤー参加配布：</strong>新規プレイヤーに自動的にメインメニューアイテムを付与</li>
+            <li><strong>API対応：</strong>利用可能な場合はCommander APIを使用して拡張機能を提供</li>
+            <li><strong>フォールバック対応：</strong>Commander API未対応の場合はバニラ互換版を提供</li>
+          </ul>
+        </div>
+
+        <h3 class="wiki-subsection-title">5. サーバー転送システム</h3>
+        <div class="wiki-card">
+          <p>設定されたBedrock サーバーへのプレイヤー転送に対応：</p>
+          <ul>
+            <li>サーバーエイリアスショートカット</li>
+            <li>シームレスな転送実行</li>
+            <li>エラーハンドリングとユーザーフィードバック</li>
+          </ul>
+        </div>
+
+        <h3 class="wiki-subsection-title">6. ワープシステム</h3>
+        <div class="wiki-card">
+          <p>G Warp機能を提供：</p>
+          <ul>
+            <li>位置ベースのテレポーテーション</li>
+            <li>サーバーリストの統合</li>
+            <li>プレイヤー国家の検出</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ── 第三期: チャットコマンド ── -->
+      <section class="wiki-section gen3-content" id="gen3-chat-commands" data-keywords="チャットコマンド 椅子 セーフストレージ イベント応答">
+        <h2 class="wiki-section-title">
+          <i data-lucide="message-circle"></i>
+          チャットコマンド
+        </h2>
+
+        <h3 class="wiki-subsection-title">椅子コマンド</h3>
+        <table class="wiki-table">
+          <thead><tr><th>コマンド</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr><td><code>!sit</code></td><td>椅子に座る</td></tr>
+            <tr><td><code>!stand</code></td><td>椅子から立ち上がる</td></tr>
+            <tr><td><code>!standall</code></td><td>全プレイヤーを椅子から立たせる</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="wiki-subsection-title">イベント応答コマンド</h3>
+        <table class="wiki-table">
+          <thead><tr><th>コマンド</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr><td><code>yes</code></td><td>承認・了承の応答</td></tr>
+            <tr><td><code>no</code></td><td>拒否・否定の応答</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="wiki-subsection-title">セーフストレージコマンド</h3>
+        <div class="wiki-card">
+          <p><strong>コマンド：</strong> <code>!safestorage</code></p>
+          <p><strong>説明：</strong>セーフストレージのキーアイテム（locker、editor、retriever）を付与します</p>
+        </div>
+
+        <div class="wiki-card">
+          <p><strong>セーフストレージキーアイテム：</strong></p>
+          <ul>
+            <li><strong>locker</strong> — ブロックをロック（Tripwire Hook）
+              <ul><li>インベントリを持つブロックに使用してロック</li></ul>
+            </li>
+            <li><strong>editor</strong> — パスワードを編集・削除（Tripwire Hook）
+              <ul><li>ロックを作成したプレイヤーのみ使用可能</li></ul>
+            </li>
+            <li><strong>retriever</strong> — パスワードを表示（Tripwire Hook）
+              <ul><li>ロック作成者またはオペレーターのみ使用可能</li></ul>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ── 第三期: オスミウムシステム ── -->
+      <section class="wiki-section gen3-content" id="gen3-osmium" data-keywords="オスミウム オア インゴット ツール ツルハシ 斧 シャベル">
+        <h2 class="wiki-section-title">
+          <i data-lucide="gem"></i>
+          オスミウムシステム
+        </h2>
+
+        <h3 class="wiki-subsection-title">オスミウムについて</h3>
+        <div class="wiki-card">
+          <p>オスミウムは、ワールドに追加されたカスタムオア素材で、ツールやアイテムのクラフティング用の追加リソースティアを提供します。標準的なマインクラフト素材と比べて、より高い耐久性と効果を備えています。</p>
+        </div>
+
+        <h3 class="wiki-subsection-title">オスミウムオア</h3>
+        <div class="wiki-card">
+          <ul>
+            <li><strong>ブロックID：</strong> <code>asa3:osmium_ore</code></li>
+            <li><strong>採掘時間：</strong>4秒（鉄以上のツルハシが必要）</li>
+            <li><strong>ドロップ：</strong>生のオスミウム</li>
+            <li><strong>爆発耐性：</strong>3.0</li>
+            <li><strong>入手方法：</strong>ワールドに自然生成</li>
+          </ul>
+        </div>
+
+        <h3 class="wiki-subsection-title">オスミウムアイテム</h3>
+        <div class="wiki-card">
+          <p><strong>生のオスミウム</strong></p>
+          <ul>
+            <li><strong>アイテムID：</strong> <code>asa3:raw_osmium</code></li>
+            <li><strong>用途：</strong>オスミウムオアの採掘で入手</li>
+            <li><strong>精錬：</strong>かまどで精錬してオスミウムインゴットを作成可能</li>
+          </ul>
+        </div>
+        <div class="wiki-card">
+          <p><strong>オスミウムインゴット</strong></p>
+          <ul>
+            <li><strong>アイテムID：</strong> <code>asa3:osmium_ingot</code></li>
+            <li><strong>用途：</strong>ツールと装備のクラフティング素材</li>
+            <li><strong>スタックサイズ：</strong>64</li>
+          </ul>
+        </div>
+
+        <h3 class="wiki-subsection-title">オスミウムツール</h3>
+        <table class="wiki-table">
+          <thead><tr><th>ツール</th><th>アイテムID</th><th>レシピ</th></tr></thead>
+          <tbody>
+            <tr><td>ツルハシ</td><td><code>asa3:osmium_pickaxe</code></td><td>オスミウムインゴット3個 + 棒2個</td></tr>
+            <tr><td>斧</td><td><code>asa3:osmium_axe</code></td><td>オスミウムインゴット3個 + 棒2個</td></tr>
+            <tr><td>シャベル</td><td><code>asa3:osmium_shovel</code></td><td>オスミウムインゴット1個 + 棒2個</td></tr>
+            <tr><td>クワ</td><td><code>asa3:osmium_hoe</code></td><td>オスミウムインゴット2個 + 棒2個</td></tr>
+            <tr><td>剣</td><td><code>asa3:osmium_sword</code></td><td>オスミウムインゴット2個 + 棒1個</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="wiki-subsection-title">クラフティングレシピ</h3>
+        <div class="wiki-card">
+          <p><strong>生のオスミウムを精錬</strong></p>
+          <ul>
+            <li><strong>入力：</strong>生のオスミウム</li>
+            <li><strong>出力：</strong>オスミウムインゴット（1:1の比率）</li>
+            <li><strong>使用可能：</strong>かまど、燻製器、溶鉱炉</li>
+          </ul>
+        </div>
+        <div class="wiki-card">
+          <p><strong>オスミウムオアを精錬</strong></p>
+          <ul>
+            <li><strong>入力：</strong>オスミウムオア</li>
+            <li><strong>出力：</strong>オスミウムインゴット（追加経験値付き）</li>
+            <li><strong>使用可能：</strong>かまど、燻製器、溶鉱炉</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ── 第三期: 技術情報 ── -->
+      <section class="wiki-section gen3-content" id="gen3-dependencies" data-keywords="依存関係 バージョン インストール トラブルシューティング">
+        <h2 class="wiki-section-title">
+          <i data-lucide="package"></i>
+          技術情報
+        </h2>
+
+        <h3 class="wiki-subsection-title">依存関係</h3>
+        <div class="wiki-card">
+          <ul>
+            <li><strong>@minecraft/server</strong> (v1.13.0以上) — コア サーバーイベントとワールドAPI</li>
+            <li><strong>@minecraft/server-ui</strong> (v1.2.0以上) — プレイヤーFormUI（ActionFormData、ModalFormData）</li>
+            <li><strong>@minecraft/server-admin</strong> (v1.0.0-beta以上) — サーバー管理機能（プレイヤー転送）</li>
+            <li><strong>Commander API アドオン</strong>（オプション） — 拡張API機能のため</li>
+          </ul>
+        </div>
+
+        <h3 class="wiki-subsection-title">バージョン情報</h3>
+        <div class="wiki-card">
+          <ul>
+            <li><strong>パックバージョン：</strong>1.0.2</li>
+            <li><strong>最小ゲームバージョン：</strong>1.21.70</li>
+          </ul>
+        </div>
+
+        <h3 class="wiki-subsection-title">インストール方法</h3>
+        <div class="wiki-card">
+          <ol>
+            <li><code>[BHP]ASA3</code>フォルダを<code>behavior_packs</code>ディレクトリに配置</li>
+            <li>オプションで<code>[RES]ASA3</code>リソースパックを追加（ビジュアル強化用）</li>
+            <li>ワールド設定で両方のパックを有効化</li>
+            <li><code>function index</code>がワールドのデータパックで利用可能か確認</li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ── 第三期: トラブルシューティング ── -->
+      <section class="wiki-section gen3-content" id="gen3-troubleshooting" data-keywords="トラブルシューティング スクリプト Commander API オートインデックス エラー">
+        <h2 class="wiki-section-title">
+          <i data-lucide="alert-circle"></i>
+          トラブルシューティング
+        </h2>
+
+        <h3 class="wiki-subsection-title">スクリプトイベントが動作しない</h3>
+        <div class="wiki-card">
+          <ul>
+            <li>ワールド設定でアドオンが有効化されているか確認</li>
+            <li>ワールド設定でスクリプトイベントが有効化されているか確認（実験的機能 → スクリプトイベント）</li>
+            <li>正しいスクリプトID形式を使用しているか確認</li>
+          </ul>
+        </div>
+
+        <h3 class="wiki-subsection-title">Commander API が検出されない</h3>
+        <div class="wiki-card">
+          <ul>
+            <li>Commander API アドオンがインストール・有効化されているか確認</li>
+            <li>APIが稼働中の場合、<code>capi:world</code>スコアボードが存在する必要があります</li>
+            <li><code>asa3:capi_check</code>を実行して手動でステータス確認</li>
+          </ul>
+        </div>
+
+        <h3 class="wiki-subsection-title">オートインデックスが実行されない</h3>
+        <div class="wiki-card">
+          <ul>
+            <li>データパックのfunctionsフォルダに<code>function index</code>が定義されているか確認</li>
+            <li>コンソールでエラーメッセージを確認（利用可能な場合は<code>/script debug ...</code>を使用）</li>
+          </ul>
+        </div>
+
+        <h3 class="wiki-subsection-title">注記</h3>
+        <div class="wiki-card">
+          <ul>
+            <li>すべてのスクリプトイベントコマンドは、フル形式（<code>arai:</code>, <code>asa3:</code>）および短形式（<code>a:</code>）の両方に対応しています</li>
+            <li>このシステムはサーバー環境向けですが、すべてのBedrock ワールドで動作します</li>
+            <li>最良の結果を得るために、<code>[RES]ASA3</code>リソースパックと組み合わせて使用してください</li>
+          </ul>
+        </div>
+      </section>
+
 
     </main>
   </div>
@@ -1510,8 +1854,8 @@
       });
     });
 
-    // Initialize with gen2
-    switchVersion('gen2');
+    // Initialize with gen3
+    switchVersion('gen3');
 
     // Fade-in observer
     const fadeObserver = new IntersectionObserver((entries) => {
