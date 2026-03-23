@@ -492,7 +492,7 @@
         <img src="images/server_logo.png" alt="新井鯖ロゴ" class="nav-logo">
         <span class="nav-title">新井鯖<span class="nav-title-pc"> - Founding Server</span></span>
       </a>
-      <!-- 元の9タブ。JSでここから8つ選び、Creditsを混ぜてシャッフル -->
+      <!-- 9つの固定タブ -->
       <ul class="nav-links" id="navLinks">
         <li data-tab="home"><a href="index.html"><i data-lucide="home" class="nav-icon"></i>Home</a></li>
         <li data-tab="news"><a href="news.html"><i data-lucide="newspaper" class="nav-icon"></i>News</a></li>
@@ -500,9 +500,9 @@
         <li data-tab="wiki"><a href="wiki.html"><i data-lucide="library" class="nav-icon"></i>Wiki</a></li>
         <li data-tab="rules"><a href="rules.html"><i data-lucide="book-open" class="nav-icon"></i>Rules</a></li>
         <li data-tab="events"><a href="events.html"><i data-lucide="calendar-days" class="nav-icon"></i>Events</a></li>
-        <li data-tab="economy"><a href="economy.html"><i data-lucide="circle-dollar-sign" class="nav-icon"></i>Economy</a></li>
         <li data-tab="network"><a href="network.html"><i data-lucide="globe" class="nav-icon"></i>Network</a></li>
         <li data-tab="admin"><a href="admin.html"><i data-lucide="settings-2" class="nav-icon"></i>Admin</a></li>
+        <li data-tab="credits"><a href="credits.html" class="active"><i data-lucide="sparkles" class="nav-icon"></i>Credits</a></li>
       </ul>
       <button class="nav-hamburger" onclick="toggleNav()" aria-label="メニューを開く">
         <span></span><span></span><span></span>
@@ -750,34 +750,7 @@
 
     // ナビゲーションのランダム化:
     // 既存9タブから8をランダム選出し、Creditsを足して計9タブでシャッフル
-    (function () {
-      const nav = document.getElementById('navLinks');
-      if (!nav) return;
-
-      const originalItems = Array.from(nav.children); // 9個
-      if (originalItems.length !== 9) return;
-
-      // ランダムに1つ除外するインデックス
-      const removeIndex = Math.floor(Math.random() * originalItems.length);
-      const keptItems = originalItems.filter((_, idx) => idx !== removeIndex);
-
-      // Credits タブを生成
-      const creditsLi = document.createElement('li');
-      creditsLi.setAttribute('data-tab', 'credits');
-      creditsLi.innerHTML = '<a href="credits.html" class="active"><i data-lucide="sparkles" class="nav-icon"></i>Credits</a>';
-
-      const combined = [...keptItems, creditsLi];
-
-      // Fisher-Yates でシャッフル
-      for (let i = combined.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [combined[i], combined[j]] = [combined[j], combined[i]];
-      }
-
-      // nav を差し替え
-      nav.innerHTML = '';
-      combined.forEach(li => nav.appendChild(li));
-    })();
+    // ※廃止：Creditsは固定タブになりました
 
     lucide.createIcons();
   </script>

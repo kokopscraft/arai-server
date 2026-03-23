@@ -681,30 +681,6 @@
         setTimeout(() => heroBg.classList.add('loaded'), 150);
     };
 
-    // --- Arai Server Add-on イースターエッグ ---
-    (function () {
-      const trigger = document.querySelector('.addon-secret-trigger');
-      if (!trigger) return;
-
-      let clickCount = 0;
-      let windowStart = 0;
-
-      trigger.addEventListener('click', () => {
-        const now = Date.now();
-
-        if (!windowStart || now - windowStart > 2000) {
-          windowStart = now;
-          clickCount = 0;
-        }
-
-        clickCount++;
-
-        if (clickCount >= 7 && now - windowStart <= 2000) {
-          window.location.href = 'credits.html';
-        }
-      });
-    })();
-
     lucide.createIcons();
   </script>
 </body>
