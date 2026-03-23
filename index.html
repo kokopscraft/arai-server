@@ -475,6 +475,56 @@
       position: relative;
       z-index: 400;
     }
+
+    /* ── Credit Card (アドオン表示用) ── */
+    .credit-card {
+      background: rgba(15,23,42,1);
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+      cursor: pointer;
+      position: relative;
+    }
+    .addon-card-link .credit-card:hover,
+    .credit-card.no-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(56,189,248,0.15);
+      border-color: #38bdf8;
+    }
+    .credit-card.no-link:active {
+      transform: scale(0.97);
+      box-shadow: none;
+    }
+    .credit-card-title {
+      font-weight: 700;
+      color: #f1f5f9;
+      font-size: 0.97rem;
+      margin-bottom: 0.2rem;
+      padding-right: 4rem;
+    }
+    .credit-card-meta {
+      font-size: 0.82rem;
+      color: #94a3b8;
+      margin-bottom: 0.15rem;
+    }
+    .credit-card-meta strong {
+      color: #e5e7eb;
+      font-weight: 600;
+    }
+    .credit-card-note {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-top: 0.35rem;
+    }
+    .credit-card-badge {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      font-size: 0.72rem;
+      color: #38bdf8;
+      opacity: 0.7;
+    }
   </style>
 </head>
 <body>
@@ -542,26 +592,35 @@
     <ul class="addon-list">
     <li>
       <a href="https://capi.un-known.xyz/" target="_blank" rel="noopener noreferrer" class="addon-card-link">
-      <div class="addon-item">
-        <div class="addon-name">Commander API</div>
-        <div class="addon-desc">コマンドの限界を突破する。コマンド勢に新たな力を。<br>開発者: 𝒩𝒶𝓃ℴ・あるたか・wako</div>
-        <div class="addon-badge">↗</div>
+      <div class="credit-card">
+        <div class="credit-card-title">Commander API
+          <span class="credit-card-badge">GitHub</span>
+        </div>
+        <div class="credit-card-meta">
+          <strong>開発者</strong>: 𝒩𝒶𝓃ℴ , あるたか , wako
+        </div>
+        <div class="credit-card-note">コマンドの限界を突破する。コマンド勢に新たな力を。</div>
       </div>
       </a>
     </li>
     <li>
       <a href="https://mcpedl.com/safe-storage-addon/" target="_blank" rel="noopener noreferrer" class="addon-card-link">
-      <div class="addon-item">
-        <div class="addon-name">Safe Storage</div>
-        <div class="addon-desc">チェストに鍵をかけられる収納セキュリティアドオン。ロックしたチェストは破壊・爆破を受け付けない。<br>開発者: Vechrozilator</div>
-        <div class="addon-badge">↗</div>
+      <div class="credit-card">
+        <div class="credit-card-title">Safe Storage
+          <span class="credit-card-badge">MCPEDL</span>
+        </div>
+        <div class="credit-card-meta">
+          <strong>開発者</strong>: Vechrozilator
+        </div>
+        <div class="credit-card-note">チェストに鍵をかけられる収納セキュリティアドオン。ロックしたチェストは破壊・爆破を受け付けない。</div>
       </div>
       </a>
     </li>
-    <li class="addon-item no-link addon-secret-trigger">
-      <div class="addon-name">Arai Server Add-on（オリジナル）</div>
-      <div class="addon-desc">新井鯖技術班のココが制作したオリジナル機能満載のアドオン。Java版の経済サーバー<a href="https://minecraft.jp/servers/dan5.red" target="_blank" rel="noopener noreferrer">まんじゅうサーバー</a>から着想を受けています。非公開・配布予定なし。</div>
-      <div class="addon-badge-locked">Private</div>
+    <li class="credit-card no-link addon-secret-trigger">
+      <div class="credit-card-title">Arai Server Add-on（オリジナル）
+        <span class="credit-card-badge">Private</span>
+      </div>
+      <div class="credit-card-note">新井鯖技術班のココが制作したオリジナル機能満載のアドオン。Java版の経済サーバー<a href="https://minecraft.jp/servers/dan5.red" target="_blank" rel="noopener noreferrer">まんじゅうサーバー</a>から着想を受けています。非公開・配布予定なし。</div>
     </li>
     </ul>
   </div>
