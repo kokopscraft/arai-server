@@ -829,7 +829,9 @@
         <div class="sidebar-group-label">第三期</div>
         <ul class="sidebar-nav">
           <li><a href="#gen3-chat-commands">チャットコマンド</a></li>
-          <li><a href="#gen3-osmium">オスミウムシステム</a></li>
+          <li><a href="#gen3-gwarp">G Warp</a></li>
+          <li><a href="#gen3-wcu">ワールドクリーンアップ</a></li>
+          <li><a href="#gen3-osmium">固有鉱石「オスミウム」について</a></li>
         </ul>
       </div>
     </aside>
@@ -1477,35 +1479,147 @@
         </div>
       </section>
 
+      <!-- ── 第三期: G Warp ── -->
+      <section class="wiki-section gen3-content" id="gen3-gwarp" data-keywords="G Warp グローバルワープ テレポート HUB ログイン 地点登録">
+        <h2 class="wiki-section-title">
+          <i data-lucide="map-pin"></i>
+          G Warp
+        </h2>
+
+        <h3 class="wiki-subsection-title">G Warpについて</h3>
+        <div class="wiki-card">
+          <p><strong>G Warp</strong>（Global Warp）は、サーバー内の登録された地点へテレポートできる機能です。</p>
+          <p><strong>ワープに必要な条件：</strong>その場に<strong>3秒間立ち止まる</strong>必要があります。モブに襲われている状況などでは使用できません。</p>
+        </div>
+
+        <h3 class="wiki-subsection-title">利用可能なワープ先</h3>
+        <table class="wiki-table">
+          <thead><tr><th>ワープ先</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr><td><strong>HUB</strong></td><td>メインハブへテレポート</td></tr>
+            <tr><td><strong>ログイン</strong></td><td>初回ログイン地点へテレポート</td></tr>
+            <tr><td><strong>自国に登録された地点</strong></td><td>自分の国に登録しているワープポイント</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="wiki-subsection-title">自国への地点登録</h3>
+        <div class="wiki-card">
+          <p>自分の国に<strong>無料でワープポイント</strong>を登録できます。</p>
+          <p><strong>申請方法：</strong>以下のDiscordチャンネルで申請してください</p>
+          <p><a href="https://discord.com/channels/1338033471045505098/1373900195674329168" target="_blank" rel="noopener noreferrer" style="color:#38bdf8;text-decoration:underline;">G Warp登録申請チャンネル</a></p>
+        </div>
+
+        <h3 class="wiki-subsection-title">申請テンプレート</h3>
+        <div class="wiki-card" style="background:#0f172a;border:1px solid #334155;">
+          <p style="font-family:'Courier New',monospace;font-size:0.85rem;color:#cbd5e1;line-height:1.8;">
+            <strong style="color:#38bdf8;">&gt; **国名**: </strong>{国名}<br>
+            <strong style="color:#38bdf8;">&gt; **地点**: </strong>{座標:x y z}<br>
+            <strong style="color:#38bdf8;">&gt; **表示名**: </strong>{表示名}
+          </p>
+        </div>
+
+        <div class="wiki-card">
+          <p><strong>例：</strong></p>
+          <p style="font-family:'Courier New',monospace;font-size:0.85rem;color:#94a3b8;background:#0f172a;border:1px solid #334155;border-radius:4px;padding:0.75rem;margin-top:0.5rem;">
+            &gt; **国名**: ゲルン=アラクイア中央帝国<br>
+            &gt; **地点**: 100 64 200<br>
+            &gt; **表示名**: 中央広場
+          </p>
+        </div>
+      </section>
+
+      <!-- ── 第三期: ワールドクリーンアップ ── -->
+      <section class="wiki-section gen3-content" id="gen3-wcu" data-keywords="ワールドクリーンアップ WCU アイテム削除 モブ 経験値 メインメニュー keep dinnerbone">
+        <h2 class="wiki-section-title">
+          <i data-lucide="trash-2"></i>
+          ワールドクリーンアップ
+        </h2>
+
+        <h3 class="wiki-subsection-title">ワールドクリーンアップとは</h3>
+        <div class="wiki-card">
+          <p><strong>ワールドクリーンアップ（WCU）</strong>は、サーバー内のワールドを整理するために<strong>20分周期</strong>で自動実行されるプログラムです。</p>
+          <p><strong>削除対象：</strong></p>
+          <ul>
+            <li>ワールドに落ちているアイテム</li>
+            <li>敵モブ（村人ゾンビを除く）</li>
+            <li>経験値オーブ</li>
+          </ul>
+        </div>
+
+        <h3 class="wiki-subsection-title">全ロスを防ぐための対策</h3>
+        <div class="wiki-card">
+          <p>WCUで削除されず、アイテムやエンティティを保護する方法があります。</p>
+        </div>
+
+        <h4 style="font-size:0.95rem;font-weight:600;color:#cbd5e1;margin:1rem 0 0.5rem;padding-left:0.75rem;border-left:2px solid #475569;">メインメニュー周辺の保護</h4>
+        <div class="wiki-card">
+          <p>メインメニューの付近<strong>7ブロック範囲</strong>に落ちているアイテムは自動削除されません。</p>
+        </div>
+
+        <h4 style="font-size:0.95rem;font-weight:600;color:#cbd5e1;margin:1rem 0 0.5rem;padding-left:0.75rem;border-left:2px solid #475569;">特殊な名前の保護</h4>
+        <div class="wiki-card">
+          <p><strong>エンティティに特殊な名前を付けることで、削除から保護できます：</strong></p>
+          <ul>
+            <li><strong>keep</strong> — 削除されない（最も一般的な保護方法）</li>
+            <li><strong>dinnerbone</strong> — 削除されない</li>
+            <li><strong>Grumm</strong> — 削除されない</li>
+          </ul>
+          <p>上記の名前を付けたエンティティはWCUでは削除されません。</p>
+        </div>
+
+        <h3 class="wiki-subsection-title">ログ設定</h3>
+        <div class="wiki-card">
+          <p><strong>残り時間ログの通知について：</strong></p>
+          <p>定期的に表示される「WCU実行まで…分」というログは、メインメニューの<strong>「設定」から削除できます</strong>。</p>
+        </div>
+
+        <div class="warn-banner">
+          <i data-lucide="alert-circle"></i>
+          <span>ただし、<strong style="color:#f1f5f9;">10秒前のアラート</strong>と<strong style="color:#f1f5f9;">実行通知</strong>は設定でオフにしても必ず届きます。重要な通知のため無視できません。</span>
+        </div>
+      </section>
+
       <!-- ── 第三期: オスミウムシステム ── -->
-      <section class="wiki-section gen3-content" id="gen3-osmium" data-keywords="オスミウム オア インゴット ツール ツルハシ 斧 シャベル">
+      <section class="wiki-section gen3-content" id="gen3-osmium" data-keywords="オスミウム 鉱石 インゴット ツール ツルハシ 斧 シャベル">
         <h2 class="wiki-section-title">
           <i data-lucide="gem"></i>
-          オスミウムシステム
+          固有鉱石「オスミウム」について
         </h2>
 
         <h3 class="wiki-subsection-title">オスミウムについて</h3>
         <div class="wiki-card">
-          <p>オスミウムは、ワールドに追加されたカスタムオア素材で、ツールやアイテムのクラフティング用の追加リソースティアを提供します。標準的なマインクラフト素材と比べて、より高い耐久性と効果を備えています。</p>
+          <p>オスミウムは、ワールドに追加されたカスタム鉱石素材で、ツールやアイテムのクラフティング用の重要なリソースです。標準的なマインクラフト素材と比べて、より高い耐久性と効果を備えています。</p>
         </div>
 
-        <h3 class="wiki-subsection-title">オスミウムオア</h3>
+        <h3 class="wiki-subsection-title">オスミウム鉱石</h3>
         <div class="wiki-card">
           <ul>
             <li><strong>ブロックID：</strong> <code>asa3:osmium_ore</code></li>
             <li><strong>採掘時間：</strong>4秒（鉄以上のツルハシが必要）</li>
-            <li><strong>ドロップ：</strong>生のオスミウム</li>
+            <li><strong>ドロップ：</strong>オスミウムの原石</li>
             <li><strong>爆発耐性：</strong>3.0</li>
-            <li><strong>入手方法：</strong>ワールドに自然生成</li>
           </ul>
+        </div>
+
+        <h3 class="wiki-subsection-title">鉱石の入手方法</h3>
+        <div class="wiki-card">
+          <p><strong>クラフティングで作成</strong></p>
+          <p>オスミウム鉱石は自然生成されないため、以下の石ブロックから作業台でクラフトできます：</p>
+          <ul>
+            <li>石（Stone）</li>
+            <li>花崗岩（Granite）</li>
+            <li>安山岩（Andesite）</li>
+            <li>閃緑岩（Diorite）</li>
+          </ul>
+          <p>これらの石ブロック<strong>9個</strong>を作業台にクラフトすることで、オスミウム鉱石<strong>1個</strong>を作成できます。</p>
         </div>
 
         <h3 class="wiki-subsection-title">オスミウムアイテム</h3>
         <div class="wiki-card">
-          <p><strong>生のオスミウム</strong></p>
+          <p><strong>オスミウムの原石</strong></p>
           <ul>
             <li><strong>アイテムID：</strong> <code>asa3:raw_osmium</code></li>
-            <li><strong>用途：</strong>オスミウムオアの採掘で入手</li>
+            <li><strong>用途：</strong>オスミウム鉱石の採掘で入手</li>
             <li><strong>精錬：</strong>かまどで精錬してオスミウムインゴットを作成可能</li>
           </ul>
         </div>
@@ -1532,17 +1646,17 @@
 
         <h3 class="wiki-subsection-title">クラフティングレシピ</h3>
         <div class="wiki-card">
-          <p><strong>生のオスミウムを精錬</strong></p>
+          <p><strong>オスミウムの原石を精錬</strong></p>
           <ul>
-            <li><strong>入力：</strong>生のオスミウム</li>
+            <li><strong>入力：</strong>オスミウムの原石</li>
             <li><strong>出力：</strong>オスミウムインゴット（1:1の比率）</li>
             <li><strong>使用可能：</strong>かまど、燻製器、溶鉱炉</li>
           </ul>
         </div>
         <div class="wiki-card">
-          <p><strong>オスミウムオアを精錬</strong></p>
+          <p><strong>オスミウム鉱石を精錬</strong></p>
           <ul>
-            <li><strong>入力：</strong>オスミウムオア</li>
+            <li><strong>入力：</strong>オスミウム鉱石</li>
             <li><strong>出力：</strong>オスミウムインゴット（追加経験値付き）</li>
             <li><strong>使用可能：</strong>かまど、燻製器、溶鉱炉</li>
           </ul>
