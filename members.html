@@ -218,11 +218,26 @@
       transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
       opacity: 0;
       transform: translateY(24px);
+      position: relative;
+      overflow: hidden;
+    }
+    .country-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 5px;
+      background: var(--country-color, #334155);
+      transition: width 0.2s;
     }
     .country-card:hover {
       border-color: var(--color-accent);
       box-shadow: 0 8px 32px rgba(56,189,248,0.18), 0 2px 8px rgba(0,0,0,0.4);
       transform: translateY(-2px);
+    }
+    .country-card:hover::before {
+      width: 6px;
     }
     .country-header {
       display: flex;
@@ -614,10 +629,6 @@
         <div class="stat-label">総人口</div>
       </div>
       <div class="stat-item">
-        <div class="stat-value" id="peaceCountries">0</div>
-        <div class="stat-label">平和国</div>
-      </div>
-      <div class="stat-item">
         <div class="stat-value" id="warCountries">0</div>
         <div class="stat-label">戦争国</div>
       </div>
@@ -627,9 +638,8 @@
       <input type="text" class="search-input" id="searchInput" placeholder="国名、プレイヤー名、ユーザーネームで検索...">
       <div class="filter-buttons">
         <button class="filter-btn active" data-filter="all">すべて</button>
-        <button class="filter-btn" data-filter="peace">平和国</button>
         <button class="filter-btn" data-filter="war">戦争国</button>
-        <button class="filter-btn" data-filter="star">Star</button>
+        <button class="filter-btn" data-filter="unaffiliated">未所属</button>
       </div>
     </div>
 
@@ -666,7 +676,7 @@
     }
 
     const countriesData = [
-      { name: "スペイン王国", tag: "ct:SPAIN", type: "peace", members: [
+      { name: "スペイン王国", tag: "ct:spain", type: "war", color: "#ffff00", members: [
         { role: "国王", name: "アトラ", username: "RyuukiRate86" },
         { role: "国民", name: "アルマ", username: "Irukkun046" },
         { role: "国民", name: "にも", username: "Nimofish0123" },
@@ -679,7 +689,7 @@
         { role: "国民", name: "米", username: "Comemet2090" },
         { role: "国民", name: "よはく", username: "Ruaxrose" }
       ]},
-      { name: "オスマン帝国", tag: "ct:OTTOMAN", type: "peace", members: [
+      { name: "オスマン帝国", tag: "ct:ottoman", type: "war", color: "#00ffff", members: [
         { role: "国王", name: "あらくま", username: "AR Bear6790" },
         { role: "国民", name: "はまぐり", username: "KENTY0924" },
         { role: "国民", name: "こいし", username: "istanb23455" },
@@ -688,7 +698,7 @@
         { role: "国民", name: "まるすけ", username: "marusuke228" },
         { role: "国民", name: "しばどっく", username: "Shibadog0901" }
       ]},
-      { name: "大スウェーデン連邦", tag: "ct:SWEDEN", type: "peace", members: [
+      { name: "大スウェーデン連邦", tag: "ct:sweden", type: "war", color: "#00ff00", members: [
         { role: "国王", name: "らぁめん", username: "Fried rice4986" },
         { role: "国民", name: "狐火", username: "Kitunebi1000ka" },
         { role: "国民", name: "めだか", username: "medqk1279" },
@@ -700,27 +710,28 @@
         { role: "国民", name: "ましゅまろ", username: "shuza1416" },
         { role: "国民", name: "カラス", username: "KARASU8295" }
       ]},
-      { name: "教皇領", tag: "ct:PAPACY", type: "peace", members: [
+      { name: "教皇領", tag: "ct:hre", type: "war", color: "#ff0000", members: [
         { role: "教皇", name: "ウルバヌス二世", username: "Tukhachev921" }
       ]},
-      { name: "スラヴ=ロシア連邦", tag: "ct:SLAVIA", type: "peace", members: [
+      { name: "スラヴ=ロシア連邦", tag: "ct:pol_lith", type: "war", color: "#ee82ee", members: [
         { role: "国王", name: "バリスタ", username: "still0401" },
         { role: "国民", name: "うべべう", username: "UBEBEU" },
         { role: "国民", name: "えあつ", username: "Yui072" }
       ]},
-      { name: "イギリス及びフランク王国", tag: "ct:UKFRA", type: "peace", members: [
+      { name: "イギリス及びフランク王国", tag: "ct:anglo_french", type: "war", color: "#ffa500", members: [
         { role: "国民", name: "DIO", username: "minedchart90732" },
         { role: "国民", name: "ジョナサン・ジョースター", username: "EviLTick2828" },
         { role: "国民", name: "狂猫", username: "HARUMARU PVP" },
         { role: "国民", name: "nekomi", username: "Motizuki1216" },
         { role: "国民", name: "ところで将軍", username: "minutes4868" },
         { role: "国民", name: "SorryBerry08409", username: "SorryBerry08409" }
-      ]},
-      { name: "未所属", tag: "ct:NOFLAG", type: "peace", members: [
-        { role: "国民", name: "Tにゃん", username: "T6neko" },
-        { role: "国民", name: "ゼロ", username: "ZERO.6358" },
-        { role: "国民", name: "復星", username: "doorudaia" }
       ]}
+    ];
+
+    const unaffiliatedMembers = [
+      { role: "国民", name: "Tにゃん", username: "T6neko" },
+      { role: "国民", name: "ゼロ", username: "ZERO.6358" },
+      { role: "国民", name: "復星", username: "doorudaia" }
     ];
 
     let currentFilter = 'all';
@@ -746,24 +757,41 @@
 
     function updateStats() {
         const total    = countriesData.length;
-        const members  = countriesData.reduce((sum, c) => sum + c.members.length, 0);
-        const peace    = countriesData.filter(c => c.type === 'peace').length;
+        const members  = countriesData.reduce((sum, c) => sum + c.members.length, 0) + unaffiliatedMembers.length;
         const war      = countriesData.filter(c => c.type === 'war').length;
-    
+
         countUp('totalCountries', total,   0);
         countUp('totalMembers',   members, 150);
-        countUp('peaceCountries', peace,   300);
-        countUp('warCountries',   war,     450);
+        countUp('warCountries',   war,     300);
     }
 
     function renderCountries(filter = 'all', searchTerm = '') {
-        const term = searchTerm;              // highlight() 用（元のケース）
-        const termLower = searchTerm.toLowerCase(); // フィルタ比較用（小文字）
+        const term = searchTerm;
+        const termLower = searchTerm.toLowerCase();
         const grid = document.getElementById('countriesGrid');
         grid.innerHTML = '';
-        
-        let filtered = filter !== 'all' ? countriesData.filter(c => c.type === filter) : [...countriesData];
-        
+
+        let filtered = [];
+        if (filter === 'all') {
+            filtered = [...countriesData];
+            // unaffiliatedメンバーを未所属として追加
+            filtered.push({
+                name: "未所属",
+                tag: "-",
+                members: unaffiliatedMembers,
+                type: 'unaffiliated'
+            });
+        } else if (filter === 'unaffiliated') {
+            filtered = [{
+                name: "未所属",
+                tag: "-",
+                members: unaffiliatedMembers,
+                type: 'unaffiliated'
+            }];
+        } else {
+            filtered = countriesData.filter(c => c.type === filter);
+        }
+
         if (searchTerm) {
             filtered = filtered.filter(c =>
                 c.name.toLowerCase().includes(termLower) ||
@@ -775,36 +803,41 @@
             );
         }
 
+        if (filtered.length === 0) {
+            grid.innerHTML = '<div class="no-results">検索結果が見つかりませんでした</div>';
+            return;
+        }
 
-      if (filtered.length === 0) {
-        grid.innerHTML = '<div class="no-results">検索結果が見つかりませんでした</div>';
-        return;
-      }
-
-      filtered.forEach((country, index) => {
-        const card = document.createElement('div');
-        card.className = 'country-card';
-        const typeLabel = country.type === 'peace' ? '平和国' : country.type === 'war' ? '戦争国' : 'Star';
-        card.innerHTML = `
-          <div class="country-header">
-            <div>
-              <div class="country-name">${highlight(country.name, term)}</div>
-              <span class="country-type ${country.type}">${typeLabel}</span>
+        filtered.forEach((country, index) => {
+            const card = document.createElement('div');
+            card.className = 'country-card';
+            if (country.color) {
+              card.style.setProperty('--country-color', country.color);
+            }
+            const typeLabel = country.type === 'war' ? '戦争国' : '未所属';
+            const typeSection = country.type !== 'unaffiliated'
+                ? `<span class="country-type ${country.type}">${typeLabel}</span>`
+                : '';
+            card.innerHTML = `
+            <div class="country-header">
+              <div>
+                <div class="country-name">${highlight(country.name, term)}</div>
+                ${typeSection}
+              </div>
+              <div class="country-tag">${country.tag}</div>
             </div>
-            <div class="country-tag">${country.tag}</div>
-          </div>
-          <div class="members-list">
-            ${country.members.map(m => `
-              <div class="member-item" onclick="copyToClipboard('${m.username}')">
-                <div class="member-role">${highlight(m.role, term)}</div>
-                <div class="member-name">${highlight(m.name, term)}</div>
-                <div class="member-username">${highlight(m.username, term)}</div>
-              </div>`).join('')}
-          </div>`;
-        grid.appendChild(card);
-        card.style.animationDelay = `${index * 60}ms`;
-        requestAnimationFrame(() => card.classList.add('visible'));
-      });
+            <div class="members-list">
+              ${country.members.map(m => `
+                <div class="member-item" onclick="copyToClipboard('${m.username}')">
+                  <div class="member-role">${highlight(m.role, term)}</div>
+                  <div class="member-name">${highlight(m.name, term)}</div>
+                  <div class="member-username">${highlight(m.username, term)}</div>
+                </div>`).join('')}
+            </div>`;
+            grid.appendChild(card);
+            card.style.animationDelay = `${index * 60}ms`;
+            requestAnimationFrame(() => card.classList.add('visible'));
+        });
     }
 
     document.getElementById('searchInput').addEventListener('input', e => renderCountries(currentFilter, e.target.value));
