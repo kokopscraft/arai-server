@@ -601,7 +601,7 @@
 
     <div class="notice-banner">
       <i data-lucide="info" class="notice-icon"></i>
-      <span>現在表示されているのは新井鯖<strong>第二期</strong>の国家勢力図です。順次、第三期のものに差し替えてまいります。</span>
+      <span>表示されているメンバー情報は最新のものとは限りません。詳細はLINEオープンチャットで確認してください。</span>
     </div>
 
     <div class="stats" id="stats">
@@ -666,91 +666,60 @@
     }
 
     const countriesData = [
-      { name: "ゲルン=アラクイア中枢帝国", tag: "ct:GERUA", type: "star", members: [
-        { role: "建国者", name: "あらくま", username: "AR Bear6790" },
-        { role: "国民", name: "tiuね", username: "TTTiune" },
-        { role: "国民", name: "斜陽", username: "Syayo3478" },
-        { role: "国民", name: "たまてん", username: "tamaten4248" },
-        { role: "国民", name: "ズールー人", username: "istanb23455" },
-        { role: "国民", name: "さお", username: "sieru2233" }
-      ]},
-      { name: "ちっぽけ島", tag: "ct:CHIP", type: "peace", members: [
-        { role: "建国者", name: "にも", username: "Nimofish0123" }
-      ]},
-      { name: "ユニヴェール", tag: "ct:UNIV", type: "peace", members: [
-        { role: "建国者", name: "復星", username: "doordaia" }
-      ]},
-      { name: "科学都市ミライティア", tag: "ct:GAND", type: "war", members: [
-        { role: "建国者", name: "アルマ", username: "Irukkun046" },
-        { role: "国民", name: "はまぐり", username: "KENTY0924" },
-        { role: "国民", name: "米", username: "sptkg43" },
-        { role: "国民", name: "レジ", username: "Aakarin2275532" },
-        { role: "国民", name: "炊き込みご飯", username: "DrollDoor051058" },
-        { role: "国民", name: "ZERO", username: "ZERO10165" },
-        { role: "国民", name: "神崎衣織", username: "kanzaki471072" },
-        { role: "国民", name: "@", username: "Orufe8042" }
-      ]},
-      { name: "ゲルンフロリア貿易商国", tag: "ct:GERUN", type: "peace", members: [
-        { role: "建国者", name: "ヒルドルブ・アトラ", username: "RyuukiRate86" },
-        { role: "国民", name: "UAMIFerdinand-Julius", username: "UAMI0112" },
-        { role: "国民", name: "Kh371[motimoti]", username: "Kh3716536" },
-        { role: "国民", name: "sini_hibiki", username: "Hibiki1169kj" },
-        { role: "国民", name: "ぷちねこ", username: "DisloyalSquid93" },
-        { role: "国民", name: "Wayoi", username: "Araki0218" }
-      ]},
-      { name: "ミニッツメン カリフォルニア共和国", tag: "ct:MINUP", type: "peace", members: [
-        { role: "建国者", name: "新カリフォルニア共和国", username: "NullMitten50502" }
-      ]},
-      { name: "ift", tag: "ct:IFTW", type: "war", members: [
-        { role: "建国者", name: "りんね", username: "rinnedao" },
-        { role: "国民", name: "おりーぶ", username: "olivesleet70756" },
-        { role: "国民", name: "睡眠薬", username: "MacchYuki" },
-        { role: "国民", name: "SorryBerry08", username: "SorryBerry08" }
-      ]},
-      { name: "ソ連", tag: "ct:SOVUN", type: "war", members: [
-        { role: "建国者", name: "わろた", username: "wammy3092" },
+      { name: "スペイン王国", tag: "ct:SPAIN", type: "peace", members: [
+        { role: "国王", name: "アトラ", username: "RyuukiRate86" },
+        { role: "国民", name: "アルマ", username: "Irukkun046" },
+        { role: "国民", name: "にも", username: "Nimofish0123" },
         { role: "国民", name: "もち", username: "mochisuki4649" },
-        { role: "国民", name: "ジュノべーゼ", username: "kouki2291" },
-        { role: "国民", name: "freedom", username: "Inane psycho433" },
-        { role: "国民", name: "はまぁ", username: "hama8945" },
-        { role: "国民", name: "しいな", username: "AI35565896" },
-        { role: "国民", name: "ましゅまろ", username: "shuza1416" }
+        { role: "国民", name: "ワロタ", username: "wammy3092" },
+        { role: "国民", name: "うあみ", username: "UAMI0112" },
+        { role: "国民", name: "kh371", username: "kh3716536" },
+        { role: "国民", name: "ヒビキ", username: "Hibiki1169kj" },
+        { role: "国民", name: "りんね", username: "rinnedao" },
+        { role: "国民", name: "米", username: "Comemet2090" },
+        { role: "国民", name: "よはく", username: "Ruaxrose" }
       ]},
-      { name: "神聖オーストリア海上帝国", tag: "ct:AUST", type: "war", members: [
-        { role: "建国者", name: "ティナ", username: "TNalpha0218" },
-        { role: "建国者", name: "かぼす", username: "BalenG9" },
-        { role: "国民", name: "隠座", username: "mopuin1227g" },
-        { role: "国民", name: "んっ", username: "ZeroPeak9593" }
+      { name: "オスマン帝国", tag: "ct:OTTOMAN", type: "peace", members: [
+        { role: "国王", name: "あらくま", username: "AR Bear6790" },
+        { role: "国民", name: "はまぐり", username: "KENTY0924" },
+        { role: "国民", name: "こいし", username: "istanb23455" },
+        { role: "国民", name: "らぐふぁ", username: "RIP G Finale" },
+        { role: "国民", name: "マムルーク", username: "musso8569" },
+        { role: "国民", name: "まるすけ", username: "marusuke228" },
+        { role: "国民", name: "しばどっく", username: "Shibadog0901" }
       ]},
-      { name: "桜猫国", tag: "ct:SAKURA", type: "peace", members: [
-        { role: "建国者", name: "まちゃぴの", username: "MatyaPino" },
-        { role: "国民", name: "からーぽ", username: "k4rapp0dayo" },
-        { role: "国民", name: "finn", username: "Finnnodesidayo" },
-        { role: "国民", name: "たこし君", username: "TAkoshi8527" }
-      ]},
-      { name: "ア・リエール二重王国", tag: "ct:ALIER", type: "peace", members: [
-        { role: "建国者", name: "ガマロ", username: "Gamaro7319" }
-      ]},
-      { name: "無法都市", tag: "ct:NOURI", type: "peace", members: [
-        { role: "建国者", name: "孤火", username: "Kitunebi1000ka" }
-      ]},
-      { name: "いぬのすみか", tag: "ct:INUNO", type: "peace", members: [
-        { role: "建国者", name: "しばどっぐ", username: "Shibadog0901" }
-      ]},
-      { name: "アニマル王国", tag: "ct:ANIMA", type: "peace", members: [
-        { role: "建国者", name: "犬", username: "Omu6502" }
-      ]},
-      { name: "あいしてす", tag: "ct:AISHI", type: "peace", members: [
-        { role: "建国者", name: "メイジ", username: "Makizusi1416" }
-      ]},
-      { name: "EVER GREEN FAMILY", tag: "ct:EGFP", type: "peace", members: [
-        { role: "建国者", name: "らぁめん", username: "Fried rice4986" },
+      { name: "大スウェーデン連邦", tag: "ct:SWEDEN", type: "peace", members: [
+        { role: "国王", name: "らぁめん", username: "Fried rice4986" },
+        { role: "国民", name: "狐火", username: "Kitunebi1000ka" },
+        { role: "国民", name: "めだか", username: "medqk1279" },
+        { role: "国民", name: "んっ", username: "ZeroPeak9593" },
+        { role: "国民", name: "めーじ", username: "Makizusi1416" },
         { role: "国民", name: "エル", username: "godJK36" },
-        { role: "国民", name: "AGEさん", username: "raikou raito" }
+        { role: "国民", name: "珊瑚", username: "Sioooooooondayo" },
+        { role: "国民", name: "珊瑚", username: "solt4" },
+        { role: "国民", name: "ましゅまろ", username: "shuza1416" },
+        { role: "国民", name: "カラス", username: "KARASU8295" }
       ]},
-      { name: "ウェスタ第二公国", tag: "ct:WESTA", type: "peace", members: [
-        { role: "建国者", name: "まるすけ", username: "marusuke228" },
-        { role: "国民", name: "Tにゃん", username: "T6neko" }
+      { name: "教皇領", tag: "ct:PAPACY", type: "peace", members: [
+        { role: "教皇", name: "ウルバヌス二世", username: "Tukhachev921" }
+      ]},
+      { name: "スラヴ=ロシア連邦", tag: "ct:SLAVIA", type: "peace", members: [
+        { role: "国王", name: "バリスタ", username: "still0401" },
+        { role: "国民", name: "うべべう", username: "UBEBEU" },
+        { role: "国民", name: "えあつ", username: "Yui072" }
+      ]},
+      { name: "イギリス及びフランク王国", tag: "ct:UKFRA", type: "peace", members: [
+        { role: "国民", name: "DIO", username: "minedchart90732" },
+        { role: "国民", name: "ジョナサン・ジョースター", username: "EviLTick2828" },
+        { role: "国民", name: "狂猫", username: "HARUMARU PVP" },
+        { role: "国民", name: "nekomi", username: "Motizuki1216" },
+        { role: "国民", name: "ところで将軍", username: "minutes4868" },
+        { role: "国民", name: "SorryBerry08409", username: "SorryBerry08409" }
+      ]},
+      { name: "未所属", tag: "ct:NOFLAG", type: "peace", members: [
+        { role: "国民", name: "Tにゃん", username: "T6neko" },
+        { role: "国民", name: "ゼロ", username: "ZERO.6358" },
+        { role: "国民", name: "復星", username: "doorudaia" }
       ]}
     ];
 
