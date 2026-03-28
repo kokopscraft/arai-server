@@ -143,7 +143,12 @@
       border: 1px solid var(--color-border);
       border-radius: 16px;
     }
-    .stat-item { text-align: center; }
+    .stat-item {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
     .stat-value {
       font-size: 2rem;
       font-weight: 700;
@@ -485,6 +490,9 @@
       h1 { font-size: 2rem; }
       .countries-grid { grid-template-columns: 1fr; }
       .stats { flex-direction: column; gap: 1rem; padding: 1.25rem; }
+      .stat-item { flex-direction: row; justify-content: center; gap: 1rem; }
+      .stat-value { margin-bottom: 0; }
+      .stat-label { text-align: left; }
       .search-box { flex-direction: column; }
       .search-input { width: 100%; }
       .nav-inner { padding: 0.75rem 1rem; position: relative; }
@@ -625,12 +633,12 @@
         <div class="stat-label">国家数</div>
       </div>
       <div class="stat-item">
-        <div class="stat-value" id="totalMembers">0</div>
-        <div class="stat-label">総人口</div>
+        <div class="stat-value" id="serverMembers">0</div>
+        <div class="stat-label">サーバーメンバー</div>
       </div>
       <div class="stat-item">
-        <div class="stat-value" id="warCountries">0</div>
-        <div class="stat-label">戦争国</div>
+        <div class="stat-value" id="totalPopulation">0</div>
+        <div class="stat-label">総人口</div>
       </div>
     </div>
 
@@ -696,7 +704,8 @@
         { role: "国民", name: "らぐふぁ", username: "RIP G Finale" },
         { role: "国民", name: "マムルーク", username: "musso8569" },
         { role: "国民", name: "まるすけ", username: "marusuke228" },
-        { role: "国民", name: "しばどっく", username: "Shibadog0901" }
+        { role: "国民", name: "しばどっく", username: "Shibadog0901" },
+        { role: "国民", name: "Tにゃん", username: "T6neko" }
       ]},
       { name: "大スウェーデン連邦", tag: "ct:sweden", type: "war", color: "#00ff00", members: [
         { role: "国王", name: "らぁめん", username: "Fried rice4986" },
@@ -729,7 +738,6 @@
     ];
 
     const unaffiliatedMembers = [
-      { role: "国民", name: "Tにゃん", username: "T6neko" },
       { role: "国民", name: "ゼロ", username: "ZERO.6358" },
       { role: "国民", name: "復星", username: "doorudaia" }
     ];
@@ -757,12 +765,12 @@
 
     function updateStats() {
         const total    = countriesData.length;
-        const members  = countriesData.reduce((sum, c) => sum + c.members.length, 0) + unaffiliatedMembers.length;
-        const war      = countriesData.filter(c => c.type === 'war').length;
+        const serverMembers  = countriesData.reduce((sum, c) => sum + c.members.length, 0) + unaffiliatedMembers.length;
+        const population      = countriesData.reduce((sum, c) => sum + c.members.length, 0);
 
         countUp('totalCountries', total,   0);
-        countUp('totalMembers',   members, 150);
-        countUp('warCountries',   war,     300);
+        countUp('serverMembers',   serverMembers, 150);
+        countUp('totalPopulation',   population,     300);
     }
 
     function renderCountries(filter = 'all', searchTerm = '') {
