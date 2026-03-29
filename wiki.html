@@ -1477,6 +1477,58 @@
             </li>
           </ul>
         </div>
+
+        <h3 class="wiki-subsection-title">Bindscord（プライベートチャット）</h3>
+        <div class="wiki-card">
+          <p><strong>Bindscord</strong>は、ワールド内の特定のプレイヤー間で会話ができる機能です。国家別のプライベートチャットグループに参加し、同じグループ内のメンバーと隔離された通信ができます。</p>
+        </div>
+
+        <h4 style="font-size:0.95rem;font-weight:600;color:#cbd5e1;margin:1rem 0 0.5rem;padding-left:0.75rem;border-left:2px solid #475569;">アクセス方法</h4>
+        <div class="wiki-card">
+          <p><strong>操作フロー：</strong></p>
+          <ol style="margin-left:1.5rem;margin-top:0.5rem;">
+            <li>メインメニューを開く</li>
+            <li>「アプリケーション」を選択</li>
+            <li>「Bindscord」を選択</li>
+            <li>所属している国家（またはグループ）の名前をタップ</li>
+          </ol>
+          <p style="margin-top:0.75rem;">これにより、該当のプライベートチャットに接続できます。</p>
+        </div>
+
+        <h4 style="font-size:0.95rem;font-weight:600;color:#cbd5e1;margin:1rem 0 0.5rem;padding-left:0.75rem;border-left:2px solid #475569;">現在のチャット状態</h4>
+        <div class="wiki-card">
+          <p>フォーム画面には「現在のチャット」が表示されます。これは現在接続しているチャットグループを示しており、このグループへのメッセージ送信時に自動送信されます。</p>
+        </div>
+
+        <h4 style="font-size:0.95rem;font-weight:600;color:#cbd5e1;margin:1rem 0 0.5rem;padding-left:0.75rem;border-left:2px solid #475569;">チャットの特徴</h4>
+        <div class="wiki-card">
+          <ul>
+            <li><strong>接続要件</strong> — チャットを受け取るには、明示的に接続する必要があります。同じ国家に所属しているだけでは視認できません</li>
+            <li><strong>自動送信</strong> — チャット接続中にメッセージを送信すると、接続しているチャットに自動で送信されます</li>
+            <li><strong>全体チャット常時表示</strong> — 個別（国家別）チャットに参加していても、全体チャット（グループ0）は常に視認できます</li>
+            <li><strong>PVP保護</strong> — 同じチャットに接続している人同士は互いに攻撃できません</li>
+          </ul>
+        </div>
+
+        <h4 style="font-size:0.95rem;font-weight:600;color:#cbd5e1;margin:1rem 0 0.5rem;padding-left:0.75rem;border-left:2px solid #475569;">参加可能なチャットグループ</h4>
+        <table class="wiki-table">
+          <thead><tr><th>グループID</th><th>チャット名</th><th>アクセス条件</th></tr></thead>
+          <tbody>
+            <tr><td>0</td><td>全体チャット</td><td>全プレイヤー（常時表示）</td></tr>
+            <tr><td>1</td><td>オスマン帝国</td><td><code>ct:ottoman</code>タグ所持</td></tr>
+            <tr><td>2</td><td>スペイン王国</td><td><code>ct:spain</code>タグ所持</td></tr>
+            <tr><td>3</td><td>イギリス及びフランク王国</td><td><code>ct</code>タグ該当グループ</td></tr>
+            <tr><td>4</td><td>教皇領</td><td><code>ct</code>タグ該当グループ</td></tr>
+            <tr><td>5</td><td>大スウェーデン連邦</td><td><code>ct</code>タグ該当グループ</td></tr>
+            <tr><td>6</td><td>スラヴ=ロシア帝国</td><td><code>ct</code>タグ該当グループ</td></tr>
+            <tr><td>7</td><td>運営チャット</td><td><code>operator</code>タグ所持</td></tr>
+          </tbody>
+        </table>
+
+        <div class="info-banner">
+          <i data-lucide="info"></i>
+          <span>所属国がない場合、グループ0（全体チャット）のみアクセス可能です。国民になると自動的に該当グループへのアクセスが有効になります。</span>
+        </div>
       </section>
 
       <!-- ── 第三期: G Warp ── -->
