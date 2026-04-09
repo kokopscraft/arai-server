@@ -708,10 +708,41 @@
         return text.replace(new RegExp(escaped, 'gi'), match => `<mark>${match}</mark>`);
     }
 
+    // ── Tag Dictionary ──
+    const tagDictionary = {
+      'compact-build': 'コンパクト建築',
+      'large-build': '大規模建築',
+      'terraforming': 'テラフォーミング',
+      'interior-build': '内装建築',
+      'pixel-art': 'ピクセルアート',
+      'rs-circuit': 'RS回路',
+      'legacy-pvp': 'Legacy-PVP',
+      'vanilla-pvp': 'Vanilla-PVP',
+      'uhc-pvp': 'UHC-PVP',
+      'pot-pvp': 'Pot-PVP',
+      'nether-op-pvp': 'NethOP-PVP',
+      'smp-pvp': 'SMP-PVP',
+      'sword-pvp': 'Sword-PVP',
+      'axe-pvp': 'Axe-PVP',
+      'bow-pvp': 'Bow-PVP',
+      'crystal-pvp': 'Crystal-PVP',
+      'mace-pvp': 'Mace-PVP',
+      'player-trap': 'Player-Trap',
+      'mob-farm': 'Mob-Farm',
+      'work': '作業',
+      'rsg-rta': 'RSG-RTA',
+      'ssg-rta': 'SSG-RTA',
+      'any-rta': 'Any%-RTA',
+      'mcsr-ranked-rta': 'MCSR Ranked-RTA',
+      'developer': 'Developer',
+      'video': '動画投稿',
+      'stream': '配信'
+    };
+
     const countriesData = [
       { name: "スペイン王国", tag: "ct:spain", type: "war", color: "#ffff00", members: [
-        { role: "国王", name: "アトラ", username: "RyuukiRate86", tags: ["large-build", "developer"] },
-        { role: "副国王", name: "もち", username: "mochisuki4649", tags: ["terraforming", "interior-build"] },
+        { role: "国王", name: "アトラ", username: "RyuukiRate86", tags: [] },
+        { role: "副国王", name: "もち", username: "mochisuki4649", tags: [] },
         { role: "国民", name: "アルマ", username: "Irukkun046", tags: [] },
         { role: "国民", name: "にも", username: "Nimofish0123", tags: [] },
         { role: "国民", name: "ワロタ", username: "wammy3092", tags: [] },
@@ -723,7 +754,7 @@
         { role: "国民", name: "よはく", username: "Ruaxrose", tags: [] }
       ]},
       { name: "オスマン帝国", tag: "ct:ottoman", type: "war", color: "#00ffff", members: [
-        { role: "皇帝", name: "あらくま", username: "AR Bear6790", tags: ["developer"] },
+        { role: "皇帝", name: "あらくま", username: "AR Bear6790", tags: ["stream"] },
         { role: "臣民", name: "はまぐり", username: "KENTY0924", tags: [] },
         { role: "臣民", name: "こいし", username: "istanb23455", tags: [] },
         { role: "臣民", name: "らぐふぁ", username: "RIP G Finale", tags: [] },
@@ -733,7 +764,7 @@
         { role: "臣民", name: "Tにゃん", username: "T6neko", tags: [] }
       ]},
       { name: "大スウェーデン連邦", tag: "ct:sweden", type: "war", color: "#00ff00", members: [
-        { role: "国王", name: "らぁめん", username: "Fried rice4986", tags: ["compact-build", "video"] },
+        { role: "国王", name: "らぁめん", username: "Fried rice4986", tags: [] },
         { role: "国民", name: "狐火", username: "Kitunebi1000ka", tags: [] },
         { role: "国民", name: "めだか", username: "medqk1279", tags: [] },
         { role: "国民", name: "んっ", username: "ZeroPeak9593", tags: [] },
@@ -748,7 +779,7 @@
         { role: "教皇", name: "ウルバヌス二世", username: "Tukhachev921", tags: [] }
       ]},
       { name: "スラヴ=ロシア帝国", tag: "ct:pol_lith", type: "war", color: "#ee82ee", members: [
-        { role: "皇帝", name: "バリスタ", username: "still0401", tags: ["work"] },
+        { role: "皇帝", name: "バリスタ", username: "still0401", tags: [] },
         { role: "臣民", name: "うべべう", username: "UBEBEU", tags: [] },
         { role: "臣民", name: "えあつ", username: "Yui072", tags: [] },
         { role: "臣民", name: "いらいい", username: "eito2893", tags: [] }
@@ -869,7 +900,7 @@
                   <div class="member-username">${highlight(m.username, term)}</div>
                   ${m.tags && m.tags.length > 0 ? `
                     <div class="member-tags">
-                      ${m.tags.map(tag => `<span class="member-tag">${tag}</span>`).join('')}
+                      ${m.tags.map(tag => `<span class="member-tag">${tagDictionary[tag] || tag}</span>`).join('')}
                     </div>
                   ` : ''}
                 </div>`).join('')}
