@@ -832,6 +832,7 @@
           <li><a href="#gen3-bindscord">Bindscord</a></li>
           <li><a href="#gen3-gwarp">G Warp</a></li>
           <li><a href="#gen3-wcu">ワールドクリーンアップ</a></li>
+          <li><a href="#gen3-coreprotect">Core Protect</a></li>
           <li><a href="#gen3-osmium">固有鉱石「オスミウム」について</a></li>
         </ul>
       </div>
@@ -1719,6 +1720,66 @@
             <li><strong>出力：</strong>オスミウムインゴット（追加経験値付き）</li>
             <li><strong>使用可能：</strong>かまど、燻製器、溶鉱炉</li>
           </ul>
+        </div>
+      </section>
+
+      <!-- ── 第三期: Core Protect ── -->
+      <section class="wiki-section gen3-content" id="gen3-coreprotect" data-keywords="Core Protect 保護区画 coreprotect cp エディター TP">
+        <h2 class="wiki-section-title">
+          <i data-lucide="shield"></i>
+          Core Protect
+        </h2>
+
+        <h3 class="wiki-subsection-title">概要</h3>
+        <div class="wiki-card">
+          <p>新井鯖の「Hub」内にある「<strong>保護区画</strong>」の保護機能です。自分の土地を他のプレイヤーから保護し、権限を細かく設定できます。</p>
+        </div>
+
+        <h3 class="wiki-subsection-title">基本的な使い方</h3>
+        <div class="wiki-card">
+          <p><code>!coreprotect</code>か短縮形<code>!cp</code>でフォームを開けます。自分がエディターに指定されている土地を閲覧でき、他の人を招待することもできます。</p>
+        </div>
+
+        <h3 class="wiki-subsection-title">エディター権限について</h3>
+        <div class="wiki-card">
+          <p><strong>エディターに指定されていないプレイヤー</strong>は、保護区画内のブロック破壊とインタラクトができません。</p>
+          <p><strong>インタラクト</strong>とは以下の操作を指します：</p>
+          <ul>
+            <li>新たなブロックの設置</li>
+            <li>作業台の使用</li>
+            <li>チェストのオープン</li>
+            <li>額縁の中身を回す</li>
+          </ul>
+          <p><strong>オプション機能：</strong>警告をチャットからフォームに変更することも可能で、マクロなどでも突破できない強固なセキュリティになります。</p>
+        </div>
+
+        <h3 class="wiki-subsection-title">保護区画のID</h3>
+        <div class="wiki-card">
+          <p>保護区画は自動でIDが振り分けられます。「メインメニュー」の「G Warp」では区画を閲覧することはできませんが、IDを控えておけばチャットコマンドでその区画にテレポートできます。</p>
+          <p><strong>例：</strong> <code>!gwarp a0001</code></p>
+          <p><strong>テレポート位置：</strong>エディターが自由に決めることができます。区画の中かその付近にしか指定できません。</p>
+        </div>
+
+        <h3 class="wiki-subsection-title">ブロック権限の設定</h3>
+        <div class="wiki-card">
+          <p>エディターは特定のブロックの破壊・インタラクトをエディターに指定されていないプレイヤーに許可することができます。</p>
+          <p><strong>例：</strong> <code>minecraft:lever</code>を「インタラクト可能」に追加すれば、レバーだけを引くことができる区画が完成します。</p>
+        </div>
+
+        <h3 class="wiki-subsection-title">基本的なアイテムID</h3>
+        <table class="wiki-table">
+          <thead><tr><th>ブロック</th><th>アイテムID</th></tr></thead>
+          <tbody>
+            <tr><td><strong>チェスト</strong></td><td><code>minecraft:chest</code></td></tr>
+            <tr><td><strong>樽</strong></td><td><code>minecraft:barrel</code></td></tr>
+            <tr><td><strong>額縁</strong></td><td><code>minecraft:frame</code></td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="wiki-subsection-title">由来</h3>
+        <div class="wiki-card">
+          <p>「<strong>Core Protect</strong>」は本来<strong>Java版</strong>に存在するプラグインの名前です。全プレイヤーの行動（ブロックの設置・破壊など）をデータベースにログとして記録し、荒らし被害が発生した際にその箇所をロールバック（巻き戻し・復元）できる、荒らし対策に特化したプラグインです。</p>
+          <p>新井鯖では区画を保護するという意味で名前をお借りしました。</p>
         </div>
       </section>
 
