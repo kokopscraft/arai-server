@@ -829,6 +829,7 @@
         <div class="sidebar-group-label">第三期</div>
         <ul class="sidebar-nav">
           <li><a href="#gen3-chat-commands">チャットコマンド</a></li>
+          <li><a href="#gen3-teleport-request">テレポート申請</a></li>
           <li><a href="#gen3-bindscord">Bindscord</a></li>
           <li><a href="#gen3-gwarp">G Warp</a></li>
           <li><a href="#gen3-wcu">ワールドクリーンアップ</a></li>
@@ -1459,25 +1460,108 @@
           </tbody>
         </table>
 
+        <h3 class="wiki-subsection-title">メッセージ系コマンド</h3>
+        <table class="wiki-table">
+          <thead><tr><th>コマンド</th><th>説明</th><th>範囲</th><th>クールダウン</th></tr></thead>
+          <tbody>
+            <tr><td><code>!whisper &lt;内容&gt;</code></td><td>ささやき</td><td>12m以内</td><td>—</td></tr>
+            <tr><td><code>!w &lt;内容&gt;</code></td><td>ささやき（短縮形）</td><td>12m以内</td><td>—</td></tr>
+            <tr><td><code>!shout &lt;内容&gt;</code></td><td>ディメンション全員に太字送信</td><td>同ディメンション</td><td class="attn">1分</td></tr>
+            <tr><td><code>!chat</code></td><td>プライベートチャット（Bindscord）</td><td>所属グループ</td><td>—</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="wiki-subsection-title">テレポート系コマンド</h3>
+        <table class="wiki-table">
+          <thead><tr><th>コマンド</th><th>説明</th><th>備考</th></tr></thead>
+          <tbody>
+            <tr><td><code>!hub</code></td><td>ハブにテレポート</td><td><code>!home</code>, <code>!arai</code>, <code>!lobby</code> でも可</td></tr>
+            <tr><td><code>!gwarp</code></td><td>G Warpフォームを開く</td><td>テレポート先選択UI</td></tr>
+            <tr><td><code>!tpr &lt;プレイヤー名&gt;</code></td><td>テレポート申請を送信</td><td>相手の承認が必要</td></tr>
+            <tr><td><code>!tpa</code></td><td>テレポート要請を公開</td><td>全プレイヤーに表示</td></tr>
+            <tr><td><code>yes</code></td><td>テレポート申請を承認</td><td>相手の要請に応答</td></tr>
+            <tr><td><code>no</code></td><td>テレポート申請を拒否</td><td>相手の要請に応答</td></tr>
+          </tbody>
+        </table>
+
+        <h3 class="wiki-subsection-title">ユーティリティコマンド</h3>
+        <table class="wiki-table">
+          <thead><tr><th>コマンド</th><th>説明</th></tr></thead>
+          <tbody>
+            <tr><td><code>!help [コマンド名]</code></td><td>チャットコマンドのヘルプ表示</td></tr>
+            <tr><td><code>!version</code></td><td>サーバーのバージョン情報表示</td></tr>
+            <tr><td><code>etc</code></td><td>ワールドクリーンアップ時間を10分延長</td></tr>
+          </tbody>
+        </table>
+
         <h3 class="wiki-subsection-title">セーフストレージコマンド</h3>
         <div class="wiki-card">
           <p><strong>コマンド：</strong> <code>!safestorage</code></p>
-          <p><strong>説明：</strong>セーフストレージのキーアイテム（locker、editor、retriever）を付与します</p>
+          <p><strong>説明：</strong>セーフストレージのキーアイテム（locker、editor、retriever）を付与します。チェストなどのロック管理に使用します。</p>
         </div>
 
         <div class="wiki-card">
           <p><strong>セーフストレージキーアイテム：</strong></p>
           <ul>
-            <li><strong>locker</strong> — ブロックをロック（Tripwire Hook）
-              <ul><li>インベントリを持つブロックに使用してロック</li></ul>
+            <li><strong>locker</strong> — ブロックをロック
+              <ul><li>インベントリを持つブロック（チェスト、樽など）に使用</li></ul>
             </li>
-            <li><strong>editor</strong> — パスワードを編集・削除（Tripwire Hook）
-              <ul><li>ロックを作成したプレイヤーのみ使用可能</li></ul>
+            <li><strong>editor</strong> — パスワードを編集・削除
+              <ul><li>ロック作成者のみ使用可能</li></ul>
             </li>
-            <li><strong>retriever</strong> — パスワードを表示（Tripwire Hook）
+            <li><strong>retriever</strong> — パスワードを表示
               <ul><li>ロック作成者またはオペレーターのみ使用可能</li></ul>
             </li>
           </ul>
+        </div>
+      </section>
+
+      <!-- ── 第三期: テレポート申請 ── -->
+      <section class="wiki-section gen3-content" id="gen3-teleport-request" data-keywords="テレポート申請 テレポート要請 !tpr !tpa yes no">
+        <h2 class="wiki-section-title">
+          <i data-lucide="arrow-right"></i>
+          テレポート申請・要請システム
+        </h2>
+
+        <div class="wiki-card">
+          <p><strong>テレポート申請・要請</strong>は、プレイヤー間で移動を承認してもらうシステムです。相手の明示的な承認が必要で、タイムアウト機能も搭載されています。</p>
+        </div>
+
+        <h3 class="wiki-subsection-title">!tpr：テレポート申請（相手指定）</h3>
+        <div class="wiki-card">
+          <p><strong>コマンド：</strong> <code>!tpr &lt;プレイヤー名またはハンドルネーム&gt;</code></p>
+          <p><strong>説明：</strong>特定のプレイヤーにテレポート申請を送信します。相手プレイヤーが <code>yes</code> または <code>no</code> で応答するまで待機します。</p>
+          <p><strong>流れ：</strong></p>
+          <ul>
+            <li>申請送信者がコマンド実行</li>
+            <li>相手プレイヤーに通知が届く</li>
+            <li>相手が <code>yes</code> で承認 → テレポート完了</li>
+            <li>相手が <code>no</code> で拒否 → テレポート中止</li>
+            <li>60秒以内に応答なし → 自動タイムアウト</li>
+          </ul>
+        </div>
+
+        <h3 class="wiki-subsection-title">!tpa：テレポート要請（全体公開）</h3>
+        <div class="wiki-card">
+          <p><strong>コマンド：</strong> <code>!tpa</code></p>
+          <p><strong>説明：</strong>テレポート要請を全プレイヤーに公開します。複数の誰かが <code>yes</code> または <code>no</code> で応答できます。</p>
+          <p><strong>備考：</strong>全プレイヤーに表示されるため、誰かが応答する可能性があります。</p>
+        </div>
+
+        <h3 class="wiki-subsection-title">応答コマンド</h3>
+        <table class="wiki-table">
+          <thead><tr><th>コマンド</th><th>説明</th><th>タイミング</th></tr></thead>
+          <tbody>
+            <tr><td><code>yes</code></td><td>テレポート申請を承認</td><td>申請を受け取ったら即座に実行</td></tr>
+            <tr><td><code>no</code></td><td>テレポート申請を拒否</td><td>申請を受け取ったら即座に実行</td></tr>
+            <tr><td><code>allow</code></td><td>テレポート要請に応答（承認）</td><td>要請を受け取ったら即座に実行</td></tr>
+            <tr><td><code>deny</code></td><td>テレポート要請に応答（拒否）</td><td>要請を受け取ったら即座に実行</td></tr>
+          </tbody>
+        </table>
+
+        <div class="info-banner">
+          <i data-lucide="info"></i>
+          <span>申請がない状態で <code>yes</code>、<code>no</code>、<code>allow</code>、<code>deny</code> を実行しても何も起こりません。</span>
         </div>
       </section>
 
@@ -1525,10 +1609,10 @@
             <tr><td>0</td><td>全体チャット</td><td>全プレイヤー（常時表示）</td></tr>
             <tr><td>1</td><td>オスマン帝国</td><td><code>ct:ottoman</code>タグ所持</td></tr>
             <tr><td>2</td><td>スペイン王国</td><td><code>ct:spain</code>タグ所持</td></tr>
-            <tr><td>3</td><td>イギリス及びフランク王国</td><td><code>ct</code>タグ該当グループ</td></tr>
-            <tr><td>4</td><td>教皇領</td><td><code>ct</code>タグ該当グループ</td></tr>
-            <tr><td>5</td><td>大スウェーデン連邦</td><td><code>ct</code>タグ該当グループ</td></tr>
-            <tr><td>6</td><td>スラヴ=ロシア帝国</td><td><code>ct</code>タグ該当グループ</td></tr>
+            <tr><td>3</td><td>イギリス及びフランク王国</td><td><code>ct:anglo_french</code>タグ所持</td></tr>
+            <tr><td>4</td><td>教皇領</td><td><code>ct:hre</code>タグ所持</td></tr>
+            <tr><td>5</td><td>大スウェーデン連邦</td><td><code>ct:sweden</code>タグ所持</td></tr>
+            <tr><td>6</td><td>スラヴ=ロシア帝国</td><td><code>ct:pol_lith</code>タグ所持</td></tr>
             <tr><td>7</td><td>運営チャット</td><td><code>operator</code>タグ所持</td></tr>
           </tbody>
         </table>
