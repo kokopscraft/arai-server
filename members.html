@@ -244,21 +244,6 @@
     .country-card:hover::before {
       width: 6px;
     }
-
-    /* ── 解体済カード ── */
-    .country-card.dissolved {
-      opacity: 0.45 !important;
-      filter: grayscale(60%);
-    }
-    .country-card.dissolved:hover {
-      border-color: var(--color-border);
-      box-shadow: none;
-      transform: none;
-    }
-    .country-card.dissolved:hover::before {
-      width: 5px;
-    }
-
     .country-header {
       display: flex;
       justify-content: space-between;
@@ -306,9 +291,9 @@
       border: 1px solid rgba(234,179,8,0.3);
     }
     .country-type.dissolved {
-      background: rgba(100,116,139,0.15);
-      color: #64748b;
-      border: 1px solid rgba(100,116,139,0.3);
+      background: rgba(107,114,128,0.15);
+      color: #9ca3af;
+      border: 1px solid rgba(107,114,128,0.3);
     }
 
     /* ── Members ── */
@@ -403,84 +388,315 @@
     .footer-social a:hover { color: #f1f5f9; border-color: #38bdf8; background: rgba(56,189,248,0.08); }
     .footer-social img { width: 18px; height: 18px; object-fit: contain; transform: scale(1.05); }
     /* Xのアイコンだけ視覚的にバランスを整える */
-    .footer-social a[href*="x.com"] img { transform: scale(0.9); }
-    .footer-divider {
-      display: inline-block;
-      width: 1px;
-      height: 14px;
-      background: #334155;
-      margin: 0 0.5rem;
-      vertical-align: middle;
+    .footer-social a[href*="x.com"] img { transform: scale(0.88); }
+    footer p { margin-bottom: 0.25rem; }
+    /* モバイルナビアイコン（デスクトップでは非表示） */
+    .nav-icon {
+      display: none;
+      width: 1.1rem;
+      height: 1.1rem;
+      flex-shrink: 0;
+    }
+    .nav-hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0.5rem;
+    }
+    .nav-hamburger span {
+        display: block;
+        width: 24px;
+        height: 2px;
+        background: #f1f5f9;
+        border-radius: 2px;
+    }
+    .nav-hamburger span {
+        transition: all 0.3s ease;
+    }
+    .nav-hamburger.open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+    .nav-hamburger.open span:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+    .nav-hamburger.open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+    .nav-badge {
+        display: inline-block;
+        background: #ef4444;
+        color: #fff;
+        font-size: 0.6rem;
+        font-weight: 700;
+        padding: 0.1rem 0.35rem;
+        border-radius: 999px;
+        margin-left: 0.3rem;
+        vertical-align: middle;
+        line-height: 1.4;
+    }
+    /* ページトップへ戻るボタン */
+    #back-to-top {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 44px;
+        height: 44px;
+        background: rgba(56, 189, 248, 0.15);
+        border: 1px solid rgba(56, 189, 248, 0.4);
+        border-radius: 50%;
+        color: #38bdf8;
+        font-size: 1.2rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s, transform 0.3s, background 0.2s;
+        z-index: 150;
+    }
+    #back-to-top.visible {
+        opacity: 1;
+        pointer-events: auto;
+    }
+    #back-to-top:hover {
+        background: rgba(56, 189, 248, 0.3);
+        transform: translateY(-3px);
+    }
+    .back-to-top-icon {
+        width: 1.25rem;
+        height: 1.25rem;
+        stroke-width: 2;
+        color: #38bdf8;
+    }
+    .country-card.visible {
+        animation: cardFadeIn 0.45s ease forwards;
+    }
+    .country-card.dissolved {
+      opacity: 0.45;
+      filter: grayscale(60%);
+    }
+    .country-card.dissolved:hover {
+      border-color: var(--color-border);
+      box-shadow: none;
+      transform: translateY(0);
+    }
+    .country-card.dissolved:hover::before {
+      width: 5px;
+    }
+    .country-card.dissolved.visible {
+      opacity: 0.45;
+    }
+    @keyframes cardFadeIn {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    mark {
+        background: rgba(56, 189, 248, 0.3);
+        color: #f1f5f9;
+        border-radius: 2px;
+        padding: 0 2px;
     }
 
-    .country-member-count {
-      font-size: 0.75rem;
-      color: var(--color-text-muted);
-      margin-top: 0.25rem;
-    }
-
+    /* ── Member Tags ── */
     .member-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.25rem;
-      margin-top: 0.3rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.3rem;
+        margin-top: 0.3rem;
     }
     .member-tag {
-      font-size: 0.65rem;
-      padding: 0.1rem 0.4rem;
-      border-radius: 3px;
-      background: rgba(56,189,248,0.12);
-      color: var(--color-accent);
-      border: 1px solid rgba(56,189,248,0.25);
-      font-weight: 600;
+        display: inline-block;
+        padding: 0.2rem 0.5rem;
+        background: rgba(56, 189, 248, 0.08);
+        border: 1px solid rgba(56, 189, 248, 0.2);
+        border-radius: 3px;
+        font-size: 0.65rem;
+        font-weight: 500;
+        color: rgba(56, 189, 248, 0.7);
+        font-family: 'Courier New', monospace;
+        white-space: nowrap;
+    }
+    .member-tag:hover {
+        background: rgba(56, 189, 248, 0.12);
+        border-color: rgba(56, 189, 248, 0.35);
+        color: rgba(56, 189, 248, 0.9);
+    }
+
+    /* ── Member Count ── */
+    .country-member-count {
+        font-size: 0.8rem;
+        color: var(--color-text-muted);
+        margin-top: 0.3rem;
+        font-weight: 500;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .container { padding: 2rem 1rem 0; }
+      h1 { font-size: 2rem; }
+      .countries-grid { grid-template-columns: 1fr; }
+      .stats { flex-direction: column; gap: 1rem; padding: 1.25rem; }
+      .stat-item { flex-direction: row; justify-content: center; gap: 1rem; }
+      .stat-value { margin-bottom: 0; }
+      .stat-label { text-align: left; }
+      .search-box { flex-direction: column; }
+      .search-input { width: 100%; }
+      .nav-inner { padding: 0.75rem 1rem; position: relative; }
+      .nav-links a { padding: 0.4rem 0.6rem; font-size: 0.8rem; }
+      .nav-hamburger { display: flex; }
+
+      .nav-links {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100dvh;
+        width: 260px;
+        max-width: 82vw;
+        background: rgba(15, 23, 42, 0.98);
+        border-left: 1px solid #334155;
+        padding: 5rem 1.25rem 2rem;
+        z-index: 300;
+        transform: translateX(110%);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        gap: 0.4rem;
+        box-shadow: -8px 0 32px rgba(0, 0, 0, 0.5);
+        overflow-y: auto;
+      }
+
+      .nav-links.open {
+        transform: translateX(0);
+      }
+
+      .nav-links a {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.9rem 1.25rem;
+        font-size: 1rem;
+        border-radius: 8px;
+      }
+
+      .nav-icon {
+        display: block;
+      }
+    }
+    .nav-title-pc {
+        display: none; /* モバイルでは非表示 */
+    }
+    @media (min-width: 641px) {
+        .nav-title-pc {
+            display: inline; /* PC幅では表示 */
+        }
+    }
+
+    /* Nav Overlay */
+    .nav-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 200;
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+    }
+    .nav-overlay.open {
+      display: block;
+    }
+
+    /* ハンバーガーボタンを常にオーバーレイより前面に */
+    .nav-hamburger {
+      position: relative;
+      z-index: 400;
+    }
+    .notice-banner {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: rgba(234, 179, 8, 0.08);
+      border: 1px solid rgba(234, 179, 8, 0.35);
+      border-radius: 10px;
+      padding: 0.75rem 1.25rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.875rem;
+      color: #fde68a;
+      line-height: 1.5;
+    }
+    .notice-banner strong {
+      color: #fbbf24;
+      font-weight: 700;
+    }
+    .notice-icon {
+      width: 1rem;
+      height: 1rem;
+      flex-shrink: 0;
+      color: #fbbf24;
     }
   </style>
 </head>
 <body>
-
+  <!-- Navigation -->
   <nav class="site-nav">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo-link">
-        <img src="images/server_logo.png" alt="Logo" class="nav-logo">
-        <span class="nav-title">新井鯖</span>
+        <img src="images/server_logo.png" alt="新井鯖ロゴ" class="nav-logo">
+        <span class="nav-title">新井鯖<span class="nav-title-pc"> - Founding Server</span></span>
       </a>
       <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="news.html">News</a></li>
-        <li><a href="members.html" class="active">Members</a></li>
-        <li><a href="wiki.html">Wiki</a></li>
-        <li><a href="rules.html">Rules</a></li>
-        <li><a href="events.html">Events</a></li>
-        <li><a href="network.html">Network</a></li>
-        <li><a href="admin.html">Admin</a></li>
-        <li><a href="credits.html">Credits</a></li>
+        <li><a href="index.html"><i data-lucide="home" class="nav-icon"></i>Home</a></li>
+        <li><a href="news.html"><i data-lucide="newspaper" class="nav-icon"></i>News</a></li>
+        <li><a href="members.html" class="active"><i data-lucide="users" class="nav-icon"></i>Members</a></li>
+        <li><a href="wiki.html"><i data-lucide="library" class="nav-icon"></i>Wiki</a></li>
+        <li><a href="rules.html"><i data-lucide="book-open" class="nav-icon"></i>Rules</a></li>
+        <li><a href="events.html"><i data-lucide="calendar-days" class="nav-icon"></i>Events</a></li>
+        <li><a href="network.html"><i data-lucide="globe" class="nav-icon"></i>Network</a></li>
+        <li><a href="admin.html"><i data-lucide="settings-2" class="nav-icon"></i>Admin</a></li>
+        <li><a href="credits.html"><i data-lucide="sparkles" class="nav-icon"></i>Credits</a></li>
       </ul>
+
+      <button class="nav-hamburger" onclick="toggleNav()" aria-label="メニューを開く">
+          <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
+  <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
 
   <div class="container">
     <header>
       <h1>Members</h1>
-      <p class="subtitle">表示されているメンバー情報は最新のものとは限りません。詳細はLINEオープンチャットで確認してください。</p>
+      <p class="subtitle">各国の国民とMinecraftネームタグを確認</p>
     </header>
 
-    <div class="stats">
+    <div class="notice-banner">
+      <i data-lucide="info" class="notice-icon"></i>
+      <span>表示されているメンバー情報は最新のものとは限りません。詳細はLINEオープンチャットで確認してください。</span>
+    </div>
+
+    <div class="stats" id="stats">
       <div class="stat-item">
-        <span class="stat-value" id="statCountries">0</span>
-        <span class="stat-label">国家数</span>
+        <div class="stat-value" id="totalCountries">0</div>
+        <div class="stat-label">国家数</div>
       </div>
       <div class="stat-item">
-        <span class="stat-value" id="statMembers">0</span>
-        <span class="stat-label">サーバーメンバー</span>
+        <div class="stat-value" id="serverMembers">0</div>
+        <div class="stat-label">サーバーメンバー</div>
       </div>
       <div class="stat-item">
-        <span class="stat-value" id="statTotal">0</span>
-        <span class="stat-label">総人口</span>
+        <div class="stat-value" id="totalPopulation">0</div>
+        <div class="stat-label">総人口</div>
       </div>
     </div>
 
     <div class="search-box">
-      <input type="text" class="search-input" id="searchInput" placeholder="国家名・メンバー名・ユーザー名で検索...">
+      <input type="text" class="search-input" id="searchInput" placeholder="国名、プレイヤー名、ユーザーネームで検索...">
       <div class="filter-buttons">
         <button class="filter-btn active" data-filter="all">すべて</button>
         <button class="filter-btn" data-filter="war">戦争国</button>
@@ -493,47 +709,98 @@
 
   <footer>
     <div class="footer-social">
-      <a href="https://www.youtube.com/@araisaba" target="_blank" rel="noopener">
-        <img src="images/youtube_logo.png" alt="YouTube">YouTube
-      </a>
-      <a href="https://x.com/araisaba_mc" target="_blank" rel="noopener">
-        <img src="images/x_logo.png" alt="X">X (Twitter)
-      </a>
+      <a href="https://line.me/ti/g2/uViXaSuCHoFWX0Z8WiyY2io4IRrXuT6t4OhRZA" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn.simpleicons.org/line/94a3b8" alt="LINE"> LINE</a>
+      <a href="https://discord.gg/EWphkMNb5h" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn.simpleicons.org/discord/94a3b8" alt="Discord"> Discord</a>
+      <a href="https://www.youtube.com/@arai_server" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn.simpleicons.org/youtube/94a3b8" alt="YouTube"> YouTube</a>
+      <a href="https://x.com/913_arakuma" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn.simpleicons.org/x/94a3b8" alt="X"> X</a>
+      <a href="https://github.com/kokopscraft/arai-server-members" target="_blank" rel="noopener">
+        <img src="https://cdn.simpleicons.org/github/94a3b8" alt="GitHub"> GitHub
+            </a>
     </div>
-    <p>© 2025 新井鯖 - Founding Server. All rights reserved.</p>
+    <p>&copy; 2026 arai server. All rights reserved.</p>
+    <p>サイト内のコンテンツの無断転載を禁じます。</p>
   </footer>
 
+  <button id="back-to-top" aria-label="トップへ戻る">
+    <i data-lucide="arrow-up" class="back-to-top-icon"></i>
+  </button>
+
   <script>
+    function highlight(text, term) {
+        if (!term) return text;
+        const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        return text.replace(new RegExp(escaped, 'gi'), match => `<mark>${match}</mark>`);
+    }
+
+    // ── Tag Dictionary ──
     const tagDictionary = {
-      "video": "🎬 動画投稿者",
-      "staff": "🛠 スタッフ"
+      'compact-build': 'コンパクト建築',
+      'large-build': '大規模建築',
+      'terraforming': 'テラフォーミング',
+      'interior-build': '内装建築',
+      'pixel-art': 'ピクセルアート',
+      'rs-circuit': 'RS回路',
+      'legacy-pvp': 'Legacy-PVP',
+      'vanilla-pvp': 'Vanilla-PVP',
+      'uhc-pvp': 'UHC-PVP',
+      'pot-pvp': 'Pot-PVP',
+      'nether-op-pvp': 'NethOP-PVP',
+      'smp-pvp': 'SMP-PVP',
+      'sword-pvp': 'Sword-PVP',
+      'axe-pvp': 'Axe-PVP',
+      'bow-pvp': 'Bow-PVP',
+      'crystal-pvp': 'Crystal-PVP',
+      'mace-pvp': 'Mace-PVP',
+      'player-trap': 'Player-Trap',
+      'mob-farm': 'Mob-Farm',
+      'work': '作業',
+      'rsg-rta': 'RSG-RTA',
+      'ssg-rta': 'SSG-RTA',
+      'any-rta': 'Any%-RTA',
+      'mcsr-ranked-rta': 'MCSR Ranked-RTA',
+      'developer': 'Developer',
+      'video': '動画投稿',
+      'stream': '配信'
     };
 
     const countriesData = [
-      { name: "大和", tag: "ct:yamato", type: "war", color: "#dc143c", members: [
-        { role: "天皇", name: "天狗", username: "arai8460", tags: ["staff"] },
-        { role: "臣民", name: "かるぼ", username: "karub0_29", tags: [] },
-        { role: "臣民", name: "ずんだもん", username: "zundam0n1", tags: [] },
-        { role: "臣民", name: "ふゆ", username: "fuyu7092", tags: [] },
-        { role: "臣民", name: "トカゲ", username: "KoiNoToKaGe", tags: [] },
-        { role: "臣民", name: "焼き鳥", username: "yakitori0810", tags: [] }
+      { name: "スペイン王国", tag: "ct:spain", type: "war", color: "#ffff00", members: [
+        { role: "国王", name: "アトラ", username: "RyuukiRate86", tags: [] },
+        { role: "副国王", name: "もち", username: "mochisuki4649", tags: [] },
+        { role: "国民", name: "アルマ", username: "Irukkun046", tags: [] },
+        { role: "国民", name: "にも", username: "Nimofish0123", tags: [] },
+        { role: "国民", name: "ワロタ", username: "wammy3092", tags: [] },
+        { role: "国民", name: "うあみ", username: "UAMI0112", tags: ["compact-build"] },
+        { role: "国民", name: "kh371", username: "kh3716536", tags: [] },
+        { role: "国民", name: "ヒビキ", username: "Hibiki1169kj", tags: [] },
+        { role: "国民", name: "りんね", username: "rinnedao", tags: [] },
+        { role: "国民", name: "米", username: "Comemet2090", tags: [] },
+        { role: "国民", name: "よはく", username: "Ruaxrose", tags: [] }
       ]},
-      { name: "モンゴル帝国", tag: "ct:mongol", type: "war", color: "#4169e1", members: [
-        { role: "ハーン", name: "ハム", username: "hamham1124", tags: ["video"] },
-        { role: "臣民", name: "くーにゃん", username: "ku_nyan7", tags: [] },
-        { role: "臣民", name: "ゆっち", username: "yucchi1028", tags: [] },
-        { role: "臣民", name: "大社", username: "haruki_5963", tags: [] }
+      { name: "オスマン帝国", tag: "ct:ottoman", type: "war", color: "#00ffff", members: [
+        { role: "皇帝", name: "あらくま", username: "AR Bear6790", tags: ["stream"] },
+        { role: "臣民", name: "はまぐり", username: "KENTY0924", tags: [] },
+        { role: "臣民", name: "こいし", username: "istanb23455", tags: [] },
+        { role: "臣民", name: "らぐふぁ", username: "RIP G Finale", tags: [] },
+        { role: "臣民", name: "マムルーク", username: "musso8569", tags: [] },
+        { role: "臣民", name: "まるすけ", username: "marusuke228", tags: [] },
+        { role: "臣民", name: "しばどっく", username: "Shibadog0901", tags: [] },
+        { role: "臣民", name: "Tにゃん", username: "T6neko", tags: [] }
       ]},
-      { name: "清", tag: "ct:qing", type: "war", color: "#ffd700", members: [
-        { role: "皇帝", name: "まつ", username: "matsu0621", tags: ["video"] },
-        { role: "臣民", name: "ただし", username: "tadasi0516", tags: [] },
-        { role: "臣民", name: "せん", username: "sen_mc", tags: [] },
-        { role: "臣民", name: "ふぉれ", username: "fore_sky", tags: [] }
-      ]},
-      { name: "ムガル帝国", tag: "ct:mughal", type: "war", color: "#228b22", members: [
-        { role: "皇帝", name: "アクバル", username: "nonakapan", tags: [] },
-        { role: "臣民", name: "ガンジー", username: "Nagiha7893", tags: [] },
-        { role: "臣民", name: "シャー", username: "shuza1416", tags: [] },
+      { name: "大スウェーデン連邦", tag: "ct:sweden", type: "war", color: "#00ff00", members: [
+        { role: "国王", name: "らぁめん", username: "Fried rice4986", tags: [] },
+        { role: "国民", name: "狐火", username: "Kitunebi1000ka", tags: [] },
+        { role: "国民", name: "めだか", username: "medqk1279", tags: [] },
+        { role: "国民", name: "んっ", username: "ZeroPeak9593", tags: [] },
+        { role: "国民", name: "めーじ", username: "Makizusi1416", tags: [] },
+        { role: "国民", name: "エル", username: "godJK36", tags: [] },
+        { role: "国民", name: "珊瑚", username: "Sioooooooondayo", tags: [] },
+        { role: "国民", name: "珊瑚", username: "solt4", tags: [] },
+        { role: "国民", name: "ましゅまろ", username: "shuza1416", tags: [] },
         { role: "国民", name: "カラス", username: "KARASU8295", tags: [] },
         { role: "国民", name: "ナーガ", username: "nargakun1206", tags: [] }
       ]},
@@ -577,29 +844,23 @@
             const timer = setInterval(() => {
                 current += increment;
                 if (current >= target) {
-                    current = target;
+                    el.textContent = target;
                     clearInterval(timer);
+                } else {
+                    el.textContent = Math.floor(current);
                 }
-                el.textContent = Math.floor(current);
             }, duration / steps);
         }, delay);
     }
 
     function updateStats() {
-        const activeCountries = countriesData.filter(c => c.type !== 'dissolved');
-        const totalMembers = activeCountries.reduce((sum, c) => sum + c.members.length, 0)
-            + unaffiliatedMembers.length;
-        const totalPop = countriesData.reduce((sum, c) => sum + c.members.length, 0)
-            + unaffiliatedMembers.length;
-        countUp('statCountries', activeCountries.length, 0);
-        countUp('statMembers', totalMembers, 200);
-        countUp('statTotal', totalPop, 400);
-    }
+        const total    = countriesData.filter(c => c.type !== 'dissolved').length;
+        const serverMembers  = countriesData.reduce((sum, c) => sum + c.members.length, 0) + unaffiliatedMembers.length;
+        const population      = countriesData.reduce((sum, c) => sum + c.members.length, 0);
 
-    function highlight(text, term) {
-        if (!term) return text;
-        const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-        return text.replace(new RegExp(`(${escaped})`, 'gi'), '<mark style="background:rgba(56,189,248,0.3);color:inherit;border-radius:2px;">$1</mark>');
+        countUp('totalCountries', total,   0);
+        countUp('serverMembers',   serverMembers, 150);
+        countUp('totalPopulation',   population,     300);
     }
 
     function renderCountries(filter = 'all', searchTerm = '') {
@@ -641,29 +902,30 @@
         }
 
         if (filtered.length === 0) {
-            grid.innerHTML = '<div class="no-results">該当する国家・メンバーが見つかりませんでした。</div>';
+            grid.innerHTML = '<div class="no-results">検索結果が見つかりませんでした</div>';
             return;
         }
 
         filtered.forEach((country, index) => {
             const card = document.createElement('div');
             card.className = 'country-card';
-            if (country.type === 'dissolved') {
-                card.classList.add('dissolved');
-            }
             if (country.color) {
               card.style.setProperty('--country-color', country.color);
             }
-
-            let typeLabel = '';
-            if (country.type === 'war') typeLabel = '戦争国';
-            else if (country.type === 'dissolved') typeLabel = '解体済';
-            else typeLabel = '未所属';
-
+            if (country.type === 'dissolved') {
+              card.classList.add('dissolved');
+            }
+            let typeLabel;
+            if (country.type === 'war') {
+              typeLabel = '戦争国';
+            } else if (country.type === 'dissolved') {
+              typeLabel = '解体済';
+            } else {
+              typeLabel = '未所属';
+            }
             const typeSection = country.type !== 'unaffiliated'
                 ? `<span class="country-type ${country.type}">${typeLabel}</span>`
                 : '';
-
             card.innerHTML = `
             <div class="country-header">
               <div>
@@ -713,32 +975,60 @@
       feedback.className = 'copy-feedback';
       feedback.textContent = `${text} をコピーしました!`;
       document.body.appendChild(feedback);
-      setTimeout(() => feedback.remove(), 2500);
-    }
-
-    const savedFilter = localStorage.getItem("araiserver_memberFilter");
-    if (savedFilter) {
-      currentFilter = savedFilter;
-      document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.filter === savedFilter);
-      });
+      setTimeout(() => {
+        feedback.style.opacity = '0';
+        feedback.style.transform = 'translateX(400px)';
+        setTimeout(() => document.body.removeChild(feedback), 300);
+      }, 2000);
     }
 
     updateStats();
-    renderCountries(currentFilter);
 
+    const savedFilter = localStorage.getItem("araiserver_memberFilter");
+    if (savedFilter) currentFilter = savedFilter;
+
+    setTimeout(() => {
+        renderCountries(currentFilter);
+    }, 600);
+
+    function toggleNav() {
+      const nav = document.querySelector('.nav-links');
+      const hamburger = document.querySelector('.nav-hamburger');
+      const overlay = document.getElementById('navOverlay');
+      nav.classList.toggle('open');
+      hamburger.classList.toggle('open');
+      overlay.classList.toggle('open');
+      document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+    }
+
+    // ESCキーで閉じる
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && document.querySelector('.nav-links').classList.contains('open')) {
+        toggleNav();
+      }
+    });
+
+    // News 未読バッジ
+    (function () {
+        const lastVisit  = Number(localStorage.getItem("araiserver_newsLastVisit") || 0);
+        const latestDate = localStorage.getItem("araiserver_newsLatest");
+        if (!latestDate) return;
+        const hasUnread  = new Date(latestDate).getTime() > lastVisit;
+        if (hasUnread) {
+            const link = document.querySelector('a[href="news.html"]');
+            if (link) link.insertAdjacentHTML("beforeend", '<span class="nav-badge">NEW</span>');
+        }
+    })();
+
+    // ページトップへ戻るボタン
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+        backToTop.classList.toggle('visible', window.scrollY > 300);
+    });
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
     lucide.createIcons();
   </script>
-
-  <style>
-    .country-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.3s, box-shadow 0.3s;
-    }
-    .country-card.dissolved.visible {
-      opacity: 0.45 !important;
-    }
-  </style>
 </body>
 </html>
