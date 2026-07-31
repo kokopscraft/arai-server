@@ -6,23 +6,17 @@
   <meta name="theme-color" content="#0f172a">
   <link rel="icon" href="images/server_logo.png" type="image/png">
   <link rel="apple-touch-icon" href="images/server_logo.png">
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
-  <title>新井鯖 - Wiki</title>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <title>新井鯖 - Home</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html {
-      overflow-x: hidden;
-    }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       background-color: #0f172a;
       color: #f1f5f9;
       min-height: 100vh;
-      overflow-y: visible;
     }
-
-    /* ── Navigation ── */
     .site-nav {
       position: sticky;
       font-family: 'Noto Sans JP', sans-serif;
@@ -66,14 +60,6 @@
       color: #38bdf8;
       letter-spacing: 0.02em;
     }
-    .nav-title-pc {
-      display: none;
-    }
-    @media (min-width: 641px) {
-      .nav-title-pc {
-        display: inline;
-      }
-    }
     .nav-links {
       list-style: none;
       display: flex;
@@ -87,8 +73,8 @@
       border-radius: 6px;
       font-size: 0.9rem;
       font-weight: 500;
-      border: 1px solid transparent;
       transition: all 0.2s;
+      border: 1px solid transparent;
     }
     .nav-links a:hover {
       background: #1e293b;
@@ -100,487 +86,153 @@
       color: #38bdf8;
       border: 1px solid rgba(56,189,248,0.3);
     }
-    /* モバイルナビアイコン（デスクトップでは非表示） */
-    .nav-icon {
-      display: none;
-      width: 1.1rem;
-      height: 1.1rem;
-      flex-shrink: 0;
+    .hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 6rem 2rem 4rem;
+        position: relative;
+        overflow: hidden;
     }
-    .nav-hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0.5rem;
-    }
-    .nav-hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: #f1f5f9;
-      border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-    .nav-hamburger.open span:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
-    }
-    .nav-hamburger.open span:nth-child(2) {
-      opacity: 0;
-      transform: scaleX(0);
-    }
-    .nav-hamburger.open span:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-    }
-    .nav-badge {
-      display: inline-block;
-      background: #ef4444;
-      color: #fff;
-      font-size: 0.6rem;
-      font-weight: 700;
-      padding: 0.1rem 0.35rem;
-      border-radius: 999px;
-      margin-left: 0.3rem;
-      vertical-align: middle;
-      line-height: 1.4;
+    /* 背景画像レイヤー */
+    .hero-bg {
+        position: absolute;
+        inset: 0;
+        background-image: url('images/arai_server_home_background.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        opacity: 0;
+        transition: opacity 1s ease;
+        z-index: 0;
     }
 
-    /* ── Layout ── */
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 3rem 2rem 0;
-      display: grid;
-      grid-template-columns: 260px 1fr;
-      gap: 2rem;
-      align-items: start;
+    .hero-bg.loaded {
+        opacity: 1;
     }
-    .page-header {
-      grid-column: 1 / -1;
-      text-align: center;
-      margin-bottom: 1rem;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid #334155;
+    .hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        /* 上は暗め、下はページ背景色に溶け込む */
+        background:
+            linear-gradient(
+                to bottom,
+                rgba(15, 23, 42, 0.55) 0%,
+                rgba(15, 23, 42, 0.45) 50%,
+                rgba(15, 23, 42, 0.92) 85%,
+                #0f172a 100%
+            );
+        pointer-events: none;
+        z-index: 1;
     }
-    h1 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.5rem;
-      color: #f1f5f9;
-    }
-    .subtitle {
-      color: #94a3b8;
-      font-size: 1rem;
-    }
-
-    /* ── Version Selector ── */
-    .version-selector {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-top: 1rem;
-      flex-wrap: wrap;
-    }
-    .version-btn {
-      padding: 0.4rem 1rem;
-      background: #1e293b;
-      border: 1px solid #334155;
-      border-radius: 6px;
-      color: #94a3b8;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-size: 0.875rem;
-      font-weight: 500;
-    }
-    .version-btn:hover {
-      border-color: #38bdf8;
-      color: #38bdf8;
-    }
-    .version-btn.active {
-      background: rgba(56, 189, 248, 0.15);
-      color: #38bdf8;
-      border-color: rgba(56, 189, 248, 0.3);
-    }
-    .version-preparing {
-      display: inline-block;
-      font-size: 0.7rem;
-      color: #64748b;
-      margin-left: 0.3rem;
-      vertical-align: middle;
-    }
-
-    /* ── Sidebar ── */
-    .wiki-sidebar {
-      position: sticky;
-      top: 5rem;
-      background: #1e293b;
-      border: 1px solid #334155;
-      border-radius: 12px;
-      padding: 1.25rem;
-      max-height: calc(100vh - 7rem);
-      overflow-y: auto;
-      scrollbar-width: thin;
-      scrollbar-color: #334155 transparent;
-    }
-    .wiki-sidebar::-webkit-scrollbar {
-      width: 6px;
-    }
-    .wiki-sidebar::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    .wiki-sidebar::-webkit-scrollbar-thumb {
-      background: #334155;
-      border-radius: 3px;
-    }
-    .wiki-sidebar::-webkit-scrollbar-thumb:hover {
-      background: #475569;
-    }
-
-    /* ── Search ── */
-    .search-box {
-      margin-bottom: 1rem;
+    .hero-logo {
+      width: 120px;
+      height: 120px;
+      border-radius: 24px;
+      object-fit: cover;
+      box-shadow: 0 0 40px rgba(56,189,248,0.35), 0 8px 32px rgba(0,0,0,0.5);
+      margin-bottom: 2rem;
       position: relative;
+      z-index: 1;
+      border: 2px solid rgba(56,189,248,0.3);
     }
-    .search-input {
-      width: 100%;
-      padding: 0.5rem 0.75rem 0.5rem 2.25rem;
-      background: #0f172a;
-      border: 1px solid #334155;
-      border-radius: 8px;
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 800;
       color: #f1f5f9;
-      font-size: 0.875rem;
-      transition: border-color 0.2s;
-    }
-    .search-input:focus {
-      outline: none;
-      border-color: #38bdf8;
-    }
-    .search-input::placeholder {
-      color: #64748b;
-    }
-    .search-icon {
-      position: absolute;
-      left: 0.65rem;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 1rem;
-      height: 1rem;
-      color: #64748b;
-      pointer-events: none;
-    }
-
-    .sidebar-group {
-      margin-bottom: 1.25rem;
-    }
-    .sidebar-group:last-child {
-      margin-bottom: 0;
-    }
-    .sidebar-group-label {
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: #64748b;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 0.5rem;
-      padding-left: 0.5rem;
-    }
-    .sidebar-nav {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-    }
-    .sidebar-nav a {
-      display: block;
-      padding: 0.45rem 0.75rem;
-      color: #94a3b8;
-      text-decoration: none;
-      border-radius: 6px;
-      font-size: 0.875rem;
-      transition: all 0.2s;
-    }
-    .sidebar-nav a:hover {
-      background: rgba(56,189,248,0.08);
-      color: #38bdf8;
-    }
-    .sidebar-nav a.active {
-      background: rgba(56,189,248,0.12);
-      color: #38bdf8;
-      font-weight: 600;
-    }
-    .sidebar-divider {
-      height: 1px;
-      background: #334155;
-      margin: 0.75rem 0;
-    }
-
-    /* ── Wiki Content ── */
-    .wiki-content {
-      min-width: 0;
-    }
-    .wiki-section {
-      margin-bottom: 2.5rem;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-    .wiki-section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .wiki-section.hidden {
-      display: none;
-    }
-    .wiki-section-title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: #f1f5f9;
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid #334155;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    .wiki-section-title i {
-      color: #38bdf8;
-      width: 1.2rem;
-      height: 1.2rem;
-    }
-    .wiki-subsection-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: #38bdf8;
-      margin: 1.25rem 0 0.6rem;
-      padding-left: 0.75rem;
-      border-left: 3px solid #38bdf8;
-    }
-    .wiki-card {
-      background: #1e293b;
-      border: 1px solid #334155;
-      border-radius: 12px;
-      padding: 1.5rem;
-      margin-bottom: 1rem;
-      line-height: 1.8;
-      color: #cbd5e1;
-      font-size: 0.95rem;
-    }
-    .wiki-card p {
+      letter-spacing: -0.02em;
+      position: relative;
+      z-index: 1;
       margin-bottom: 0.75rem;
     }
-    .wiki-card p:last-child {
-      margin-bottom: 0;
+    .hero-title .new-color { color: #b89c8f; }
+    .hero-title span { color: #38bdf8; }
+    .hero-subtitle {
+      font-size: 1.15rem;
+      color: #94a3b8;
+      max-width: 500px;
+      line-height: 1.7;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 2.5rem;
+      min-height: 3.4rem;
     }
-    .wiki-card h3 {
-      font-size: 1rem;
-      font-weight: 700;
-      color: #f1f5f9;
-      margin-bottom: 0.5rem;
-    }
-    .wiki-card ul {
-      padding-left: 1.5rem;
-      margin-top: 0.5rem;
-    }
-    .wiki-card li {
-      margin-bottom: 0.5rem;
-    }
-    .wiki-card code {
-      background: #0f172a;
-      border: 1px solid #334155;
-      border-radius: 4px;
-      padding: 0.1rem 0.4rem;
-      font-family: 'Courier New', monospace;
-      font-size: 0.875rem;
-      color: #38bdf8;
-    }
-
-    /* ── Badge ── */
-    .badge, .country-badge {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 0.15rem 0.55rem;
-      border-radius: 999px;
-      vertical-align: middle;
-      margin-left: 0.25rem;
-    }
-    .country-badge {
-      border-radius: 4px;
-      font-size: 0.75rem;
+    .static-text {
+    color: #cbd5e1;
       font-weight: 600;
-      margin-left: 0.5rem;
     }
-    .badge-peace {
-      background: rgba(34,197,94,0.15);
-      color: #22c55e;
-      border: 1px solid rgba(34,197,94,0.3);
+    .dynamic-text {
+      color: #38bdf8;
+      font-weight: 600;
     }
-    .badge-war {
-      background: rgba(239,68,68,0.15);
-      color: #ef4444;
-      border: 1px solid rgba(239,68,68,0.3);
-    }
-    .badge-star {
-      background: rgba(234,179,8,0.15);
-      color: #eab308;
-      border: 1px solid rgba(234,179,8,0.3);
-    }
-
-    /* ── Table ── */
-    .wiki-table {
+    .nav-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      max-width: 860px;
       width: 100%;
-      border-collapse: collapse;
+      position: relative;
+      z-index: 1;
+    }
+    .nav-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 2rem 1.5rem;
       background: #1e293b;
       border: 1px solid #334155;
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 1rem;
-      font-size: 0.9rem;
-    }
-    .wiki-table th {
-      background: #0f172a;
-      padding: 0.75rem 1rem;
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: #64748b;
-      text-align: left;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      border-bottom: 1px solid #334155;
-    }
-    .wiki-table td {
-      padding: 0.75rem 1rem;
-      color: #cbd5e1;
-      border-bottom: 1px solid rgba(51,65,85,0.5);
-    }
-    .wiki-table tr:last-child td {
-      border-bottom: none;
-    }
-    .wiki-table tr:hover td {
-      background: rgba(56,189,248,0.04);
-    }
-    .wiki-table td strong {
+      border-radius: 16px;
+      text-decoration: none;
       color: #f1f5f9;
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+      position: relative;
+      overflow: hidden;
     }
-    .col-num {
-      text-align: right;
-      font-family: 'Courier New', monospace;
+    .nav-card {
+      position: relative;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .nav-card::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 300%;
+      height: 300%;
+      background: radial-gradient(circle, rgba(56,189,248,0.16) 0%, rgba(56,189,248,0.06) 55%, transparent 75%);
+      border-radius: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+      z-index: -1;
+      pointer-events: none;
+    }
+    .nav-card:hover,
+    .nav-card.active {
+      transform: translateY(-4px);
+      border-color: #38bdf8;
+      box-shadow: 0 8px 32px rgba(56,189,248,0.18), 0 2px 8px rgba(0,0,0,0.4);
+    }
+    .nav-card:hover::before,
+    .nav-card.active::before {
+      transform: translate(-50%, -50%) scale(1);
+    }
+    .card-icon {
+      width: 2.5rem;
+      height: 2.5rem;
       color: #38bdf8;
-      font-weight: 600;
+      stroke-width: 1.5;
     }
-    .col-muted {
-      color: #475569;
-      font-size: 0.82rem;
-    }
-
-    /* ── Currency Table Colors ── */
-    .currency-table-bills th {
-      background: #0a1929;
-      color: #5eaed3;
-    }
-    .currency-table-bills tr:hover td {
-      background: rgba(56,189,248,0.06);
-    }
-    .currency-table-coins th {
-      background: #0d2818;
-      color: #4ade80;
-    }
-    .currency-table-coins tr:hover td {
-      background: rgba(34,197,94,0.06);
-    }
-
-    /* ── Rank badges ── */
-    .rank-name {
-      font-weight: 600;
-      display: inline-block;
-      padding: 0.15rem 0.4rem;
-      border-radius: 3px;
-    }
-    .rank-member { color: #94a3b8; background: rgba(148,163,184,0.1); }
-    .rank-bronze { color: #cd7f32; background: rgba(205,127,50,0.1); }
-    .rank-silver { color: #c0c0c0; background: rgba(192,192,192,0.1); }
-    .rank-gold { color: #eab308; background: rgba(234,179,8,0.1); }
-    .rank-diamond { color: #38bdf8; background: rgba(56,189,248,0.1); }
-    .rank-master { color: #d946ef; background: rgba(217,70,239,0.1); }
-    .rank-masterp { color: #d946ef; background: rgba(217,70,239,0.12); }
-    .rank-legend { color: #f59e0b; background: rgba(245,158,11,0.1); }
-    .rank-legendp { color: #f59e0b; background: rgba(245,158,11,0.12); }
-    .rank-ultimate { color: #60a5fa; background: rgba(96,165,250,0.1); font-weight: 700; }
-    .rank-op { color: #f1f5f9; background: rgba(241,245,249,0.1); font-weight: 700; }
-
-    /* ── Sheep color swatches ── */
-    .sheep-swatch {
-      display: inline-block;
-      width: 1rem;
-      height: 1rem;
-      border-radius: 3px;
-      margin-right: 0.5rem;
-      vertical-align: middle;
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-    .swatch-black { background: #1a1a1a; }
-    .swatch-white { background: #f1f5f9; }
-    .swatch-red { background: #ef4444; }
-    .swatch-blue { background: #3b82f6; }
-    .swatch-green { background: #22c55e; }
-    .swatch-purple { background: #a855f7; }
-
-    /* ── Command attention highlights ── */
-    .cmd {
-      color: #38bdf8;
-      font-family: 'Courier New', monospace;
-      font-size: 0.875rem;
-    }
-    .attn {
-      color: #f59e0b;
-    }
-
-    /* ── Info / Warn banners ── */
-    .info-banner {
-      background: rgba(56,189,248,0.07);
-      border: 1px solid rgba(56,189,248,0.2);
-      border-radius: 8px;
-      padding: 0.75rem 1rem;
-      display: flex;
-      align-items: flex-start;
-      gap: 0.6rem;
-      font-size: 0.875rem;
-      color: #94a3b8;
-      line-height: 1.6;
-      margin-bottom: 1rem;
-    }
-    .info-banner i {
-      color: #38bdf8;
-      flex-shrink: 0;
-      width: 1rem;
-      height: 1rem;
-      margin-top: 2px;
-    }
-    .warn-banner {
-      background: rgba(239,68,68,0.07);
-      border: 1px solid rgba(239,68,68,0.2);
-      border-radius: 8px;
-      padding: 0.75rem 1rem;
-      display: flex;
-      align-items: flex-start;
-      gap: 0.6rem;
-      font-size: 0.875rem;
-      color: #94a3b8;
-      line-height: 1.6;
-      margin-bottom: 1rem;
-    }
-    .warn-banner i {
-      color: #ef4444;
-      flex-shrink: 0;
-      width: 1rem;
-      height: 1rem;
-      margin-top: 2px;
-    }
-
-    /* ── Footer ── */
+    .card-title { font-size: 1.15rem; font-weight: 700; color: #f1f5f9; }
+    .card-desc { font-size: 0.82rem; color: #64748b; text-align: center; line-height: 1.5; }
+    .card-arrow { font-size: 1rem; color: #38bdf8; opacity: 0; transform: translateX(-4px); transition: all 0.2s; }
+    .nav-card:hover .card-arrow { opacity: 1; transform: translateX(0); }
     footer {
       text-align: center;
       padding: 2.5rem 2rem 2rem;
@@ -609,85 +261,157 @@
       border: 1px solid #334155;
       transition: all 0.3s ease;
     }
-    .footer-social a:hover {
-      color: #f1f5f9;
-      border-color: #38bdf8;
-      background: rgba(56,189,248,0.08);
-    }
-    .footer-social img {
-      width: 18px;
-      height: 18px;
-      object-fit: contain;
-      transform: scale(1.05);
-    }
-    .footer-social a[href*="x.com"] img {
-      transform: scale(0.88);
-    }
-    footer p {
-      margin-bottom: 0.25rem;
-    }
+    .footer-social a:hover { color: #f1f5f9; border-color: #38bdf8; background: rgba(56,189,248,0.08); }
+    .footer-social img { width: 18px; height: 18px; object-fit: contain; transform: scale(1.05); }
+    /* Xのアイコンだけ視覚的にバランスを整える */
+    .footer-social a[href*="x.com"] img { transform: scale(0.88); }
+    footer p { margin-bottom: 0.25rem; }
+    .about-section { max-width: 860px; margin: 0 auto 4rem; padding: 0 2rem; }
+    .about-section h2 { font-size: 1.5rem; font-weight: 700; color: #38bdf8; margin-bottom: 1.5rem; padding-left: 1rem; border-left: 4px solid #38bdf8; }
+    .about-card { background: #1e293b; border: 1px solid #334155; border-radius: 16px; padding: 1.75rem 2rem; margin-bottom: 1.5rem; }
+    .about-card p { color: #cbd5e1; font-size: 0.97rem; line-height: 1.8; margin-bottom: 0.75rem; }
+    .about-card p:last-child { margin-bottom: 0; }
+    .about-card a { color: #38bdf8; text-decoration: none; font-size: 0.8rem; }
+    .about-card a:hover { text-decoration: underline; }
 
-    /* ── Back to Top ── */
-    #back-to-top {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      width: 44px;
-      height: 44px;
-      background: rgba(56,189,248,0.15);
-      border: 1px solid rgba(56,189,248,0.4);
-      border-radius: 50%;
+    /* Addon Cards */
+    .addon-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; margin-top: 0.5rem; }
+    .addon-card-link {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border-radius: 10px;
+    }
+    .addon-item {
+      background: rgba(56,189,248,0.05);
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: relative;
+    }
+    .addon-card-link:hover .addon-item,
+    .addon-item.no-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(56,189,248,0.15);
+      border-color: #38bdf8;
+    }
+    .addon-item.no-link:active {
+      transform: scale(0.97);
+      box-shadow: none;
+    }
+    .addon-item .addon-name { font-weight: 700; color: #f1f5f9; font-size: 0.97rem; margin-bottom: 0.3rem; }
+    .addon-item .addon-desc { color: #94a3b8; font-size: 0.88rem; line-height: 1.6; }
+    .addon-badge {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      font-size: 0.75rem;
+      color: #38bdf8;
+      opacity: 0.6;
+      transition: opacity 0.15s;
+    }
+    .addon-card-link:hover .addon-badge { opacity: 1; }
+    .addon-badge-locked {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      font-size: 0.72rem;
+      color: #475569;
+      background: rgba(71,85,105,0.2);
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      border: 1px solid #334155;
+    }
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: #f1f5f9;
+      border-radius: 2px;
+    }
+    .nav-hamburger span {
+      transition: all 0.3s ease;
+    }
+    .nav-hamburger.open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+    .nav-hamburger.open span:nth-child(2) {
       opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s, transform 0.3s, background 0.2s;
-      z-index: 150;
+      transform: scaleX(0);
+    }
+    .nav-hamburger.open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+    .nav-badge {
+      display: inline-block;
+      background: #ef4444;
+      color: #fff;
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 0.1rem 0.35rem;
+      border-radius: 999px;
+      margin-left: 0.3rem;
+      vertical-align: middle;
+      line-height: 1.4;
+    }
+    /* ページトップへ戻るボタン */
+    #back-to-top {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 44px;
+        height: 44px;
+        background: rgba(56, 189, 248, 0.15);
+        border: 1px solid rgba(56, 189, 248, 0.4);
+        border-radius: 50%;
+        color: #38bdf8;
+        font-size: 1.2rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s, transform 0.3s, background 0.2s;
+        z-index: 150;
     }
     #back-to-top.visible {
-      opacity: 1;
-      pointer-events: auto;
+        opacity: 1;
+        pointer-events: auto;
     }
     #back-to-top:hover {
-      background: rgba(56,189,248,0.3);
-      transform: translateY(-3px);
+        background: rgba(56, 189, 248, 0.3);
+        transform: translateY(-3px);
     }
     .back-to-top-icon {
-      width: 1.25rem;
-      height: 1.25rem;
-      stroke-width: 2;
-      color: #38bdf8;
+        width: 1.25rem;
+        height: 1.25rem;
+        stroke-width: 2;
+        color: #38bdf8;
+    }
+    /* モバイルナビアイコン（デスクトップでは非表示） */
+    .nav-icon {
+      display: none;
+      width: 1.1rem;
+      height: 1.1rem;
+      flex-shrink: 0;
     }
 
-    /* ── Responsive ── */
-    @media (max-width: 768px) {
-      .container {
-        grid-template-columns: 1fr;
-      }
-      .wiki-sidebar {
-        position: static;
-        max-height: none;
-      }
-      .page-header {
-        grid-column: 1;
-      }
-    }
     @media (max-width: 640px) {
-      .container {
-        padding: 2rem 1rem 0;
-      }
-      h1 {
-        font-size: 2rem;
-      }
-      .nav-inner {
-        padding: 0.75rem 1rem;
-        position: relative;
-      }
-      .nav-hamburger {
-        display: flex;
-      }
+      /* 変更後（追加） */
+      .nav-inner { padding: 0.75rem 1rem; position: relative; }
+      .nav-hamburger { display: flex; }
 
       .nav-links {
         display: flex;
@@ -713,6 +437,7 @@
         transform: translateX(0);
       }
 
+      /* モバイル時のタブを大きく（アイコン対応でflexに） */
       .nav-links a {
         display: flex;
         align-items: center;
@@ -725,13 +450,27 @@
       .nav-icon {
         display: block;
       }
-      .wiki-table th,
-      .wiki-table td {
-        padding: 0.55rem 0.75rem;
-        font-size: 0.82rem;
-      }
     }
-
+    .cursor {
+      display: inline-block;
+      color: #38bdf8;
+      font-weight: 300;
+      animation: blink 0.75s step-end infinite;
+      margin-left: 1px;
+      opacity: 1;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%     { opacity: 0; }
+    }
+    .nav-title-pc {
+        display: none; /* モバイルでは非表示 */
+    }
+    @media (min-width: 641px) {
+        .nav-title-pc {
+            display: inline; /* PC幅では表示 */
+        }
+    }
     /* Nav Overlay */
     .nav-overlay {
       display: none;
@@ -751,1141 +490,172 @@
       position: relative;
       z-index: 400;
     }
+
+    /* ── Credit Card (アドオン表示用) ── */
+    .credit-card {
+      background: rgba(15,23,42,1);
+      border: 1px solid #334155;
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+      cursor: pointer;
+      position: relative;
+    }
+    .addon-card-link .credit-card:hover,
+    .credit-card.no-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(56,189,248,0.15);
+      border-color: #38bdf8;
+    }
+    .credit-card.no-link:active {
+      transform: scale(0.97);
+      box-shadow: none;
+    }
+    .credit-card-title {
+      font-weight: 700;
+      color: #f1f5f9;
+      font-size: 0.97rem;
+      margin-bottom: 0.2rem;
+      padding-right: 4rem;
+    }
+    .credit-card-meta {
+      font-size: 0.82rem;
+      color: #94a3b8;
+      margin-bottom: 0.15rem;
+    }
+    .credit-card-meta strong {
+      color: #e5e7eb;
+      font-weight: 600;
+    }
+    .credit-card-note {
+      font-size: 0.8rem;
+      color: #9ca3af;
+      margin-top: 0.35rem;
+    }
+    .credit-card-badge {
+      position: absolute;
+      top: 0.75rem;
+      right: 0.75rem;
+      font-size: 0.72rem;
+      color: #38bdf8;
+      opacity: 0.7;
+    }
   </style>
 </head>
 <body>
-
   <nav class="site-nav">
-    <div class="nav-inner">
-      <a href="index.html" class="nav-logo-link">
-        <img src="images/server_logo.png" alt="新井鯖ロゴ" class="nav-logo">
-        <span class="nav-title">新井鯖<span class="nav-title-pc"> - Founding Server</span></span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="index.html"><i data-lucide="home" class="nav-icon"></i>Home</a></li>
-        <li><a href="news.html"><i data-lucide="newspaper" class="nav-icon"></i>News</a></li>
-        <li><a href="members.html"><i data-lucide="users" class="nav-icon"></i>Members</a></li>
-        <li><a href="wiki.html" class="active"><i data-lucide="library" class="nav-icon"></i>Wiki</a></li>
-        <li><a href="rules.html"><i data-lucide="book-open" class="nav-icon"></i>Rules</a></li>
-        <li><a href="events.html"><i data-lucide="calendar-days" class="nav-icon"></i>Events</a></li>
-        <li><a href="network.html"><i data-lucide="globe" class="nav-icon"></i>Network</a></li>
-        <li><a href="admin.html"><i data-lucide="settings-2" class="nav-icon"></i>Admin</a></li>
-        <li><a href="credits.html"><i data-lucide="sparkles" class="nav-icon"></i>Credits</a></li>
-      </ul>
-
-      <button class="nav-hamburger" onclick="toggleNav()" aria-label="メニューを開く">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo-link">
+      <img src="images/server_logo.png" alt="新井鯖ロゴ" class="nav-logo">
+      <span class="nav-title">新井鯖<span class="nav-title-pc"> - Founding Server</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active"><i data-lucide="home" class="nav-icon"></i>Home</a></li>
+      <li><a href="news.html"><i data-lucide="newspaper" class="nav-icon"></i>News</a></li>
+      <li><a href="members.html"><i data-lucide="users" class="nav-icon"></i>Members</a></li>
+      <li><a href="wiki.html"><i data-lucide="library" class="nav-icon"></i>Wiki</a></li>
+      <li><a href="rules.html"><i data-lucide="book-open" class="nav-icon"></i>Rules</a></li>
+      <li><a href="events.html"><i data-lucide="calendar-days" class="nav-icon"></i>Events</a></li>
+      <li><a href="network.html"><i data-lucide="globe" class="nav-icon"></i>Network</a></li>
+      <li><a href="admin.html"><i data-lucide="settings-2" class="nav-icon"></i>Admin</a></li>
+      <li><a href="credits.html"><i data-lucide="sparkles" class="nav-icon"></i>Credits</a></li>
+    </ul>
+    <button class="nav-hamburger" onclick="toggleNav()" aria-label="メニューを開く">
+    <span></span><span></span><span></span>
+    </button>
+  </div>
   </nav>
   <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
-
-  <div class="container">
-    <div class="page-header">
-      <h1>Wiki</h1>
-      <p class="subtitle">新井鯖の遊び方・仕様ガイド</p>
-      <div class="version-selector">
-        <button class="version-btn" data-version="gen1">第一期</button>
-        <button class="version-btn" data-version="gen2">第二期</button>
-        <button class="version-btn active" data-version="gen3">第三期</button>
-      </div>
-    </div>
-
-    <!-- ── Sidebar ── -->
-    <aside class="wiki-sidebar">
-      <div class="search-box">
-        <i data-lucide="search" class="search-icon"></i>
-        <input type="text" class="search-input" id="wikiSearch" placeholder="検索...">
-      </div>
-
-      <div class="sidebar-group gen1-sidebar">
-        <div class="sidebar-group-label">第一期</div>
-        <ul class="sidebar-nav">
-          <li><a href="#gen1-items">入手アイテム</a></li>
-          <li><a href="#gen1-login">ログインボーナス</a></li>
-          <li><a href="#gen1-scte">SCTE</a></li>
-        </ul>
-      </div>
-
-      <div class="sidebar-divider gen1-sidebar"></div>
-
-      <div class="sidebar-group gen2-sidebar">
-        <div class="sidebar-group-label">第二期</div>
-        <ul class="sidebar-nav">
-          <li><a href="#currency">通貨システム</a></li>
-          <li><a href="#atm">ATM</a></li>
-          <li><a href="#bank">Bank（送金・請求）</a></li>
-          <li><a href="#commands">チャットコマンド</a></li>
-          <li><a href="#gwarp">G Warp</a></li>
-          <li><a href="#nations">国家一覧</a></li>
-          <li><a href="#rank">ランクシステム</a></li>
-          <li><a href="#keiyou">競羊</a></li>
-          <li><a href="#zakuvegas">ザクベガス（閉鎖）</a></li>
-        </ul>
-      </div>
-
-      <div class="sidebar-divider gen2-sidebar"></div>
-
-      <div class="sidebar-group gen3-sidebar">
-        <div class="sidebar-group-label">第三期</div>
-        <ul class="sidebar-nav">
-          <li><a href="#gen3-chat-commands">チャットコマンド</a></li>
-          <li><a href="#gen3-teleport-request">テレポート申請</a></li>
-          <li><a href="#gen3-bindscord">Bindscord</a></li>
-          <li><a href="#gen3-gwarp">G Warp</a></li>
-          <li><a href="#gen3-wcu">ワールドクリーンアップ</a></li>
-          <li><a href="#gen3-osmium">固有鉱石「オスミウム」について</a></li>
-          <li><a href="#gen3-coreprotect">Core Protect</a></li>
-        </ul>
-      </div>
-    </aside>
-
-    <!-- ── Wiki Content ── -->
-    <main class="wiki-content">
-
-      <!-- ── 第一期: 入手アイテム ── -->
-      <section class="wiki-section gen1-content" id="gen1-items" data-keywords="第一期 白い牛 WhiteBull">
-        <h2 class="wiki-section-title">
-          <i data-lucide="wand-2"></i>
-          入手アイテム
-          <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">(第一期限定)</span>
-        </h2>
-        <div class="info-banner">
-          <i data-lucide="info"></i>
-          <span><strong style="color:#f1f5f9;">第一期の仕様です。</strong>マインクラフト内でプレイ中に入手できるカスタムアイテムの一覧。</span>
-        </div>
-        <table class="wiki-table">
-          <thead><tr><th>アイテム名</th><th>効果</th><th>制限</th></tr></thead>
-          <tbody>
-            <tr>
-              <td><strong>マジカルスワップ</strong></td>
-              <td>半径20m以内の最も近いプレイヤーと位置を入れ替える</td>
-              <td class="col-muted">運営領地使用不可</td>
-            </tr>
-            <tr>
-              <td><strong>スーパージャンプ</strong></td>
-              <td>50m上空まで飛び上がることができる</td>
-              <td class="col-muted">運営領地使用不可</td>
-            </tr>
-            <tr>
-              <td><strong>ウサギのブーツ</strong></td>
-              <td>ネザライトブーツ属性。移動速度上昇＋二段ジャンプ</td>
-              <td class="col-muted">制限なし</td>
-            </tr>
-            <tr>
-              <td><strong>ドームバリア</strong></td>
-              <td>自分の周囲にガラスドームを生成。10秒後に自然消滅</td>
-              <td class="col-muted">制限なし</td>
-            </tr>
-            <tr>
-              <td><strong>WhiteBull</strong></td>
-              <td>ロンズデーライトのツルハシと組み合わせると深層岩を通常採掘可能</td>
-              <td class="col-muted">制限なし</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-
-      <!-- ── 第一期: ログインボーナス ── -->
-      <section class="wiki-section gen1-content" id="gen1-login" data-keywords="第一期 ログインボーナス">
-        <h2 class="wiki-section-title">
-          <i data-lucide="gift"></i>
-          ログインボーナス
-          <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">(第一期限定)</span>
-        </h2>
-        <div class="wiki-card">
-          <p>1日1回ログインすると自動でアイテムが付与されました。入手できるアイテムは以下の3種で、組み合わせることで<strong>経験値の塊</strong>を作成できました。</p>
-          <ul>
-            <li><strong>けいけんの石</strong></li>
-            <li><strong>けいけんの砂</strong></li>
-            <li><strong>珍しい水</strong></li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- ── 第一期: SCTE ── -->
-      <section class="wiki-section gen1-content" id="gen1-scte" data-keywords="第一期 SCTE Super Crafting Table EX">
-        <h2 class="wiki-section-title">
-          <i data-lucide="table-2"></i>
-          SCTE
-          <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">(第一期限定)</span>
-        </h2>
-        <div class="wiki-card">
-          <p><strong>Super Crafting Table EX（SCTE）</strong>は、カスタムアイテム作成に必要な専用作業台です。第二期以降では廃止されています。</p>
-          <ul>
-            <li>HUBから行ける「<strong>クラフトエリア</strong>」に固定設置</li>
-            <li>モバイル版プレイヤーもクラフトエリアで作成可能</li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- ── 第二期: 通貨システム ── -->
-      <section class="wiki-section gen2-content" id="currency" data-keywords="通貨 マネー 紙幣 コイン">
-        <h2 class="wiki-section-title">
-          <i data-lucide="coins"></i>
-          通貨システム
-          <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">(第二期)</span>
-        </h2>
-        <div class="wiki-card">
-          <p>新井鯖の共通通貨は<strong>マネー</strong>です。残高は以下の3種類で独立して管理されています。</p>
-          <table class="wiki-table" style="margin-top:0.75rem;border:1px solid #334155;box-shadow:0 0 0 1px #334155;">
-            <thead><tr><th style="border-right:1px solid #334155;">種別</th><th style="border-right:1px solid #334155;">説明</th><th>備考</th></tr></thead>
-            <tbody>
-              <tr><td style="border-right:1px solid rgba(51,65,85,0.5);"><strong>現金</strong></td><td style="border-right:1px solid rgba(51,65,85,0.5);">インベントリ内の紙幣アイテム</td><td>インベントリに物理保持</td></tr>
-              <tr><td style="border-right:1px solid rgba(51,65,85,0.5);"><strong>電子マネー</strong></td><td style="border-right:1px solid rgba(51,65,85,0.5);">デジタル残高</td><td>電子的に保持</td></tr>
-              <tr><td style="border-right:1px solid rgba(51,65,85,0.5);"><strong>銀行預金</strong></td><td style="border-right:1px solid rgba(51,65,85,0.5);">銀行に預けた残高</td><td>オフラインでも管理可能</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h3 class="wiki-subsection-title">紙幣の種類（全14種）</h3>
-        <table class="wiki-table currency-table-bills">
-          <thead><tr><th>額面</th><th>アイテムID</th><th>入手方法</th></tr></thead>
-          <tbody>
-            <tr><td>1,000,000</td><td><code>arai:money_1000000</code></td><td><span class="rank-name rank-legendp">Legend+</span>以上のランク</td></tr>
-            <tr><td>250,000</td><td><code>arai:money_250000</code></td><td><span class="rank-name rank-legendp">Legend+</span>以上のランク</td></tr>
-            <tr><td>100,000</td><td><code>arai:money_100000</code></td><td><span class="rank-name rank-legend">Legend</span>以上のランク</td></tr>
-            <tr><td>75,000</td><td><code>arai:money_75000</code></td><td><span class="rank-name rank-masterp">Master+</span>以上のランク</td></tr>
-            <tr><td>50,000</td><td><code>arai:money_50000</code></td><td><span class="rank-name rank-master">Master</span>以上のランク</td></tr>
-            <tr><td>10,000</td><td><code>arai:money_10000</code></td><td><span class="rank-name rank-diamond">Diamond</span>以上のランク</td></tr>
-            <tr><td>5,000</td><td><code>arai:money_5000</code></td><td>ATMでの出金</td></tr>
-            <tr><td>1,000</td><td><code>arai:money_1000</code></td><td>ATMでの出金</td></tr>
-            <tr><td>500</td><td><code>arai:money_500</code></td><td>ATMでの出金</td></tr>
-            <tr><td>100</td><td><code>arai:money_100</code></td><td>ATMでの出金</td></tr>
-            <tr><td>50</td><td><code>arai:money_50</code></td><td>ATMでの出金</td></tr>
-            <tr><td>10</td><td><code>arai:money_10</code></td><td>ATMでの出金</td></tr>
-            <tr><td>5</td><td><code>arai:money_5</code></td><td>ATMでの出金</td></tr>
-            <tr><td>1</td><td><code>arai:money_1</code></td><td>ATMでの出金</td></tr>
-          </tbody>
-        </table>
-
-        <div class="warn-banner">
-          <i data-lucide="alert-circle"></i>
-          <span><strong style="color:#f1f5f9;">50,000マネー以上</strong>の特殊紙幣は、運営を呼ぶかHUB内のNPC「Dealer」から電子マネーとの取引で入手できます。</span>
-        </div>
-      </section>
-
-      <!-- ── 第二期: ATM ── -->
-      <section class="wiki-section gen2-content" id="atm" data-keywords="ATM 入金 出金 電子マネー">
-        <h2 class="wiki-section-title">
-          <i data-lucide="landmark"></i>
-          ATM
-          <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">(第二期)</span>
-        </h2>
-        <div class="wiki-card">
-          <p>ATMでは現金・電子マネー・銀行預金の相互変換ができます。金額入力は<code>1000</code>、<code>10k</code>、<code>1m</code>、<code>all</code>に対応しています。</p>
-        </div>
-        <table class="wiki-table">
-          <thead><tr><th>操作名</th><th>変換方向</th><th>備考</th></tr></thead>
-          <tbody>
-            <tr><td><strong>チャージ</strong></td><td>現金 → 電子マネー</td><td>おつりあり</td></tr>
-            <tr><td><strong>入金</strong></td><td>現金 → 銀行</td><td>おつりあり</td></tr>
-            <tr><td><strong>換金</strong></td><td>電子マネー → 現金</td><td>—</td></tr>
-            <tr><td><strong>出金</strong></td><td>銀行 → 現金</td><td>—</td></tr>
-            <tr><td><strong>振替（電→銀）</strong></td><td>電子マネー → 銀行</td><td>—</td></tr>
-            <tr><td><strong>振替（銀→電）</strong></td><td>銀行 → 電子マネー</td><td>—</td></tr>
-          </tbody>
-        </table>
-      </section>
-
-      <!-- ── 第二期: Bank（送金・請求） ── -->
-      <section class="wiki-section gen2-content" id="bank" data-keywords="Bank 送金 請求 銀行">
-        <h2 class="wiki-section-title">
-          <i data-lucide="building-2"></i>
-          Bank メニュー
-          <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">(第二期)</span>
-        </h2>
-        <table class="wiki-table">
-          <thead><tr><th>機能</th><th>対象</th><th>内容</th></tr></thead>
-          <tbody>
-            <tr><td><strong>送金</strong></td><td>全鯖民</td><td>他プレイヤーへ電子マネーを送る</td></tr>
-            <tr><td><strong>請求</strong></td><td>全鯖民</td><td>他プレイヤーへ支払い依頼（請求書）を送る</td></tr>
-            <tr><td><strong>プロファイル</strong></td><td>全鯖民</td><td>電子マネー・銀行預金・合計資産の確認＋入出金</td></tr>
-            <tr><td><strong>強制請求</strong></td><td>運営のみ</td><td>鯖民に強制的に請求を行う</td></tr>
-          </tbody>
-        </table>
-      </section>
-
-      <!-- ── 第二期: チャットコマンド ── -->
-      <section class="wiki-section gen2-content" id="commands" data-keywords="チャット コマンド whisper shout ct op ch deposit withdraw gift thank">
-        <h2 class="wiki-section-title">
-          <i data-lucide="message-square"></i>
-          チャットコマンド
-          <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">(第二期)</span>
-        </h2>
-
-        <h3 class="wiki-subsection-title">メッセージ系</h3>
-        <table class="wiki-table">
-          <thead><tr><th>コマンド</th><th>機能</th><th>範囲</th><th>クールダウン</th><th>備考</th></tr></thead>
-          <tbody>
-            <tr>
-              <td><code>!whisper &lt;内容&gt;</code></td>
-              <td>ささやき</td>
-              <td class="col-muted">12ブロック以内</td>
-              <td>—</td>
-              <td>近くだけに届く（7m以内：12m、7m以上：12m）</td>
-            </tr>
-            <tr>
-              <td><code>!shout &lt;内容&gt;</code></td>
-              <td>叫び</td>
-              <td>同ディメンション</td>
-              <td class="attn">1分</td>
-              <td>太字で全体送信。受信時に効果音あり</td>
-            </tr>
-            <tr>
-              <td><code>!ct &lt;内容&gt;</code></td>
-              <td>国チャット</td>
-              <td class="col-muted">国民のみ</td>
-              <td>—</td>
-              <td>同国メンバーのみ</td>
-            </tr>
-            <tr>
-              <td><code>!op &lt;内容&gt;</code></td>
-              <td>運営チャット</td>
-              <td class="col-muted">OP専用</td>
-              <td>—</td>
-              <td>運営のみ閲覧可</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h3 class="wiki-subsection-title"><code>!ch</code>：チャンネル切り替え</h3>
-        <div class="wiki-card">
-          <p><code>!ch</code>で現在のチャンネル確認、<code>!ch &lt;チャンネル名&gt;</code>で切り替え。</p>
-        </div>
-        <table class="wiki-table">
-          <thead><tr><th>コマンド</th><th>チャンネル</th><th>説明</th></tr></thead>
-          <tbody>
-            <tr><td><code>!ch all</code></td><td>全体</td><td>通常チャット</td></tr>
-            <tr><td><code>!ch ct</code></td><td>国</td><td>国民のみ</td></tr>
-            <tr><td><code>!ch op</code></td><td>運営</td><td>運営のみ</td></tr>
-          </tbody>
-        </table>
-
-        <h3 class="wiki-subsection-title">銀行操作</h3>
-        <table class="wiki-table">
-          <thead><tr><th>コマンド</th><th>機能</th><th>エイリアス</th><th>備考</th></tr></thead>
-          <tbody>
-            <tr><td><code>!deposit &lt;金額&gt;</code></td><td>銀行入金</td><td>—</td><td>電子マネー → 銀行預金</td></tr>
-            <tr><td><code>!withdraw &lt;金額&gt;</code></td><td>銀行出金</td><td><code>!w</code></td><td>銀行預金 → 電子マネー</td></tr>
-          </tbody>
-        </table>
-
-        <h3 class="wiki-subsection-title">その他</h3>
-        <div class="info-banner">
-          <i data-lucide="info"></i>
-          <span><code>!gift</code>と<code>!thank</code>は<strong style="color:#f1f5f9;">共通のクールダウン30分</strong>です。30分経過するまで両方使用できません。</span>
-        </div>
-        <table class="wiki-table">
-          <thead><tr><th>コマンド</th><th>クールダウン</th><th>効果</th></tr></thead>
-          <tbody>
-            <tr>
-              <td><code>!gift</code></td>
-              <td class="attn">30分</td>
-              <td>オンライン中の全プレイヤーにあらくまねー1個付与</td>
-            </tr>
-            <tr>
-              <td><code>!thank &lt;プレイヤー名&gt;</code></td>
-              <td class="attn">30分</td>
-              <td>指定プレイヤーにあらくまねー5個付与。全員に通知＋効果音</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h3 class="wiki-subsection-title">金額指定の便利表記</h3>
-        <table class="wiki-table">
-          <thead><tr><th>表記</th><th>意味</th></tr></thead>
-          <tbody>
-            <tr><td><code>1000</code></td><td>1,000マネー</td></tr>
-            <tr><td><code>10k</code></td><td>10,000マネー</td></tr>
-            <tr><td><code>1m</code></td><td>1,000,000マネー</td></tr>
-            <tr><td><code>all</code></td><td>全額</td></tr>
-          </tbody>
-        </table>
-      </section>
-
-      <!-- ── 第二期: G Warp ── -->
-      <section class="wiki-section gen2-content" id="gwarp" data-keywords="G Warp グローバルワープ TP HUB ATS 承認">
-        <h2 class="wiki-section-title">
-          <i data-lucide="map-pin"></i>
-          G Warp
-          <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">(第二期)</span>
-        </h2>
-        <div class="warn-banner">
-          <i data-lucide="alert-circle"></i>
-          <span>G Warpのワープポイントは<strong style="color:#f1f5f9;">本拠点は自動的に登録</strong>されますが、他ポイントを登録したい場合は別途申請が必要です。</span>
-        </div>
-        <table class="wiki-table">
-          <thead><tr><th>ワープ先</th><th>表示条件</th><th>説明</th></tr></thead>
-          <tbody>
-            <tr><td><strong>HUB</strong></td><td>常時</td><td>—</td></tr>
-            <tr><td><strong>自国</strong></td><td><code>ct</code>タグ所持</td><td>—</td></tr>
-            <tr><td><strong>[国一覧]</strong></td><td><code>operator</code>タグ</td><td>運営のみ・全国家から選択可能</td></tr>
-            <tr><td><strong>[承認された国]</strong></td><td>他国の国民に承認された場合</td><td>国主から承認されTPが可能</td></tr>
-            <tr><td><strong>ATS</strong></td><td>常時</td><td>—</td></tr>
-            <tr><td><strong>新井賭博場</strong></td><td>常時</td><td>—</td></tr>
-            <tr><td><strong>ザクベガス</strong></td><td>常時</td><td>—</td></tr>
-            <tr><td><strong>ログイン</strong></td><td>常時</td><td>—</td></tr>
-            <tr><td><strong>国のプロファイル</strong></td><td><code>ct</code>タグ所持</td><td>TP承認権限の付与・削除</td></tr>
-          </tbody>
-        </table>
-
-        <div class="wiki-card">
-          <p><strong>TP承認権限について</strong></p>
-          <p>国主が他プレイヤーに<code>al:国ID</code>タグを付与することで、そのプレイヤーが対象国へのワープが可能になります。付与・削除は「国のプロファイル → 管理」から操作します。</p>
-        </div>
-      </section>
-
-      <!-- ── 第二期: 国家一覧 ── -->
-      <section class="wiki-section gen2-content" id="nations" data-keywords="国家 国 Star スター">
-        <h2 class="wiki-section-title">
-          <i data-lucide="earth"></i>
-          国家一覧
-          <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">(第二期)</span>
-        </h2>
-
-        <h3 class="wiki-subsection-title">平和国</h3>
-        <table class="wiki-table">
-          <thead><tr><th>国名</th><th>建国者</th><th>建国日</th><th>特記事項</th></tr></thead>
-          <tbody>
-            <tr>
-              <td><strong>ちっぽけ島</strong><span class="country-badge badge-peace">平和</span></td>
-              <td>にも <span class="col-muted">(Nimofish0123)</span></td>
-              <td>2025年5月6日</td>
-              <td>国土最小・経済力1位</td>
-            </tr>
-            <tr>
-              <td><strong>ユニヴェール</strong><span class="country-badge badge-peace">平和</span></td>
-              <td>復星 <span class="col-muted">(doordaia)</span></td>
-              <td>2025年5月5日</td>
-              <td>鯖の癒し枠</td>
-            </tr>
-            <tr>
-              <td><strong>ゲルンフロリア貿易商国</strong><span class="country-badge badge-peace">平和</span></td>
-              <td>AtoRa <span class="col-muted">(RyuukiRate86)</span></td>
-              <td>2025年5月4日</td>
-              <td>貿易特化・高度建築で有名</td>
-            </tr>
-            <tr>
-              <td><strong>ミニッツメン カリフォルニア共和国</strong><span class="country-badge badge-peace">平和</span></td>
-              <td>新カリフォルニア共和国 <span class="col-muted">(NullMitten50502)</span></td>
-              <td>2025年5月5日</td>
-              <td>—</td>
-            </tr>
-            <tr>
-              <td><strong>桜猫国</strong><span class="country-badge badge-peace">平和</span></td>
-              <td class="col-muted">—</td>
-              <td class="col-muted">—</td>
-              <td class="col-muted">情報未登録</td>
-            </tr>
-            <tr>
-              <td><strong>ア・リエール二重王国</strong><span class="country-badge badge-peace">平和</span></td>
-              <td class="col-muted">—</td>
-              <td class="col-muted">—</td>
-              <td class="col-muted">情報未登録</td>
-            </tr>
-            <tr>
-              <td><strong>無法都市</strong><span class="country-badge badge-peace">平和</span></td>
-              <td class="col-muted">—</td>
-              <td class="col-muted">—</td>
-              <td class="col-muted">情報未登録</td>
-            </tr>
-            <tr>
-              <td><strong>いぬのすみか</strong><span class="country-badge badge-peace">平和</span></td>
-              <td>しばどっぐ <span class="col-muted">(Shibadog0901)</span></td>
-              <td>2025年9月6日</td>
-              <td>1人国家・巨大建築・ダンジョン攻略。PVP専門外</td>
-            </tr>
-            <tr>
-              <td><strong>アニマル王国</strong><span class="country-badge badge-peace">平和</span></td>
-              <td>犬 <span class="col-muted">(Omu6502)</span></td>
-              <td>2025年11月9日</td>
-              <td>多国貿易・安息地を目指す</td>
-            </tr>
-            <tr>
-              <td><strong>あいしてす</strong><span class="country-badge badge-peace">平和</span></td>
-              <td>あいしてす <span class="col-muted">(Aishitesu1234)</span></td>
-              <td>2025年11月10日</td>
-              <td>ほぼ何もしない国として話題</td>
-            </tr>
-            <tr>
-              <td><strong>EVER GREEN FAMILY</strong><span class="country-badge badge-peace">平和</span></td>
-              <td>マルコ <span class="col-muted">(GermanyLove3033)</span></td>
-              <td>2025年12月11日</td>
-              <td>永遠の緑・平和を目標とする都市国家</td>
-            </tr>
-            <tr>
-              <td><strong>ウェスタ第二公国</strong><span class="country-badge badge-peace">平和</span></td>
-              <td class="col-muted">—</td>
-              <td class="col-muted">—</td>
-              <td class="col-muted">情報未登録</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h3 class="wiki-subsection-title">戦争国</h3>
-        <table class="wiki-table">
-          <thead><tr><th>国名</th><th>建国者</th><th>建国日</th><th>特記事項</th></tr></thead>
-          <tbody>
-            <tr>
-              <td><strong>科学都市ミライティア</strong><span class="country-badge badge-war">戦争</span></td>
-              <td>ハニワ中尉 <span class="col-muted">(CornyStar594748)</span></td>
-              <td>2025年4月29日</td>
-              <td>天空要塞・巨大な壁</td>
-            </tr>
-            <tr>
-              <td><strong>ift</strong><span class="country-badge badge-war">戦争</span></td>
-              <td>りんね <span class="col-muted">(rinnedao)</span></td>
-              <td>2025年5月5日</td>
-              <td>鯖内1〜2位の戦闘力</td>
-            </tr>
-            <tr>
-              <td><strong>ソ連</strong><span class="country-badge badge-war">戦争</span></td>
-              <td>わろた <span class="col-muted">(wammy3092)</span></td>
-              <td>2025年5月5日</td>
-              <td>鯖内最強戦闘力</td>
-            </tr>
-            <tr>
-              <td><strong>大日本帝国</strong><span class="country-badge badge-war">戦争</span></td>
-              <td class="col-muted">—</td>
-              <td class="col-muted">—</td>
-              <td class="col-muted">情報未登録</td>
-            </tr>
-            <tr>
-              <td><strong>神聖オーストリア海上帝国</strong><span class="country-badge badge-war">戦争</span></td>
-              <td>ティナ <span class="col-muted">(TNalpha0218)</span></td>
-              <td>2025年5月18日</td>
-              <td>軍備・建築両重視</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h3 class="wiki-subsection-title">Star認定国</h3>
-        <table class="wiki-table">
-          <thead><tr><th>国名</th><th>建国者</th><th>建国日</th><th>特記事項</th></tr></thead>
-          <tbody>
-            <tr>
-              <td><strong>ゲルン=アラクイア中央帝国</strong><span class="country-badge badge-star">Star</span></td>
-              <td>新井熊 <span class="col-muted">(ARbear0913)</span></td>
-              <td>2025年11月5日</td>
-              <td>鯖主の国。基本的に誰でも入国可</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-
-      <!-- ── 第二期: ランクシステム ── -->
-      <section class="wiki-section gen2-content" id="rank" data-keywords="ランク member Bronze Silver Gold Diamond Master Legend Ultimate operator">
-        <h2 class="wiki-section-title">
-          <i data-lucide="trophy"></i>
-          ランク制度
-          <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">(第二期)</span>
-        </h2>
-        <table class="wiki-table">
-          <thead>
-            <tr>
-              <th>ランク</th>
-              <th>所持金</th>
-              <th>累計プレイヤーキル数</th>
-              <th>ブロック破壊数</th>
-              <th>レベル</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><span class="rank-name rank-member">member</span></td>
-              <td class="col-muted">—</td><td class="col-muted">—</td><td class="col-muted">—</td><td class="col-muted">—</td>
-            </tr>
-            <tr>
-              <td><span class="rank-name rank-bronze">Bronze</span></td>
-              <td class="col-num">100+</td><td class="col-num">1+</td><td class="col-muted">—</td><td class="col-num">10+</td>
-            </tr>
-            <tr>
-              <td><span class="rank-name rank-silver">Silver</span></td>
-              <td class="col-num">10,000+</td><td class="col-num">10+</td><td class="col-num">1,000+</td><td class="col-num">30+</td>
-            </tr>
-            <tr>
-              <td><span class="rank-name rank-gold">Gold</span></td>
-              <td class="col-num">50,000+</td><td class="col-num">30+</td><td class="col-num">10,000+</td><td class="col-num">50+</td>
-            </tr>
-            <tr>
-              <td><span class="rank-name rank-diamond">Diamond</span></td>
-              <td class="col-num">200,000+</td><td class="col-num">50+</td><td class="col-num">100,000+</td><td class="col-num">75+</td>
-            </tr>
-            <tr>
-              <td><span class="rank-name rank-master">Master</span></td>
-              <td class="col-num">1,000,000+</td><td class="col-num">100+</td><td class="col-num">100,000+</td><td class="col-num">90+</td>
-            </tr>
-            <tr>
-              <td><span class="rank-name rank-masterp">Master+</span></td>
-              <td class="col-num">7,000,000+</td><td class="col-num">200+</td><td class="col-num">150,000+</td><td class="col-num">120+</td>
-            </tr>
-            <tr>
-              <td><span class="rank-name rank-legend">Legend</span></td>
-              <td class="col-num">10,000,000+</td><td class="col-num">400+</td><td class="col-num">200,000+</td><td class="col-num">130+</td>
-            </tr>
-            <tr>
-              <td><span class="rank-name rank-legendp">Legend+</span></td>
-              <td class="col-num">20,000,000+</td><td class="col-num">600+</td><td class="col-num">400,000+</td><td class="col-num">150+</td>
-            </tr>
-            <tr>
-              <td><span class="rank-name rank-ultimate">Ultimate</span></td>
-              <td class="col-num">50,000,000+</td><td class="col-num">1,000+</td><td class="col-num">1,000,000+</td><td class="col-num">200+</td>
-            </tr>
-            <tr>
-              <td><span class="rank-name rank-op">operator</span></td>
-              <td colspan="4" style="color:#475569;font-size:0.85rem;">運営のみ（手動付与）</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-
-      <!-- ── 第二期: 競羊 ── -->
-      <section class="wiki-section gen2-content" id="keiyou" data-keywords="競羊 羊 レース black white red blue green purple ky">
-        <h2 class="wiki-section-title">
-          <i data-lucide="flag"></i>
-          競羊
-          <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">(第二期)</span>
-        </h2>
-        <div class="wiki-card">
-          <p>羊のレースに賭け金をかけて配当を得るギャンブルシステムです。<strong>単一がけ形式</strong>で、1頭の羊に賭けます。</p>
-          <ul>
-            <li>1位 → <strong>2倍</strong>の配当</li>
-            <li>2位 → <strong>1.5倍</strong>の配当</li>
-            <li>3位 → <strong>0.5倍</strong>の配当</li>
-            <li>最低購入額：<strong>100マネー</strong></li>
-            <li>最大購入額：<strong>1,000,000マネー</strong></li>
-          </ul>
-        </div>
-
-        <h3 class="wiki-subsection-title">賭けられる羊の色</h3>
-        <table class="wiki-table">
-          <thead><tr><th>色</th><th>コマンド例</th><th>その他の呼び方</th></tr></thead>
-          <tbody>
-            <tr>
-              <td><span class="sheep-swatch swatch-black"></span><strong>黒</strong></td>
-              <td><code>!ky black 1000</code></td>
-              <td class="col-muted">black / kuro / くろ / クロ / 黒</td>
-            </tr>
-            <tr>
-              <td><span class="sheep-swatch swatch-white"></span><strong>白</strong></td>
-              <td><code>!ky white 1000</code></td>
-              <td class="col-muted">white / shiro / しろ / シロ / 白</td>
-            </tr>
-            <tr>
-              <td><span class="sheep-swatch swatch-red"></span><strong>赤</strong></td>
-              <td><code>!ky red 1000</code></td>
-              <td class="col-muted">red / aka / あか / アカ / 赤</td>
-            </tr>
-            <tr>
-              <td><span class="sheep-swatch swatch-blue"></span><strong>青</strong></td>
-              <td><code>!ky blue 1000</code></td>
-              <td class="col-muted">blue / ao / あお / アオ / 青</td>
-            </tr>
-            <tr>
-              <td><span class="sheep-swatch swatch-green"></span><strong>緑</strong></td>
-              <td><code>!ky green 1000</code></td>
-              <td class="col-muted">green / midori / みどり / ミドリ / 緑</td>
-            </tr>
-            <tr>
-              <td><span class="sheep-swatch swatch-purple"></span><strong>紫</strong></td>
-              <td><code>!ky purple 1000</code></td>
-              <td class="col-muted">purple / murasaki / むらさき / ムラサキ / 紫</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h3 class="wiki-subsection-title">コマンド一覧</h3>
-        <table class="wiki-table">
-          <thead><tr><th>コマンド</th><th>内容</th></tr></thead>
-          <tbody>
-            <tr><td><code>!ky</code> / <code>!keiyou</code></td><td>チケット残高確認</td></tr>
-            <tr><td><code>!ky &lt;色&gt; &lt;金額&gt;</code></td><td>チケット購入（例:<code>!ky red 10000</code>）</td></tr>
-            <tr><td><code>!ky clear</code></td><td>購入履歴をリセット</td></tr>
-            <tr><td><code>!ky help</code></td><td>ヘルプ表示</td></tr>
-          </tbody>
-        </table>
-
-        <div class="wiki-card">
-          <p>購入に成功すると<strong>競羊券（紙アイテム）</strong>がインベントリに追加されます。券には羊の色・賭け金・購入日時が記載されます。購入のたびに運営全員に通知が届きます。</p>
-        </div>
-      </section>
-
-      <!-- ── 第二期: ザクベガス ── -->
-      <section class="wiki-section gen2-content" id="zakuvegas" data-keywords="ザクベガス 閉鎖">
-        <h2 class="wiki-section-title">
-          <i data-lucide="dice-5"></i>
-          ザクベガス
-          <span style="font-size:0.75rem;color:#64748b;font-weight:400;margin-left:0.5rem;">(第二期 / 閉鎖済み)</span>
-        </h2>
-        <div class="wiki-card">
-          <p>The Endに存在するカジノ施設です。G Warpから「ザクベガス」を選択するとロビーへ移動できます。現在はロビーのみワープが有効です。</p>
-        </div>
-        <table class="wiki-table">
-          <thead><tr><th>施設名</th><th>種別</th><th>状態</th></tr></thead>
-          <tbody>
-            <tr><td><strong>ロビー</strong></td><td>入口</td><td>✅ ワープ有効</td></tr>
-            <tr><td><strong>本店</strong></td><td>—</td><td>❌ 現在無効</td></tr>
-            <tr><td><strong>パチンコ RNZ_08</strong></td><td>パチンコ</td><td>❌ 現在無効</td></tr>
-            <tr><td><strong>スロット GNF_07</strong></td><td>スロット</td><td>❌ 現在無効</td></tr>
-            <tr><td><strong>運営スロット ZK_08</strong></td><td>スロット</td><td>❌ 現在無効</td></tr>
-            <tr><td><strong>景品交換所</strong></td><td>交換</td><td>❌ 現在無効</td></tr>
-            <tr><td><strong>コネクトフォー</strong></td><td>ゲーム</td><td>❌ 現在無効</td></tr>
-          </tbody>
-        </table>
-      </section>
-
-      <!-- ── 第三期: チャットコマンド ── -->
-      <section class="wiki-section gen3-content" id="gen3-chat-commands" data-keywords="チャットコマンド 椅子 セーフストレージ イベント応答">
-        <h2 class="wiki-section-title">
-          <i data-lucide="message-circle"></i>
-          チャットコマンド
-        </h2>
-
-        <h3 class="wiki-subsection-title">椅子コマンド</h3>
-        <table class="wiki-table">
-          <thead><tr><th>コマンド</th><th>説明</th></tr></thead>
-          <tbody>
-            <tr><td><code>!sit</code></td><td>椅子に座る</td></tr>
-            <tr><td><code>!stand</code></td><td>椅子から立ち上がる</td></tr>
-            <tr><td><code>!standall</code></td><td>全プレイヤーを椅子から立たせる</td></tr>
-          </tbody>
-        </table>
-
-        <h3 class="wiki-subsection-title">イベント応答コマンド</h3>
-        <table class="wiki-table">
-          <thead><tr><th>コマンド</th><th>説明</th></tr></thead>
-          <tbody>
-            <tr><td><code>yes</code></td><td>承認・了承の応答</td></tr>
-            <tr><td><code>no</code></td><td>拒否・否定の応答</td></tr>
-          </tbody>
-        </table>
-
-        <h3 class="wiki-subsection-title">メッセージ系コマンド</h3>
-        <table class="wiki-table">
-          <thead><tr><th>コマンド</th><th>説明</th><th>範囲</th><th>クールダウン</th></tr></thead>
-          <tbody>
-            <tr><td><code>!whisper &lt;内容&gt;</code></td><td>ささやき</td><td>12m以内</td><td>—</td></tr>
-            <tr><td><code>!w &lt;内容&gt;</code></td><td>ささやき（短縮形）</td><td>12m以内</td><td>—</td></tr>
-            <tr><td><code>!shout &lt;内容&gt;</code></td><td>ディメンション全員に太字送信</td><td>同ディメンション</td><td class="attn">1分</td></tr>
-            <tr><td><code>!chat</code></td><td>プライベートチャット（Bindscord）</td><td>所属グループ</td><td>—</td></tr>
-          </tbody>
-        </table>
-
-        <h3 class="wiki-subsection-title">テレポート系コマンド</h3>
-        <table class="wiki-table">
-          <thead><tr><th>コマンド</th><th>説明</th><th>備考</th></tr></thead>
-          <tbody>
-            <tr><td><code>!hub</code></td><td>ハブにテレポート</td><td><code>!home</code>, <code>!arai</code>, <code>!lobby</code> でも可</td></tr>
-            <tr><td><code>!gwarp</code></td><td>G Warpフォームを開く</td><td>テレポート先選択UI</td></tr>
-            <tr><td><code>!tpr &lt;プレイヤー名&gt;</code></td><td>テレポート申請を送信</td><td>相手の承認が必要</td></tr>
-            <tr><td><code>!tpa</code></td><td>テレポート要請を公開</td><td>全プレイヤーに表示</td></tr>
-            <tr><td><code>yes</code></td><td>テレポート申請を承認</td><td>相手の要請に応答</td></tr>
-            <tr><td><code>no</code></td><td>テレポート申請を拒否</td><td>相手の要請に応答</td></tr>
-          </tbody>
-        </table>
-
-        <h3 class="wiki-subsection-title">ユーティリティコマンド</h3>
-        <table class="wiki-table">
-          <thead><tr><th>コマンド</th><th>説明</th></tr></thead>
-          <tbody>
-            <tr><td><code>!help [コマンド名]</code></td><td>チャットコマンドのヘルプ表示</td></tr>
-            <tr><td><code>!version</code></td><td>サーバーのバージョン情報表示</td></tr>
-            <tr><td><code>etc</code></td><td>ワールドクリーンアップ時間を10分延長</td></tr>
-          </tbody>
-        </table>
-
-        <h3 class="wiki-subsection-title">セーフストレージコマンド</h3>
-        <div class="wiki-card">
-          <p><strong>コマンド：</strong> <code>!safestorage</code></p>
-          <p><strong>説明：</strong>セーフストレージのキーアイテム（locker、editor、retriever）を付与します。チェストなどのロック管理に使用します。</p>
-        </div>
-
-        <div class="wiki-card">
-          <p><strong>セーフストレージキーアイテム：</strong></p>
-          <ul>
-            <li><strong>locker</strong> — ブロックをロック
-              <ul><li>インベントリを持つブロック（チェスト、樽など）に使用</li></ul>
-            </li>
-            <li><strong>editor</strong> — パスワードを編集・削除
-              <ul><li>ロック作成者のみ使用可能</li></ul>
-            </li>
-            <li><strong>retriever</strong> — パスワードを表示
-              <ul><li>ロック作成者またはオペレーターのみ使用可能</li></ul>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- ── 第三期: テレポート申請 ── -->
-      <section class="wiki-section gen3-content" id="gen3-teleport-request" data-keywords="テレポート申請 テレポート要請 !tpr !tpa yes no">
-        <h2 class="wiki-section-title">
-          <i data-lucide="arrow-right"></i>
-          テレポート申請・要請システム
-        </h2>
-
-        <div class="wiki-card">
-          <p><strong>テレポート申請・要請</strong>は、プレイヤー間で移動を承認してもらうシステムです。相手の明示的な承認が必要で、タイムアウト機能も搭載されています。</p>
-        </div>
-
-        <h3 class="wiki-subsection-title">!tpr：テレポート申請（相手指定）</h3>
-        <div class="wiki-card">
-          <p><strong>コマンド：</strong> <code>!tpr &lt;プレイヤー名またはハンドルネーム&gt;</code></p>
-          <p><strong>説明：</strong>特定のプレイヤーにテレポート申請を送信します。相手プレイヤーが <code>yes</code> または <code>no</code> で応答するまで待機します。</p>
-          <p><strong>流れ：</strong></p>
-          <ul>
-            <li>申請送信者がコマンド実行</li>
-            <li>相手プレイヤーに通知が届く</li>
-            <li>相手が <code>yes</code> で承認 → テレポート完了</li>
-            <li>相手が <code>no</code> で拒否 → テレポート中止</li>
-            <li>60秒以内に応答なし → 自動タイムアウト</li>
-          </ul>
-        </div>
-
-        <h3 class="wiki-subsection-title">!tpa：テレポート要請（全体公開）</h3>
-        <div class="wiki-card">
-          <p><strong>コマンド：</strong> <code>!tpa</code></p>
-          <p><strong>説明：</strong>テレポート要請を全プレイヤーに公開します。複数の誰かが <code>yes</code> または <code>no</code> で応答できます。</p>
-          <p><strong>備考：</strong>全プレイヤーに表示されるため、誰かが応答する可能性があります。</p>
-        </div>
-
-        <h3 class="wiki-subsection-title">応答コマンド</h3>
-        <table class="wiki-table">
-          <thead><tr><th>コマンド</th><th>説明</th><th>タイミング</th></tr></thead>
-          <tbody>
-            <tr><td><code>yes</code></td><td>テレポート申請を承認</td><td>申請を受け取ったら即座に実行</td></tr>
-            <tr><td><code>no</code></td><td>テレポート申請を拒否</td><td>申請を受け取ったら即座に実行</td></tr>
-            <tr><td><code>allow</code></td><td>テレポート要請に応答（承認）</td><td>要請を受け取ったら即座に実行</td></tr>
-            <tr><td><code>deny</code></td><td>テレポート要請に応答（拒否）</td><td>要請を受け取ったら即座に実行</td></tr>
-          </tbody>
-        </table>
-
-        <div class="info-banner">
-          <i data-lucide="info"></i>
-          <span>申請がない状態で <code>yes</code>、<code>no</code>、<code>allow</code>、<code>deny</code> を実行しても何も起こりません。</span>
-        </div>
-      </section>
-
-      <!-- ── 第三期: Bindscord ── -->
-      <section class="wiki-section gen3-content" id="gen3-bindscord" data-keywords="Bindscord プライベートチャット グループ 国家">
-        <h2 class="wiki-section-title">
-          <i data-lucide="message-circle"></i>
-          Bindscord
-        </h2>
-        <div class="wiki-card">
-          <p><strong>Bindscord</strong>は、ワールド内の特定のプレイヤー間で会話ができる機能です。国家別のプライベートチャットグループに参加し、同じグループ内のメンバーと隔離された通信ができます。</p>
-        </div>
-
-        <h3 class="wiki-subsection-title">アクセス方法</h3>
-        <div class="wiki-card">
-          <p><strong>操作フロー：</strong></p>
-          <ol style="margin-left:1.5rem;margin-top:0.5rem;">
-            <li>メインメニューを開く</li>
-            <li>「アプリケーション」を選択</li>
-            <li>「Bindscord」を選択</li>
-            <li>所属している国家（またはグループ）の名前をタップ</li>
-          </ol>
-          <p style="margin-top:0.75rem;">これにより、該当のプライベートチャットに接続できます。</p>
-        </div>
-
-        <h3 class="wiki-subsection-title">現在のチャット状態</h3>
-        <div class="wiki-card">
-          <p>フォーム画面には「現在のチャット」が表示されます。これは現在接続しているチャットグループを示しており、このグループへのメッセージ送信時に自動送信されます。</p>
-        </div>
-
-        <h3 class="wiki-subsection-title">チャットの特徴</h3>
-        <div class="wiki-card">
-          <ul>
-            <li><strong>接続要件</strong> — チャットを受け取るには、明示的に接続する必要があります。同じ国家に所属しているだけでは視認できません</li>
-            <li><strong>自動送信</strong> — チャット接続中にメッセージを送信すると、接続しているチャットに自動で送信されます</li>
-            <li><strong>全体チャット常時表示</strong> — 個別（国家別）チャットに参加していても、全体チャット（グループ0）は常に視認できます</li>
-            <li><strong>PVP保護</strong> — 同じチャットに接続している人同士は互いに攻撃できません</li>
-          </ul>
-        </div>
-
-        <h3 class="wiki-subsection-title">参加可能なチャットグループ</h3>
-        <table class="wiki-table">
-          <thead><tr><th>グループID</th><th>チャット名</th><th>アクセス条件</th></tr></thead>
-          <tbody>
-            <tr><td>0</td><td>全体チャット</td><td>全プレイヤー（常時表示）</td></tr>
-            <tr><td>1</td><td>オスマン帝国</td><td><code>ct:ottoman</code>タグ所持</td></tr>
-            <tr><td>2</td><td>スペイン王国</td><td><code>ct:spain</code>タグ所持</td></tr>
-            <tr><td>3</td><td>イギリス及びフランク王国</td><td><code>ct:anglo_french</code>タグ所持</td></tr>
-            <tr><td>4</td><td>教皇領</td><td><code>ct:hre</code>タグ所持</td></tr>
-            <tr><td>5</td><td>大スウェーデン連邦</td><td><code>ct:sweden</code>タグ所持</td></tr>
-            <tr><td>6</td><td>スラヴ=ロシア帝国</td><td><code>ct:pol_lith</code>タグ所持</td></tr>
-            <tr><td>7</td><td>運営チャット</td><td><code>operator</code>タグ所持</td></tr>
-          </tbody>
-        </table>
-
-        <div class="info-banner">
-          <i data-lucide="info"></i>
-          <span>所属国がない場合、グループ0（全体チャット）のみアクセス可能です。国民になると自動的に該当グループへのアクセスが有効になります。</span>
-        </div>
-      </section>
-
-      <!-- ── 第三期: G Warp ── -->
-      <section class="wiki-section gen3-content" id="gen3-gwarp" data-keywords="G Warp グローバルワープ テレポート HUB ログイン 地点登録">
-        <h2 class="wiki-section-title">
-          <i data-lucide="map-pin"></i>
-          G Warp
-        </h2>
-
-        <h3 class="wiki-subsection-title">G Warpについて</h3>
-        <div class="wiki-card">
-          <p><strong>G Warp</strong>（Global Warp）は、サーバー内の登録された地点へテレポートできる機能です。</p>
-          <p><strong>ワープに必要な条件：</strong>その場に<strong>3秒間立ち止まる</strong>必要があります。モブに襲われている状況などでは使用できません。</p>
-        </div>
-
-        <h3 class="wiki-subsection-title">利用可能なワープ先</h3>
-        <table class="wiki-table">
-          <thead><tr><th>ワープ先</th><th>説明</th></tr></thead>
-          <tbody>
-            <tr><td><strong>HUB</strong></td><td>メインハブへテレポート</td></tr>
-            <tr><td><strong>ログイン</strong></td><td>初回ログイン地点へテレポート</td></tr>
-            <tr><td><strong>自国に登録された地点</strong></td><td>自分の国に登録しているワープポイント</td></tr>
-          </tbody>
-        </table>
-
-        <h3 class="wiki-subsection-title">自国への地点登録</h3>
-        <div class="wiki-card">
-          <p>自分の国に<strong>無料でワープポイント</strong>を登録できます。</p>
-          <p><strong>申請方法：</strong>以下のDiscordチャンネルで申請してください</p>
-          <p><a href="https://discord.com/channels/1338033471045505098/1373900195674329168" target="_blank" rel="noopener noreferrer" style="color:#38bdf8;text-decoration:underline;">G Warp登録申請チャンネル</a></p>
-        </div>
-
-        <h3 class="wiki-subsection-title">申請テンプレート</h3>
-        <div class="wiki-card" style="background:#0f172a;border:1px solid #334155;">
-          <p style="font-family:'Courier New',monospace;font-size:0.85rem;color:#cbd5e1;line-height:1.8;">
-            <strong style="color:#38bdf8;">&gt; **国名**: </strong>{国名}<br>
-            <strong style="color:#38bdf8;">&gt; **地点**: </strong>{座標:x y z}<br>
-            <strong style="color:#38bdf8;">&gt; **表示名**: </strong>{表示名}
-          </p>
-        </div>
-
-        <div class="wiki-card">
-          <p><strong>例：</strong></p>
-          <p style="font-family:'Courier New',monospace;font-size:0.85rem;color:#94a3b8;background:#0f172a;border:1px solid #334155;border-radius:4px;padding:0.75rem;margin-top:0.5rem;">
-            &gt; **国名**: ゲルン=アラクイア中央帝国<br>
-            &gt; **地点**: 100 64 200<br>
-            &gt; **表示名**: 中央広場
-          </p>
-        </div>
-      </section>
-
-      <!-- ── 第三期: ワールドクリーンアップ ── -->
-      <section class="wiki-section gen3-content" id="gen3-wcu" data-keywords="ワールドクリーンアップ WCU アイテム削除 モブ 経験値 メインメニュー keep dinnerbone">
-        <h2 class="wiki-section-title">
-          <i data-lucide="trash-2"></i>
-          ワールドクリーンアップ
-        </h2>
-
-        <h3 class="wiki-subsection-title">ワールドクリーンアップとは</h3>
-        <div class="wiki-card">
-          <p><strong>ワールドクリーンアップ（WCU）</strong>は、サーバー内のワールドを整理するために<strong>20分周期</strong>で自動実行されるプログラムです。</p>
-          <p><strong>削除対象：</strong></p>
-          <ul>
-            <li>ワールドに落ちているアイテム</li>
-            <li>敵モブ（村人ゾンビを除く）</li>
-            <li>経験値オーブ</li>
-          </ul>
-        </div>
-
-        <h3 class="wiki-subsection-title">全ロスを防ぐための対策</h3>
-        <div class="wiki-card">
-          <p>WCUで削除されず、アイテムやエンティティを保護する方法があります。</p>
-        </div>
-
-        <h4 style="font-size:0.95rem;font-weight:600;color:#cbd5e1;margin:1rem 0 0.5rem;padding-left:0.75rem;border-left:2px solid #475569;">メインメニュー周辺の保護</h4>
-        <div class="wiki-card">
-          <p>メインメニューの付近<strong>7ブロック範囲</strong>に落ちているアイテムは自動削除されません。</p>
-        </div>
-
-        <h4 style="font-size:0.95rem;font-weight:600;color:#cbd5e1;margin:1rem 0 0.5rem;padding-left:0.75rem;border-left:2px solid #475569;">特殊な名前の保護</h4>
-        <div class="wiki-card">
-          <p><strong>エンティティに特殊な名前を付けることで、削除から保護できます：</strong></p>
-          <ul>
-            <li><strong>keep</strong> — 削除されない（最も一般的な保護方法）</li>
-            <li><strong>dinnerbone</strong> — 削除されない</li>
-            <li><strong>Grumm</strong> — 削除されない</li>
-          </ul>
-          <p>上記の名前を付けたエンティティはWCUでは削除されません。</p>
-        </div>
-
-        <h3 class="wiki-subsection-title">ログ設定</h3>
-        <div class="wiki-card">
-          <p><strong>残り時間ログの通知について：</strong></p>
-          <p>定期的に表示される「WCU実行まで…分」というログは、メインメニューの<strong>「設定」から削除できます</strong>。</p>
-        </div>
-
-        <div class="warn-banner">
-          <i data-lucide="alert-circle"></i>
-          <span>ただし、<strong style="color:#f1f5f9;">10秒前のアラート</strong>と<strong style="color:#f1f5f9;">実行通知</strong>は設定でオフにしても必ず届きます。重要な通知のため無視できません。</span>
-        </div>
-      </section>
-
-      <!-- ── 第三期: オスミウムシステム ── -->
-      <section class="wiki-section gen3-content" id="gen3-osmium" data-keywords="オスミウム 鉱石 インゴット ツール ツルハシ 斧 シャベル">
-        <h2 class="wiki-section-title">
-          <i data-lucide="gem"></i>
-          固有鉱石「オスミウム」について
-        </h2>
-
-        <h3 class="wiki-subsection-title">オスミウムについて</h3>
-        <div class="wiki-card">
-          <p>オスミウムは、ワールドに追加されたカスタム鉱石素材で、ツールやアイテムのクラフティング用の重要なリソースです。標準的なマインクラフト素材と比べて、より高い耐久性と効果を備えています。</p>
-        </div>
-
-        <h3 class="wiki-subsection-title">オスミウム鉱石</h3>
-        <div class="wiki-card">
-          <ul>
-            <li><strong>ブロックID：</strong> <code>asa3:osmium_ore</code></li>
-            <li><strong>採掘時間：</strong>4秒（鉄以上のツルハシが必要）</li>
-            <li><strong>ドロップ：</strong>オスミウムの原石</li>
-            <li><strong>爆発耐性：</strong>3.0</li>
-          </ul>
-        </div>
-
-        <h3 class="wiki-subsection-title">鉱石の入手方法</h3>
-        <div class="wiki-card">
-          <p><strong>クラフティングで作成</strong></p>
-          <p>オスミウム鉱石は自然生成されないため、以下の石ブロックから作業台でクラフトできます：</p>
-          <ul>
-            <li>石（Stone）</li>
-            <li>花崗岩（Granite）</li>
-            <li>安山岩（Andesite）</li>
-            <li>閃緑岩（Diorite）</li>
-          </ul>
-          <p>これらの石ブロック<strong>9個</strong>を作業台にクラフトすることで、オスミウム鉱石<strong>1個</strong>を作成できます。</p>
-        </div>
-
-        <h3 class="wiki-subsection-title">オスミウムアイテム</h3>
-        <div class="wiki-card">
-          <p><strong>オスミウムの原石</strong></p>
-          <ul>
-            <li><strong>アイテムID：</strong> <code>asa3:raw_osmium</code></li>
-            <li><strong>用途：</strong>オスミウム鉱石の採掘で入手</li>
-            <li><strong>精錬：</strong>かまどで精錬してオスミウムインゴットを作成可能</li>
-          </ul>
-        </div>
-        <div class="wiki-card">
-          <p><strong>オスミウムインゴット</strong></p>
-          <ul>
-            <li><strong>アイテムID：</strong> <code>asa3:osmium_ingot</code></li>
-            <li><strong>用途：</strong>ツールと装備のクラフティング素材</li>
-            <li><strong>スタックサイズ：</strong>64</li>
-          </ul>
-        </div>
-
-        <h3 class="wiki-subsection-title">オスミウムツール</h3>
-        <table class="wiki-table">
-          <thead><tr><th>ツール</th><th>アイテムID</th><th>レシピ</th></tr></thead>
-          <tbody>
-            <tr><td>ツルハシ</td><td><code>asa3:osmium_pickaxe</code></td><td>オスミウムインゴット3個 + 棒2個</td></tr>
-            <tr><td>斧</td><td><code>asa3:osmium_axe</code></td><td>オスミウムインゴット3個 + 棒2個</td></tr>
-            <tr><td>シャベル</td><td><code>asa3:osmium_shovel</code></td><td>オスミウムインゴット1個 + 棒2個</td></tr>
-            <tr><td>クワ</td><td><code>asa3:osmium_hoe</code></td><td>オスミウムインゴット2個 + 棒2個</td></tr>
-            <tr><td>剣</td><td><code>asa3:osmium_sword</code></td><td>オスミウムインゴット2個 + 棒1個</td></tr>
-          </tbody>
-        </table>
-
-        <h3 class="wiki-subsection-title">クラフティングレシピ</h3>
-        <div class="wiki-card">
-          <p><strong>オスミウムの原石を精錬</strong></p>
-          <ul>
-            <li><strong>入力：</strong>オスミウムの原石</li>
-            <li><strong>出力：</strong>オスミウムインゴット（1:1の比率）</li>
-            <li><strong>使用可能：</strong>かまど、燻製器、溶鉱炉</li>
-          </ul>
-        </div>
-        <div class="wiki-card">
-          <p><strong>オスミウム鉱石を精錬</strong></p>
-          <ul>
-            <li><strong>入力：</strong>オスミウム鉱石</li>
-            <li><strong>出力：</strong>オスミウムインゴット（追加経験値付き）</li>
-            <li><strong>使用可能：</strong>かまど、燻製器、溶鉱炉</li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- ── 第三期: Core Protect ── -->
-      <section class="wiki-section gen3-content" id="gen3-coreprotect" data-keywords="Core Protect 保護区画 coreprotect cp エディター TP">
-        <h2 class="wiki-section-title">
-          <i data-lucide="shield"></i>
-          Core Protect
-        </h2>
-
-        <h3 class="wiki-subsection-title">概要</h3>
-        <div class="wiki-card">
-          <p>新井鯖の「Hub」内にある「<strong>保護区画</strong>」の保護機能です。自分の土地を他のプレイヤーから保護し、権限を細かく設定できます。</p>
-        </div>
-
-        <h3 class="wiki-subsection-title">基本的な使い方</h3>
-        <div class="wiki-card">
-          <p><code>!coreprotect</code>か短縮形<code>!cp</code>でフォームを開けます。自分がエディターに指定されている土地を閲覧でき、他の人を招待することもできます。</p>
-        </div>
-
-        <h3 class="wiki-subsection-title">エディター権限について</h3>
-        <div class="wiki-card">
-          <p><strong>エディターに指定されていないプレイヤー</strong>は、保護区画内のブロック破壊とインタラクトができません。</p>
-          <p><strong>インタラクト</strong>とは以下の操作を指します：</p>
-          <ul>
-            <li>新たなブロックの設置</li>
-            <li>作業台の使用</li>
-            <li>チェストのオープン</li>
-            <li>額縁の中身を回す</li>
-          </ul>
-          <p><strong>オプション機能：</strong>警告をチャットからフォームに変更することも可能で、マクロなどでも突破できない強固なセキュリティになります。</p>
-        </div>
-
-        <h3 class="wiki-subsection-title">保護区画のID</h3>
-        <div class="wiki-card">
-          <p>保護区画は自動でIDが振り分けられます。「メインメニュー」の「G Warp」では区画を閲覧することはできませんが、IDを控えておけばチャットコマンドでその区画にテレポートできます。</p>
-          <p><strong>例：</strong> <code>!gwarp a0001</code></p>
-          <p><strong>テレポート位置：</strong>エディターが自由に決めることができます。区画の中かその付近にしか指定できません。</p>
-        </div>
-
-        <h3 class="wiki-subsection-title">ブロック権限の設定</h3>
-        <div class="wiki-card">
-          <p>エディターは特定のブロックの破壊・インタラクトをエディターに指定されていないプレイヤーに許可することができます。</p>
-          <p><strong>例：</strong> <code>minecraft:lever</code>を「インタラクト可能」に追加すれば、レバーだけを引くことができる区画が完成します。</p>
-        </div>
-
-        <h3 class="wiki-subsection-title">基本的なアイテムID</h3>
-        <table class="wiki-table">
-          <thead><tr><th>ブロック</th><th>アイテムID</th></tr></thead>
-          <tbody>
-            <tr><td><strong>チェスト</strong></td><td><code>minecraft:chest</code></td></tr>
-            <tr><td><strong>樽</strong></td><td><code>minecraft:barrel</code></td></tr>
-            <tr><td><strong>額縁</strong></td><td><code>minecraft:frame</code></td></tr>
-          </tbody>
-        </table>
-
-        <h3 class="wiki-subsection-title">由来</h3>
-        <div class="wiki-card">
-          <p>「<strong>Core Protect</strong>」は本来<strong>Java版</strong>に存在するプラグインの名前です。全プレイヤーの行動（ブロックの設置・破壊など）をデータベースにログとして記録し、荒らし被害が発生した際にその箇所をロールバック（巻き戻し・復元）できる、荒らし対策に特化したプラグインです。</p>
-          <p>新井鯖では区画を保護するという意味で名前をお借りしました。</p>
-        </div>
-      </section>
-
-      <!-- ── 第三期: オスミウムシステム ── -->
+  <section class="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <img src="images/server_logo.png" alt="新井鯖 Logo" class="hero-logo">
+  <h1 class="hero-title"><span class="new-color">新井</span><span>鯖</span></h1>
+  <p class="hero-subtitle">
+    <span class="static-text">建国サーバーに</span><span class="dynamic-text" id="dynamicText"></span><span class="cursor" id="cursor">|</span>
+  </p>
+  <div class="nav-cards">
+    <a href="wiki.html" class="nav-card">
+    <i data-lucide="library" class="card-icon"></i>
+    <span class="card-title">Wiki</span>
+    <span class="card-desc">サーバーの仕組みや世界観</span>
+    <span class="card-arrow">→</span>
+    </a>
+    <a href="rules.html" class="nav-card">
+    <i data-lucide="book-open" class="card-icon"></i>
+    <span class="card-title">Rules</span>
+    <span class="card-desc">サーバールール</span>
+    <span class="card-arrow">→</span>
+    </a>
+    <a href="events.html" class="nav-card">
+    <i data-lucide="calendar-days" class="card-icon"></i>
+    <span class="card-title">Events</span>
+    <span class="card-desc">賭博・PVPなどのイベント</span>
+    <span class="card-arrow">→</span>
+    </a>
+  </div>
+  </section>
+  <section class="about-section">
+  <h2>新井鯖について</h2>
+  <div class="about-card">
+    <p>新井建国鯖は20人ほど入れるレンタルサーバーの<a href="https://xserver.ne.jp/xservergames/" target="_blank" rel="noopener noreferrer">XServer Games</a>を使って公開されているMinecraft統合版の建国サーバーです。</p>
+    <p>定期的な賭博イベント・PVPイベントや追加新要素があり、オリジナル要素を含んでいてとても楽しめます。</p>
   </div>
 
+  <h2>新井鯖のアドオン</h2>
+  <div class="about-card">
+    <p>新井鯖はさまざまなアドオンを組み合わせて独自の体験を提供しています。</p>
+    <ul class="addon-list">
+    <li>
+      <a href="https://capi.un-known.xyz/" target="_blank" rel="noopener noreferrer" class="addon-card-link">
+      <div class="credit-card">
+        <div class="credit-card-title">Commander API
+          <span class="credit-card-badge">GitHub</span>
+        </div>
+        <div class="credit-card-meta">
+          <strong>開発者</strong>: 𝒩𝒶𝓃ℴ , あるたか , wako
+        </div>
+        <div class="credit-card-note">コマンドの限界を突破する。コマンド勢に新たな力を。</div>
+      </div>
+      </a>
+    </li>
+    <li>
+      <a href="https://mcpedl.com/safe-storage-addon/" target="_blank" rel="noopener noreferrer" class="addon-card-link">
+      <div class="credit-card">
+        <div class="credit-card-title">Safe Storage
+          <span class="credit-card-badge">MCPEDL</span>
+        </div>
+        <div class="credit-card-meta">
+          <strong>開発者</strong>: Vechrozilator
+        </div>
+        <div class="credit-card-note">チェストに鍵をかけられる収納セキュリティアドオン。ロックしたチェストは破壊・爆破を受け付けない。</div>
+      </div>
+      </a>
+    </li>
+    <li class="credit-card no-link addon-secret-trigger">
+      <div class="credit-card-title">Arai Server Add-on（オリジナル）
+        <span class="credit-card-badge">Private</span>
+      </div>
+      <div class="credit-card-note">新井鯖技術班のココが制作したオリジナル機能満載のアドオン。Java版の経済サーバー<a href="https://minecraft.jp/servers/dan5.red" target="_blank" rel="noopener noreferrer">まんじゅうサーバー</a>から着想を受けています。非公開・配布予定なし。</div>
+    </li>
+    </ul>
+  </div>
+  </section>
   <footer>
-    <div class="footer-social">
-      <a href="https://line.me/ti/g2/uViXaSuCHoFWX0Z8WiyY2io4IRrXuT6t4OhRZA" target="_blank" rel="noopener noreferrer">
-        <img src="https://cdn.simpleicons.org/line/94a3b8" alt="LINE"> LINE</a>
-      <a href="https://discord.gg/EWphkMNb5h" target="_blank" rel="noopener noreferrer">
-        <img src="https://cdn.simpleicons.org/discord/94a3b8" alt="Discord"> Discord</a>
-      <a href="https://www.youtube.com/@arai_server" target="_blank" rel="noopener noreferrer">
-        <img src="https://cdn.simpleicons.org/youtube/94a3b8" alt="YouTube"> YouTube</a>
-      <a href="https://x.com/913_arakuma" target="_blank" rel="noopener noreferrer">
-        <img src="https://cdn.simpleicons.org/x/94a3b8" alt="X"> X</a>
-      <a href="https://github.com/kokopscraft/arai-server-members" target="_blank" rel="noopener">
-        <img src="https://cdn.simpleicons.org/github/94a3b8" alt="GitHub"> GitHub</a>
-    </div>
-    <p>&copy; 2026 arai server. All rights reserved.</p>
-    <p>サイト内のコンテンツの無断転載を禁じます。</p>
+  <div class="footer-social">
+    <a href="https://line.me/ti/g2/uViXaSuCHoFWX0Z8WiyY2io4IRrXuT6t4OhRZA" target="_blank" rel="noopener noreferrer">
+    <img src="https://cdn.simpleicons.org/line/94a3b8" alt="LINE"> LINE</a>
+    <a href="https://discord.gg/EWphkMNb5h" target="_blank" rel="noopener noreferrer">
+    <img src="https://cdn.simpleicons.org/discord/94a3b8" alt="Discord"> Discord</a>
+    <a href="https://www.youtube.com/@arai_server" target="_blank" rel="noopener noreferrer">
+    <img src="https://cdn.simpleicons.org/youtube/94a3b8" alt="YouTube"> YouTube</a>
+    <a href="https://x.com/913_arakuma" target="_blank" rel="noopener noreferrer">
+    <img src="https://cdn.simpleicons.org/x/94a3b8" alt="X"> X</a>
+    <a href="https://github.com/kokopscraft/arai-server-members" target="_blank" rel="noopener">
+    <img src="https://cdn.simpleicons.org/github/94a3b8" alt="GitHub"> GitHub
+      </a>
+  </div>
+  <p>&copy; 2025-2026 arai server. All rights reserved.</p>
+  <p>サイト内のコンテンツの無断転載を禁じます。</p>
   </footer>
 
   <button id="back-to-top" aria-label="トップへ戻る">
@@ -1893,133 +663,99 @@
   </button>
 
   <script>
-    function toggleNav() {
-      const nav = document.querySelector('.nav-links');
-      const hamburger = document.querySelector('.nav-hamburger');
-      const overlay = document.getElementById('navOverlay');
-      nav.classList.toggle('open');
-      hamburger.classList.toggle('open');
-      overlay.classList.toggle('open');
-      document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+  const texts = [
+    "新たな出会いを。",
+    "さらなる利便性を。",
+    "楽しい賑わいを。",
+  ];
+
+  let textIndex = 0;
+  let charIndex  = 0;
+  let isDeleting = false;
+
+  const dynamicText = document.getElementById("dynamicText");
+  const cursor    = document.getElementById("cursor");
+
+  function typeWriter() {
+    const current = texts[textIndex];
+  
+    if (isDeleting) {
+      dynamicText.textContent = current.substring(0, charIndex - 1);
+      charIndex--;
+    } else {
+      dynamicText.textContent = current.substring(0, charIndex + 1);
+      charIndex++;
     }
-
-    // ESCキーで閉じる
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && document.querySelector('.nav-links').classList.contains('open')) {
-        toggleNav();
-      }
-    });
-
-    // News badge
-    (() => {
-      const lastVisit = Number(localStorage.getItem('araiserver_newsLastVisit')) || 0;
-      const latestDate = localStorage.getItem('araiserver_newsLatest');
-      if (!latestDate) return;
-      if (new Date(latestDate).getTime() > lastVisit) {
-        const link = document.querySelector('a[href="news.html"]');
-        if (link) link.insertAdjacentHTML('beforeend', '<span class="nav-badge">NEW</span>');
-      }
-    })();
-
-    // Version switching
-    const versionButtons = document.querySelectorAll('.version-btn');
-    const gen1Content = document.querySelectorAll('.gen1-content');
-    const gen2Content = document.querySelectorAll('.gen2-content');
-    const gen3Content = document.querySelectorAll('.gen3-content');
-
-    function switchVersion(version) {
-      versionButtons.forEach(btn => btn.classList.remove('active'));
-      document.querySelector(`.version-btn[data-version="${version}"]`).classList.add('active');
-
-      gen1Content.forEach(el => el.style.display = version === 'gen1' ? 'block' : 'none');
-      gen2Content.forEach(el => el.style.display = version === 'gen2' ? 'block' : 'none');
-      gen3Content.forEach(el => el.style.display = version === 'gen3' ? 'block' : 'none');
-
-      // Update sidebar groups
-      const gen1Sidebars = document.querySelectorAll('.gen1-sidebar');
-      const gen2Sidebars = document.querySelectorAll('.gen2-sidebar');
-      const gen3Sidebars = document.querySelectorAll('.gen3-sidebar');
-
-      gen1Sidebars.forEach(el => el.style.display = version === 'gen1' ? 'block' : 'none');
-      gen2Sidebars.forEach(el => el.style.display = version === 'gen2' ? 'block' : 'none');
-      gen3Sidebars.forEach(el => el.style.display = version === 'gen3' ? 'block' : 'none');
+    
+    // 打ち中はカーソルを常時表示、待機中は通常点滅
+    cursor.style.animation = "none";
+    void cursor.offsetWidth; // reflow で animation リセット
+    cursor.style.animation  = "";
+    
+    let delay = isDeleting ? 55 : 95;
+    
+    if (!isDeleting && charIndex === current.length) {
+      // 打ち終わり → 2秒待ってから削除開始
+      delay    = 2000;
+      isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+      // 削除完了 → 次のテキストへ
+      isDeleting = false;
+      textIndex  = (textIndex + 1) % texts.length;
+      delay    = 350;
     }
+    
+    setTimeout(typeWriter, delay);
+  }
 
-    versionButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        switchVersion(btn.dataset.version);
-      });
-    });
+  typeWriter();
 
-    // Initialize with gen3
-    switchVersion('gen3');
+  function toggleNav() {
+    const nav = document.querySelector('.nav-links');
+    const hamburger = document.querySelector('.nav-hamburger');
+    const overlay = document.getElementById('navOverlay');
+    nav.classList.toggle('open');
+    hamburger.classList.toggle('open');
+    overlay.classList.toggle('open');
+    document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
+  }
 
-    // Fade-in observer
-    const fadeObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, i * 80);
-          fadeObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.05 });
+  // ESCキーで閉じる
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.querySelector('.nav-links').classList.contains('open')) {
+      toggleNav();
+    }
+  });
 
-    document.querySelectorAll('.wiki-section[id]').forEach(el => {
-      fadeObserver.observe(el);
-    });
-
-    // Active sidebar link
-    const sections = document.querySelectorAll('.wiki-section[id]');
-    const sidebarLinks = document.querySelectorAll('.sidebar-nav a[href]');
-
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(s => {
-        if (!s.classList.contains('hidden') && s.style.display !== 'none') {
-          if (window.scrollY >= s.offsetTop - 140) {
-            current = s.id;
-          }
-        }
-      });
-      sidebarLinks.forEach(a => {
-        a.classList.toggle('active', a.getAttribute('href') === `#${current}`);
-      });
-    });
-
-    // Search
-    const searchInput = document.getElementById('wikiSearch');
-    searchInput.addEventListener('input', (e) => {
-      const query = e.target.value.toLowerCase().trim();
-      sections.forEach(section => {
-        if (section.style.display === 'none') return;
-        const keywords = section.getAttribute('data-keywords') || '';
-        const title = section.querySelector('.wiki-section-title')?.textContent.toLowerCase() || '';
-        const content = section.textContent.toLowerCase();
-        if (query === '' || keywords.includes(query) || title.includes(query) || content.includes(query)) {
-          section.classList.remove('hidden');
-          if (!section.classList.contains('visible')) {
-            section.classList.add('visible');
-          }
-        } else {
-          section.classList.add('hidden');
-          section.classList.remove('visible');
-        }
-      });
-    });
-
-    // Back to top
-    const backToTop = document.getElementById('back-to-top');
-    window.addEventListener('scroll', () => {
+  // News 未読バッジ
+  (function () {
+    const lastVisit  = Number(localStorage.getItem("araiserver_newsLastVisit") || 0);
+    const latestDate = localStorage.getItem("araiserver_newsLatest");
+    if (!latestDate) return;
+    const hasUnread  = new Date(latestDate).getTime() > lastVisit;
+    if (hasUnread) {
+      const link = document.querySelector('a[href="news.html"]');
+      if (link) link.insertAdjacentHTML("beforeend", '<span class="nav-badge">NEW</span>');
+    }
+  })();
+  // ページトップへ戻るボタン
+  const backToTop = document.getElementById('back-to-top');
+  window.addEventListener('scroll', () => {
       backToTop.classList.toggle('visible', window.scrollY > 300);
-    });
-    backToTop.addEventListener('click', () => {
+  });
+  backToTop.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+  });
+
+    // 背景画像フェードイン
+    const heroBg = document.getElementById('heroBg');
+    const bgImg = new Image();
+    bgImg.src = 'images/arai_server_home_background.png';
+    bgImg.onload = () => {
+        setTimeout(() => heroBg.classList.add('loaded'), 150);
+    };
 
     lucide.createIcons();
   </script>
-
 </body>
 </html>
