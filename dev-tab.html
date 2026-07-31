@@ -199,29 +199,28 @@
       overflow: hidden;
       z-index: 0;
     }
+    
     .nav-card::before {
       content: '';
       position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 300%;
-      height: 300%;
-      background: radial-gradient(circle, rgba(56,189,248,0.16) 0%, rgba(56,189,248,0.06) 55%, transparent 75%);
-      border-radius: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+      inset: 0;
+      background: rgba(56, 189, 248, 0.16);
+      clip-path: circle(0% at 50% 50%);
+      transition: clip-path 0.5s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: -1;
       pointer-events: none;
     }
+    
     .nav-card:hover,
     .nav-card.active {
       transform: translateY(-4px);
       border-color: #38bdf8;
-      box-shadow: 0 8px 32px rgba(56,189,248,0.18), 0 2px 8px rgba(0,0,0,0.4);
+      box-shadow: 0 8px 32px rgba(56, 189, 248, 0.18), 0 2px 8px rgba(0, 0, 0, 0.4);
     }
+    
     .nav-card:hover::before,
     .nav-card.active::before {
-      transform: translate(-50%, -50%) scale(1);
+      clip-path: circle(100% at 50% 50%);
     }
     .card-icon {
       width: 2.5rem;
