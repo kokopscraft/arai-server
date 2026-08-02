@@ -8,7 +8,7 @@
   <link rel="apple-touch-icon" href="images/server_logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-  <title>新井鯖 - Home</title>
+  <title>新井鯖 - Admin</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -17,6 +17,8 @@
       color: #f1f5f9;
       min-height: 100vh;
     }
+
+    /* ── Navigation (index.html と同一) ── */
     .site-nav {
       position: sticky;
       font-family: 'Noto Sans JP', sans-serif;
@@ -73,8 +75,8 @@
       border-radius: 6px;
       font-size: 0.9rem;
       font-weight: 500;
-      transition: all 0.2s;
       border: 1px solid transparent;
+      transition: all 0.2s;
     }
     .nav-links a:hover {
       background: #1e293b;
@@ -82,156 +84,259 @@
       border-color: #334155;
     }
     .nav-links a.active {
-      background: rgba(56,189,248,0.15);
+      background: rgba(56, 189, 248, 0.15);
       color: #38bdf8;
-      border: 1px solid rgba(56,189,248,0.3);
-    }
-    .hero {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 6rem 2rem 4rem;
-        position: relative;
-        overflow: hidden;
-    }
-    /* 背景画像レイヤー */
-    .hero-bg {
-        position: absolute;
-        inset: 0;
-        background-image: url('images/arai_server_home_background.png');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        opacity: 0;
-        transition: opacity 1s ease;
-        z-index: 0;
+      border: 1px solid rgba(56, 189, 248, 0.3);
     }
 
-    .hero-bg.loaded {
-        opacity: 1;
+    /* ── Container ── */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem 0;
     }
-    .hero::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        /* 上は暗め、下はページ背景色に溶け込む */
-        background:
-            linear-gradient(
-                to bottom,
-                rgba(15, 23, 42, 0.55) 0%,
-                rgba(15, 23, 42, 0.45) 50%,
-                rgba(15, 23, 42, 0.92) 85%,
-                #0f172a 100%
-            );
-        pointer-events: none;
-        z-index: 1;
+
+    /* ── Page Header ── */
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #334155;
     }
-    .hero-logo {
-      width: 120px;
-      height: 120px;
-      border-radius: 24px;
-      object-fit: cover;
-      box-shadow: 0 0 40px rgba(56,189,248,0.35), 0 8px 32px rgba(0,0,0,0.5);
-      margin-bottom: 2rem;
-      position: relative;
-      z-index: 1;
-      border: 2px solid rgba(56,189,248,0.3);
-    }
-    .hero-title {
-      font-size: 3.5rem;
+    h1 {
+      font-size: 2.5rem;
       font-weight: 800;
-      color: #f1f5f9;
       letter-spacing: -0.02em;
-      position: relative;
-      z-index: 1;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
+      color: #f1f5f9;
     }
-    .hero-title .new-color { color: #b89c8f; }
-    .hero-title span { color: #38bdf8; }
-    .hero-subtitle {
-      font-size: 1.15rem;
+    .subtitle {
       color: #94a3b8;
-      max-width: 500px;
-      line-height: 1.7;
-      transition: all 0.3s ease;
-      position: relative;
-      z-index: 1;
-      margin-bottom: 2.5rem;
-      min-height: 3.4rem;
+      font-size: 1rem;
     }
-    .static-text {
-    color: #cbd5e1;
-      font-weight: 600;
-    }
-    .dynamic-text {
-      color: #38bdf8;
-      font-weight: 600;
-    }
-    .nav-cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.25rem;
-      max-width: 860px;
-      width: 100%;
-      position: relative;
-      z-index: 1;
-    }
-    .nav-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.75rem;
-      padding: 2rem 1.5rem;
+
+    /* ── Admin Section ── */
+    .admin-section {
       background: #1e293b;
       border: 1px solid #334155;
       border-radius: 16px;
-      text-decoration: none;
-      color: #f1f5f9;
-      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    /* ── Member Cards ── */
+    .member-card {
+      background: linear-gradient(155deg, #16213a 0%, #0f172a 65%);
+      padding: 1.25rem;
+      border-radius: 14px;
+      border: 1px solid #334155;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      cursor: pointer;
       position: relative;
       overflow: hidden;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.25s, box-shadow 0.25s, background 0.25s;
     }
-    .nav-card {
-      position: relative;
-      overflow: hidden;
-      z-index: 0;
-    }
-    
-    .nav-card::before {
+    .member-card::before {
       content: '';
       position: absolute;
-      inset: 0;
-      background: rgba(56, 189, 248, 0.16);
-      clip-path: circle(0% at 50% 50%);
-      transition: clip-path 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: -1;
-      pointer-events: none;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, #38bdf8, rgba(56, 189, 248, 0));
+      opacity: 0.6;
+      transition: opacity 0.25s, width 0.25s;
     }
-    
-    .nav-card:hover,
-    .nav-card.active {
-      transform: translateY(-4px);
+    .member-card:hover {
       border-color: #38bdf8;
-      box-shadow: 0 8px 32px rgba(56, 189, 248, 0.18), 0 2px 8px rgba(0, 0, 0, 0.4);
+      background: linear-gradient(155deg, rgba(56, 189, 248, 0.08) 0%, #0f172a 65%);
+      box-shadow: 0 10px 28px rgba(56, 189, 248, 0.12);
+      transform: translateY(-3px);
     }
-    
-    .nav-card:hover::before,
-    .nav-card.active::before {
-      clip-path: circle(100% at 50% 50%);
+    .member-card:hover::before {
+      opacity: 1;
+      width: 4px;
     }
-    .card-icon {
-      width: 2.5rem;
-      height: 2.5rem;
+    .member-card.fade-in:hover {
+      transform: translateY(-3px);
+    }
+    .member-card.active {
+      border-color: #38bdf8;
+      box-shadow: 0 10px 28px rgba(56, 189, 248, 0.15);
+    }
+    .member-main {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+    }
+    .member-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 2px solid #334155;
+      object-fit: cover;
+      background: #1e293b;
+      flex-shrink: 0;
+      transition: border-color 0.25s;
+    }
+    .member-card:hover .member-avatar,
+    .member-card.active .member-avatar {
+      border-color: #38bdf8;
+    }
+    .member-info {
+      min-width: 0;
+    }
+    .member-info .role {
+      display: inline-block;
+      font-size: 0.7rem;
       color: #38bdf8;
-      stroke-width: 1.5;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 0.1rem 0.55rem;
+      border-radius: 999px;
+      margin-bottom: 0.35rem;
     }
-    .card-title { font-size: 1.15rem; font-weight: 700; color: #f1f5f9; }
-    .card-desc { font-size: 0.82rem; color: #64748b; text-align: center; line-height: 1.5; }
-    .card-arrow { font-size: 1rem; color: #38bdf8; opacity: 0; transform: translateX(-4px); transition: all 0.2s; }
-    .nav-card:hover .card-arrow { opacity: 1; transform: translateX(0); }
+    .member-info .name {
+      color: #f1f5f9;
+      font-size: 1.05rem;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+    .member-card-chevron {
+      margin-left: auto;
+      color: #64748b;
+      width: 1.1rem;
+      height: 1.1rem;
+      flex-shrink: 0;
+      transition: transform 0.3s ease, color 0.25s;
+    }
+    .member-card.active .member-card-chevron {
+      transform: rotate(180deg);
+      color: #38bdf8;
+    }
+
+    /* Profile Info (hidden by default) */
+    .member-profile {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out, padding 0.3s ease, margin 0.3s ease;
+      font-size: 0.875rem;
+      color: #94a3b8;
+      line-height: 1.6;
+      border-top: 0 solid #334155;
+      margin-top: 0;
+    }
+    .member-card.active .member-profile {
+      max-height: 200px;
+      padding-top: 0.75rem;
+      margin-top: 0.5rem;
+      border-top-width: 1px;
+    }
+    .profile-text {
+      white-space: pre-wrap;
+    }
+
+    /* ── Server Owner ── */
+    .server-owner {
+      background: #1e293b;
+      border: 1px solid #334155;
+      padding: 2rem;
+      border-radius: 16px;
+      margin-bottom: 2.5rem;
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      /* 既存のスタイルを保持 */
+    }
+    .server-owner::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #38bdf8;
+    }
+    .server-owner:hover {
+      border-color: #38bdf8;
+      box-shadow: 0 8px 32px rgba(56, 189, 248, 0.1);
+    }
+    .owner-main {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .character-img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 2px solid #38bdf8;
+      object-fit: cover;
+      background: #0f172a;
+    }
+    .owner-info .role {
+      font-size: 0.875rem;
+      color: #38bdf8;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .owner-info .name {
+      font-size: 1.75rem;
+      color: #f1f5f9;
+      font-weight: 700;
+    }
+    .owner-profile {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out, padding 0.3s ease;
+      font-size: 1rem;
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+    .server-owner.active .owner-profile {
+      max-height: 300px;
+      padding-top: 1.5rem;
+      margin-top: 1.5rem;
+      border-top: 1px solid #334155;
+    }
+
+    /* ── Department ── */
+    .department {
+      margin-bottom: 3rem;
+    }
+    .dept-header {
+      border-left: 4px solid #38bdf8;
+      padding: 0.5rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    .dept-title {
+      font-size: 1.5rem;
+      color: #f1f5f9;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    .dept-desc {
+      font-size: 0.9rem;
+      color: #94a3b8;
+    }
+    .members-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.25rem;
+    }
+
+    /* ── Footer (index.html と同一) ── */
     footer {
       text-align: center;
       padding: 2.5rem 2rem 2rem;
@@ -260,69 +365,25 @@
       border: 1px solid #334155;
       transition: all 0.3s ease;
     }
-    .footer-social a:hover { color: #f1f5f9; border-color: #38bdf8; background: rgba(56,189,248,0.08); }
-    .footer-social img { width: 18px; height: 18px; object-fit: contain; transform: scale(1.05); }
-    /* Xのアイコンだけ視覚的にバランスを整える */
-    .footer-social a[href*="x.com"] img { transform: scale(0.88); }
-    footer p { margin-bottom: 0.25rem; }
-    .about-section { max-width: 860px; margin: 0 auto 4rem; padding: 0 2rem; }
-    .about-section h2 { font-size: 1.5rem; font-weight: 700; color: #38bdf8; margin-bottom: 1.5rem; padding-left: 1rem; border-left: 4px solid #38bdf8; }
-    .about-card { background: #1e293b; border: 1px solid #334155; border-radius: 16px; padding: 1.75rem 2rem; margin-bottom: 1.5rem; }
-    .about-card p { color: #cbd5e1; font-size: 0.97rem; line-height: 1.8; margin-bottom: 0.75rem; }
-    .about-card p:last-child { margin-bottom: 0; }
-    .about-card a { color: #38bdf8; text-decoration: none; font-size: 0.8rem; }
-    .about-card a:hover { text-decoration: underline; }
-
-    /* Addon Cards */
-    .addon-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; margin-top: 0.5rem; }
-    .addon-card-link {
-      display: block;
-      text-decoration: none;
-      color: inherit;
-      border-radius: 10px;
-    }
-    .addon-item {
-      background: rgba(56,189,248,0.05);
-      border: 1px solid #334155;
-      border-radius: 10px;
-      padding: 1rem 1.25rem;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
-      cursor: pointer;
-      position: relative;
-    }
-    .addon-card-link:hover .addon-item,
-    .addon-item.no-link:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(56,189,248,0.15);
+    .footer-social a:hover {
+      color: #f1f5f9;
       border-color: #38bdf8;
+      background: rgba(56, 189, 248, 0.08);
     }
-    .addon-item.no-link:active {
-      transform: scale(0.97);
-      box-shadow: none;
+    .footer-social img {
+      width: 18px;
+      height: 18px;
+      object-fit: contain;
+      transform: scale(1.05);
     }
-    .addon-item .addon-name { font-weight: 700; color: #f1f5f9; font-size: 0.97rem; margin-bottom: 0.3rem; }
-    .addon-item .addon-desc { color: #94a3b8; font-size: 0.88rem; line-height: 1.6; }
-    .addon-badge {
-      position: absolute;
-      top: 0.75rem;
-      right: 0.75rem;
-      font-size: 0.75rem;
-      color: #38bdf8;
-      opacity: 0.6;
-      transition: opacity 0.15s;
+    .footer-social a[href*="x.com"] img {
+      transform: scale(0.88); /* 1より小さい値で縮小 */
     }
-    .addon-card-link:hover .addon-badge { opacity: 1; }
-    .addon-badge-locked {
-      position: absolute;
-      top: 0.75rem;
-      right: 0.75rem;
-      font-size: 0.72rem;
-      color: #475569;
-      background: rgba(71,85,105,0.2);
-      padding: 0.15rem 0.5rem;
-      border-radius: 4px;
-      border: 1px solid #334155;
+    footer p {
+      margin-bottom: 0.25rem;
     }
+
+    /* ハンバーガーボタン（PC では非表示） */
     .nav-hamburger {
       display: none;
       flex-direction: column;
@@ -340,29 +401,29 @@
       border-radius: 2px;
     }
     .nav-hamburger span {
-      transition: all 0.3s ease;
+        transition: all 0.3s ease;
     }
     .nav-hamburger.open span:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
+        transform: translateY(7px) rotate(45deg);
     }
     .nav-hamburger.open span:nth-child(2) {
-      opacity: 0;
-      transform: scaleX(0);
+        opacity: 0;
+        transform: scaleX(0);
     }
     .nav-hamburger.open span:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
+        transform: translateY(-7px) rotate(-45deg);
     }
     .nav-badge {
-      display: inline-block;
-      background: #ef4444;
-      color: #fff;
-      font-size: 0.6rem;
-      font-weight: 700;
-      padding: 0.1rem 0.35rem;
-      border-radius: 999px;
-      margin-left: 0.3rem;
-      vertical-align: middle;
-      line-height: 1.4;
+        display: inline-block;
+        background: #ef4444;
+        color: #fff;
+        font-size: 0.6rem;
+        font-weight: 700;
+        padding: 0.1rem 0.35rem;
+        border-radius: 999px;
+        margin-left: 0.3rem;
+        vertical-align: middle;
+        line-height: 1.4;
     }
     /* ページトップへ戻るボタン */
     #back-to-top {
@@ -399,19 +460,63 @@
         stroke-width: 2;
         color: #38bdf8;
     }
-    /* モバイルナビアイコン（デスクトップでは非表示） */
+    .member-card.fade-in {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .server-owner.fade-in {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    /* ── Member Actions ── */
+    .member-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.25rem;
+      margin-left: 0.25rem;
+    }
+    .member-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      color: #38bdf8;
+      text-decoration: none;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      background: rgba(56, 189, 248, 0.08);
+      padding: 0.3rem 0.75rem;
+      border-radius: 6px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .member-link:hover {
+      background: rgba(56, 189, 248, 0.18);
+      border-color: #38bdf8;
+    }
+    .member-link i {
+      width: 0.9rem;
+      height: 0.9rem;
+      color: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
     .nav-icon {
       display: none;
       width: 1.1rem;
       height: 1.1rem;
       flex-shrink: 0;
     }
-
+    @media (max-width: 768px) {
+        .container { padding: 2rem 1rem 0; }
+        h1 { font-size: 2rem; }
+        .owner-main { flex-direction: column; text-align: center; gap: 1.5rem; }
+        .members-grid { grid-template-columns: 1fr; }
+    }
     @media (max-width: 640px) {
-      /* 変更後（追加） */
       .nav-inner { padding: 0.75rem 1rem; position: relative; }
       .nav-hamburger { display: flex; }
-
       .nav-links {
         display: flex;
         flex-direction: column;
@@ -431,12 +536,9 @@
         box-shadow: -8px 0 32px rgba(0, 0, 0, 0.5);
         overflow-y: auto;
       }
-
       .nav-links.open {
         transform: translateX(0);
       }
-
-      /* モバイル時のタブを大きく（アイコン対応でflexに） */
       .nav-links a {
         display: flex;
         align-items: center;
@@ -445,22 +547,9 @@
         font-size: 1rem;
         border-radius: 8px;
       }
-
       .nav-icon {
         display: block;
       }
-    }
-    .cursor {
-      display: inline-block;
-      color: #38bdf8;
-      font-weight: 300;
-      animation: blink 0.75s step-end infinite;
-      margin-left: 1px;
-      opacity: 1;
-    }
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50%     { opacity: 0; }
     }
     .nav-title-pc {
         display: none; /* モバイルでは非表示 */
@@ -470,7 +559,6 @@
             display: inline; /* PC幅では表示 */
         }
     }
-    /* Nav Overlay */
     .nav-overlay {
       display: none;
       position: fixed;
@@ -483,173 +571,249 @@
     .nav-overlay.open {
       display: block;
     }
-
-    /* ハンバーガーボタンを常にオーバーレイより前面に */
     .nav-hamburger {
       position: relative;
       z-index: 400;
-    }
-
-    /* ── Credit Card (アドオン表示用) ── */
-    .credit-card {
-      background: rgba(15,23,42,1);
-      border: 1px solid #334155;
-      border-radius: 10px;
-      padding: 1rem 1.25rem;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
-      cursor: pointer;
-      position: relative;
-    }
-    .addon-card-link .credit-card:hover,
-    .credit-card.no-link:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 24px rgba(56,189,248,0.15);
-      border-color: #38bdf8;
-    }
-    .credit-card.no-link:active {
-      transform: scale(0.97);
-      box-shadow: none;
-    }
-    .credit-card-title {
-      font-weight: 700;
-      color: #f1f5f9;
-      font-size: 0.97rem;
-      margin-bottom: 0.2rem;
-      padding-right: 4rem;
-    }
-    .credit-card-meta {
-      font-size: 0.82rem;
-      color: #94a3b8;
-      margin-bottom: 0.15rem;
-    }
-    .credit-card-meta strong {
-      color: #e5e7eb;
-      font-weight: 600;
-    }
-    .credit-card-note {
-      font-size: 0.8rem;
-      color: #9ca3af;
-      margin-top: 0.35rem;
-    }
-    .credit-card-badge {
-      position: absolute;
-      top: 0.75rem;
-      right: 0.75rem;
-      font-size: 0.72rem;
-      color: #38bdf8;
-      opacity: 0.7;
     }
   </style>
 </head>
 <body>
   <nav class="site-nav">
-  <div class="nav-inner">
-    <a href="index.html" class="nav-logo-link">
-      <img src="images/server_logo.png" alt="新井鯖ロゴ" class="nav-logo">
-      <span class="nav-title">新井鯖<span class="nav-title-pc"> - Founding Server</span></span>
-    </a>
-    <ul class="nav-links">
-      <li><a href="index.html" class="active"><i data-lucide="home" class="nav-icon"></i>Home</a></li>
-      <li><a href="news.html"><i data-lucide="newspaper" class="nav-icon"></i>News</a></li>
-      <li><a href="members.html"><i data-lucide="users" class="nav-icon"></i>Members</a></li>
-      <li><a href="wiki.html"><i data-lucide="library" class="nav-icon"></i>Wiki</a></li>
-      <li><a href="rules.html"><i data-lucide="book-open" class="nav-icon"></i>Rules</a></li>
-      <li><a href="events.html"><i data-lucide="calendar-days" class="nav-icon"></i>Events</a></li>
-      <li><a href="network.html"><i data-lucide="globe" class="nav-icon"></i>Network</a></li>
-      <li><a href="admin.html"><i data-lucide="settings-2" class="nav-icon"></i>Admin</a></li>
-      <li><a href="credits.html"><i data-lucide="sparkles" class="nav-icon"></i>Credits</a></li>
-    </ul>
-    <button class="nav-hamburger" onclick="toggleNav()" aria-label="メニューを開く">
-    <span></span><span></span><span></span>
-    </button>
-  </div>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo-link">
+        <img src="images/server_logo.png" alt="新井鯖ロゴ" class="nav-logo">
+        <span class="nav-title">新井鯖<span class="nav-title-pc"> - Founding Server</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html"><i data-lucide="home" class="nav-icon"></i>Home</a></li>
+        <li><a href="news.html"><i data-lucide="newspaper" class="nav-icon"></i>News</a></li>
+        <li><a href="members.html"><i data-lucide="users" class="nav-icon"></i>Members</a></li>
+        <li><a href="wiki.html"><i data-lucide="library" class="nav-icon"></i>Wiki</a></li>
+        <li><a href="rules.html"><i data-lucide="book-open" class="nav-icon"></i>Rules</a></li>
+        <li><a href="events.html"><i data-lucide="calendar-days" class="nav-icon"></i>Events</a></li>
+        <li><a href="network.html"><i data-lucide="globe" class="nav-icon"></i>Network</a></li>
+        <li><a href="admin.html" class="active"><i data-lucide="settings-2" class="nav-icon"></i>Admin</a></li>
+        <li><a href="credits.html"><i data-lucide="sparkles" class="nav-icon"></i>Credits</a></li>
+      </ul>
+      <button class="nav-hamburger" onclick="toggleNav()" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
   <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
-  <section class="hero">
-  <div class="hero-bg" id="heroBg"></div>
-  <img src="images/server_logo.png" alt="新井鯖 Logo" class="hero-logo">
-  <h1 class="hero-title"><span class="new-color">新井</span><span>鯖</span></h1>
-  <p class="hero-subtitle">
-    <span class="static-text">建国サーバーに</span><span class="dynamic-text" id="dynamicText"></span><span class="cursor" id="cursor">|</span>
-  </p>
-  <div class="nav-cards">
-    <a href="wiki.html" class="nav-card">
-    <i data-lucide="library" class="card-icon"></i>
-    <span class="card-title">Wiki</span>
-    <span class="card-desc">サーバーの仕組みや世界観</span>
-    <span class="card-arrow">→</span>
-    </a>
-    <a href="rules.html" class="nav-card">
-    <i data-lucide="book-open" class="card-icon"></i>
-    <span class="card-title">Rules</span>
-    <span class="card-desc">サーバールール</span>
-    <span class="card-arrow">→</span>
-    </a>
-    <a href="events.html" class="nav-card">
-    <i data-lucide="calendar-days" class="card-icon"></i>
-    <span class="card-title">Events</span>
-    <span class="card-desc">賭博・PVPなどのイベント</span>
-    <span class="card-arrow">→</span>
-    </a>
+
+  <div class="container">
+    <header>
+      <h1>Admin</h1>
+      <p class="subtitle">サーバー運営メンバー</p>
+    </header>
+
+<!-- 鯖主 -->
+<div class="server-owner" onclick="toggleProfile(this)">
+  <div class="owner-main">
+    <img src="images/arakuma_icon.png" alt="新井熊" class="character-img">
+    <div class="owner-info">
+      <p class="role">鯖主</p>
+      <p class="name">新井熊（あらくま）</p>
+    </div>
   </div>
-  </section>
-  <section class="about-section">
-  <h2>新井鯖について</h2>
-  <div class="about-card">
-    <p>新井建国鯖は20人ほど入れるレンタルサーバーの<a href="https://xserver.ne.jp/xservergames/" target="_blank" rel="noopener noreferrer">XServer Games</a>を使って公開されているMinecraft統合版の建国サーバーです。</p>
-    <p>定期的な賭博イベント・PVPイベントや追加新要素があり、オリジナル要素を含んでいてとても楽しめます。</p>
+  <div class="owner-profile">
+    <p class="profile-text">
+      新井鯖のサーバー主で新井賭博場のオーナー。技術力こそ低いが、リーダーシップ力が輝く。
+    </p>
+  </div>
+</div>
+
+
+    <!-- 法務部門 -->
+    <section class="department">
+      <div class="dept-header">
+        <h2 class="dept-title">法務部門</h2>
+        <p class="dept-desc">サーバー内の問題解決や総合運営</p>
+      </div>
+      <div class="members-grid">
+        <div class="member-card" onclick="toggleProfile(this)">
+          <div class="member-main">
+            <img src="images/arakuma_icon.png" alt="あらくま" class="member-avatar">
+            <div class="member-info">
+              <p class="role">裁判官</p>
+              <p class="name">新井熊（あらくま）</p>
+            </div>
+
+            <i data-lucide="chevron-down" class="member-card-chevron"></i>
+          </div>
+          <div class="member-actions">
+            <a href="https://www.youtube.com/@araiguma0913" target="_blank" rel="noopener noreferrer" class="member-link" onclick="event.stopPropagation()">
+              <img src="https://cdn.simpleicons.org/youtube/38bdf8" alt="YouTube" style="width: 1.2rem; height: 1.2rem;"> YouTube
+            </a>
+          </div>
+          <div class="member-profile">
+            <p class="profile-text">新井鯖のサーバー主で新井賭博場のオーナー。技術力こそ低いが、リーダーシップ力が輝く。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 技術部門 -->
+    <section class="department">
+      <div class="dept-header">
+        <h2 class="dept-title">技術部門</h2>
+        <p class="dept-desc">サーバーの技術部分の作成および更新</p>
+      </div>
+      <div class="members-grid">
+        <div class="member-card" onclick="toggleProfile(this)">
+          <div class="member-main">
+            <img src="images/koko_icon.png" alt="ココ" class="member-avatar">
+            <div class="member-info">
+              <p class="role">部長</p>
+              <p class="name">ココ</p>
+            </div>
+
+            <i data-lucide="chevron-down" class="member-card-chevron"></i>
+          </div>
+          <div class="member-actions">
+            <a href="https://www.youtube.com/@%E6%96%B0%E4%BA%95%E9%AF%96%E3%81%AE%E3%82%B3%E3%82%B3" target="_blank" rel="noopener noreferrer" class="member-link" onclick="event.stopPropagation()">
+              <img src="https://cdn.simpleicons.org/youtube/38bdf8" alt="YouTube" style="width: 1.2rem; height: 1.2rem;"> YouTube
+            </a>
+          </div>
+          <div class="member-profile">
+            <p class="profile-text">新井鯖唯一のディベロッパーで、このWebサイトの開設者。得意なJavaScriptとMcFunctionを用いてArai Server Add-onの作成を行っている。</p>
+          </div>
+        </div>
+        <div class="member-card" onclick="toggleProfile(this)">
+          <div class="member-main">
+            <img src="images/mogukoro_icon.png" alt="もぐころ" class="member-avatar">
+            <div class="member-info">
+              <p class="role">部員</p>
+              <p class="name">碧雲葦（あおぐい） ころも</p>
+            </div>
+
+            <i data-lucide="chevron-down" class="member-card-chevron"></i>
+          </div>
+          <div class="member-actions">
+            <a href="https://www.youtube.com/@mogukoro1111" target="_blank" rel="noopener noreferrer" class="member-link" onclick="event.stopPropagation()">
+              <img src="https://cdn.simpleicons.org/youtube/38bdf8" alt="YouTube" style="width: 1.2rem; height: 1.2rem;"> YouTube
+            </a>
+          </div>
+          <div class="member-profile">
+            <p class="profile-text">新井鯖のコマンド担当。開発中のプロジェクトはいつになっても終わらない。ついに、本当にアイドルVTuberとしてデビューした。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 総合人事部門 -->
+    <section class="department">
+      <div class="dept-header">
+        <h2 class="dept-title">総合人事部門</h2>
+        <p class="dept-desc">サーバー内のマップの管理</p>
+      </div>
+      <div class="members-grid">
+        <div class="member-card" onclick="toggleProfile(this)">
+          <div class="member-main">
+            <img src="images/koisi_icon.png" alt="こいし" class="member-avatar">
+            <div class="member-info">
+              <p class="role">部長</p>
+              <p class="name">こいし</p>
+            </div>
+
+            <i data-lucide="chevron-down" class="member-card-chevron"></i>
+          </div>
+          <div class="member-profile">
+            <p class="profile-text">圧倒的な建国系サーバーでの経験を活かして、新井鯖の治安を守っている。影の立役者。</p>
+          </div>
+        </div>
+        <div class="member-card" onclick="toggleProfile(this)">
+          <div class="member-main">
+            <img src="images/siina_kagehito_icon.png" alt="しいな" class="member-avatar">
+            <div class="member-info">
+              <p class="role">部員</p>
+              <p class="name">しいなかげひと（しいな）</p>
+            </div>
+
+            <i data-lucide="chevron-down" class="member-card-chevron"></i>
+          </div>
+          <div class="member-actions">
+            <a href="https://www.youtube.com/@%E3%81%97%E3%81%84%E3%81%AA%E3%81%8B%E3%81%92%E3%81%B2%E3%81%A8" target="_blank" rel="noopener noreferrer" class="member-link" onclick="event.stopPropagation()">
+              <img src="https://cdn.simpleicons.org/youtube/38bdf8" alt="YouTube" style="width: 1.2rem; height: 1.2rem;"> YouTube
+            </a>
+          </div>
+          <div class="member-profile">
+            <p class="profile-text">新井鯖唯一のイラストレイターで情報整理と経理処理を行っている。積み上げられてきた経験の数々でその場を切り抜ける新井鯖の頭脳。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 総合部門 -->
+    <section class="department">
+      <div class="dept-header">
+        <h2 class="dept-title">総合部門</h2>
+        <p class="dept-desc">イベントの運営や雑務</p>
+      </div>
+      <div class="members-grid">
+        <div class="member-card" onclick="toggleProfile(this)">
+          <div class="member-main">
+            <img src="images/yakitori_icon.png" alt="焼き鳥" class="member-avatar">
+            <div class="member-info">
+              <p class="role">部員</p>
+              <p class="name">焼き鳥は美味いよな？（焼き鳥）</p>
+            </div>
+
+            <i data-lucide="chevron-down" class="member-card-chevron"></i>
+          </div>
+          <div class="member-profile">
+            <p class="profile-text">あおころの双子の兄だが、あおころとは違って不真面目。配信やイベントに参加することは極めて珍しいので、見かけたら拝んでおこう。</p>
+          </div>
+        </div>
+        <div class="member-card" onclick="toggleProfile(this)">
+          <div class="member-main">
+            <img src="images/koisi_icon.png" alt="こいし" class="member-avatar">
+            <div class="member-info">
+              <p class="role">部員</p>
+              <p class="name">こいし</p>
+            </div>
+
+            <i data-lucide="chevron-down" class="member-card-chevron"></i>
+          </div>
+          <div class="member-profile">
+            <p class="profile-text">圧倒的な建国系サーバーでの経験を活かして、新井鯖の治安を守っている。影の立役者。</p>
+          </div>
+        </div>
+        <div class="member-card" onclick="toggleProfile(this)">
+          <div class="member-main">
+            <img src="images/siina_kagehito_icon.png" alt="しいな" class="member-avatar">
+            <div class="member-info">
+              <p class="role">部員</p>
+              <p class="name">しいなかげひと（しいな）</p>
+            </div>
+
+            <i data-lucide="chevron-down" class="member-card-chevron"></i>
+          </div>
+          <div class="member-actions">
+            <a href="https://www.youtube.com/@%E3%81%97%E3%81%84%E3%81%AA%E3%81%8B%E3%81%92%E3%81%B2%E3%81%A8" target="_blank" rel="noopener noreferrer" class="member-link" onclick="event.stopPropagation()">
+              <img src="https://cdn.simpleicons.org/youtube/38bdf8" alt="YouTube" style="width: 1.2rem; height: 1.2rem;"> YouTube
+            </a>
+          </div>
+          <div class="member-profile">
+            <p class="profile-text">新井鯖唯一のイラストレイターで情報整理と経理処理を行っている。積み上げられてきた経験の数々でその場を切り抜ける新井鯖の頭脳。</p>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 
-  <h2>新井鯖のアドオン</h2>
-  <div class="about-card">
-    <p>新井鯖はさまざまなアドオンを組み合わせて独自の体験を提供しています。</p>
-    <ul class="addon-list">
-    <li>
-      <a href="https://capi.un-known.xyz/" target="_blank" rel="noopener noreferrer" class="addon-card-link">
-      <div class="credit-card">
-        <div class="credit-card-title">Commander API
-          <span class="credit-card-badge">GitHub</span>
-        </div>
-        <div class="credit-card-meta">
-          <strong>開発者</strong>: 𝒩𝒶𝓃ℴ , あるたか , wako
-        </div>
-        <div class="credit-card-note">コマンドの限界を突破する。コマンド勢に新たな力を。</div>
-      </div>
-      </a>
-    </li>
-    <li>
-      <a href="https://mcpedl.com/safe-storage-addon/" target="_blank" rel="noopener noreferrer" class="addon-card-link">
-      <div class="credit-card">
-        <div class="credit-card-title">Safe Storage
-          <span class="credit-card-badge">MCPEDL</span>
-        </div>
-        <div class="credit-card-meta">
-          <strong>開発者</strong>: Vechrozilator
-        </div>
-        <div class="credit-card-note">チェストに鍵をかけられる収納セキュリティアドオン。ロックしたチェストは破壊・爆破を受け付けない。</div>
-      </div>
-      </a>
-    </li>
-    <li class="credit-card no-link addon-secret-trigger">
-      <div class="credit-card-title">Arai Server Add-on（オリジナル）
-        <span class="credit-card-badge">Private</span>
-      </div>
-      <div class="credit-card-note">新井鯖技術班のココが制作したオリジナル機能満載のアドオン。Java版の経済サーバー<a href="https://minecraft.jp/servers/dan5.red" target="_blank" rel="noopener noreferrer">まんじゅうサーバー</a>から着想を受けています。非公開・配布予定なし。</div>
-    </li>
-    </ul>
-  </div>
-  </section>
   <footer>
   <div class="footer-social">
-    <a href="https://line.me/ti/g2/uViXaSuCHoFWX0Z8WiyY2io4IRrXuT6t4OhRZA" target="_blank" rel="noopener noreferrer">
+    <a href="https://arai-server.pages.dev/line" target="_blank" rel="noopener noreferrer">
     <img src="https://cdn.simpleicons.org/line/94a3b8" alt="LINE"> LINE</a>
-    <a href="https://discord.gg/EWphkMNb5h" target="_blank" rel="noopener noreferrer">
+    <a href="https://arai-server.pages.dev/discord" target="_blank" rel="noopener noreferrer">
     <img src="https://cdn.simpleicons.org/discord/94a3b8" alt="Discord"> Discord</a>
-    <a href="https://www.youtube.com/@arai_server" target="_blank" rel="noopener noreferrer">
+    <a href="https://arai-server.pages.dev/youtube" target="_blank" rel="noopener noreferrer">
     <img src="https://cdn.simpleicons.org/youtube/94a3b8" alt="YouTube"> YouTube</a>
-    <a href="https://x.com/913_arakuma" target="_blank" rel="noopener noreferrer">
+    <a href="https://arai-server.pages.dev/x" target="_blank" rel="noopener noreferrer">
     <img src="https://cdn.simpleicons.org/x/94a3b8" alt="X"> X</a>
-    <a href="https://github.com/kokopscraft/arai-server-members" target="_blank" rel="noopener">
+    <a href="https://arai-server.pages.dev/github" target="_blank" rel="noopener">
     <img src="https://cdn.simpleicons.org/github/94a3b8" alt="GitHub"> GitHub
       </a>
   </div>
@@ -662,97 +826,64 @@
   </button>
 
   <script>
-  const texts = [
-    "新たな出会いを。",
-    "さらなる利便性を。",
-    "楽しい賑わいを。",
-  ];
-
-  let textIndex = 0;
-  let charIndex  = 0;
-  let isDeleting = false;
-
-  const dynamicText = document.getElementById("dynamicText");
-  const cursor    = document.getElementById("cursor");
-
-  function typeWriter() {
-    const current = texts[textIndex];
-  
-    if (isDeleting) {
-      dynamicText.textContent = current.substring(0, charIndex - 1);
-      charIndex--;
-    } else {
-      dynamicText.textContent = current.substring(0, charIndex + 1);
-      charIndex++;
+    function toggleProfile(element) {
+      element.classList.toggle('active');
     }
-    
-    // 打ち中はカーソルを常時表示、待機中は通常点滅
-    cursor.style.animation = "none";
-    void cursor.offsetWidth; // reflow で animation リセット
-    cursor.style.animation  = "";
-    
-    let delay = isDeleting ? 55 : 95;
-    
-    if (!isDeleting && charIndex === current.length) {
-      // 打ち終わり → 2秒待ってから削除開始
-      delay    = 2000;
-      isDeleting = true;
-    } else if (isDeleting && charIndex === 0) {
-      // 削除完了 → 次のテキストへ
-      isDeleting = false;
-      textIndex  = (textIndex + 1) % texts.length;
-      delay    = 350;
+    function toggleNav() {
+      const nav = document.querySelector('.nav-links');
+      const hamburger = document.querySelector('.nav-hamburger');
+      const overlay = document.getElementById('navOverlay');
+      nav.classList.toggle('open');
+      hamburger.classList.toggle('open');
+      overlay.classList.toggle('open');
+      document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
     }
-    
-    setTimeout(typeWriter, delay);
-  }
 
-  typeWriter();
+    // ESCキーで閉じる
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && document.querySelector('.nav-links').classList.contains('open')) {
+        toggleNav();
+      }
+    });
 
-  function toggleNav() {
-    const nav = document.querySelector('.nav-links');
-    const hamburger = document.querySelector('.nav-hamburger');
-    const overlay = document.getElementById('navOverlay');
-    nav.classList.toggle('open');
-    hamburger.classList.toggle('open');
-    overlay.classList.toggle('open');
-    document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
-  }
+    // News 未読バッジ
+    (function () {
+        const lastVisit  = Number(localStorage.getItem("araiserver_newsLastVisit") || 0);
+        const latestDate = localStorage.getItem("araiserver_newsLatest");
+        if (!latestDate) return;
+        const hasUnread  = new Date(latestDate).getTime() > lastVisit;
+        if (hasUnread) {
+            const link = document.querySelector('a[href="news.html"]');
+            if (link) link.insertAdjacentHTML("beforeend", '<span class="nav-badge">NEW</span>');
+        }
+    })();
+    // ページトップへ戻るボタン
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+        backToTop.classList.toggle('visible', window.scrollY > 300);
+    });
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 
-  // ESCキーで閉じる
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && document.querySelector('.nav-links').classList.contains('open')) {
-      toggleNav();
+    function initFadeInAnimation() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('fade-in');
+                    }, index * 120); // 各カードに120msの遅延で順次アニメーション
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+      
+        // adminページの対象要素を選択
+        document.querySelectorAll('.member-card, .server-owner').forEach(el => {
+            observer.observe(el);
+        });
     }
-  });
-
-  // News 未読バッジ
-  (function () {
-    const lastVisit  = Number(localStorage.getItem("araiserver_newsLastVisit") || 0);
-    const latestDate = localStorage.getItem("araiserver_newsLatest");
-    if (!latestDate) return;
-    const hasUnread  = new Date(latestDate).getTime() > lastVisit;
-    if (hasUnread) {
-      const link = document.querySelector('a[href="news.html"]');
-      if (link) link.insertAdjacentHTML("beforeend", '<span class="nav-badge">NEW</span>');
-    }
-  })();
-  // ページトップへ戻るボタン
-  const backToTop = document.getElementById('back-to-top');
-  window.addEventListener('scroll', () => {
-      backToTop.classList.toggle('visible', window.scrollY > 300);
-  });
-  backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-
-    // 背景画像フェードイン
-    const heroBg = document.getElementById('heroBg');
-    const bgImg = new Image();
-    bgImg.src = 'images/arai_server_home_background.png';
-    bgImg.onload = () => {
-        setTimeout(() => heroBg.classList.add('loaded'), 150);
-    };
+    document.addEventListener('DOMContentLoaded', initFadeInAnimation);
 
     lucide.createIcons();
   </script>
