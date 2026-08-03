@@ -17,8 +17,6 @@
       color: #f1f5f9;
       min-height: 100vh;
     }
-
-    /* ── Navigation (index.html と同一) ── */
     .site-nav {
       position: sticky;
       font-family: 'Noto Sans JP', sans-serif;
@@ -88,15 +86,11 @@
       color: #38bdf8;
       border: 1px solid rgba(56, 189, 248, 0.3);
     }
-
-    /* ── Container ── */
     .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 3rem 2rem 0;
     }
-
-    /* ── Page Header ── */
     header {
       text-align: center;
       margin-bottom: 3rem;
@@ -114,8 +108,6 @@
       color: #94a3b8;
       font-size: 1rem;
     }
-
-    /* ── Admin Section ── */
     .admin-section {
       background: #1e293b;
       border: 1px solid #334155;
@@ -123,8 +115,6 @@
       padding: 2rem;
       margin-bottom: 2rem;
     }
-
-    /* ── Member Cards ── */
     .member-card {
       background: linear-gradient(155deg, #16213a 0%, #0f172a 65%);
       padding: 1.25rem;
@@ -221,8 +211,6 @@
       transform: rotate(180deg);
       color: #38bdf8;
     }
-
-    /* Profile Info (hidden by default) */
     .member-profile {
       max-height: 0;
       overflow: hidden;
@@ -242,8 +230,6 @@
     .profile-text {
       white-space: pre-wrap;
     }
-
-    /* ── Server Owner ── */
     .server-owner {
       background: #1e293b;
       border: 1px solid #334155;
@@ -257,7 +243,6 @@
       opacity: 0;
       transform: translateY(24px);
       transition: opacity 0.5s ease, transform 0.5s ease;
-      /* 既存のスタイルを保持 */
     }
     .server-owner::before {
       content: '';
@@ -310,8 +295,6 @@
       margin-top: 1.5rem;
       border-top: 1px solid #334155;
     }
-
-    /* ── Department ── */
     .department {
       margin-bottom: 3rem;
     }
@@ -335,8 +318,6 @@
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 1.25rem;
     }
-
-    /* ── Footer (index.html と同一) ── */
     footer {
       text-align: center;
       padding: 2.5rem 2rem 2rem;
@@ -377,13 +358,11 @@
       transform: scale(1.05);
     }
     .footer-social a[href*="x.com"] img {
-      transform: scale(0.88); /* 1より小さい値で縮小 */
+      transform: scale(0.88);
     }
     footer p {
       margin-bottom: 0.25rem;
     }
-
-    /* ハンバーガーボタン（PC では非表示） */
     .nav-hamburger {
       display: none;
       flex-direction: column;
@@ -425,7 +404,6 @@
         vertical-align: middle;
         line-height: 1.4;
     }
-    /* ページトップへ戻るボタン */
     #back-to-top {
         position: fixed;
         bottom: 2rem;
@@ -468,7 +446,6 @@
         opacity: 1;
         transform: translateY(0);
     }
-    /* ── Member Actions ── */
     .member-actions {
       display: flex;
       gap: 0.5rem;
@@ -501,7 +478,6 @@
       stroke-linecap: round;
       stroke-linejoin: round;
     }
-
     .nav-icon {
       display: none;
       width: 1.1rem;
@@ -552,11 +528,11 @@
       }
     }
     .nav-title-pc {
-        display: none; /* モバイルでは非表示 */
+        display: none;
     }
     @media (min-width: 641px) {
         .nav-title-pc {
-            display: inline; /* PC幅では表示 */
+            display: inline;
         }
     }
     .nav-overlay {
@@ -633,36 +609,75 @@
   </button>
 
   <script>
-    const adminPageData = {
-      owner: {
-        id: 'arai-kuma-owner',
-        role: '鯖主',
+    // ── 人物マスターデータ（重複して複数の役職に就いている人はここに一度だけ定義し、
+    //    各部門からは personId で参照して呼び出す） ──
+    const peopleRegistry = {
+      'arai-kuma': {
+        role: '裁判官',
         name: '新井熊（あらくま）',
         avatar: 'images/arakuma_icon.png',
-        alt: '新井熊',
-        profile: '新井鯖のサーバー主で新井賭博場のオーナー。技術力こそ低いが、リーダーシップ力が輝く。'
+        alt: 'あらくま',
+        profile: '新井鯖のサーバー主で新井賭博場のオーナー。技術力こそ低いが、リーダーシップ力が輝く。',
+        links: [
+          { href: 'https://www.youtube.com/@araiguma0913', label: 'YouTube', icon: 'https://cdn.simpleicons.org/youtube/38bdf8' }
+        ]
       },
+      'koko': {
+        role: '部長',
+        name: 'ココ',
+        avatar: 'images/koko_icon.png',
+        alt: 'ココ',
+        profile: '新井鯖唯一のディベロッパーで、このWebサイトの開設者。得意なJavaScriptとMcFunctionを用いてArai Server Add-onの作成を行っている。',
+        links: [
+          { href: 'https://www.youtube.com/@%E6%96%B0%E4%BA%95%E9%AF%96%E3%81%AE%E3%82%B3%E3%82%B3', label: 'YouTube', icon: 'https://cdn.simpleicons.org/youtube/38bdf8' }
+        ]
+      },
+      'mogukoro': {
+        role: '部員',
+        name: '碧雲葦（あおぐい） ころも',
+        avatar: 'images/mogukoro_icon.png',
+        alt: 'もぐころ',
+        profile: '新井鯖のコマンド担当。開発中のプロジェクトはいつになっても終わらない。ついに、本当にアイドルVTuberとしてデビューした。',
+        links: [
+          { href: 'https://www.youtube.com/@mogukoro1111', label: 'YouTube', icon: 'https://cdn.simpleicons.org/youtube/38bdf8' }
+        ]
+      },
+      // 複数の部門・役職を兼任している人物
+      'koishi': {
+        role: '部長',
+        name: 'こいし',
+        avatar: 'images/koisi_icon.png',
+        alt: 'こいし',
+        profile: '圧倒的な建国系サーバーでの経験を活かして、新井鯖の治安を守っている。影の立役者。'
+      },
+      'shina': {
+        role: '部員',
+        name: 'しいなかげひと（しいな）',
+        avatar: 'images/siina_kagehito_icon.png',
+        alt: 'しいな',
+        profile: '新井鯖唯一のイラストレイターで情報整理と経理処理を行っている。積み上げられてきた経験の数々でその場を切り抜ける新井鯖の頭脳。',
+        links: [
+          { href: 'https://www.youtube.com/@%E3%81%97%E3%81%84%E3%81%AA%E3%81%8B%E3%81%92%E3%81%B2%E3%81%A8', label: 'YouTube', icon: 'https://cdn.simpleicons.org/youtube/38bdf8' }
+        ]
+      },
+      'yakitori': {
+        role: '部員',
+        name: '焼き鳥は美味いよな？（焼き鳥）',
+        avatar: 'images/yakitori_icon.png',
+        alt: '焼き鳥',
+        profile: 'あおころの双子の兄だが、あおころとは違って不真面目。配信やイベントに参加することは極めて珍しいので、見かけたら拝んでおこう。'
+      }
+    };
+
+    const adminPageData = {
+      owner: { personId: 'arai-kuma' },
       departments: [
         {
           id: 'legal',
           title: '法務部門',
           description: 'サーバー内の問題解決や総合運営',
           members: [
-            {
-              id: 'arai-kuma-judge',
-              role: '裁判官',
-              name: '新井熊（あらくま）',
-              avatar: 'images/arakuma_icon.png',
-              alt: 'あらくま',
-              profile: '新井鯖のサーバー主で新井賭博場のオーナー。技術力こそ低いが、リーダーシップ力が輝く。',
-              links: [
-                {
-                  href: 'https://www.youtube.com/@araiguma0913',
-                  label: 'YouTube',
-                  icon: 'https://cdn.simpleicons.org/youtube/38bdf8'
-                }
-              ]
-            }
+            { personId: 'arai-kuma' }
           ]
         },
         {
@@ -670,36 +685,8 @@
           title: '技術部門',
           description: 'サーバーの技術部分の作成および更新',
           members: [
-            {
-              id: 'koko',
-              role: '部長',
-              name: 'ココ',
-              avatar: 'images/koko_icon.png',
-              alt: 'ココ',
-              profile: '新井鯖唯一のディベロッパーで、このWebサイトの開設者。得意なJavaScriptとMcFunctionを用いてArai Server Add-onの作成を行っている。',
-              links: [
-                {
-                  href: 'https://www.youtube.com/@%E6%96%B0%E4%BA%95%E9%AF%96%E3%81%AE%E3%82%B3%E3%82%B3',
-                  label: 'YouTube',
-                  icon: 'https://cdn.simpleicons.org/youtube/38bdf8'
-                }
-              ]
-            },
-            {
-              id: 'mogukoro',
-              role: '部員',
-              name: '碧雲葦（あおぐい） ころも',
-              avatar: 'images/mogukoro_icon.png',
-              alt: 'もぐころ',
-              profile: '新井鯖のコマンド担当。開発中のプロジェクトはいつになっても終わらない。ついに、本当にアイドルVTuberとしてデビューした。',
-              links: [
-                {
-                  href: 'https://www.youtube.com/@mogukoro1111',
-                  label: 'YouTube',
-                  icon: 'https://cdn.simpleicons.org/youtube/38bdf8'
-                }
-              ]
-            }
+            { personId: 'koko' },
+            { personId: 'mogukoro' }
           ]
         },
         {
@@ -707,29 +694,8 @@
           title: '総合人事部門',
           description: 'サーバー内のマップの管理',
           members: [
-            {
-              id: 'koishi-1',
-              role: '部長',
-              name: 'こいし',
-              avatar: 'images/koisi_icon.png',
-              alt: 'こいし',
-              profile: '圧倒的な建国系サーバーでの経験を活かして、新井鯖の治安を守っている。影の立役者。'
-            },
-            {
-              id: 'shina',
-              role: '部員',
-              name: 'しいなかげひと（しいな）',
-              avatar: 'images/siina_kagehito_icon.png',
-              alt: 'しいな',
-              profile: '新井鯖唯一のイラストレイターで情報整理と経理処理を行っている。積み上げられてきた経験の数々でその場を切り抜ける新井鯖の頭脳。',
-              links: [
-                {
-                  href: 'https://www.youtube.com/@%E3%81%97%E3%81%84%E3%81%AA%E3%81%8B%E3%81%92%E3%81%B2%E3%81%A8',
-                  label: 'YouTube',
-                  icon: 'https://cdn.simpleicons.org/youtube/38bdf8'
-                }
-              ]
-            }
+            { personId: 'koishi', role: '部長' },
+            { personId: 'shina', role: '部員' }
           ]
         },
         {
@@ -737,57 +703,35 @@
           title: '総合部門',
           description: 'イベントの運営や雑務',
           members: [
-            {
-              id: 'yakitori',
-              role: '部員',
-              name: '焼き鳥は美味いよな？（焼き鳥）',
-              avatar: 'images/yakitori_icon.png',
-              alt: '焼き鳥',
-              profile: 'あおころの双子の兄だが、あおころとは違って不真面目。配信やイベントに参加することは極めて珍しいので、見かけたら拝んでおこう。'
-            },
-            {
-              id: 'koishi-2',
-              role: '部員',
-              name: 'こいし',
-              avatar: 'images/koisi_icon.png',
-              alt: 'こいし',
-              profile: '圧倒的な建国系サーバーでの経験を活かして、新井鯖の治安を守っている。影の立役者。'
-            },
-            {
-              id: 'shina-2',
-              role: '部員',
-              name: 'しいなかげひと（しいな）',
-              avatar: 'images/siina_kagehito_icon.png',
-              alt: 'しいな',
-              profile: '新井鯖唯一のイラストレイターで情報整理と経理処理を行っている。積み上げられてきた経験の数々でその場を切り抜ける新井鯖の頭脳。',
-              links: [
-                {
-                  href: 'https://www.youtube.com/@%E3%81%97%E3%81%84%E3%81%AA%E3%81%8B%E3%81%92%E3%81%B2%E3%81%A8',
-                  label: 'YouTube',
-                  icon: 'https://cdn.simpleicons.org/youtube/38bdf8'
-                }
-              ]
-            }
+            { personId: 'yakitori' },
+            { personId: 'koishi', role: '部員' },
+            { personId: 'shina', role: '部員' }
           ]
         }
       ]
     };
 
+    function resolveMember(entry) {
+      const base = peopleRegistry[entry.personId] || {};
+      return Object.assign({}, base, entry, { role: entry.role || base.role });
+    }
+
     function renderAdminPage() {
       const container = document.getElementById('admin-content');
       if (!container) return;
 
+      const owner = resolveMember(adminPageData.owner);
       const ownerMarkup = `
-        <div class="server-owner" onclick="toggleProfile(this)" id="${adminPageData.owner.id}">
+        <div class="server-owner" onclick="toggleProfile(this)" id="owner-${adminPageData.owner.personId}">
           <div class="owner-main">
-            <img src="${adminPageData.owner.avatar}" alt="${adminPageData.owner.alt}" class="character-img">
+            <img src="${owner.avatar}" alt="${owner.alt}" class="character-img">
             <div class="owner-info">
-              <p class="role">${adminPageData.owner.role}</p>
-              <p class="name">${adminPageData.owner.name}</p>
+              <p class="role">${owner.role}</p>
+              <p class="name">${owner.name}</p>
             </div>
           </div>
           <div class="owner-profile">
-            <p class="profile-text">${adminPageData.owner.profile}</p>
+            <p class="profile-text">${owner.profile}</p>
           </div>
         </div>
       `;
@@ -799,8 +743,11 @@
             <p class="dept-desc">${department.description}</p>
           </div>
           <div class="members-grid">
-            ${department.members.map((member) => `
-              <div class="member-card" onclick="toggleProfile(this)" id="${member.id}">
+            ${department.members.map((entry, idx) => {
+              const member = resolveMember(entry);
+              const domId = `${department.id}-${entry.personId}-${idx}`;
+              return `
+              <div class="member-card" onclick="toggleProfile(this)" id="${domId}">
                 <div class="member-main">
                   <img src="${member.avatar}" alt="${member.alt}" class="member-avatar">
                   <div class="member-info">
@@ -822,7 +769,8 @@
                   <p class="profile-text">${member.profile}</p>
                 </div>
               </div>
-            `).join('')}
+            `;
+            }).join('')}
           </div>
         </section>
       `).join('');
@@ -845,14 +793,12 @@
       element.classList.toggle('active');
     }
 
-    // ESCキーで閉じる
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && document.querySelector('.nav-links').classList.contains('open')) {
         toggleNav();
       }
     });
 
-    // News 未読バッジ
     (function () {
         const lastVisit  = Number(localStorage.getItem("araiserver_newsLastVisit") || 0);
         const latestDate = localStorage.getItem("araiserver_newsLatest");
@@ -863,7 +809,6 @@
             if (link) link.insertAdjacentHTML("beforeend", '<span class="nav-badge">NEW</span>');
         }
     })();
-    // ページトップへ戻るボタン
     const backToTop = document.getElementById('back-to-top');
     window.addEventListener('scroll', () => {
         backToTop.classList.toggle('visible', window.scrollY > 300);
@@ -878,13 +823,12 @@
                 if (entry.isIntersecting) {
                     setTimeout(() => {
                         entry.target.classList.add('fade-in');
-                    }, index * 120); // 各カードに120msの遅延で順次アニメーション
+                    }, index * 120);
                     observer.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.1 });
-      
-        // adminページの対象要素を選択
+
         document.querySelectorAll('.member-card, .server-owner').forEach(el => {
             observer.observe(el);
         });
