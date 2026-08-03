@@ -612,7 +612,7 @@
     // ── 人物マスターデータ（重複して複数の役職に就いている人はここに一度だけ定義し、
     //    各部門からは personId で参照して呼び出す） ──
     const peopleRegistry = {
-      'arai-kuma': {
+      'arai-guma': {
         role: '裁判官',
         name: '新井熊（あらくま）',
         avatar: 'images/arakuma_icon.png',
@@ -655,7 +655,7 @@
         name: 'しいなかげひと（しいな）',
         avatar: 'images/siina_kagehito_icon.png',
         alt: 'しいな',
-        profile: '新井鯖唯一のイラストレイターで情報整理と経理処理を行っている。積み上げられてきた経験の数々でその場を切り抜ける新井鯖の頭脳。',
+        profile: '新井鯖唯一のイラストレーターで情報整理と経理処理を行っている。積み上げられてきた経験の数々でその場を切り抜ける新井鯖の頭脳。',
         links: [
           { href: 'https://www.youtube.com/@%E3%81%97%E3%81%84%E3%81%AA%E3%81%8B%E3%81%92%E3%81%B2%E3%81%A8', label: 'YouTube', icon: 'https://cdn.simpleicons.org/youtube/38bdf8' }
         ]
@@ -672,33 +672,36 @@
         name: 'Tにゃん',
         avatar: 'images/t6neko_icon.png',
         alt: 'Tにゃん',
-        profile: ''
+        profile: 'T6NetWorkの管理者で、新井鯖の接続部分を担当している。得意のJavaScriptを活かして、新井鯖のサーバーの安定稼働を支えている。',
+        links: [
+          { href: 'https://www.youtube.com/@T6neko-hon', label: 'YouTube', icon: 'https://cdn.simpleicons.org/youtube/38bdf8' }
+        ]
       },
       'marusuke': {
         role: '部員',
         name: 'まるすけ',
         avatar: 'images/marusuke_icon.png',
         alt: 'まるすけ',
-        profile: ''
+        profile: '他鯖での執行本部・企画部の経験を活かし、新井鯖のシステムの提案及び管理を担当している。',
       },
       'mochi': {
         role: '部員',
         name: 'もち',
         avatar: 'images/kinakomochi_icon.png',
         alt: 'もち',
-        profile: ''
+        profile: '新井鯖の治安維持及び新規メンバーの受け入れを担当している。新井鯖の治安維持に欠かせない存在。',
       }
     };
 
     const adminPageData = {
-      owner: { personId: 'arai-kuma' },
+      owner: { personId: 'arai-guma' },
       departments: [
         {
           id: 'legal',
           title: '法務部門',
           description: 'サーバー内の問題解決や総合運営',
           members: [
-            { personId: 'arai-kuma' }
+            { personId: 'arai-guma' }
           ]
         },
         {
