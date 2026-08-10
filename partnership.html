@@ -8,7 +8,7 @@
   <link rel="apple-touch-icon" href="images/server_logo.png">
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@700;900&display=swap" rel="stylesheet">
-  <title>新井鯖 - Network</title>
+  <title>新井鯖 - Partnership</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -18,7 +18,6 @@
       min-height: 100vh;
     }
 
-    /* ── Navigation ── */
     .site-nav {
       position: sticky;
       font-family: 'Noto Sans JP', sans-serif;
@@ -73,14 +72,12 @@
       border: 1px solid rgba(56, 189, 248, 0.3);
     }
 
-    /* ── Container ── */
     .container {
       max-width: 900px;
       margin: 0 auto;
       padding: 3rem 2rem 0;
     }
 
-    /* ── Page Header ── */
     header {
       text-align: center;
       margin-bottom: 2.5rem;
@@ -95,7 +92,6 @@
       color: #64748b;
     }
 
-    /* ── Fade-in Animation ── */
     .fade-in {
       opacity: 0;
       transform: translateY(24px);
@@ -106,62 +102,6 @@
       transform: translateY(0);
     }
 
-    /* ── Server Card ── */
-    .server-card {
-      background: #1e293b;
-      border: 1px solid #334155;
-      border-radius: 20px;
-      overflow: hidden;
-      margin-bottom: 2rem;
-      transition: border-color 0.2s, box-shadow 0.2s, opacity 0.5s ease, transform 0.5s ease;
-    }
-    .server-card:hover {
-      border-color: #38bdf8;
-      box-shadow: 0 8px 32px rgba(56, 189, 248, 0.1);
-    }
-    .server-photo { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; display: block; }
-    .server-card-body { padding: 2rem; }
-    .server-name-row {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
-      flex-wrap: wrap;
-    }
-    .server-name { font-size: 1.75rem; font-weight: 800; color: #f1f5f9; letter-spacing: -0.01em; }
-    .server-badge {
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 0.25rem 0.75rem;
-      border-radius: 999px;
-      background: rgba(56, 189, 248, 0.15);
-      color: #38bdf8;
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      white-space: nowrap;
-    }
-    .server-desc { font-size: 1rem; color: #cbd5e1; line-height: 1.8; margin-bottom: 1.5rem; }
-    .server-link-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.6rem 1.25rem;
-      background: rgba(88, 101, 242, 0.15);
-      border: 1px solid rgba(88, 101, 242, 0.4);
-      border-radius: 8px;
-      color: #a5b4fc;
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 600;
-      transition: all 0.2s;
-    }
-    .server-link-btn:hover {
-      background: rgba(88, 101, 242, 0.3);
-      border-color: rgba(88, 101, 242, 0.7);
-      color: #c7d2fe;
-    }
-    .server-link-btn i { width: 1rem; height: 1rem; }
-
-    /* ── Section ── */
     .section {
       background: #1e293b;
       border: 1px solid #334155;
@@ -182,60 +122,94 @@
       padding-left: 1rem;
     }
     .section-title i { width: 1.1rem; height: 1.1rem; color: #38bdf8; flex-shrink: 0; }
-
-    /* ── Addon List ── */
-    .addon-list { display: flex; flex-direction: column; gap: 0.75rem; }
-    .addon-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      padding: 1rem 1.25rem;
-      background: #0f172a;
+    .section-content { color: #cbd5e1; line-height: 1.8; }
+    .section-content strong { color: #f1f5f9; }
+    .hero-image {
+      width: 100%;
+      margin-top: 1rem;
+      border-radius: 14px;
       border: 1px solid #334155;
-      border-radius: 10px;
-      transition: border-color 0.2s;
+      overflow: hidden;
+      background: #0f172a;
     }
-    .addon-item:hover { border-color: #38bdf8; }
-    .addon-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      background: rgba(56, 189, 248, 0.1);
-      border: 1px solid rgba(56, 189, 248, 0.2);
+    .hero-image img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+    .feature-list {
+      margin-top: 0.75rem;
+      padding-left: 1.2rem;
+      display: grid;
+      gap: 0.55rem;
+      color: #cbd5e1;
+    }
+    .feature-list li { line-height: 1.7; }
+    .cta-row {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
     }
-    .addon-icon i { width: 1rem; height: 1rem; color: #38bdf8; }
-    .addon-info { flex: 1; min-width: 0; }
-    .addon-name { font-size: 0.95rem; font-weight: 700; color: #f1f5f9; margin-bottom: 0.2rem; }
-    .addon-desc { font-size: 0.825rem; color: #94a3b8; line-height: 1.5; }
-    .addon-link {
-      font-size: 0.775rem;
-      color: #38bdf8;
-      text-decoration: none;
+    .cta-btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.25rem;
-      margin-top: 0.35rem;
-      transition: color 0.2s;
-    }
-    .addon-link:hover { color: #7dd3fc; }
-    .addon-link i { width: 0.7rem; height: 0.7rem; }
-    .addon-tag-nodist {
-      display: inline-block;
-      font-size: 0.65rem;
+      justify-content: center;
+      gap: 0.45rem;
+      padding: 0.7rem 1rem;
+      border-radius: 999px;
+      text-decoration: none;
       font-weight: 700;
-      padding: 0.1rem 0.5rem;
-      border-radius: 4px;
-      background: rgba(239, 68, 68, 0.15);
-      color: #f87171;
-      border: 1px solid rgba(239, 68, 68, 0.3);
-      margin-top: 0.35rem;
+      font-size: 0.9rem;
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      transition: all 0.2s ease;
+    }
+    .cta-btn:hover {
+      background: rgba(56, 189, 248, 0.25);
+      color: #7dd3fc;
+    }
+    .cta-btn.secondary {
+      background: rgba(129, 140, 248, 0.12);
+      color: #a5b4fc;
+      border-color: rgba(129, 140, 248, 0.3);
+    }
+    .cta-btn.secondary:hover {
+      background: rgba(129, 140, 248, 0.2);
+      color: #c7d2fe;
+    }
+    .info-card {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .info-item {
+      padding: 1rem 1.25rem;
+      border-radius: 10px;
+      background: #0f172a;
+      border: 1px solid #334155;
+    }
+    .info-item h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #f1f5f9;
+      margin-bottom: 0.35rem;
+    }
+    .info-item p { font-size: 0.9rem; color: #94a3b8; line-height: 1.7; }
+    .tag {
+      display: inline-block;
+      margin-top: 0.45rem;
+      padding: 0.2rem 0.6rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.3);
     }
 
-    /* ── Footer ── */
     footer {
       text-align: center;
       padding: 2.5rem 2rem 2rem;
@@ -269,7 +243,6 @@
     .footer-social a[href*="x.com"] img { transform: scale(0.88); }
     footer p { margin-bottom: 0.25rem; }
 
-    /* ── Hamburger ── */
     .nav-hamburger {
       display: none;
       flex-direction: column;
@@ -290,43 +263,6 @@
     .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
     .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-    .nav-badge {
-      display: inline-block;
-      background: #ef4444;
-      color: #fff;
-      font-size: 0.6rem;
-      font-weight: 700;
-      padding: 0.1rem 0.35rem;
-      border-radius: 999px;
-      margin-left: 0.3rem;
-      vertical-align: middle;
-      line-height: 1.4;
-    }
-
-    /* ── Back to Top ── */
-    #back-to-top {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      width: 44px;
-      height: 44px;
-      background: rgba(56, 189, 248, 0.15);
-      border: 1px solid rgba(56, 189, 248, 0.4);
-      border-radius: 50%;
-      color: #38bdf8;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s, transform 0.3s, background 0.2s;
-      z-index: 150;
-    }
-    #back-to-top.visible { opacity: 1; pointer-events: auto; }
-    #back-to-top:hover { background: rgba(56, 189, 248, 0.3); transform: translateY(-3px); }
-    .back-to-top-icon { width: 1.25rem; height: 1.25rem; stroke-width: 2; color: #38bdf8; }
-
     .nav-icon {
       display: none;
       width: 1.1rem;
@@ -334,7 +270,6 @@
       flex-shrink: 0;
     }
 
-    /* ── Responsive ── */
     @media (max-width: 640px) {
       .container { padding: 2rem 1rem 0; }
       h1 { font-size: 2rem; }
@@ -359,9 +294,7 @@
         box-shadow: -8px 0 32px rgba(0, 0, 0, 0.5);
         overflow-y: auto;
       }
-      .nav-links.open {
-        transform: translateX(0);
-      }
+      .nav-links.open { transform: translateX(0); }
       .nav-links a {
         display: flex;
         align-items: center;
@@ -370,10 +303,7 @@
         font-size: 1rem;
         border-radius: 8px;
       }
-      .nav-icon {
-        display: block;
-      }
-      .server-card-body { padding: 1.25rem; }
+      .nav-icon { display: block; }
       .section { padding: 1.25rem; }
     }
     .nav-overlay {
@@ -385,17 +315,11 @@
       backdrop-filter: blur(2px);
       -webkit-backdrop-filter: blur(2px);
     }
-    .nav-overlay.open {
-      display: block;
-    }
-    .nav-hamburger {
-      position: relative;
-      z-index: 400;
-    }
+    .nav-overlay.open { display: block; }
+    .nav-hamburger { position: relative; z-index: 400; }
   </style>
 </head>
 <body>
-
   <nav class="site-nav">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo-link">
@@ -409,7 +333,7 @@
         <li><a href="wiki.html"><i data-lucide="library" class="nav-icon"></i>Wiki</a></li>
         <li><a href="rules.html"><i data-lucide="book-open" class="nav-icon"></i>Rules</a></li>
         <li><a href="events.html"><i data-lucide="calendar-days" class="nav-icon"></i>Events</a></li>
-        <li><a href="partnership.html"><i data-lucide="handshake" class="nav-icon"></i>Partnership</a></li>
+        <li><a href="partnership.html" class="active"><i data-lucide="handshake" class="nav-icon"></i>Partnership</a></li>
         <li><a href="admin.html"><i data-lucide="settings-2" class="nav-icon"></i>Admin</a></li>
         <li><a href="credits.html"><i data-lucide="sparkles" class="nav-icon"></i>Credits</a></li>
       </ul>
@@ -422,23 +346,62 @@
 
   <div class="container">
     <header>
-      <h1>Network</h1>
-      <p class="subtitle">新井系列のサーバーネットワーク</p>
+      <h1>Partnership</h1>
+      <p class="subtitle">新井鯖と関わる提携・連携情報をまとめたページです</p>
+      <p class="subtitle-secret">※今後内容を追加・更新していきます。</p>
     </header>
 
     <div class="section fade-in">
       <h2 class="section-title">
-        <i data-lucide="wrench"></i>
-        工事中のお知らせ
-      </h2>
-      <p class="server-desc" style="margin-bottom: 0;">
-        このページは現在リニューアル工事中です。<br>
-        新たにPartnershipタブを作成中です。準備ができ次第、順次公開します。
-      </p>
-      <a href="partnership.html" class="server-link-btn">
         <i data-lucide="handshake"></i>
-        Partnershipページを見る
-      </a>
+        T6NetWorkとは
+      </h2>
+      <div class="section-content">
+        <p><strong>T6NetWork</strong> は、統合版向けに運営されている共同ロビーサーバーです。自分のサーバーを持っている運営者にとっては、SwitchやPlayStationなどのゲーム機からでも参加しやすい導線を提供する仕組みとして親しまれています。</p>
+        <div class="hero-image fade-in">
+          <img src="images/t6network_photo.png" alt="T6NetWorkのロビー画像">
+        </div>
+        <div class="info-card">
+          <div class="info-item">
+            <h3>参加方法</h3>
+            <p>ゲーマータグ「T6NetWork1694」にフレンド申請し、少し待つとワールドに入れます。入ったらサーバー一覧またはNPCから新井鯖を探して参加できます。</p>
+            <span class="tag">Bedrock対応</span>
+          </div>
+          <div class="info-item">
+            <h3>経営方針</h3>
+            <p>T6NetWorkは、サーバー運営者同士の交流や情報交換、サーバー紹介をしやすい場として設計されています。新しいサーバーを探している人にも役立つ構成です。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section fade-in">
+      <h2 class="section-title">
+        <i data-lucide="sparkles"></i>
+        便利な機能
+      </h2>
+      <div class="section-content">
+        <ul class="feature-list">
+          <li>サーバーがオフラインか、バージョンが古いか、満員かを自動で確認できます。</li>
+          <li>状態が良ければそのまま転送し、問題があれば警告を出す仕組みがあります。</li>
+          <li>自動更新やバックアップ、通知機能により、運営の負担を減らせます。</li>
+          <li>管理コマンド <strong>/t6:ping [IP] [Port]</strong> で、個別のサーバー状態も確認できます。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section fade-in">
+      <h2 class="section-title">
+        <i data-lucide="messages-square"></i>
+        参加・提携の案内
+      </h2>
+      <div class="section-content">
+        <p>提携や参加については、公式Discordから案内できます。新井鯖でも、T6NetWorkの仕組みを活かした連携を進めていきます。</p>
+        <div class="cta-row">
+          <a class="cta-btn" href="https://discord.gg/792jn4dpsN/" target="_blank" rel="noopener noreferrer">Discordに参加する</a>
+          <a class="cta-btn secondary" href="https://site.t6server.net/server/" target="_blank" rel="noopener noreferrer">稼働状況を見る</a>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -459,10 +422,6 @@
     <p>サイト内のコンテンツの無断転載を禁じます。</p>
   </footer>
 
-  <button id="back-to-top" aria-label="トップへ戻る">
-    <i data-lucide="arrow-up" class="back-to-top-icon"></i>
-  </button>
-
   <script>
     function toggleNav() {
       const nav = document.querySelector('.nav-links');
@@ -474,26 +433,12 @@
       document.body.style.overflow = nav.classList.contains('open') ? 'hidden' : '';
     }
 
-    // ESCキーで閉じる
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && document.querySelector('.nav-links').classList.contains('open')) {
         toggleNav();
       }
     });
 
-    // News 未読バッジ
-    (function () {
-      const lastVisit  = Number(localStorage.getItem("araiserver_newsLastVisit") || 0);
-      const latestDate = localStorage.getItem("araiserver_newsLatest");
-      if (!latestDate) return;
-      const hasUnread  = new Date(latestDate).getTime() > lastVisit;
-      if (hasUnread) {
-        const link = document.querySelector('a[href="news.html"]');
-        if (link) link.insertAdjacentHTML("beforeend", '<span class="nav-badge">NEW</span>');
-      }
-    })();
-
-    // 下からフェードイン
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
         if (entry.isIntersecting) {
@@ -504,18 +449,7 @@
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-    // ページトップへ戻るボタン
-    const backToTop = document.getElementById('back-to-top');
-    window.addEventListener('scroll', () => {
-      backToTop.classList.toggle('visible', window.scrollY > 300);
-    });
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
     lucide.createIcons();
   </script>
-
 </body>
 </html>
