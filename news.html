@@ -204,6 +204,30 @@
      margin-bottom: 0.75rem;
      flex-wrap: wrap;
     }
+    .news-actions {
+     margin-left: auto;
+    }
+    .share-btn {
+     border: 1px solid #334155;
+     background: #0f172a;
+     color: #94a3b8;
+     border-radius: 999px;
+     padding: 0.2rem 0.65rem;
+     font-size: 0.72rem;
+     font-weight: 600;
+     cursor: pointer;
+     transition: all 0.2s;
+    }
+    .share-btn:hover {
+     color: #38bdf8;
+     border-color: #38bdf8;
+     background: rgba(56, 189, 248, 0.08);
+    }
+    .share-btn.copied {
+     color: #22c55e;
+     border-color: rgba(34, 197, 94, 0.5);
+     background: rgba(34, 197, 94, 0.12);
+    }
     .news-date {
      font-size: 0.8rem;
      color: #64748b;
@@ -614,7 +638,7 @@
       tag: "info",
       title: "最新鯖内マップを公開しました",
       image: "images/news_image/arai-server_map_20260814.jpg",
-      body: "新井鯖の最新鯖内マップを公開しました。\n\n国名の変更や新たな建国の変更を反映しています。\n\n作者: しいな かげひと"
+      body: "新井鯖の最新鯖内マップを公開しました。\n国名の変更や新たな建国の変更を反映しています。\n\n作者: しいな かげひと"
     },
     {
       date: "2026-05-16",
@@ -865,6 +889,7 @@
          <div class="news-meta">
           <span class="news-date">${n.date}</span>
           <span class="news-tag ${tag.cls}">${tag.label}</span>
+          <span class="news-actions"><button class="share-btn" type="button" onclick="copyNewsLink('${n.date}', event, this)">共有</button></span>
          </div>
          <div class="news-title">${highlight(n.title, searchTerm)}</div>
          ${imgHtml}
@@ -929,6 +954,28 @@
       if (!card) return;
       card.classList.add('open');
       card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function copyNewsLink(dateStr, ev, btn) {
+      if (ev) ev.stopPropagation();
+      const url = `${location.origin}${location.pathname}?date=${encodeURIComponent(dateStr)}`;
+      navigator.clipboard.writeText(url).then(() => {
+        if (!btn) return;
+        const original = btn.textContent;
+        btn.textContent = 'コピー済み';
+        btn.classList.add('copied');
+        setTimeout(() => {
+          btn.textContent = original;
+          btn.classList.remove('copied');
+        }, 1400);
+      }).catch(() => {
+        if (!btn) return;
+        const original = btn.textContent;
+        btn.textContent = '失敗';
+        setTimeout(() => {
+          btn.textContent = original;
+        }, 1200);
+      });
     }
 
     localStorage.setItem("araiserver_newsLastVisit", Date.now());
