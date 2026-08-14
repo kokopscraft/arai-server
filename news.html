@@ -610,6 +610,13 @@
   // ============================================================
   const newsData = [
     {
+      date: "2026-08-14",
+      tag: "info",
+      title: "最新鯖内マップを公開しました",
+      image: "images/news_image/arai-server_map_20260814.jpg",
+      body: "新井鯖の最新鯖内マップを公開しました。\n\n国名の変更や新たな建国の変更を反映しています。\n\n作者: しいな かげひと"
+    },
+    {
       date: "2026-05-16",
       tag: "update",
       title: "新機能『保護機能』について",
@@ -854,7 +861,7 @@
            </div>`
         : '';
       return `
-      <div class="news-card" onclick="this.classList.toggle('open')">
+      <div class="news-card" data-date="${n.date}" onclick="this.classList.toggle('open')">
          <div class="news-meta">
           <span class="news-date">${n.date}</span>
           <span class="news-tag ${tag.cls}">${tag.label}</span>
@@ -916,21 +923,31 @@
         });
     }
 
+    function openAndScrollToDate(dateStr) {
+      if (!dateStr) return;
+      const card = document.querySelector(`.news-card[data-date="${dateStr}"]`);
+      if (!card) return;
+      card.classList.add('open');
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
     localStorage.setItem("araiserver_newsLastVisit", Date.now());
     localStorage.setItem("araiserver_newsLatest", newsData[0].date);
 
-    renderNews();
+    const queryParams = new URLSearchParams(window.location.search);
+    const legacyHashParams = new URLSearchParams(window.location.hash.substring(1));
+    const searchTerm = queryParams.get('search') || legacyHashParams.get('search') || '';
+    const dateParam = queryParams.get('date') || legacyHashParams.get('date') || '';
+
+    if (searchTerm) {
+      document.getElementById('searchInput').value = searchTerm;
+    }
+
+    renderNews(currentFilter, searchTerm);
     lucide.createIcons();
 
-    // URLフラグメントから検索キーワードを取得
-    const hash = window.location.hash.substring(1);
-    if (hash) {
-      const params = new URLSearchParams(hash);
-      const searchTerm = params.get('search');
-      if (searchTerm) {
-        document.getElementById('searchInput').value = decodeURIComponent(searchTerm);
-        renderNews(currentFilter, decodeURIComponent(searchTerm));
-      }
+    if (dateParam) {
+      requestAnimationFrame(() => openAndScrollToDate(dateParam));
     }
 
     // ページトップへ戻るボタン
